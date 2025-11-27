@@ -16,7 +16,11 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(60), nullable=False)
+    password = db.Column(db.String(60), nullable=True)  # Nullable for OAuth/LDAP users
+    auth_method = db.Column(db.String(20), default='password')  # 'password', 'oauth', 'ldap'
+    oauth_provider = db.Column(db.String(50), nullable=True)  # 'google', 'github', etc.
+    oauth_id = db.Column(db.String(255), nullable=True)  # User ID from OAuth provider
+    ldap_dn = db.Column(db.String(255), nullable=True)  # Distinguished Name for LDAP users
     is_admin = db.Column(db.Boolean, default=False)
     can_share_publicly = db.Column(db.Boolean, default=True)  # Permission to create public share links
     recordings = db.relationship('Recording', backref='owner', lazy=True)

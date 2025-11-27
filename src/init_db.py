@@ -62,6 +62,32 @@ def initialize_database(app):
             app.logger.info("Added diarize column to user table")
         if add_column_if_not_exists(engine, 'user', 'ui_language', 'VARCHAR(10) DEFAULT "en"'):
             app.logger.info("Added ui_language column to user table")
+        
+        # Add OAuth and LDAP authentication fields
+        if add_column_if_not_exists(engine, 'user', 'auth_method', 'VARCHAR(20) DEFAULT "password"'):
+            app.logger.info("Added auth_method column to user table")
+        if add_column_if_not_exists(engine, 'user', 'oauth_provider', 'VARCHAR(50)'):
+            app.logger.info("Added oauth_provider column to user table")
+        if add_column_if_not_exists(engine, 'user', 'oauth_id', 'VARCHAR(255)'):
+            app.logger.info("Added oauth_id column to user table")
+        if add_column_if_not_exists(engine, 'user', 'ldap_dn', 'VARCHAR(255)'):
+            app.logger.info("Added ldap_dn column to user table")
+        
+        # Make password nullable for OAuth/LDAP users
+        # Note: SQLite doesn't support ALTER COLUMN, so we'll handle this gracefully
+        # Existing users will keep their passwords, new OAuth/LDAP users will have NULL
+        try:
+            inspector = inspect(engine)
+            if 'user' in inspector.get_table_names():
+                columns = {col['name']: col for col in inspector.get_columns('user')}
+                if 'password' in columns and not columns['password']['nullable']:
+                    # For SQLite, we can't change nullability directly, but new inserts will work
+                    # For PostgreSQL/MySQL, we could alter the column, but it's safer to leave as-is
+                    # since existing users need passwords
+                    app.logger.info("Password column exists and is not nullable - OAuth/LDAP users will be created with empty string initially")
+        except Exception as e:
+            app.logger.warning(f"Could not check password column nullability: {e}")
+        
         if add_column_if_not_exists(engine, 'recording', 'mime_type', 'VARCHAR(100)'):
             app.logger.info("Added mime_type column to recording table")
         if add_column_if_not_exists(engine, 'recording', 'completed_at', 'DATETIME'):

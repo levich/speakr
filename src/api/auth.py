@@ -28,13 +28,15 @@ auth_bp = Blueprint('auth', __name__)
 bcrypt = None
 csrf = None
 limiter = None
+oauth = None
 
-def init_auth_extensions(_bcrypt, _csrf, _limiter):
+def init_auth_extensions(_bcrypt, _csrf, _limiter, _oauth=None):
     """Initialize extensions after app creation."""
-    global bcrypt, csrf, limiter
+    global bcrypt, csrf, limiter, oauth
     bcrypt = _bcrypt
     csrf = _csrf
     limiter = _limiter
+    oauth = _oauth
 
 
 def rate_limit(limit_string):
@@ -81,7 +83,7 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
-    email = StringField('Email', validators=[DataRequired(), Email()])
+    email = StringField('Email/Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember Me')
     submit = SubmitField('Login')
@@ -128,19 +130,51 @@ def login():
     if current_user.is_authenticated:
         return redirect(url_for('recordings.index'))
 
+    # Import here to avoid circular imports
+    from src.services.oauth_auth import get_oauth_providers
+    from src.services.ldap_auth import is_ldap_enabled, authenticate_ldap_user
+
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
-        if user and bcrypt.check_password_hash(user.password, form.password.data):
-            login_user(user, remember=form.remember.data)
-            next_page = request.args.get('next')
-            if not is_safe_url(next_page):
-                return redirect(url_for('recordings.index'))
-            return redirect(next_page) if next_page else redirect(url_for('recordings.index'))
-        else:
-            flash('Login unsuccessful. Please check email and password.', 'danger')
+        email_or_username = form.email.data
+        password = form.password.data
+        
+        # Try LDAP authentication first if enabled
+        if is_ldap_enabled():
+            ldap_user, ldap_error = authenticate_ldap_user(email_or_username, password)
+            if ldap_user:
+                login_user(ldap_user, remember=form.remember.data)
+                next_page = request.args.get('next')
+                if not is_safe_url(next_page):
+                    return redirect(url_for('recordings.index'))
+                return redirect(next_page) if next_page else redirect(url_for('recordings.index'))
+            # If LDAP fails, continue to password authentication
+        
+        # Try password authentication
+        user = User.query.filter_by(email=email_or_username).first()
+        if not user:
+            # Try username lookup
+            user = User.query.filter_by(username=email_or_username).first()
+        
+        if user and user.auth_method == 'password' and user.password:
+            if bcrypt.check_password_hash(user.password, password):
+                login_user(user, remember=form.remember.data)
+                next_page = request.args.get('next')
+                if not is_safe_url(next_page):
+                    return redirect(url_for('recordings.index'))
+                return redirect(next_page) if next_page else redirect(url_for('recordings.index'))
+        
+        flash('Login unsuccessful. Please check email/username and password.', 'danger')
 
-    return render_template('login.html', title='Login', form=form)
+    # Get available authentication methods
+    oauth_providers = get_oauth_providers() if oauth else []
+    ldap_enabled = is_ldap_enabled()
+    
+    return render_template('login.html', 
+                         title='Login', 
+                         form=form,
+                         oauth_providers=oauth_providers,
+                         ldap_enabled=ldap_enabled)
 
 
 @auth_bp.route('/logout')
@@ -148,6 +182,51 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
+
+
+@auth_bp.route('/oauth/login/<provider>')
+@rate_limit("10 per minute")
+def oauth_login(provider):
+    """Initiate OAuth login flow."""
+    if not oauth:
+        flash('OAuth authentication is not configured.', 'danger')
+        return redirect(url_for('auth.login'))
+    
+    if provider not in oauth.providers:
+        flash(f'OAuth provider "{provider}" is not configured.', 'danger')
+        return redirect(url_for('auth.login'))
+    
+    redirect_uri = url_for('auth.oauth_callback', provider=provider, _external=True)
+    return oauth.providers[provider].authorize_redirect(redirect_uri)
+
+
+@auth_bp.route('/oauth/callback/<provider>')
+@csrf_exempt
+@rate_limit("10 per minute")
+def oauth_callback(provider):
+    """Handle OAuth callback."""
+    if not oauth:
+        flash('OAuth authentication is not configured.', 'danger')
+        return redirect(url_for('auth.login'))
+    
+    if provider not in oauth.providers:
+        flash(f'OAuth provider "{provider}" is not configured.', 'danger')
+        return redirect(url_for('auth.login'))
+    
+    from src.services.oauth_auth import handle_oauth_callback
+    from flask_login import login_user
+    
+    user, error = handle_oauth_callback(oauth, provider)
+    
+    if user:
+        login_user(user, remember=True)
+        next_page = request.args.get('next')
+        if not is_safe_url(next_page):
+            return redirect(url_for('recordings.index'))
+        return redirect(next_page) if next_page else redirect(url_for('recordings.index'))
+    else:
+        flash(f'OAuth authentication failed: {error}', 'danger')
+        return redirect(url_for('auth.login'))
 
 
 @auth_bp.route('/account', methods=['GET', 'POST'])
@@ -254,6 +333,11 @@ def account():
 @login_required
 @rate_limit("10 per minute")
 def change_password():
+    # Check if user can change password (not OAuth or LDAP users)
+    if current_user.auth_method != 'password':
+        flash('Password change is not available for OAuth/LDAP authenticated users.', 'danger')
+        return redirect(url_for('auth.account'))
+    
     current_password = request.form.get('current_password')
     new_password = request.form.get('new_password')
     confirm_password = request.form.get('confirm_password')
@@ -275,7 +359,7 @@ def change_password():
         return redirect(url_for('auth.account'))
 
     # Verify current password
-    if not bcrypt.check_password_hash(current_user.password, current_password):
+    if not current_user.password or not bcrypt.check_password_hash(current_user.password, current_password):
         flash('Current password is incorrect.', 'danger')
         return redirect(url_for('auth.account'))
 

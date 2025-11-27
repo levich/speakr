@@ -1,13 +1,16 @@
 # Speakr - Audio Transcription and Summarization App
 import os
 import sys
+
+# Add project root to Python path to allow imports from src
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from flask import Flask, render_template, request, jsonify, send_file, redirect, url_for, flash, Response, make_response
 from urllib.parse import urlparse, urljoin, quote
 from email.utils import encode_rfc2231
-try:
-    from flask import Markup
-except ImportError:
-    from markupsafe import Markup
+from markupsafe import Markup
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 from openai import OpenAI # Keep using the OpenAI library
@@ -499,8 +502,16 @@ with app.app_context():
 from src.config.app_config import initialize_config
 client, chunking_service, version = initialize_config(app)
 
+# Initialize OAuth if enabled
+oauth = None
+try:
+    from src.services.oauth_auth import init_oauth
+    oauth = init_oauth(app)
+except Exception as e:
+    app.logger.warning(f"OAuth initialization failed: {e}")
+
 # Initialize blueprint helpers (inject extensions and utility functions)
-init_auth_extensions(bcrypt, csrf, limiter)
+init_auth_extensions(bcrypt, csrf, limiter, oauth)
 init_shares_helpers(has_recording_access)
 init_recordings_helpers(has_recording_access=has_recording_access, get_user_recording_status=get_user_recording_status, set_user_recording_status=set_user_recording_status, enrich_recording_dict_with_user_status=enrich_recording_dict_with_user_status, bcrypt=bcrypt, csrf=csrf, limiter=limiter, chunking_service=chunking_service)
 init_tags_helpers(has_recording_access=has_recording_access, bcrypt=bcrypt, csrf=csrf, limiter=limiter)
