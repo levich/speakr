@@ -1,128 +1,128 @@
-# Admin Guide
+# Руководство администратора
 
-Welcome to the Speakr Admin Guide! As an administrator, you control the heart of your Speakr instance, managing users, monitoring system health, and configuring AI behavior.
+Добро пожаловать в руководство администратора Speakr! Как администратор, вы контролируете сердце вашего экземпляра Speakr, управляя пользователями, отслеживая состояние системы и настраивая поведение ИИ.
 
-## Administrative Controls
+## Административные элементы управления
 
 <div class="guide-cards">
   <div class="guide-card">
     <div class="card-icon">👥</div>
-    <h3>User Management</h3>
-    <p>Create accounts, manage permissions, monitor usage, and control access to your Speakr instance.</p>
-    <a href="user-management" class="card-link">Manage Users →</a>
+    <h3>Управление пользователями</h3>
+    <p>Создавайте аккаунты, управляйте разрешениями, отслеживайте использование и контролируйте доступ к вашему экземпляру Speakr.</p>
+    <a href="user-management" class="card-link">Управлять пользователями →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">🤝</div>
-    <h3>Group Management</h3>
-    <p>Create groups, assign roles, configure auto-sharing tags, and enable organized collaboration.</p>
-    <a href="group-management" class="card-link">Manage Groups →</a>
+    <h3>Управление группами</h3>
+    <p>Создавайте группы, назначайте роли, настраивайте теги автоматического обмена и включайте организованное сотрудничество.</p>
+    <a href="group-management" class="card-link">Управлять группами →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">📊</div>
-    <h3>System Statistics</h3>
-    <p>Monitor system health, track usage patterns, and identify potential issues before they affect users.</p>
-    <a href="statistics" class="card-link">View Statistics →</a>
+    <h3>Системная статистика</h3>
+    <p>Отслеживайте состояние системы, анализируйте паттерны использования и выявляйте потенциальные проблемы до того, как они повлияют на пользователей.</p>
+    <a href="statistics" class="card-link">Просмотреть статистику →</a>
   </div>
   
   <div class="guide-card">
     <div class="card-icon">🔧</div>
-    <h3>System Settings</h3>
-    <p>Configure global limits, timeouts, file sizes, and system-wide behavior that affects all users.</p>
-    <a href="system-settings" class="card-link">Configure System →</a>
+    <h3>Системные настройки</h3>
+    <p>Настраивайте глобальные лимиты, таймауты, размеры файлов и системное поведение, которое влияет на всех пользователей.</p>
+    <a href="system-settings" class="card-link">Настроить систему →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">🤖</div>
-    <h3>Model Configuration</h3>
-    <p>Configure AI models for text generation, including GPT-5 support and provider selection.</p>
-    <a href="model-configuration" class="card-link">Configure Models →</a>
+    <h3>Конфигурация моделей</h3>
+    <p>Настраивайте модели ИИ для генерации текста, включая поддержку GPT-5 и выбор провайдера.</p>
+    <a href="model-configuration" class="card-link">Настроить модели →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">✨</div>
-    <h3>Default Prompts</h3>
-    <p>Customize AI behavior with default summary prompts that shape how content is processed.</p>
-    <a href="prompts" class="card-link">Set Prompts →</a>
+    <h3>Промпты по умолчанию</h3>
+    <p>Настраивайте поведение ИИ с помощью промптов сводки по умолчанию, которые формируют обработку контента.</p>
+    <a href="prompts" class="card-link">Установить промпты →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">🔍</div>
-    <h3>Vector Store</h3>
-    <p>Manage semantic search capabilities, monitor embedding status, and control Inquire Mode.</p>
-    <a href="vector-store" class="card-link">Manage Search →</a>
+    <h3>Векторное хранилище</h3>
+    <p>Управляйте возможностями семантического поиска, отслеживайте статус эмбеддингов и контролируйте режим Inquire.</p>
+    <a href="vector-store" class="card-link">Управлять поиском →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">🗑️</div>
-    <h3>Retention & Auto-Deletion</h3>
-    <p>Configure automated data lifecycle management with flexible retention policies and smart deletion rules.</p>
-    <a href="retention" class="card-link">Manage Retention →</a>
+    <h3>Хранение и автоматическое удаление</h3>
+    <p>Настраивайте автоматизированное управление жизненным циклом данных с гибкими политиками хранения и умными правилами удаления.</p>
+    <a href="retention" class="card-link">Управлять хранением →</a>
   </div>
 </div>
 
-## Quick Actions
+## Быстрые действия
 
 <div class="action-cards">
   <div class="action-card">
     <span class="action-icon">➕</span>
     <div>
-      <strong>Add New User</strong>
-      <p>User Management → Add User Button → Enter details → Set permissions</p>
+      <strong>Добавить нового пользователя</strong>
+      <p>Управление пользователями → Кнопка Add User → Введите детали → Установите разрешения</p>
     </div>
   </div>
 
   <div class="action-card">
     <span class="action-icon">🤝</span>
     <div>
-      <strong>Create a Group</strong>
-      <p>Group Management → Create Group → Add members → Configure group tags</p>
+      <strong>Создать группу</strong>
+      <p>Управление группами → Создать группу → Добавить участников → Настроить групповые теги</p>
     </div>
   </div>
 
   <div class="action-card">
     <span class="action-icon">📈</span>
     <div>
-      <strong>Check System Health</strong>
-      <p>System Statistics → Review metrics → Check processing status → Monitor storage</p>
+      <strong>Проверить состояние системы</strong>
+      <p>Системная статистика → Просмотреть метрики → Проверить статус обработки → Отслеживать хранилище</p>
     </div>
   </div>
   
   <div class="action-card">
     <span class="action-icon">⚙️</span>
     <div>
-      <strong>Update Settings</strong>
-      <p>System Settings → Adjust limits → Configure timeouts → Save changes</p>
+      <strong>Обновить настройки</strong>
+      <p>Системные настройки → Настроить лимиты → Настроить таймауты → Сохранить изменения</p>
     </div>
   </div>
   
   <div class="action-card">
     <span class="action-icon">🔄</span>
     <div>
-      <strong>Process Embeddings</strong>
-      <p>Vector Store → Check status → Process pending → Monitor progress</p>
+      <strong>Обработать эмбеддинги</strong>
+      <p>Векторное хранилище → Проверить статус → Обработать ожидающие → Отслеживать прогресс</p>
     </div>
   </div>
 </div>
 
-## Need Admin Help?
+## Нужна помощь администратора?
 
 <div class="help-section">
   <div class="help-item">
     <span class="help-icon">📖</span>
-    <span>Review the detailed <a href="../troubleshooting.md">Troubleshooting Guide</a></span>
+    <span>Просмотрите подробное <a href="../troubleshooting.md">Руководство по решению проблем</a></span>
   </div>
   <div class="help-item">
     <span class="help-icon">🐛</span>
-    <span>Check Docker logs: <code>docker compose logs -f app</code></span>
+    <span>Проверьте логи Docker: <code>docker compose logs -f app</code></span>
   </div>
   <div class="help-item">
     <span class="help-icon">💾</span>
-    <span>Backup your data directory regularly</span>
+    <span>Регулярно создавайте резервные копии вашей директории данных</span>
   </div>
 </div>
 
 ---
 
-Ready to manage your Speakr instance? Start with [User Management](user-management.md) →
+Готовы управлять вашим экземпляром Speakr? Начните с [Управления пользователями](user-management.md) →

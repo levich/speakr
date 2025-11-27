@@ -1,405 +1,405 @@
 ---
 layout: default
-title: Group Management
-parent: Admin Guide
+title: Управление группами
+parent: Руководство администратора
 nav_order: 6
 ---
 
-# Group Management
+# Управление группами
 
-Groups enable organized collaboration in multi-user Speakr instances by grouping users and automating recording access through group-specific tags. This powerful feature reduces administrative overhead while maintaining security and control over content access.
+Группы обеспечивают организованное сотрудничество в многопользовательских экземплярах Speakr, группируя пользователей и автоматизируя доступ к записям через теги, специфичные для группы. Эта мощная функция снижает административные накладные расходы, поддерживая безопасность и контроль над доступом к контенту.
 
-## Prerequisites
+## Предварительные требования
 
-Before enabling groups, ensure internal sharing is configured. Groups build on Speakr's internal sharing infrastructure to automatically grant access when users apply group tags.
+Перед включением групп убедитесь, что внутренний обмен настроен. Группы строятся на инфраструктуре внутреннего обмена Speakr для автоматического предоставления доступа, когда пользователи применяют групповые теги.
 
-### Required Configuration
+### Необходимая конфигурация
 
-Add these settings to your `.env` file:
+Добавьте эти настройки в ваш файл `.env`:
 
 ```bash
-# Enable internal sharing (required for groups)
+# Включить внутренний обмен (требуется для групп)
 ENABLE_INTERNAL_SHARING=true
 
-# Control username visibility
-SHOW_USERNAMES_IN_UI=true   # Show usernames in UI
-# OR
-SHOW_USERNAMES_IN_UI=false  # Hide usernames (users type usernames manually to share)
+# Контроль видимости имени пользователя
+SHOW_USERNAMES_IN_UI=true   # Показывать имена пользователей в UI
+# ИЛИ
+SHOW_USERNAMES_IN_UI=false  # Скрывать имена пользователей (пользователи вводят имена пользователей вручную для обмена)
 ```
 
-After modifying `.env`, restart your Speakr instance for changes to take effect. The Groups tab will appear in the admin dashboard once internal sharing is enabled.
+После изменения `.env` перезапустите ваш экземпляр Speakr, чтобы изменения вступили в силу. Вкладка Groups появится в административной панели после включения внутреннего обмена.
 
-### Privacy Considerations
+### Соображения конфиденциальности
 
-The `SHOW_USERNAMES_IN_UI` setting affects the entire instance. When enabled (`true`), users see actual usernames when searching for colleagues and viewing shared content. This improves usability in small, trusted groups where everyone knows each other.
+Настройка `SHOW_USERNAMES_IN_UI` влияет на весь экземпляр. Когда включено (`true`), пользователи видят фактические имена пользователей при поиске коллег и просмотре общего контента. Это улучшает удобство использования в небольших, доверенных группах, где все знают друг друга.
 
-When disabled (`false`), usernames are hidden from the interface. Users must know each other's usernames to share recordings - they type the username manually when creating shares. This privacy-focused approach suits organizations where username visibility should be restricted. Group functionality works identically in both modes - only the display changes.
+Когда отключено (`false`), имена пользователей скрыты из интерфейса. Пользователи должны знать имена пользователей друг друга для обмена записями — они вводят имя пользователя вручную при создании общих доступов. Этот подход, ориентированный на конфиденциальность, подходит организациям, где видимость имени пользователя должна быть ограничена. Групповая функциональность работает идентично в обоих режимах — изменяется только отображение.
 
-## Creating and Managing Groups
+## Создание и управление группами
 
-Groups are created and managed exclusively through the admin dashboard. Regular users cannot create groups, ensuring centralized control over organizational structure.
+Группы создаются и управляются исключительно через административную панель. Обычные пользователи не могут создавать группы, обеспечивая централизованный контроль над организационной структурой.
 
-### Creating a Group
+### Создание группы
 
-Navigate to the Admin Dashboard and select the Groups tab. Click "Create Group" to open the creation modal. Provide a group name that clearly identifies the group's purpose - "Engineering", "Sales EMEA", "Project Phoenix", etc. Descriptive names help users understand each group's scope and purpose.
+Перейдите в Административную панель и выберите вкладку Groups. Нажмите "Create Group", чтобы открыть модальное окно создания. Укажите имя группы, которое четко идентифицирует цель группы — "Engineering", "Sales EMEA", "Project Phoenix" и т.д. Описательные имена помогают пользователям понимать область и цель каждой группы.
 
-The description field is optional but recommended. Use it to explain the group's purpose, which projects or departments it serves, or who should be members. Good descriptions help future administrators understand group organization and make membership decisions.
+Поле описания необязательно, но рекомендуется. Используйте его для объяснения цели группы, какие проекты или отделы она обслуживает, или кто должен быть участником. Хорошие описания помогают будущим администраторам понимать организацию группы и принимать решения о членстве.
 
-Click "Create Group" to finalize creation. The group appears in your groups list immediately, though it starts with no members. The creating user (you) doesn't automatically join - membership must be explicitly granted even for group creators.
+Нажмите "Create Group", чтобы завершить создание. Группа появляется в вашем списке групп немедленно, хотя она начинается без участников. Создающий пользователь (вы) не присоединяется автоматически — членство должно быть явно предоставлено даже для создателей группы.
 
-### Managing Group Membership
+### Управление членством в группе
 
-Click the users-cog icon next to any group to open the group management modal. This interface shows current members, their roles, and provides tools for adding or removing members.
+Нажмите значок users-cog рядом с любой группой, чтобы открыть модальное окно управления группой. Этот интерфейс показывает текущих участников, их роли и предоставляет инструменты для добавления или удаления участников.
 
-To add a member, select a user from the dropdown and choose their role:
+Чтобы добавить участника, выберите пользователя из выпадающего списка и выберите их роль:
 
-- **Member**: Can use group tags and access group-tagged recordings. Suitable for most group participants who need to collaborate on content.
-- **Admin**: All member capabilities plus the ability to manage group membership, create and delete group tags, and access group management features. Useful for group leads or managers who need administrative control.
+- **Member**: Может использовать групповые теги и получать доступ к записям с групповыми тегами. Подходит для большинства участников группы, которым нужно сотрудничать над контентом.
+- **Admin**: Все возможности участника плюс способность управлять членством в группе, создавать и удалять групповые теги и получать доступ к функциям управления группами. Полезно для лидеров групп или менеджеров, которым нужен административный контроль.
 
-Click "Add Member" to grant access. The user immediately gains visibility to group tags and will receive future group-tagged recordings. They don't automatically gain access to existing group-tagged recordings - only new ones tagged after they join.
+Нажмите "Add Member", чтобы предоставить доступ. Пользователь немедленно получает видимость групповых тегов и будет получать будущие записи с групповыми тегами. Они не получают автоматически доступ к существующим записям с групповыми тегами — только к новым, помеченным после того, как они присоединились.
 
-### Changing Member Roles
+### Изменение ролей участников
 
-Group roles can change as responsibilities evolve. Click the role dropdown next to any member to toggle them between Member and Admin. Role changes take effect immediately.
+Роли в группе могут изменяться по мере эволюции обязанностей. Нажмите выпадающий список ролей рядом с любым участником, чтобы переключить их между Member и Admin. Изменения ролей вступают в силу немедленно.
 
-Promoting members to admin grants them access to group management capabilities. They'll see a "Group Management" link in their interface and can add/remove members, create tags, and manage the group independently. This distributes administrative workload and empowers group leads.
+Повышение участников до администратора предоставляет им доступ к возможностям управления группами. Они увидят ссылку "Group Management" в своем интерфейсе и могут добавлять/удалять участников, создавать теги и управлять группой независимо. Это распределяет административную рабочую нагрузку и расширяет возможности лидеров групп.
 
-Demoting admins to members removes their management capabilities but preserves their group membership. They retain access to group tags and recordings but can no longer manage group membership or tags.
+Понижение администраторов до участников удаляет их возможности управления, но сохраняет их членство в группе. Они сохраняют доступ к групповым тегам и записям, но больше не могут управлять членством в группе или тегами.
 
-### Removing Group Members
+### Удаление участников группы
 
-Click the red user-times icon next to any member to remove them from the group. Removal is immediate and has several effects:
+Нажмите красный значок user-times рядом с любым участником, чтобы удалить его из группы. Удаление немедленное и имеет несколько эффектов:
 
-- The user loses access to group tags
-- They won't receive new group-tagged recordings
-- Their access to previously-shared group recordings persists
-- Their personal notes on group recordings are preserved
+- Пользователь теряет доступ к групповым тегам
+- Они не будут получать новые записи с групповыми тегами
+- Их доступ к ранее общим групповым записям сохраняется
+- Их личные заметки на групповых записях сохраняются
 
-If you need to fully revoke access to existing group recordings, you must manually revoke those internal shares through the recording's share management interface. Group removal only prevents future automatic sharing.
+Если вам нужно полностью отозвать доступ к существующим групповым записям, вы должны вручную отозвать эти внутренние общие доступы через интерфейс управления обменом записи. Удаление из группы только предотвращает будущий автоматический обмен.
 
-### Deleting Groups
+### Удаление групп
 
-Click the red trash icon next to a group to delete it entirely. A confirmation dialog prevents accidental deletion. Deleting a group:
+Нажмите красный значок корзины рядом с группой, чтобы удалить её полностью. Диалог подтверждения предотвращает случайное удаление. Удаление группы:
 
-- Removes all group memberships
-- Deletes all group tags (via database cascade)
-- Preserves all recordings (including previously group-tagged ones)
-- Preserves all internal shares created by group tags
+- Удаляет все членства в группе
+- Удаляет все групповые теги (через каскад базы данных)
+- Сохраняет все записи (включая ранее помеченные группой)
+- Сохраняет все внутренние общие доступы, созданные групповыми тегами
 
-Group deletion is irreversible. Once deleted, the group structure is gone, though recordings and access permissions created by the group persist. If you need to temporarily disable a group, consider removing all members instead of deleting the group itself.
+Удаление группы необратимо. После удаления структура группы исчезает, хотя записи и разрешения доступа, созданные группой, сохраняются. Если вам нужно временно отключить группу, рассмотрите удаление всех участников вместо удаления самой группы.
 
-## Group Tags
+## Групповые теги
 
-Group tags power automatic sharing within groups. Unlike personal tags that organize individual content, group tags trigger access grants across all group members whenever applied.
+Групповые теги обеспечивают автоматический обмен внутри групп. В отличие от личных тегов, которые организуют индивидуальный контент, групповые теги запускают предоставление доступа всем участникам группы всякий раз, когда применяются.
 
-### Creating Group Tags
+### Создание групповых тегов
 
-From the Groups tab, click the purple tags icon next to the relevant group. This opens the group tags modal showing existing tags and a creation form.
+Из вкладки Groups нажмите фиолетовый значок тегов рядом с соответствующей группой. Это открывает модальное окно групповых тегов, показывающее существующие теги и форму создания.
 
-Provide a tag name that describes the content type or purpose. Good names are specific and clear: "Sprint Reviews", "Customer Calls", "Legal Contracts". Avoid generic names like "Important" or "Group" that don't convey useful information.
+Укажите имя тега, которое описывает тип контента или цель. Хорошие имена специфичны и ясны: "Sprint Reviews", "Customer Calls", "Legal Contracts". Избегайте общих имен, таких как "Important" или "Group", которые не передают полезную информацию.
 
-Select a color to visually distinguish the tag. Colors help users quickly identify content categories in the interface. Consider establishing color conventions - blue for technical content, green for sales, red for legal, etc.
+Выберите цвет для визуального различения тега. Цвета помогают пользователям быстро идентифицировать категории контента в интерфейсе. Рассмотрите установление цветовых соглашений — синий для технического контента, зеленый для продаж, красный для юридического и т.д.
 
-### Tag Retention Policies
+### Политики хранения тегов
 
-Group tags can override global retention settings with tag-specific retention periods. This powerful feature lets different content types have different lifecycles within the same instance.
+Групповые теги могут переопределять глобальные настройки хранения с периодами хранения, специфичными для тегов. Эта мощная функция позволяет разным типам контента иметь разные жизненные циклы в одном экземпляре.
 
-Leave the retention field empty to use global retention settings. The tag won't affect how long recordings are kept - they'll follow the instance-wide `GLOBAL_RETENTION_DAYS` setting.
+Оставьте поле хранения пустым, чтобы использовать глобальные настройки хранения. Тег не будет влиять на то, как долго записи хранятся — они будут следовать настройке `GLOBAL_RETENTION_DAYS` для всего экземпляра.
 
-Enter a number of days to set custom retention for this tag. Recordings with this tag will be auto-deleted after the specified period, regardless of global settings. For example:
+Введите количество дней, чтобы установить пользовательское хранение для этого тега. Записи с этим тегом будут автоматически удаляться после указанного периода, независимо от глобальных настроек. Например:
 
-- Legal group: 2555 days (7 years) for contracts and compliance recordings
-- Operations group: 14 days for daily stand-ups
-- Marketing group: 180 days for campaign planning sessions
+- Юридическая группа: 2555 дней (7 лет) для контрактов и записей соответствия требованиям
+- Операционная группа: 14 дней для ежедневных стендапов
+- Маркетинговая группа: 180 дней для сессий планирования кампаний
 
-When a recording has multiple tags with different retention periods, the shortest period applies. This ensures content is never kept longer than its most restrictive tag allows.
+Когда запись имеет несколько тегов с разными периодами хранения, применяется **самый короткий** период. Это обеспечивает, что контент никогда не хранится дольше, чем позволяет его самый ограничительный тег.
 
-### Protection from Deletion
+### Защита от удаления
 
-Enable "Protect from deletion" to make recordings with this tag immune to automatic deletion. Protected recordings are never auto-deleted regardless of age, global retention settings, or other tag retention periods.
+Включите "Protect from deletion", чтобы сделать записи с этим тегом невосприимчивыми к автоматическому удалению. Защищенные записи никогда не удаляются автоматически независимо от возраста, глобальных настроек хранения или других периодов хранения тегов.
 
-Use protection for recordings that must be permanently preserved:
+Используйте защиту для записей, которые должны быть постоянно сохранены:
 
-- Legal and compliance records
-- Critical business decisions
-- Training and onboarding materials
-- Reference documentation
-- Historical archives
+- Юридические записи и записи соответствия требованиям
+- Критические бизнес-решения
+- Материалы обучения и адаптации
+- Справочная документация
+- Исторические архивы
 
-Protection can be removed by editing the tag later if preservation requirements change. Removing protection doesn't immediately delete recordings - they'll be evaluated for deletion on the next retention check based on their age and other applicable retention policies.
+Защита может быть удалена путем редактирования тега позже, если требования к сохранению изменятся. Удаление защиты не удаляет записи немедленно — они будут оценены для удаления при следующей проверке хранения на основе их возраста и других применимых политик хранения.
 
-### Auto-Share Settings
+### Настройки автоматического обмена
 
-Group tags support two levels of automatic sharing that trigger when any group member applies the tag to a recording:
+Групповые теги поддерживают два уровня автоматического обмена, которые запускаются, когда любой участник группы применяет тег к записи:
 
-**Share with All Group Members** is the default and recommended approach. When enabled, applying this tag shares the recording with every group member (excluding the owner). All members receive view and edit permissions, enabling full collaboration.
+**Share with All Group Members** — это подход по умолчанию и рекомендуемый. Когда включено, применение этого тега делится записью с каждым участником группы (исключая владельца). Все участники получают разрешения на просмотр и редактирование, обеспечивая полное сотрудничество.
 
-**Share with Group Leads Only** restricts automatic sharing to group admins. When enabled, only users with the admin role in this group receive automatic access. Regular members don't get automatic access, though group admins can manually share with them if needed. This option suits sensitive content that requires administrative oversight before wider distribution.
+**Share with Group Leads Only** ограничивает автоматический обмен администраторами групп. Когда включено, только пользователи с ролью администратора в этой группе получают автоматический доступ. Обычные участники не получают автоматический доступ, хотя администраторы групп могут вручную делиться с ними при необходимости. Эта опция подходит для чувствительного контента, который требует административного надзора перед более широким распространением.
 
-Both options can be enabled simultaneously, though this is redundant - sharing with all members already includes group leads. Use one or the other based on your content sensitivity and group structure.
+Обе опции могут быть включены одновременно, хотя это избыточно — обмен со всеми участниками уже включает лидеров групп. Используйте одну или другую на основе чувствительности вашего контента и структуры группы.
 
-### Managing Group Tags
+### Управление групповыми тегами
 
-Existing group tags appear in the group tags modal with their current settings. Click the edit icon to modify a tag's name, color, retention, protection, or sharing settings. Changes affect the tag going forward but don't retroactively change already-applied tags or shares.
+Существующие групповые теги появляются в модальном окне групповых тегов с их текущими настройками. Нажмите значок редактирования, чтобы изменить имя тега, цвет, хранение, защиту или настройки обмена. Изменения влияют на тег в будущем, но не ретроактивно изменяют уже примененные теги или общие доступы.
 
-Delete group tags by clicking the trash icon. Deleted tags:
+Удаляйте групповые теги, нажав значок корзины. Удаленные теги:
 
-- Are removed from all recordings they were applied to
-- Disappear from tag selectors for all group members
-- Don't delete the recordings themselves
-- Don't revoke access already granted through the tag
+- Удаляются со всех записей, к которым они были применены
+- Исчезают из селекторов тегов для всех участников группы
+- Не удаляют сами записи
+- Не отзывают доступ, уже предоставленный через тег
 
-If a tag was widely used, consider the impact before deletion. Users may have organized content around that tag, and deletion removes that organizational structure. In most cases, retaining unused tags causes no harm.
+Если тег широко использовался, рассмотрите влияние перед удалением. Пользователи могли организовать контент вокруг этого тега, и удаление удаляет эту организационную структуру. В большинстве случаев сохранение неиспользуемых тегов не причиняет вреда.
 
-### Syncing Group Shares
+### Синхронизация групповых общих доступов
 
-If your instance enabled group features after recordings were already tagged, or if group membership changed significantly, you might have group-tagged recordings that weren't automatically shared with current group members. The "Sync Group Shares" feature addresses this.
+Если ваш экземпляр включил групповые функции после того, как записи уже были помечены, или если членство в группе значительно изменилось, у вас могут быть записи с групповыми тегами, которые не были автоматически общими с текущими участниками группы. Функция "Sync Group Shares" решает это.
 
-Click "Sync Group Shares" in the group management modal to open the sync dialog. Review the information about what the sync will do - it applies automatic sharing retroactively to all existing recordings with this group's tags.
+Нажмите "Sync Group Shares" в модальном окне управления группой, чтобы открыть диалог синхронизации. Просмотрите информацию о том, что синхронизация будет делать — она применяет автоматический обмен ретроактивно ко всем существующим записям с тегами этой группы.
 
-The sync operation:
+Операция синхронизации:
 
-- Identifies all recordings tagged with any of this group's tags
-- Checks each recording for existing shares with current group members
-- Creates missing shares for group members who should have access but don't
-- Respects the tag's sharing settings (all members vs. group leads only)
-- Skips recordings where members already have access
+- Идентифицирует все записи, помеченные любым из тегов этой группы
+- Проверяет каждую запись на наличие существующих общих доступов с текущими участниками группы
+- Создает отсутствующие общие доступы для участников группы, которые должны иметь доступ, но не имеют
+- Уважает настройки обмена тега (все участники против только лидеров групп)
+- Пропускает записи, где участники уже имеют доступ
 
-Confirm the sync to execute. Depending on the number of tagged recordings and group size, this might take a few seconds to several minutes. A result modal shows how many shares were created and how many recordings were processed.
+Подтвердите синхронизацию для выполнения. В зависимости от количества помеченных записей и размера группы это может занять от нескольких секунд до нескольких минут. Модальное окно результата показывает, сколько общих доступов было создано и сколько записей было обработано.
 
-Sync is safe to run multiple times - it won't create duplicate shares. Use it after adding many new members, after fixing misconfigured tags, or when migrating from older Speakr versions that didn't have full group support.
+Синхронизация безопасна для запуска несколько раз — она не создаст дублирующие общие доступы. Используйте её после добавления многих новых участников, после исправления неправильно настроенных тегов или при миграции со старых версий Speakr, которые не имели полной поддержки групп.
 
-## Group Admin Role
+## Роль администратора группы
 
-Group admins are group members with elevated permissions within their group's scope. Unlike full instance administrators who can manage all groups and system settings, group admins can only manage groups where they have the admin role.
+Администраторы групп — это участники группы с повышенными разрешениями в области их группы. В отличие от полных администраторов экземпляра, которые могут управлять всеми группами и системными настройками, администраторы групп могут управлять только группами, где у них есть роль администратора.
 
-### Granting Group Admin Access
+### Предоставление доступа администратора группы
 
-When adding a member to a group, select "Admin" from the role dropdown. The user immediately gains group admin capabilities for that group only. They cannot manage other groups or access system-wide administrative features.
+При добавлении участника в группу выберите "Admin" из выпадающего списка ролей. Пользователь немедленно получает возможности администратора группы только для этой группы. Они не могут управлять другими группами или получать доступ к административным функциям всей системы.
 
-Group admins see a "Group Management" link in their user menu instead of the full admin link. Clicking this takes them to a focused admin interface showing only groups they administer. The interface is identical to the Groups tab regular admins see, but scoped to their groups.
+Администраторы групп видят ссылку "Group Management" в своем пользовательском меню вместо полной административной ссылки. Нажатие на это переносит их в сфокусированный административный интерфейс, показывающий только группы, которыми они управляют. Интерфейс идентичен вкладке Groups, которую видят обычные администраторы, но ограничен их группами.
 
-### Group Admin Capabilities
+### Возможности администратора группы
 
-Group admins can perform these actions within their groups:
+Администраторы групп могут выполнять эти действия в своих группах:
 
-- Add new members from the instance's user base
-- Remove existing members (excluding themselves)
-- Change member roles between admin and member
-- Create new group tags with full configuration options
-- Edit existing group tags including retention and sharing settings
-- Delete group tags
-- Sync group shares for their groups
+- Добавлять новых участников из пользовательской базы экземпляра
+- Удалять существующих участников (исключая себя)
+- Изменять роли участников между администратором и участником
+- Создавать новые групповые теги с полными опциями конфигурации
+- Редактировать существующие групповые теги, включая настройки хранения и обмена
+- Удалять групповые теги
+- Синхронизировать групповые общие доступы для своих групп
 
-Group admins cannot:
+Администраторы групп не могут:
 
-- Create new groups
-- Delete groups
-- Manage groups they're not admins of
-- Access system-wide admin features (users, settings, statistics)
-- Grant themselves admin access to other groups
+- Создавать новые группы
+- Удалять группы
+- Управлять группами, в которых они не являются администраторами
+- Получать доступ к административным функциям всей системы (пользователи, настройки, статистика)
+- Предоставлять себе административный доступ к другим группам
 
-This scoped access lets you distribute group management responsibility to group leads without granting full administrative access. Group leads can manage their groups independently while you maintain control over instance-wide settings and group creation.
+Этот ограниченный доступ позволяет вам распределять ответственность управления группами на лидеров групп без предоставления полного административного доступа. Лидеры групп могут управлять своими группами независимо, в то время как вы поддерживаете контроль над настройками всего экземпляра и созданием групп.
 
-### Security Boundaries
+### Границы безопасности
 
-Group admins have powerful capabilities within their groups but cannot escalate their privileges. They cannot:
+Администраторы групп имеют мощные возможности в своих группах, но не могут повысить свои привилегии. Они не могут:
 
-- Make themselves full instance administrators
-- Grant themselves admin roles in other groups
-- Access or modify system settings
-- View statistics for other groups or the entire instance
-- Delete recordings owned by other users (even within their group)
+- Сделать себя полными администраторами экземпляра
+- Предоставить себе административные роли в других группах
+- Получать доступ или изменять системные настройки
+- Просматривать статистику для других групп или всего экземпляра
+- Удалять записи, принадлежащие другим пользователям (даже в их группе)
 
-The database enforces these boundaries at the API level. Even if a group admin could somehow call instance-wide admin APIs, the backend verifies permissions and rejects unauthorized requests. The UI simply hides controls group admins can't use, but security doesn't rely on UI hiding.
+База данных обеспечивает эти границы на уровне API. Даже если администратор группы каким-то образом мог вызвать административные API всей системы, бэкенд проверяет разрешения и отклоняет неавторизованные запросы. UI просто скрывает элементы управления, которые администраторы групп не могут использовать, но безопасность не полагается на скрытие UI.
 
-## Configuration Reference
+## Справочник конфигурации
 
-### Environment Variables
+### Переменные окружения
 
 ```bash
-# Internal Sharing (Required)
+# Внутренний обмен (Обязательно)
 ENABLE_INTERNAL_SHARING=true|false
 
-# Username Display
+# Отображение имени пользователя
 SHOW_USERNAMES_IN_UI=true|false
 
-# Public Sharing Control (Affects group members' public sharing)
+# Контроль публичного обмена (Влияет на публичный обмен участников группы)
 ENABLE_PUBLIC_SHARING=true|false
 
-# Retention Settings (Groups can override)
+# Настройки хранения (Группы могут переопределить)
 ENABLE_AUTO_DELETION=true|false
 GLOBAL_RETENTION_DAYS=90
 DELETION_MODE=audio_only|full_recording
 ```
 
-### Database Schema
+### Схема базы данных
 
-Groups use several database tables that work together:
+Группы используют несколько таблиц базы данных, которые работают вместе:
 
-**Group Table**:
-- `id`: Primary key
-- `name`: Group name (max 100 chars)
-- `description`: Optional group description
-- `created_by`: User ID of creator (full admin)
-- `created_at`: Creation timestamp
+**Таблица Group**:
+- `id`: Первичный ключ
+- `name`: Имя группы (макс. 100 символов)
+- `description`: Необязательное описание группы
+- `created_by`: ID пользователя создателя (полный администратор)
+- `created_at`: Временная метка создания
 
-**TeamMembership Table**:
-- `id`: Primary key
-- `team_id`: References Group
-- `user_id`: References User
-- `role`: "admin" or "member"
-- `joined_at`: Membership timestamp
+**Таблица TeamMembership**:
+- `id`: Первичный ключ
+- `team_id`: Ссылается на Group
+- `user_id`: Ссылается на User
+- `role`: "admin" или "member"
+- `joined_at`: Временная метка членства
 
-**Tag Table** (Extended):
-- `team_id`: References Group (null for personal tags)
-- `retention_days`: Custom retention override (null uses global)
-- `protect_from_deletion`: Boolean protection flag
-- `auto_share_on_apply`: Boolean (share with all members)
-- `share_with_team_lead`: Boolean (share with group admins only)
+**Таблица Tag** (Расширенная):
+- `team_id`: Ссылается на Group (null для личных тегов)
+- `retention_days`: Пользовательское переопределение хранения (null использует глобальное)
+- `protect_from_deletion`: Булевый флаг защиты
+- `auto_share_on_apply`: Булево (делиться со всеми участниками)
+- `share_with_team_lead`: Булево (делиться только с администраторами групп)
 
-Cascade deletion is configured so deleting a group deletes its tags and memberships, but preserves recordings and shares.
+Каскадное удаление настроено так, что удаление группы удаляет её теги и членства, но сохраняет записи и общие доступы.
 
-## Troubleshooting
+## Решение проблем
 
-### Groups Tab Not Visible
+### Вкладка Groups не видна
 
-**Cause**: Internal sharing not enabled or not configured correctly.
+**Причина**: Внутренний обмен не включен или настроен неправильно.
 
-**Solution**:
-1. Check `.env` contains `ENABLE_INTERNAL_SHARING=true`
-2. Restart Speakr after `.env` changes
-3. Clear browser cache and reload
-4. Check application logs for startup errors
+**Решение**:
+1. Проверьте, что `.env` содержит `ENABLE_INTERNAL_SHARING=true`
+2. Перезапустите Speakr после изменений `.env`
+3. Очистите кеш браузера и перезагрузите
+4. Проверьте логи приложения на ошибки запуска
 
-### Users Can't See Group Tags
+### Пользователи не видят групповые теги
 
-**Cause**: User not added to group, or internal sharing disabled.
+**Причина**: Пользователь не добавлен в группу или внутренний обмен отключен.
 
-**Solution**:
-1. Verify user is listed in group membership
-2. Confirm `ENABLE_INTERNAL_SHARING=true` in `.env`
-3. Check user is logged in (group tags hidden for anonymous users)
-4. Refresh the page to load updated tag lists
+**Решение**:
+1. Проверьте, что пользователь перечислен в членстве группы
+2. Подтвердите `ENABLE_INTERNAL_SHARING=true` в `.env`
+3. Проверьте, что пользователь вошел в систему (групповые теги скрыты для анонимных пользователей)
+4. Обновите страницу, чтобы загрузить обновленные списки тегов
 
-### Auto-Sharing Not Working
+### Автоматический обмен не работает
 
-**Cause**: Group tag misconfigured or internal sharing disabled.
+**Причина**: Групповой тег неправильно настроен или внутренний обмен отключен.
 
-**Solution**:
-1. Edit the group tag and verify "Share with all group members" or "Share with group leads" is enabled
-2. Confirm `ENABLE_INTERNAL_SHARING=true` in `.env`
-3. Check application logs when applying tags for sharing errors
-4. Try manually sharing the recording to verify sharing infrastructure works
+**Решение**:
+1. Отредактируйте групповой тег и проверьте, что "Share with all group members" или "Share with group leads" включено
+2. Подтвердите `ENABLE_INTERNAL_SHARING=true` в `.env`
+3. Проверьте логи приложения при применении тегов на ошибки обмена
+4. Попробуйте вручную поделиться записью, чтобы проверить, работает ли инфраструктура обмена
 
-### Group Admin Can't Access Admin Interface
+### Администратор группы не может получить доступ к административному интерфейсу
 
-**Cause**: User doesn't have admin role in any group, or routing issue.
+**Причина**: Пользователь не имеет роли администратора ни в одной группе или проблема с маршрутизацией.
 
-**Solution**:
-1. Verify user role is "admin" not "member" in group membership
-2. Have user log out and back in to refresh session
-3. Check "Group Management" link appears in user menu (not "Admin")
-4. Review application logs for permission errors
+**Решение**:
+1. Проверьте, что роль пользователя "admin", а не "member" в членстве группы
+2. Попросите пользователя выйти и войти снова, чтобы обновить сессию
+3. Проверьте, что ссылка "Group Management" появляется в пользовательском меню (не "Admin")
+4. Просмотрите логи приложения на ошибки разрешений
 
-### Recordings Not Deleted Per Retention Policy
+### Записи не удаляются согласно политике хранения
 
-**Cause**: Protected tags, misconfigured retention, or auto-deletion disabled.
+**Причина**: Защищенные теги, неправильно настроенное хранение или автоматическое удаление отключено.
 
-**Solution**:
-1. Check if recording has protected group tags
-2. Verify `ENABLE_AUTO_DELETION=true` in `.env`
-3. Confirm `GLOBAL_RETENTION_DAYS` is set if no tag retention applies
-4. Review cron scheduler logs for deletion errors
-5. Check tag retention_days is set correctly (null = use global)
+**Решение**:
+1. Проверьте, имеет ли запись защищенные групповые теги
+2. Проверьте `ENABLE_AUTO_DELETION=true` в `.env`
+3. Подтвердите, что `GLOBAL_RETENTION_DAYS` установлен, если не применяется хранение тегов
+4. Просмотрите логи планировщика cron на ошибки удаления
+5. Проверьте, что `retention_days` тега установлен правильно (null = использовать глобальное)
 
-### Sync Group Shares Shows Zero Shares Created
+### Sync Group Shares показывает ноль созданных общих доступов
 
-**Cause**: All applicable shares already exist, or no recordings have group tags.
+**Причина**: Все применимые общие доступы уже существуют, или нет записей с групповыми тегами.
 
-**Solution**:
-1. Verify recordings actually have tags from this group
-2. Check if group members already have access via other shares
-3. Review whether recordings are owned by current group members (no self-sharing)
-4. Confirm group has members beyond the recording owners
+**Решение**:
+1. Проверьте, что записи фактически имеют теги из этой группы
+2. Проверьте, имеют ли участники группы уже доступ через другие общие доступы
+3. Просмотрите, принадлежат ли записи текущим участникам группы (нет самообмена)
+4. Подтвердите, что группа имеет участников помимо владельцев записей
 
-## Best Practices
+## Лучшие практики
 
-### Group Structure
+### Структура группы
 
-**Small Organizations (<10 users)**:
-Create groups per department (Engineering, Sales, HR). Use group tags for project names or content types. Liberal use of groups promotes collaboration since everyone knows everyone.
+**Малые организации (<10 пользователей)**:
+Создавайте группы по отделам (Engineering, Sales, HR). Используйте групповые теги для названий проектов или типов контента. Либеральное использование групп способствует сотрудничеству, поскольку все знают друг друга.
 
-**Large Organizations (>10 users)**:
-Create groups per product, division, or major project. Use nested organizational patterns if needed (separate groups for Product A Engineering and Product A Sales). More selective group membership prevents information overload.
+**Крупные организации (>10 пользователей)**:
+Создавайте группы по продуктам, подразделениям или крупным проектам. Используйте вложенные организационные паттерны при необходимости (отдельные группы для Product A Engineering и Product A Sales). Более избирательное членство в группе предотвращает информационную перегрузку.
 
-### Tag Naming Conventions
+### Соглашения об именовании тегов
 
-Establish conventions early and document them for consistency:
+Установите соглашения рано и документируйте их для согласованности:
 
 ```
-Project-Based: "Project-Phoenix", "Initiative-Q3-2024"
-Content-Type: "Sprint-Reviews", "Customer-Calls", "Legal-Contracts"
-Department: "Eng-Architecture", "Sales-Training", "HR-Interviews"
+На основе проекта: "Project-Phoenix", "Initiative-Q3-2024"
+Тип контента: "Sprint-Reviews", "Customer-Calls", "Legal-Contracts"
+Отдел: "Eng-Architecture", "Sales-Training", "HR-Interviews"
 ```
 
-Avoid generic names that don't communicate purpose:
+Избегайте общих имен, которые не передают цель:
 ❌ "Important", "Misc", "Other", "Temp", "Group"
 ✓ "Executive-Briefings", "Tech-Specs", "Client-Demos"
 
-### Retention Strategy
+### Стратегия хранения
 
-Set thoughtful defaults that balance storage costs with compliance needs:
+Установите продуманные значения по умолчанию, которые балансируют затраты на хранилище с потребностями соответствия требованиям:
 
 ```
-Global Default: 90 days (captures most content)
-Legal Group Tags: 2555 days (7 years for legal records)
-Compliance Tags: Protected (permanent retention)
-Meeting Tags: 180 days (reasonable collaboration window)
-Stand-up Tags: 14 days (ephemeral daily content)
+Глобальное по умолчанию: 90 дней (захватывает большинство контента)
+Теги юридической группы: 2555 дней (7 лет для юридических записей)
+Теги соответствия: Защищенные (постоянное хранение)
+Теги встреч: 180 дней (разумное окно сотрудничества)
+Теги стендапов: 14 дней (эфемерный ежедневный контент)
 ```
 
-Review retention policies quarterly to ensure they remain appropriate as business needs change.
+Просматривайте политики хранения ежеквартально, чтобы убедиться, что они остаются подходящими по мере изменения бизнес-потребностей.
 
-### Group Admin Distribution
+### Распределение администраторов групп
 
-Grant group admin roles to natural group leaders - project managers, department heads, tech leads. This distributes administrative workload and empowers groups to self-manage.
+Предоставляйте роли администраторов групп естественным лидерам групп — менеджерам проектов, руководителям отделов, техническим лидерам. Это распределяет административную рабочую нагрузку и расширяет возможности групп для самоуправления.
 
-Avoid granting group admin too liberally. While it's scoped to individual groups, group admins can add members and create tags that affect access. Limit the role to trusted individuals who understand security implications.
+Избегайте слишком либерального предоставления администратора группы. Хотя это ограничено отдельными группами, администраторы групп могут добавлять участников и создавать теги, которые влияют на доступ. Ограничьте роль доверенными людьми, которые понимают последствия безопасности.
 
-Document each group's admins in the group description or external documentation. Future administrators will appreciate knowing who to contact about group-specific questions.
+Документируйте администраторов каждой группы в описании группы или внешней документации. Будущие администраторы оценят знание, к кому обращаться по вопросам, специфичным для группы.
 
-## Integration with Other Features
+## Интеграция с другими функциями
 
-### Inquire Mode
+### Режим Inquire
 
-Group tags automatically appear in Inquire Mode's available filters, enabling group-scoped semantic search. Users can search for "budget discussions" and filter to just their project group, finding relevant conversations without noise from other groups.
+Групповые теги автоматически появляются в доступных фильтрах режима Inquire, обеспечивая семантический поиск в области группы. Пользователи могут искать "обсуждения бюджета" и фильтровать только свою проектную группу, находя релевантные беседы без шума от других групп.
 
-Recordings shared via group tags are included in semantic search results. The vector store indexes all accessible recordings, meaning group content becomes part of users' searchable knowledge base automatically.
+Записи, которыми поделились через групповые теги, включаются в результаты семантического поиска. Векторное хранилище индексирует все доступные записи, что означает, что групповой контент автоматически становится частью доступной для поиска базы знаний пользователей.
 
-### Retention and Auto-Deletion
+### Хранение и автоматическое удаление
 
-Tag-level retention policies integrate with Speakr's auto-deletion system. The nightly retention check evaluates each recording's tags to determine applicable retention periods:
+Политики хранения на уровне тегов интегрируются с системой автоматического удаления Speakr. Ежедневная проверка хранения оценивает теги каждой записи, чтобы определить применимые периоды хранения:
 
-1. If recording has protected tags → Never deleted
-2. If recording has tags with `retention_days` → Use shortest tag retention
-3. Otherwise → Use global `GLOBAL_RETENTION_DAYS`
+1. Если запись имеет защищенные теги → Никогда не удаляется
+2. Если запись имеет теги с `retention_days` → Используйте самый короткий период хранения тега
+3. Иначе → Используйте глобальный `GLOBAL_RETENTION_DAYS`
 
-This cascading system lets groups set specific policies while maintaining instance-wide defaults for untagged content.
+Эта каскадная система позволяет группам устанавливать конкретные политики, поддерживая при этом значения по умолчанию для всего экземпляра для непомеченного контента.
 
-### Public Sharing
+### Публичный обмен
 
-Group membership doesn't affect public sharing capabilities. Users' ability to create public share links is controlled by:
+Членство в группе не влияет на возможности публичного обмена. Способность пользователей создавать публичные ссылки для обмена контролируется:
 
-1. Global `ENABLE_PUBLIC_SHARING` setting
-2. Per-user `can_share_publicly` permission (if global is enabled)
+1. Глобальной настройкой `ENABLE_PUBLIC_SHARING`
+2. Разрешением `can_share_publicly` для каждого пользователя (если глобальное включено)
 
-Group members can create public links for group recordings if they have appropriate permissions, enabling external stakeholder communication while maintaining group-internal collaboration.
+Участники группы могут создавать публичные ссылки для групповых записей, если у них есть соответствующие разрешения, обеспечивая общение с внешними заинтересованными сторонами, поддерживая при этом сотрудничество внутри группы.
 
 ---
 
-Groups transform multi-user Speakr instances into collaborative platforms where information flows automatically to relevant people. Proper configuration and management ensure security while enabling seamless knowledge sharing.
+Группы преобразуют многопользовательские экземпляры Speakr в совместные платформы, где информация автоматически течет к релевантным людям. Правильная конфигурация и управление обеспечивают безопасность, обеспечивая при этом бесшовный обмен знаниями.
 
-For user-focused group documentation, see the [Group Collaboration](../user-guide/groups.md) guide.
+Для пользовательской документации по группам см. руководство [Сотрудничество в группах](../user-guide/groups.md).
 
-Return to [Admin Guide](index.md) →
+Вернуться к [Руководству администратора](index.md) →

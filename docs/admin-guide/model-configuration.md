@@ -1,22 +1,22 @@
-# Model Configuration
+# Конфигурация моделей
 
-This guide covers how to configure AI models for text generation in Speakr, including support for OpenAI's GPT-5 series and other language models.
+Это руководство охватывает, как настроить модели ИИ для генерации текста в Speakr, включая поддержку серии GPT-5 от OpenAI и других языковых моделей.
 
-## Overview
+## Обзор
 
-Speakr uses AI models for several key features:
+Speakr использует модели ИИ для нескольких ключевых функций:
 
-- **Summary Generation**: Creating intelligent summaries of your transcriptions
-- **Title Generation**: Automatically generating descriptive titles for recordings
-- **Event Extraction**: Identifying calendar-worthy events from conversations
-- **Interactive Chat**: Answering questions about your recordings
-- **Speaker Identification**: Detecting speaker names from conversation context
+- **Генерация сводок**: Создание интеллектуальных сводок ваших транскрипций
+- **Генерация заголовков**: Автоматическая генерация описательных заголовков для записей
+- **Извлечение событий**: Идентификация событий, достойных календаря, из бесед
+- **Интерактивный чат**: Ответы на вопросы о ваших записях
+- **Идентификация говорящих**: Обнаружение имен говорящих из контекста беседы
 
-These features are powered by large language models (LLMs) configured through your `.env` file.
+Эти функции питаются большими языковыми моделями (LLM), настроенными через ваш файл `.env`.
 
-## Basic Configuration
+## Базовая конфигурация
 
-The text generation model is configured using three environment variables:
+Модель генерации текста настраивается с использованием трех переменных окружения:
 
 ```bash
 TEXT_MODEL_BASE_URL=https://openrouter.ai/api/v1
@@ -24,291 +24,291 @@ TEXT_MODEL_API_KEY=your_api_key_here
 TEXT_MODEL_NAME=openai/gpt-4o-mini
 ```
 
-### Choosing a Provider
+### Выбор провайдера
 
-**OpenRouter** (recommended for most users): Provides access to multiple AI models through a single API, often at competitive prices. Supports GPT-4, Claude, and many other models. Configure using `TEXT_MODEL_BASE_URL=https://openrouter.ai/api/v1`.
+**OpenRouter** (рекомендуется для большинства пользователей): Предоставляет доступ к нескольким моделям ИИ через единый API, часто по конкурентным ценам. Поддерживает GPT-4, Claude и многие другие модели. Настройте, используя `TEXT_MODEL_BASE_URL=https://openrouter.ai/api/v1`.
 
-**OpenAI Direct**: Use OpenAI's API directly for access to their latest models including GPT-5. Configure using `TEXT_MODEL_BASE_URL=https://api.openai.com/v1`. This option is required for GPT-5 models with their specialized parameters.
+**OpenAI Direct**: Используйте API OpenAI напрямую для доступа к их последним моделям, включая GPT-5. Настройте, используя `TEXT_MODEL_BASE_URL=https://api.openai.com/v1`. Эта опция требуется для моделей GPT-5 с их специализированными параметрами.
 
-**Custom Endpoints**: Speakr works with any OpenAI-compatible API endpoint, including self-hosted solutions like LocalAI, Ollama with OpenAI compatibility, or enterprise API gateways.
+**Пользовательские эндпоинты**: Speakr работает с любым API-эндпоинтом, совместимым с OpenAI, включая самодостаточные решения, такие как LocalAI, Ollama с совместимостью OpenAI, или корпоративные API-шлюзы.
 
-## GPT-5 Support
+## Поддержка GPT-5
 
-Speakr fully supports OpenAI's GPT-5 model family, automatically detecting and adjusting API parameters when you use GPT-5 models with the official OpenAI API.
+Speakr полностью поддерживает семейство моделей GPT-5 от OpenAI, автоматически обнаруживая и настраивая параметры API, когда вы используете модели GPT-5 с официальным API OpenAI.
 
-### Requirements
+### Требования
 
-- **OpenAI Python SDK**: Version 2.2.0 or higher (included in `requirements.txt`)
-- **OpenAI API**: Must use `TEXT_MODEL_BASE_URL=https://api.openai.com/v1`
-- **Valid API Key**: An OpenAI API key with GPT-5 access
+- **OpenAI Python SDK**: Версия 2.2.0 или выше (включена в `requirements.txt`)
+- **OpenAI API**: Должен использовать `TEXT_MODEL_BASE_URL=https://api.openai.com/v1`
+- **Действительный ключ API**: Ключ API OpenAI с доступом к GPT-5
 
-### Supported GPT-5 Models
+### Поддерживаемые модели GPT-5
 
-- **gpt-5**: Best for complex reasoning, broad world knowledge, and code-heavy tasks
-- **gpt-5-mini**: Cost-optimized reasoning and chat; balances speed, cost, and capability
-- **gpt-5-nano**: High-throughput tasks, especially simple instruction-following
-- **gpt-5-chat-latest**: Latest GPT-5 chat model
+- **gpt-5**: Лучше всего для сложных рассуждений, широких знаний о мире и задач, насыщенных кодом
+- **gpt-5-mini**: Оптимизированные по стоимости рассуждения и чат; балансирует скорость, стоимость и возможности
+- **gpt-5-nano**: Задачи с высокой пропускной способностью, особенно простое следование инструкциям
+- **gpt-5-chat-latest**: Последняя модель чата GPT-5
 
-### Key Differences from GPT-4
+### Ключевые отличия от GPT-4
 
-GPT-5 models use different parameters than previous models:
+Модели GPT-5 используют разные параметры, чем предыдущие модели:
 
-**Unsupported Parameters** (will cause errors if used):
-- `temperature` - Replaced by `reasoning_effort` and `verbosity`
-- `top_p` - Not supported
-- `logprobs` - Not supported
+**Неподдерживаемые параметры** (вызовут ошибки, если используются):
+- `temperature` - Заменен на `reasoning_effort` и `verbosity`
+- `top_p` - Не поддерживается
+- `logprobs` - Не поддерживается
 
-**New GPT-5 Parameters**:
+**Новые параметры GPT-5**:
 
-**Reasoning Effort**: Controls how many reasoning tokens the model generates before producing a response.
+**Reasoning Effort**: Контролирует, сколько токенов рассуждения модель генерирует перед производством ответа.
 
-- **minimal**: Fastest responses, minimal reasoning tokens (best for simple tasks)
-- **low**: Fast responses with basic reasoning
-- **medium**: Balanced reasoning and speed (default, recommended)
-- **high**: Maximum reasoning for complex tasks like coding and multi-step planning
+- **minimal**: Самые быстрые ответы, минимальные токены рассуждения (лучше всего для простых задач)
+- **low**: Быстрые ответы с базовыми рассуждениями
+- **medium**: Сбалансированные рассуждения и скорость (по умолчанию, рекомендуется)
+- **high**: Максимальные рассуждения для сложных задач, таких как кодирование и многошаговое планирование
 
-**Verbosity**: Controls how many output tokens are generated.
+**Verbosity**: Контролирует, сколько выходных токенов генерируется.
 
-- **low**: Concise responses
-- **medium**: Balanced detail (default)
-- **high**: Thorough explanations and detailed code
+- **low**: Краткие ответы
+- **medium**: Сбалансированная детализация (по умолчанию)
+- **high**: Тщательные объяснения и детальный код
 
-**Token Limits**: GPT-5 uses `max_completion_tokens` instead of `max_tokens`.
+**Лимиты токенов**: GPT-5 использует `max_completion_tokens` вместо `max_tokens`.
 
-### Configuring GPT-5
+### Настройка GPT-5
 
-Add these settings to your `.env` file:
+Добавьте эти настройки в ваш файл `.env`:
 
 ```bash
-# Use OpenAI API endpoint
+# Используйте эндпоинт API OpenAI
 TEXT_MODEL_BASE_URL=https://api.openai.com/v1
 TEXT_MODEL_API_KEY=your_openai_api_key
 TEXT_MODEL_NAME=gpt-5-mini
 
-# GPT-5 specific parameters (optional, defaults shown)
+# Специфичные для GPT-5 параметры (необязательно, показаны значения по умолчанию)
 GPT5_REASONING_EFFORT=medium
 GPT5_VERBOSITY=medium
 ```
 
-### GPT-5 Configuration Examples
+### Примеры конфигурации GPT-5
 
-**Fast Summarization (Low Cost)**:
+**Быстрое суммирование (низкая стоимость)**:
 ```bash
 TEXT_MODEL_NAME=gpt-5-nano
 GPT5_REASONING_EFFORT=minimal
 GPT5_VERBOSITY=low
 ```
 
-**Standard Usage (Recommended)**:
+**Стандартное использование (рекомендуется)**:
 ```bash
 TEXT_MODEL_NAME=gpt-5-mini
 GPT5_REASONING_EFFORT=medium
 GPT5_VERBOSITY=medium
 ```
 
-**Complex Analysis (High Quality)**:
+**Сложный анализ (высокое качество)**:
 ```bash
 TEXT_MODEL_NAME=gpt-5
 GPT5_REASONING_EFFORT=high
 GPT5_VERBOSITY=high
 ```
 
-### Automatic Detection
+### Автоматическое обнаружение
 
-Speakr automatically detects when you're using:
+Speakr автоматически обнаруживает, когда вы используете:
 
-1. A GPT-5 model (based on model name)
-2. The official OpenAI API (based on base URL containing `api.openai.com`)
+1. Модель GPT-5 (на основе имени модели)
+2. Официальный API OpenAI (на основе базового URL, содержащего `api.openai.com`)
 
-When both conditions are met, Speakr automatically:
+Когда оба условия выполнены, Speakr автоматически:
 
-- Removes `temperature` parameter from API calls
-- Adds `reasoning_effort` parameter
-- Adds `verbosity` parameter
-- Uses `max_completion_tokens` instead of `max_tokens`
-- Logs that GPT-5 parameters are being used
+- Удаляет параметр `temperature` из API-вызовов
+- Добавляет параметр `reasoning_effort`
+- Добавляет параметр `verbosity`
+- Использует `max_completion_tokens` вместо `max_tokens`
+- Логирует, что используются параметры GPT-5
 
-Check your logs for confirmation:
+Проверьте ваши логи для подтверждения:
 ```
 Using GPT-5 model: gpt-5-mini - applying GPT-5 specific parameters
 ```
 
-### Using GPT-5 Through OpenRouter
+### Использование GPT-5 через OpenRouter
 
-If you use GPT-5 models through OpenRouter or other proxy services, the automatic GPT-5 parameter handling will **not** activate. These services typically handle parameter translation themselves, so Speakr uses standard parameters (temperature, max_tokens, etc.).
+Если вы используете модели GPT-5 через OpenRouter или другие прокси-сервисы, автоматическая обработка параметров GPT-5 **не** активируется. Эти сервисы обычно обрабатывают перевод параметров сами, поэтому Speakr использует стандартные параметры (temperature, max_tokens и т.д.).
 
-### Use Cases
+### Случаи использования
 
-**Summarization**:
-- Fast summaries: `gpt-5-nano` with `minimal` effort and `low` verbosity
-- Standard summaries: `gpt-5-mini` with `medium` effort and `medium` verbosity
-- Detailed summaries: `gpt-5` with `medium` effort and `high` verbosity
+**Суммирование**:
+- Быстрые сводки: `gpt-5-nano` с `minimal` усилием и `low` verbosity
+- Стандартные сводки: `gpt-5-mini` с `medium` усилием и `medium` verbosity
+- Детальные сводки: `gpt-5` с `medium` усилием и `high` verbosity
 
-**Chat**:
-- Quick Q&A: `gpt-5-mini` with `minimal` effort and `low` verbosity
-- Standard conversation: `gpt-5-mini` with `low` effort and `medium` verbosity
-- Complex analysis: `gpt-5` with `high` effort and `medium` verbosity
+**Чат**:
+- Быстрые вопросы и ответы: `gpt-5-mini` с `minimal` усилием и `low` verbosity
+- Стандартная беседа: `gpt-5-mini` с `low` усилием и `medium` verbosity
+- Сложный анализ: `gpt-5` с `high` усилием и `medium` verbosity
 
-### Troubleshooting GPT-5
+### Решение проблем GPT-5
 
-**Error: "Unsupported parameter 'temperature'"**
+**Ошибка: "Unsupported parameter 'temperature'"**
 
-This means GPT-5 detection failed. Check that:
+Это означает, что обнаружение GPT-5 не удалось. Проверьте, что:
 
-1. `TEXT_MODEL_BASE_URL` contains `api.openai.com`
-2. `TEXT_MODEL_NAME` starts with `gpt-5` or is one of: `gpt-5`, `gpt-5-mini`, `gpt-5-nano`, `gpt-5-chat-latest`
+1. `TEXT_MODEL_BASE_URL` содержит `api.openai.com`
+2. `TEXT_MODEL_NAME` начинается с `gpt-5` или является одним из: `gpt-5`, `gpt-5-mini`, `gpt-5-nano`, `gpt-5-chat-latest`
 
-**Error: "Invalid reasoning_effort value"**
+**Ошибка: "Invalid reasoning_effort value"**
 
-Valid values are: `minimal`, `low`, `medium`, `high`
+Допустимые значения: `minimal`, `low`, `medium`, `high`
 
-**Error: "Invalid verbosity value"**
+**Ошибка: "Invalid verbosity value"**
 
-Valid values are: `low`, `medium`, `high`
+Допустимые значения: `low`, `medium`, `high`
 
-### Migrating from GPT-4 to GPT-5
+### Миграция с GPT-4 на GPT-5
 
-1. **Update dependencies** (required for GPT-5):
+1. **Обновите зависимости** (требуется для GPT-5):
    ```bash
    pip install -r requirements.txt
    ```
-   This upgrades the OpenAI SDK to version 2.2.0 or higher.
+   Это обновляет OpenAI SDK до версии 2.2.0 или выше.
 
-2. Update your `.env` file:
+2. Обновите ваш файл `.env`:
    ```bash
-   TEXT_MODEL_NAME=gpt-5-mini  # or gpt-5, gpt-5-nano
+   TEXT_MODEL_NAME=gpt-5-mini  # или gpt-5, gpt-5-nano
    ```
 
-3. Add GPT-5 parameters (optional):
+3. Добавьте параметры GPT-5 (необязательно):
    ```bash
    GPT5_REASONING_EFFORT=medium
    GPT5_VERBOSITY=medium
    ```
 
-4. Restart Speakr:
+4. Перезапустите Speakr:
    ```bash
    docker compose restart
    ```
 
-5. Check logs for confirmation:
+5. Проверьте логи для подтверждения:
    ```
    Using GPT-5 model: gpt-5-mini - applying GPT-5 specific parameters
    ```
 
-### Performance Considerations
+### Соображения производительности
 
-- **Cost**: `gpt-5-nano` < `gpt-5-mini` < `gpt-5`
-- **Speed**: `minimal` < `low` < `medium` < `high` reasoning effort
-- **Quality**: Generally increases with model size and reasoning effort
-- **Token usage**: Higher verbosity = more output tokens
+- **Стоимость**: `gpt-5-nano` < `gpt-5-mini` < `gpt-5`
+- **Скорость**: `minimal` < `low` < `medium` < `high` reasoning effort
+- **Качество**: Обычно увеличивается с размером модели и reasoning effort
+- **Использование токенов**: Более высокая verbosity = больше выходных токенов
 
-For most use cases, we recommend:
-- **Model**: `gpt-5-mini`
-- **Reasoning**: `medium`
+Для большинства случаев использования мы рекомендуем:
+- **Модель**: `gpt-5-mini`
+- **Рассуждения**: `medium`
 - **Verbosity**: `medium`
 
-This provides a good balance of cost, speed, and quality.
+Это обеспечивает хороший баланс стоимости, скорости и качества.
 
-## Model Selection Guidelines
+## Руководящие принципы выбора модели
 
-### For Summaries
+### Для сводок
 
-The model you choose significantly impacts summary quality:
+Модель, которую вы выбираете, значительно влияет на качество сводок:
 
-- **GPT-4 or better**: Produces nuanced, context-aware summaries with excellent understanding of complex topics
-- **GPT-5-mini**: Excellent balance of quality and cost for most summarization needs
-- **GPT-3.5/4o-mini**: Budget-friendly option, suitable for straightforward content
-- **Claude models**: Strong performance on structured content and technical material
+- **GPT-4 или лучше**: Производит нюансные, контекстно-осознанные сводки с отличным пониманием сложных тем
+- **GPT-5-mini**: Отличный баланс качества и стоимости для большинства потребностей в суммировании
+- **GPT-3.5/4o-mini**: Бюджетный вариант, подходящий для прямолинейного контента
+- **Модели Claude**: Сильная производительность на структурированном контенте и техническом материале
 
-### For Chat
+### Для чата
 
-Chat features benefit from more capable models:
+Функции чата выигрывают от более способных моделей:
 
-- **GPT-5**: Best for complex multi-turn conversations and detailed analysis
-- **GPT-5-mini**: Recommended for most chat use cases
-- **Claude**: Excellent for technical discussions and code-related queries
+- **GPT-5**: Лучше всего для сложных многоходовых бесед и детального анализа
+- **GPT-5-mini**: Рекомендуется для большинства случаев использования чата
+- **Claude**: Отлично для технических обсуждений и запросов, связанных с кодом
 
-### Cost Optimization
+### Оптимизация стоимости
 
-To reduce costs while maintaining quality:
+Чтобы снизить затраты, поддерживая качество:
 
-1. **Use smaller models for simple tasks**: `gpt-5-nano` or `gpt-4o-mini` handle straightforward summaries well
-2. **Adjust GPT-5 reasoning effort**: Use `minimal` or `low` for quick tasks
-3. **Set token limits**: Configure `SUMMARY_MAX_TOKENS` and `CHAT_MAX_TOKENS` in your `.env`
-4. **Use OpenRouter**: Often provides better rates than direct API access
+1. **Используйте меньшие модели для простых задач**: `gpt-5-nano` или `gpt-4o-mini` хорошо обрабатывают прямолинейные сводки
+2. **Настройте reasoning effort GPT-5**: Используйте `minimal` или `low` для быстрых задач
+3. **Установите лимиты токенов**: Настройте `SUMMARY_MAX_TOKENS` и `CHAT_MAX_TOKENS` в вашем `.env`
+4. **Используйте OpenRouter**: Часто предоставляет лучшие тарифы, чем прямой доступ к API
 
-### Testing Configuration
+### Тестирование конфигурации
 
-After changing model configuration:
+После изменения конфигурации модели:
 
-1. Restart the Speakr container
-2. Create a test recording
-3. Review the generated summary and title
-4. Test the chat feature
-5. Monitor logs for any errors or warnings
+1. Перезапустите контейнер Speakr
+2. Создайте тестовую запись
+3. Просмотрите сгенерированную сводку и заголовок
+4. Протестируйте функцию чата
+5. Отслеживайте логи на наличие ошибок или предупреждений
 
-## Environment Variables Reference
+## Справочник переменных окружения
 
 ```bash
-# Required: API endpoint
+# Обязательно: API эндпоинт
 TEXT_MODEL_BASE_URL=https://api.openai.com/v1
 
-# Required: API key
+# Обязательно: Ключ API
 TEXT_MODEL_API_KEY=your_api_key_here
 
-# Required: Model identifier
+# Обязательно: Идентификатор модели
 TEXT_MODEL_NAME=gpt-5-mini
 
-# Optional: Maximum tokens for summaries (default: 8000)
+# Необязательно: Максимальные токены для сводок (по умолчанию: 8000)
 SUMMARY_MAX_TOKENS=8000
 
-# Optional: Maximum tokens for chat responses (default: 2000)
+# Необязательно: Максимальные токены для ответов чата (по умолчанию: 2000)
 CHAT_MAX_TOKENS=2000
 
-# GPT-5 specific (only used with GPT-5 models and OpenAI API)
+# Специфично для GPT-5 (используется только с моделями GPT-5 и API OpenAI)
 GPT5_REASONING_EFFORT=medium  # minimal, low, medium, high
 GPT5_VERBOSITY=medium          # low, medium, high
 ```
 
-## Troubleshooting
+## Решение проблем
 
-### Model Not Responding
+### Модель не отвечает
 
-Check logs for authentication errors:
+Проверьте логи на ошибки аутентификации:
 ```bash
 docker compose logs -f app | grep "LLM"
 ```
 
-Common issues:
-- Invalid API key
-- Model name not available on your plan
-- Rate limits exceeded
-- Insufficient credits
+Распространенные проблемы:
+- Недействительный ключ API
+- Имя модели недоступно в вашем плане
+- Превышены лимиты скорости
+- Недостаточно кредитов
 
-### Poor Summary Quality
+### Плохое качество сводок
 
-Try these adjustments:
-- Upgrade to a more capable model
-- Increase `SUMMARY_MAX_TOKENS`
-- Review and refine [custom prompts](prompts.md)
-- For GPT-5: increase reasoning effort to `medium` or `high`
+Попробуйте эти корректировки:
+- Обновитесь до более способной модели
+- Увеличьте `SUMMARY_MAX_TOKENS`
+- Просмотрите и уточните [пользовательские промпты](prompts.md)
+- Для GPT-5: увеличьте reasoning effort до `medium` или `high`
 
-### High Costs
+### Высокие затраты
 
-Reduce costs with:
-- Switch to smaller models (`gpt-5-nano`, `gpt-4o-mini`)
-- Lower token limits
-- For GPT-5: reduce reasoning effort to `minimal` or `low`
-- Use OpenRouter for better rates
+Снизьте затраты с помощью:
+- Переключитесь на меньшие модели (`gpt-5-nano`, `gpt-4o-mini`)
+- Снизьте лимиты токенов
+- Для GPT-5: уменьшите reasoning effort до `minimal` или `low`
+- Используйте OpenRouter для лучших тарифов
 
-## Additional Resources
+## Дополнительные ресурсы
 
-- [OpenAI GPT-5 Documentation](https://platform.openai.com/docs/guides/latest-model)
-- [OpenAI Chat Completions API](https://platform.openai.com/docs/api-reference/chat)
-- [OpenRouter Documentation](https://openrouter.ai/docs)
-- [Custom Prompts Guide](prompts.md)
-- [System Settings](system-settings.md)
+- [Документация OpenAI GPT-5](https://platform.openai.com/docs/guides/latest-model)
+- [API OpenAI Chat Completions](https://platform.openai.com/docs/api-reference/chat)
+- [Документация OpenRouter](https://openrouter.ai/docs)
+- [Руководство по пользовательским промптам](prompts.md)
+- [Системные настройки](system-settings.md)
 
 ---
 
-Next: [Default Prompts](prompts.md) | Back to [Admin Guide](index.md)
+Далее: [Промпты по умолчанию](prompts.md) | Назад к [Руководству администратора](index.md)

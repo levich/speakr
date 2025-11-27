@@ -1,129 +1,129 @@
-# User Guide
+# Руководство пользователя
 
-Welcome to the Speakr User Guide! This documentation will help you master every feature, from basic recording to advanced AI-powered search capabilities.
+Добро пожаловать в руководство пользователя Speakr! Эта документация поможет вам освоить все функции, от базовой записи до расширенных возможностей поиска на основе ИИ.
 
-## Quick Navigation
+## Быстрая навигация
 
 <div class="guide-cards">
   <div class="guide-card">
     <div class="card-icon">🖥️</div>
-    <h3>Main View</h3>
-    <p>Navigate the three-panel interface, use smart filters, and manage your recordings efficiently.</p>
-    <a href="first-steps" class="card-link">Learn the Interface →</a>
+    <h3>Главный вид</h3>
+    <p>Навигация по трехпанельному интерфейсу, использование умных фильтров и эффективное управление вашими записями.</p>
+    <a href="first-steps" class="card-link">Изучить интерфейс →</a>
   </div>
   
   <div class="guide-card">
     <div class="card-icon">📱</div>
-    <h3>Progressive Web App</h3>
-    <p>Install as a PWA for offline access and wake lock support during recording.</p>
-    <a href="pwa" class="card-link">Learn About PWA →</a>
+    <h3>Прогрессивное веб-приложение</h3>
+    <p>Установите как PWA для офлайн-доступа и поддержки блокировки пробуждения во время записи.</p>
+    <a href="pwa" class="card-link">Узнать о PWA →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">🎙️</div>
-    <h3>Recording & Uploading</h3>
-    <p>Upload audio files or record directly in your browser with live note-taking capabilities.</p>
-    <a href="recording" class="card-link">Start Recording →</a>
+    <h3>Запись и загрузка</h3>
+    <p>Загружайте аудиофайлы или записывайте напрямую в браузере с возможностью делать заметки в реальном времени.</p>
+    <a href="recording" class="card-link">Начать запись →</a>
   </div>
   <div class="guide-card">
     <div class="card-icon">📝</div>
-    <h3>Working with Transcripts</h3>
-    <p>Edit transcriptions, identify speakers, and use AI chat to explore your content.</p>
-    <a href="transcripts" class="card-link">Master Transcripts →</a>
+    <h3>Работа с транскриптами</h3>
+    <p>Редактируйте транскрипции, идентифицируйте говорящих и используйте ИИ-чат для изучения вашего контента.</p>
+    <a href="transcripts" class="card-link">Освоить транскрипты →</a>
   </div>
   
   <div class="guide-card">
     <div class="card-icon">🔍</div>
-    <h3>Inquire Mode</h3>
-    <p>Search across all recordings using natural language and semantic understanding.</p>
-    <a href="inquire-mode" class="card-link">Explore Inquire Mode →</a>
+    <h3>Режим Inquire</h3>
+    <p>Ищите по всем записям, используя естественный язык и семантическое понимание.</p>
+    <a href="inquire-mode" class="card-link">Изучить режим Inquire →</a>
   </div>
   
   <div class="guide-card">
     <div class="card-icon">🔗</div>
-    <h3>Sharing & Collaboration</h3>
-    <p>Share recordings internally with colleagues or create public links for external stakeholders.</p>
-    <a href="sharing" class="card-link">Share Content →</a>
+    <h3>Обмен и совместная работа</h3>
+    <p>Делитесь записями внутри с коллегами или создавайте публичные ссылки для внешних заинтересованных сторон.</p>
+    <a href="sharing" class="card-link">Поделиться контентом →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">👥</div>
-    <h3>Group Collaboration</h3>
-    <p>Work with groups using auto-sharing tags and organized group access to recordings.</p>
-    <a href="groups" class="card-link">Collaborate with Groups →</a>
+    <h3>Совместная работа в группах</h3>
+    <p>Работайте с группами, используя теги автоматического обмена и организованный групповой доступ к записям.</p>
+    <a href="groups" class="card-link">Сотрудничать с группами →</a>
   </div>
 
   <div class="guide-card">
     <div class="card-icon">⚙️</div>
-    <h3>Account Settings</h3>
-    <p>Configure preferences, manage speakers, create tags, and customize AI prompts.</p>
-    <a href="settings" class="card-link">Customize →</a>
+    <h3>Настройки аккаунта</h3>
+    <p>Настройте предпочтения, управляйте говорящими, создавайте теги и настраивайте промпты ИИ.</p>
+    <a href="settings" class="card-link">Настроить →</a>
   </div>
 </div>
 
-## Pro Tips for Success
+## Профессиональные советы для успеха
 
 <div class="tips-grid">
   <div class="tip-card">
-    <h4>🏷️ Organize with Tags</h4>
-    <p>Create a consistent tagging system early. Tags with custom AI prompts can automatically generate specialized summaries for different content types.</p>
+    <h4>🏷️ Организуйте с помощью тегов</h4>
+    <p>Создайте последовательную систему тегов рано. Теги с пользовательскими промптами ИИ могут автоматически генерировать специализированные сводки для разных типов контента.</p>
   </div>
   
   <div class="tip-card">
-    <h4>🎤 Recording Best Practices</h4>
-    <p>Use combined microphone and system audio for meetings. Take live notes to mark important moments without interrupting the recording.</p>
+    <h4>🎤 Лучшие практики записи</h4>
+    <p>Используйте комбинацию микрофона и системного аудио для встреч. Делайте заметки в реальном времени, чтобы отмечать важные моменты, не прерывая запись.</p>
   </div>
   
   <div class="tip-card">
-    <h4>👥 Identify Speakers</h4>
-    <p>After transcription, identify speakers to build your speaker library. Future recordings will suggest known speakers automatically.</p>
+    <h4>👥 Идентифицируйте говорящих</h4>
+    <p>После транскрибации идентифицируйте говорящих, чтобы создать вашу библиотеку говорящих. Будущие записи будут автоматически предлагать известных говорящих.</p>
   </div>
   
   <div class="tip-card">
-    <h4>💬 Chat Efficiently</h4>
-    <p>For long recordings, ask specific questions like "What were the action items?" instead of reading the entire transcript.</p>
+    <h4>💬 Эффективно используйте чат</h4>
+    <p>Для длинных записей задавайте конкретные вопросы, такие как "Какие были пункты действий?", вместо чтения всего транскрипта.</p>
   </div>
   
   <div class="tip-card">
-    <h4>🔎 Search Smartly</h4>
-    <p>Inquire Mode understands context, not just keywords. Ask natural questions to find information across all your recordings.</p>
+    <h4>🔎 Умно ищите</h4>
+    <p>Режим Inquire понимает контекст, а не только ключевые слова. Задавайте естественные вопросы, чтобы найти информацию по всем вашим записям.</p>
   </div>
   
   <div class="tip-card">
-    <h4>📊 Custom Summaries</h4>
-    <p>Set personal summary prompts in settings to get summaries tailored to your specific needs and workflow.</p>
+    <h4>📊 Пользовательские сводки</h4>
+    <p>Установите личные промпты сводки в настройках, чтобы получать сводки, адаптированные к вашим конкретным потребностям и рабочему процессу.</p>
   </div>
 </div>
 
-## Getting Started
+## Начало работы
 
-The best way to learn Speakr is by doing. Start with these simple steps:
+Лучший способ изучить Speakr — это практика. Начните с этих простых шагов:
 
-1. **Upload a test file** - Try a short audio recording to see the transcription process
-2. **Explore the interface** - Click through the different views and panels
-3. **Try the AI chat** - Ask questions about your recording to see the AI in action
-4. **Create your first tag** - Set up organization from the beginning
-5. **Test Inquire Mode** - Search for something specific in your recordings
+1. **Загрузите тестовый файл** - Попробуйте короткую аудиозапись, чтобы увидеть процесс транскрибации
+2. **Изучите интерфейс** - Просмотрите различные виды и панели
+3. **Попробуйте ИИ-чат** - Задавайте вопросы о вашей записи, чтобы увидеть ИИ в действии
+4. **Создайте ваш первый тег** - Настройте организацию с самого начала
+5. **Протестируйте режим Inquire** - Найдите что-то конкретное в ваших записях
 
-As you grow comfortable with basics, explore advanced features like speaker diarization, custom AI prompts, and bulk operations.
+По мере того, как вы освоитесь с основами, изучите расширенные функции, такие как идентификация говорящих, пользовательские промпты ИИ и массовые операции.
 
-## Need Help?
+## Нужна помощь?
 
 <div class="help-section">
   <div class="help-item">
     <span class="help-icon">📚</span>
-    <span>Browse the complete <a href="../faq">FAQ</a> for quick answers</span>
+    <span>Просмотрите полный <a href="../faq">FAQ</a> для быстрых ответов</span>
   </div>
   <div class="help-item">
     <span class="help-icon">🔧</span>
-    <span>Check <a href="../troubleshooting">Troubleshooting</a> for common issues</span>
+    <span>Проверьте <a href="../troubleshooting">Решение проблем</a> для распространенных проблем</span>
   </div>
   <div class="help-item">
     <span class="help-icon">💬</span>
-    <span>Report issues on <a href="https://github.com/murtaza-nasir/speakr/issues">GitHub</a></span>
+    <span>Сообщите о проблемах на <a href="https://github.com/murtaza-nasir/speakr/issues">GitHub</a></span>
   </div>
 </div>
 
 ---
 
-Ready to become a Speakr power user? Start with [First Steps](first-steps.md) →
+Готовы стать продвинутым пользователем Speakr? Начните с [Первых шагов](first-steps.md) →

@@ -1,205 +1,205 @@
-# Welcome to Speakr
+# Добро пожаловать в Speakr
 
-Speakr is a powerful self-hosted transcription platform that helps you capture, transcribe, and understand your audio content. Whether you're recording meetings, interviews, lectures, or personal notes, Speakr transforms spoken words into valuable, searchable knowledge.
+Speakr — это мощная платформа для транскрибации с самостоятельным размещением, которая помогает вам захватывать, транскрибировать и понимать ваше аудиосодержание. Независимо от того, записываете ли вы встречи, интервью, лекции или личные заметки, Speakr превращает произнесенные слова в ценные, доступные для поиска знания.
 
 <div style="max-width: 80%; margin: 2em auto;">
-  <img src="assets/images/screenshots/Main view.png" alt="Main Interface" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <img src="assets/images/screenshots/Main view.png" alt="Главный интерфейс" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
 </div>
 
-!!! warning "Latest Release: v0.5.9 - Major Update"
-    **⚠️ IMPORTANT:** This is a **major release** with significant architectural changes. **Before upgrading:**
+!!! warning "Последний релиз: v0.5.9 - Крупное обновление"
+    **⚠️ ВАЖНО:** Это **крупный релиз** со значительными архитектурными изменениями. **Перед обновлением:**
 
-    - **BACKUP YOUR DATA** - Database schema changes require migration
-    - **Review new environment variables** - Many features require `.env` configuration
-    - **Test in development first** - Major refactoring may affect existing workflows
+    - **СОЗДАЙТЕ РЕЗЕРВНУЮ КОПИЮ ДАННЫХ** - Изменения схемы базы данных требуют миграции
+    - **Проверьте новые переменные окружения** - Многие функции требуют настройки `.env`
+    - **Сначала протестируйте в разработке** - Крупный рефакторинг может повлиять на существующие рабочие процессы
 
-    **Key Environment Variables:** `ENABLE_INTERNAL_SHARING`, `SHOW_USERNAMES_IN_UI`, `USERS_CAN_DELETE`, `ENABLE_AUTO_DELETION`, `GLOBAL_RETENTION_DAYS`, `ENABLE_AUTO_EXPORT`, `ENABLE_PUBLIC_SHARING`
+    **Ключевые переменные окружения:** `ENABLE_INTERNAL_SHARING`, `SHOW_USERNAMES_IN_UI`, `USERS_CAN_DELETE`, `ENABLE_AUTO_DELETION`, `GLOBAL_RETENTION_DAYS`, `ENABLE_AUTO_EXPORT`, `ENABLE_PUBLIC_SHARING`
 
-    See the [configuration guide](getting-started/installation.md#step-3-environment-configuration) for complete setup instructions. [View full release notes](https://github.com/murtaza-nasir/speakr/releases/tag/v0.5.9)
+    См. [руководство по настройке](getting-started/installation.md#step-3-environment-configuration) для полных инструкций по установке. [Просмотреть полные заметки о релизе](https://github.com/murtaza-nasir/speakr/releases/tag/v0.5.9)
 
-## Quick Navigation
+## Быстрая навигация
 
 <div class="grid cards">
   <div class="card">
     <div class="card-icon">📚</div>
-    <h3>Getting Started</h3>
-    <p>New to Speakr? Start here for a quick overview and setup guide.</p>
-    <a href="getting-started" class="card-link">Get Started →</a>
+    <h3>Начало работы</h3>
+    <p>Новичок в Speakr? Начните здесь для краткого обзора и руководства по настройке.</p>
+    <a href="getting-started" class="card-link">Начать →</a>
   </div>
   
   <div class="card">
     <div class="card-icon">🚀</div>
-    <h3>Installation</h3>
-    <p>Step-by-step instructions for Docker and manual installation.</p>
-    <a href="getting-started/installation" class="card-link">Install Now →</a>
+    <h3>Установка</h3>
+    <p>Пошаговые инструкции для установки через Docker и вручную.</p>
+    <a href="getting-started/installation" class="card-link">Установить сейчас →</a>
   </div>
   
   <div class="card">
     <div class="card-icon">👤</div>
-    <h3>User Guide</h3>
-    <p>Learn how to <a href="user-guide/recording">record</a>, <a href="user-guide/transcripts">transcribe</a>, and manage your audio content.</p>
-    <a href="user-guide/" class="card-link">Learn More →</a>
+    <h3>Руководство пользователя</h3>
+    <p>Узнайте, как <a href="user-guide/recording">записывать</a>, <a href="user-guide/transcripts">транскрибировать</a> и управлять вашим аудиосодержанием.</p>
+    <a href="user-guide/" class="card-link">Узнать больше →</a>
   </div>
   
   <div class="card">
     <div class="card-icon">⚙️</div>
-    <h3>Admin Guide</h3>
-    <p>Configure <a href="admin-guide/user-management">users</a>, <a href="admin-guide/prompts">system settings</a>, and manage your instance.</p>
-    <a href="admin-guide/" class="card-link">Configure →</a>
+    <h3>Руководство администратора</h3>
+    <p>Настройте <a href="admin-guide/user-management">пользователей</a>, <a href="admin-guide/prompts">системные параметры</a> и управляйте вашим экземпляром.</p>
+    <a href="admin-guide/" class="card-link">Настроить →</a>
   </div>
   
   <div class="card">
     <div class="card-icon">❓</div>
-    <h3>FAQ</h3>
-    <p>Find answers to commonly asked questions about Speakr.</p>
-    <a href="faq" class="card-link">View FAQ →</a>
+    <h3>Часто задаваемые вопросы</h3>
+    <p>Найдите ответы на часто задаваемые вопросы о Speakr.</p>
+    <a href="faq" class="card-link">Просмотреть FAQ →</a>
   </div>
   
   <div class="card">
     <div class="card-icon">🔧</div>
-    <h3>Troubleshooting</h3>
-    <p>Solutions for <a href="troubleshooting#transcription-problems">transcription issues</a> and <a href="troubleshooting#performance-issues">performance problems</a>.</p>
-    <a href="troubleshooting" class="card-link">Get Help →</a>
+    <h3>Решение проблем</h3>
+    <p>Решения для <a href="troubleshooting#transcription-problems">проблем с транскрибацией</a> и <a href="troubleshooting#performance-issues">проблем с производительностью</a>.</p>
+    <a href="troubleshooting" class="card-link">Получить помощь →</a>
   </div>
 </div>
 
-## Core Features
+## Основные возможности
 
 <div class="feature-grid">
   <div class="feature-card">
-    <h4>🎙️ Smart Recording</h4>
+    <h4>🎙️ Умная запись</h4>
     <ul>
-      <li>Audio capture from mic or system</li>
-      <li>Take notes while recording</li>
-      <li>Generate <a href="features#automatic-summarization">smart summaries</a></li>
+      <li>Захват аудио с микрофона или системы</li>
+      <li>Делайте заметки во время записи</li>
+      <li>Генерируйте <a href="features#automatic-summarization">умные сводки</a></li>
     </ul>
   </div>
   
   <div class="feature-card">
-    <h4>🤖 AI Transcription</h4>
+    <h4>🤖 ИИ-транскрибация</h4>
     <ul>
-      <li><a href="features#language-support">Multi-language support</a></li>
-      <li><a href="features#speaker-diarization">Speaker identification</a></li>
-      <li><a href="features#speaker-management">Voice profiles with AI recognition</a></li>
-      <li>Custom vocabularies</li>
+      <li><a href="features#language-support">Поддержка множества языков</a></li>
+      <li><a href="features#speaker-diarization">Идентификация говорящих</a></li>
+      <li><a href="features#speaker-management">Голосовые профили с распознаванием ИИ</a></li>
+      <li>Пользовательские словари</li>
     </ul>
   </div>
   
   <div class="feature-card">
-    <h4>🔍 Intelligent Search</h4>
+    <h4>🔍 Интеллектуальный поиск</h4>
     <ul>
-      <li><a href="user-guide/inquire-mode">Semantic search</a></li>
-      <li>Natural language queries</li>
-      <li>Cross-recording search</li>
+      <li><a href="user-guide/inquire-mode">Семантический поиск</a></li>
+      <li>Запросы на естественном языке</li>
+      <li>Поиск по всем записям</li>
     </ul>
   </div>
   
   <div class="feature-card">
-    <h4>📊 Organization</h4>
+    <h4>📊 Организация</h4>
     <ul>
-      <li><a href="features#tagging-system">Smart tagging system</a></li>
-      <li><a href="admin-guide/prompts">Custom AI prompts with stacking</a></li>
-      <li><a href="features#speaker-management">Speaker voice profiles with auto-cleanup</a></li>
+      <li><a href="features#tagging-system">Умная система тегов</a></li>
+      <li><a href="admin-guide/prompts">Пользовательские промпты ИИ с наложением</a></li>
+      <li><a href="features#speaker-management">Голосовые профили говорящих с автоматической очисткой</a></li>
     </ul>
   </div>
   
   <div class="feature-card">
-    <h4>🌍 International</h4>
+    <h4>🌍 Интернационализация</h4>
     <ul>
-      <li>5+ languages supported</li>
-      <li>Automatic UI translation</li>
-      <li>Localized summaries</li>
+      <li>Поддержка 5+ языков</li>
+      <li>Автоматический перевод интерфейса</li>
+      <li>Локализованные сводки</li>
     </ul>
   </div>
   
   <div class="feature-card">
-    <h4>🔒 Privacy First</h4>
+    <h4>🔒 Приватность прежде всего</h4>
     <ul>
-      <li><a href="getting-started/installation">Self-hosting ready</a></li>
-      <li><a href="troubleshooting#offline-deployment">Offline-ready</a></li>
-      <li><a href="user-guide/sharing">Secure sharing</a></li>
+      <li><a href="getting-started/installation">Готово для самостоятельного размещения</a></li>
+      <li><a href="troubleshooting#offline-deployment">Работает офлайн</a></li>
+      <li><a href="user-guide/sharing">Безопасный обмен</a></li>
     </ul>
   </div>
 </div>
 
-## Interactive Audio Synchronization
+## Интерактивная синхронизация аудио
 
-Experience seamless bidirectional synchronization between your audio and transcript. Click any part of the transcript to jump directly to that moment in the audio, or watch as the system automatically highlights the currently spoken text as the audio plays. Enable auto-scroll follow mode to keep the active segment centered in view, creating an effortless reading experience for even the longest recordings.
+Ощутите бесшовную двунаправленную синхронизацию между вашим аудио и транскриптом. Нажмите на любую часть транскрипта, чтобы перейти непосредственно к этому моменту в аудио, или наблюдайте, как система автоматически подсвечивает произносимый текст во время воспроизведения аудио. Включите режим автоматической прокрутки, чтобы активный сегмент оставался в центре экрана, создавая легкий опыт чтения даже для самых длинных записей.
 
 <div style="max-width: 90%; margin: 2em auto;">
-  <img src="assets/images/screenshots/audio-sync-bubble-view.png" alt="Real-time audio-transcript synchronization" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
-  <p style="text-align: center; margin-top: 0.5rem; font-style: italic; color: #666;">Real-time transcript highlighting synchronized with audio playback, with auto-scroll follow mode</p>
+  <img src="assets/images/screenshots/audio-sync-bubble-view.png" alt="Синхронизация аудио и транскрипта в реальном времени" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+  <p style="text-align: center; margin-top: 0.5rem; font-style: italic; color: #666;">Подсветка транскрипта в реальном времени, синхронизированная с воспроизведением аудио, с режимом автоматической прокрутки</p>
 </div>
 
-Learn more about [audio synchronization features](user-guide/transcripts.md#audio-synchronization-and-follow-mode) in the user guide.
+Узнайте больше о [функциях синхронизации аудио](user-guide/transcripts.md#audio-synchronization-and-follow-mode) в руководстве пользователя.
 
-!!! tip "Transform Your Recordings with Custom Tag Prompts"
-    Tags aren't just for organization - they transform content. Create a "Recipe" tag to convert cooking narration into formatted recipes. Use "Study Notes" tags to turn lecture recordings into organized outlines. Stack tags like "Client Meeting" + "Legal Review" for combined analysis. Learn more in the [Custom Prompts guide](admin-guide/prompts.md#creative-tag-prompt-use-cases).
+!!! tip "Преобразуйте ваши записи с помощью пользовательских промптов тегов"
+    Теги предназначены не только для организации — они преобразуют содержимое. Создайте тег "Рецепт", чтобы превратить кулинарный рассказ в отформатированные рецепты. Используйте теги "Учебные заметки", чтобы превратить записи лекций в организованные конспекты. Накладывайте теги, такие как "Встреча с клиентом" + "Юридический обзор", для комбинированного анализа. Узнайте больше в [руководстве по пользовательским промптам](admin-guide/prompts.md#creative-tag-prompt-use-cases).
 
-## Latest Updates
+## Последние обновления
 
-!!! warning "Version 0.5.9 - Major Release"
-    **⚠️ Backup your data before upgrading!** This release includes database migrations and architectural changes.
+!!! warning "Версия 0.5.9 - Крупный релиз"
+    **⚠️ Создайте резервную копию данных перед обновлением!** Этот релиз включает миграции базы данных и архитектурные изменения.
 
-    **New Features:**
-    - **Complete Internal Sharing System** - Share recordings with users with granular permissions (view/edit/reshare), personal notes, and independent status tracking
-    - **Group Management & Collaboration** - Create groups with leads, group tags that auto-share recordings, custom retention policies per group
-    - **Speaker Voice Profiles** - AI-powered speaker recognition with 256-dimensional embeddings (requires WhisperX ASR)
-    - **Audio-Transcript Synchronization** - Click-to-jump, auto-highlight, and follow mode for interactive navigation
-    - **Auto-Deletion & Retention System** - Global and group-level retention policies, tag protection, per-recording exemptions
-    - **Automated Export** - Auto-export transcriptions to markdown for Obsidian, Logseq, and other note-taking apps
-    - **Permission System** - Fine-grained access control with user deletion rights, public sharing permissions, role-based access
-    - **Modular Architecture** - Backend refactored into blueprints, frontend composables for shared logic
-    - **UI/UX Enhancements** - Compact controls, inline editing, unified toast notifications, improved badges
-    - **Enhanced Internationalization** - 29 new tooltip translations across all languages (EN, DE, ES, FR, ZH)
+    **Новые возможности:**
+    - **Полная система внутреннего обмена** - Обменивайтесь записями с пользователями с детальными разрешениями (просмотр/редактирование/передача), личными заметками и независимым отслеживанием статуса
+    - **Управление группами и совместная работа** - Создавайте группы с лидерами, групповые теги, которые автоматически делятся записями, пользовательские политики хранения для каждой группы
+    - **Голосовые профили говорящих** - Распознавание говорящих на основе ИИ с 256-мерными эмбеддингами (требуется WhisperX ASR)
+    - **Синхронизация аудио-транскрипт** - Переход по клику, автоматическая подсветка и режим следования для интерактивной навигации
+    - **Система автоматического удаления и хранения** - Глобальные и групповые политики хранения, защита тегов, исключения для каждой записи
+    - **Автоматический экспорт** - Автоматический экспорт транскрипций в markdown для Obsidian, Logseq и других приложений для заметок
+    - **Система разрешений** - Детальный контроль доступа с правами удаления пользователей, разрешениями на публичный обмен, доступом на основе ролей
+    - **Модульная архитектура** - Бэкенд рефакторен в blueprints, фронтенд composables для общей логики
+    - **Улучшения UI/UX** - Компактные элементы управления, встроенное редактирование, унифицированные уведомления, улучшенные значки
+    - **Расширенная интернационализация** - 29 новых переводов подсказок на всех языках (EN, DE, ES, FR, ZH)
 
-    **Required `.env` variables:** See [configuration guide](getting-started/installation.md#step-3-environment-configuration)
+    **Необходимые переменные `.env`:** См. [руководство по настройке](getting-started/installation.md#step-3-environment-configuration)
 
-    Previous release (v0.5.8):
+    Предыдущий релиз (v0.5.8):
 
-    - **Inline Transcript Editing** - Edit speaker assignments and text directly in the speaker identification modal
-    - **Add Speaker Functionality** - Dynamically add new speakers during transcript review
-    - **Enhanced Speaker Modal** - Improved UX with hover-based edit controls and real-time updates
+    - **Встроенное редактирование транскрипта** - Редактируйте назначения говорящих и текст непосредственно в модальном окне идентификации говорящих
+    - **Функция добавления говорящего** - Динамически добавляйте новых говорящих во время просмотра транскрипта
+    - **Улучшенное модальное окно говорящего** - Улучшенный UX с элементами управления редактированием на основе наведения и обновлениями в реальном времени
 
-    Previous release (v0.5.7):
+    Предыдущий релиз (v0.5.7):
 
-    - **GPT-5 Support** - Full support for OpenAI's GPT-5 model family with automatic parameter detection
-    - **Custom Summary Prompts on Reprocessing** - Experiment with different prompts when regenerating summaries
-    - **PWA Enhancements** - Service worker for wake lock to prevent screen sleep on mobile
+    - **Поддержка GPT-5** - Полная поддержка семейства моделей GPT-5 от OpenAI с автоматическим определением параметров
+    - **Пользовательские промпты сводки при повторной обработке** - Экспериментируйте с разными промптами при регенерации сводок
+    - **Улучшения PWA** - Service worker для блокировки пробуждения, чтобы предотвратить засыпание экрана на мобильных устройствах
 
-    Previous release (v0.5.6):
+    Предыдущий релиз (v0.5.6):
 
-    - Event extraction for automatically identifying calendar-worthy events
-    - Transcript templates for customizable download formats
-    - Enhanced export options and improved mobile UI
+    - Извлечение событий для автоматической идентификации событий, достойных календаря
+    - Шаблоны транскриптов для настраиваемых форматов загрузки
+    - Расширенные опции экспорта и улучшенный мобильный интерфейс
 
-## Getting Help
+## Получение помощи
 
-Need assistance? We're here to help:
+Нужна помощь? Мы здесь, чтобы помочь:
 
 <div class="help-grid">
   <div class="help-card">
-    <h4>📖 Documentation</h4>
-    <p>You're already here! Browse our comprehensive guides:</p>
+    <h4>📖 Документация</h4>
+    <p>Вы уже здесь! Просмотрите наши подробные руководства:</p>
     <ul>
-      <li><a href="faq">Frequently Asked Questions</a></li>
-      <li><a href="troubleshooting">Troubleshooting Guide</a></li>
-      <li><a href="user-guide/">User Documentation</a></li>
-      <li><a href="admin-guide/">Admin Documentation</a></li>
+      <li><a href="faq">Часто задаваемые вопросы</a></li>
+      <li><a href="troubleshooting">Руководство по решению проблем</a></li>
+      <li><a href="user-guide/">Документация пользователя</a></li>
+      <li><a href="admin-guide/">Документация администратора</a></li>
     </ul>
   </div>
   
   <div class="help-card">
-    <h4>💬 Community</h4>
-    <p>Connect with other users and get support:</p>
+    <h4>💬 Сообщество</h4>
+    <p>Свяжитесь с другими пользователями и получите поддержку:</p>
     <ul>
-      <li><a href="https://github.com/murtaza-nasir/speakr/issues">Report Issues</a></li>
-      <li><a href="https://github.com/murtaza-nasir/speakr/discussions">Join Discussions</a></li>
-      <li><a href="https://github.com/murtaza-nasir/speakr">Star on GitHub</a></li>
+      <li><a href="https://github.com/murtaza-nasir/speakr/issues">Сообщить о проблемах</a></li>
+      <li><a href="https://github.com/murtaza-nasir/speakr/discussions">Присоединиться к обсуждениям</a></li>
+      <li><a href="https://github.com/murtaza-nasir/speakr">Отметить на GitHub</a></li>
     </ul>
   </div>
 </div>
 
 ---
 
-Ready to transform your audio into actionable insights? [Get started now](getting-started.md) →
+Готовы превратить ваше аудио в действенные идеи? [Начать сейчас](getting-started.md) →

@@ -1,55 +1,55 @@
-# User Management
+# Управление пользователями
 
-The User Management tab is command central for controlling who has access to your Speakr instance and what they can do with it. Every user account flows through here, from initial creation to eventual removal, with all the monitoring and adjustments needed along the way. For system-wide usage patterns, check [system statistics](statistics.md).
+Вкладка Управление пользователями — это командный центр для контроля того, кто имеет доступ к вашему экземпляру Speakr и что они могут с ним делать. Каждый пользовательский аккаунт проходит через здесь, от первоначального создания до окончательного удаления, со всем мониторингом и корректировками, необходимыми на этом пути. Для системных паттернов использования проверьте [системную статистику](statistics.md).
 
-![User Management](../assets/images/screenshots/Admin dashboard.png)
+![Управление пользователями](../assets/images/screenshots/Admin dashboard.png)
 
-## Understanding the User Table
+## Понимание таблицы пользователей
 
-When you open User Management, you're greeted with a comprehensive table showing every user in your system. Each row tells a story - the email address identifies the user, the admin badge shows their privilege level, the recording count reveals their activity level, and the storage measurement demonstrates their resource consumption.
+Когда вы открываете Управление пользователями, вас приветствует комплексная таблица, показывающая каждого пользователя в вашей системе. Каждая строка рассказывает историю — адрес электронной почты идентифицирует пользователя, значок администратора показывает их уровень привилегий, количество записей раскрывает их уровень активности, а измерение хранилища демонстрирует их потребление ресурсов.
 
-The search bar at the top responds instantly as you type, filtering the table to help you find specific users quickly. This becomes invaluable as your user base grows beyond what fits on a single screen. The table updates in real-time when you make changes, so you always see the current state of your system.
+Строка поиска вверху реагирует мгновенно, когда вы печатаете, фильтруя таблицу, чтобы помочь вам быстро найти конкретных пользователей. Это становится бесценным, когда ваша пользовательская база растет за пределы того, что помещается на одном экране. Таблица обновляется в реальном времени, когда вы вносите изменения, поэтому вы всегда видите текущее состояние вашей системы.
 
-## Adding New Users
+## Добавление новых пользователей
 
-Creating a user account starts with clicking the Add User button in the top right corner. The modal that appears asks for the essentials - username, email address, and password. You'll also decide immediately whether this person needs admin privileges, though you can always change this later.
+Создание пользовательского аккаунта начинается с нажатия кнопки Add User в правом верхнем углу. Модальное окно, которое появляется, запрашивает основные данные — имя пользователя, адрес электронной почты и пароль. Вы также сразу решите, нужны ли этому человеку административные привилегии, хотя вы всегда можете изменить это позже.
 
-The username becomes their identity within Speakr, appearing in the interface and organizing their recordings. The email address serves dual purposes - it's their login credential and their contact point for any system communications. The password you set is temporary; users should change it immediately after their first login through their [account settings](../user-guide/settings.md). Configure initial [language preferences](../user-guide/settings.md#language-preferences) and [custom prompts](../user-guide/settings.md#custom-prompts-tab).
+Имя пользователя становится их идентичностью в Speakr, появляясь в интерфейсе и организуя их записи. Адрес электронной почты служит двойным целям — это их учетные данные для входа и их точка контакта для любых системных коммуникаций. Пароль, который вы устанавливаете, временный; пользователи должны изменить его немедленно после первого входа через свои [настройки аккаунта](../user-guide/settings.md). Настройте начальные [языковые предпочтения](../user-guide/settings.md#language-preferences) и [пользовательские промпты](../user-guide/settings.md#custom-prompts-tab).
 
-Admin privileges are powerful and should be granted sparingly. Admin users can see and modify all [system settings](system-settings.md), manage other users including other admins, configure [default prompts](prompts.md), and monitor the [vector store](vector-store.md). Most users will never need these capabilities.
+Административные привилегии мощные и должны предоставляться экономно. Пользователи-администраторы могут видеть и изменять все [системные настройки](system-settings.md), управлять другими пользователями, включая других администраторов, настраивать [промпты по умолчанию](prompts.md) и отслеживать [векторное хранилище](vector-store.md). Большинству пользователей никогда не понадобятся эти возможности.
 
-### User Permissions
+### Разрешения пользователей
 
-Beyond the admin role, Speakr offers granular per-user permissions that control specific capabilities:
+Помимо роли администратора, Speakr предлагает детальные разрешения для каждого пользователя, которые контролируют конкретные возможности:
 
-**Public Sharing Permission**: The public sharing icon button (globe icon) in each user's row toggles their ability to create public share links. When enabled (green), the user can generate secure links to share recordings externally with anyone. When disabled (gray), the user can only use internal sharing to share with other Speakr users. This permission is only available if `ENABLE_PUBLIC_SHARING=true` in your environment configuration.
+**Разрешение на публичный обмен**: Кнопка со значком публичного обмена (значок глобуса) в строке каждого пользователя переключает их способность создавать публичные ссылки для обмена. Когда включено (зеленое), пользователь может генерировать безопасные ссылки для обмена записями внешне с кем угодно. Когда отключено (серое), пользователь может использовать только внутренний обмен для обмена с другими пользователями Speakr. Это разрешение доступно только если `ENABLE_PUBLIC_SHARING=true` в вашей конфигурации окружения.
 
-Use this permission to control external information sharing on a per-user basis. You might grant public sharing to executives, sales groups, or marketing staff who regularly communicate with external stakeholders, while restricting it for users handling sensitive internal data.
+Используйте это разрешение для контроля внешнего обмена информацией на основе каждого пользователя. Вы можете предоставить публичный обмен руководителям, группам продаж или маркетинговому персоналу, которые регулярно общаются с внешними заинтересованными сторонами, в то время как ограничиваете его для пользователей, обрабатывающих чувствительные внутренние данные.
 
-## Managing Existing Users
+## Управление существующими пользователями
 
-Each user row includes action buttons that give you complete control over that account. The edit button opens a modal where you can update their username or email address. This is useful when people change names, switch email providers, or when you need to correct initial entry mistakes.
+Каждая строка пользователя включает кнопки действий, которые дают вам полный контроль над этим аккаунтом. Кнопка редактирования открывает модальное окно, где вы можете обновить их имя пользователя или адрес электронной почты. Это полезно, когда люди меняют имена, переключают провайдеров электронной почты или когда вам нужно исправить ошибки первоначального ввода.
 
-The admin toggle is perhaps the most powerful single click in the interface. Promoting a user to admin grants them access to everything you can see and do. Demoting an admin back to regular user immediately revokes all their administrative capabilities. The system prevents you from removing admin rights from your own account, ensuring you can't accidentally lock yourself out.
+Переключатель администратора, возможно, самый мощный одиночный клик в интерфейсе. Повышение пользователя до администратора предоставляет им доступ ко всему, что вы можете видеть и делать. Понижение администратора обратно до обычного пользователя немедленно отзывает все их административные возможности. Система предотвращает удаление административных прав из вашего собственного аккаунта, обеспечивая, что вы не можете случайно заблокировать себя.
 
-The delete button requires careful consideration. Removing a user is permanent and cannot be undone through the interface. All their recordings, notes, and settings will be deleted along with their account. The system asks for confirmation, but once confirmed, the removal is immediate and complete.
+Кнопка удаления требует тщательного рассмотрения. Удаление пользователя постоянно и не может быть отменено через интерфейс. Все их записи, заметки и настройки будут удалены вместе с их аккаунтом. Система запрашивает подтверждение, но после подтверждения удаление немедленное и полное.
 
-## Monitoring Usage Patterns
+## Мониторинг паттернов использования
 
-The recording count and storage columns reveal how users interact with your Speakr instance. High recording counts might indicate power users who rely heavily on the system, while low counts could suggest users who need training or might not need accounts at all.
+Столбцы количества записей и хранилища раскрывают, как пользователи взаимодействуют с вашим экземпляром Speakr. Высокие количества записей могут указывать на продвинутых пользователей, которые сильно полагаются на систему, в то время как низкие количества могут предполагать пользователей, которым нужно обучение или которые могут вообще не нуждаться в аккаунтах.
 
-Storage consumption tells another important story. Users with disproportionately high storage might be uploading very long recordings, keeping everything indefinitely, or possibly misusing the system. You can adjust [file size limits](system-settings.md#maximum-file-size) and review [chunking settings](../troubleshooting.md#files-over-25mb-fail-with-openai) if needed. This information helps you have informed conversations about resource usage and establish appropriate policies.
+Потребление хранилища рассказывает другую важную историю. Пользователи с непропорционально высоким хранилищем могут загружать очень длинные записи, хранить все бесконечно или возможно неправильно использовать систему. Вы можете настроить [лимиты размера файлов](system-settings.md#maximum-file-size) и просмотреть [настройки разделения](../troubleshooting.md#files-over-25mb-fail-with-openai) при необходимости. Эта информация помогает вам вести информированные беседы об использовании ресурсов и устанавливать соответствующие политики.
 
-Patterns often emerge when you regularly review this data. You might notice seasonal variations in academic settings, project-based spikes in corporate environments, or gradual growth that signals the need for infrastructure expansion.
+Паттерны часто появляются, когда вы регулярно просматриваете эти данные. Вы можете заметить сезонные вариации в академических настройках, проектные всплески в корпоративных средах или постепенный рост, который сигнализирует о необходимости расширения инфраструктуры.
 
-## Security Implications
+## Последствия безопасности
 
-Every user account is a potential security vector. Strong passwords are your first defense, but they're not enough alone. Encourage users to use unique passwords, change them regularly, and never share them with others.
+Каждый пользовательский аккаунт — это потенциальный вектор безопасности. Сильные пароли — ваша первая защита, но их недостаточно одних. Поощряйте пользователей использовать уникальные пароли, менять их регулярно и никогда не делиться ими с другими.
 
-Admin accounts require extra vigilance. Each admin can do everything you can do, including creating more admins or deleting all users. Limit admin access to the absolute minimum needed for operations. When someone no longer needs admin privileges, revoke them immediately.
+Административные аккаунты требуют дополнительной бдительности. Каждый администратор может делать все, что вы можете делать, включая создание большего количества администраторов или удаление всех пользователей. Ограничьте административный доступ до абсолютного минимума, необходимого для операций. Когда кому-то больше не нужны административные привилегии, отзовите их немедленно.
 
-Inactive accounts pose particular risks. They might have weak or compromised passwords that no one is monitoring. Regular audits help you identify and remove these vulnerabilities before they become problems.
+Неактивные аккаунты представляют особые риски. У них могут быть слабые или скомпрометированные пароли, которые никто не отслеживает. Регулярные аудиты помогают вам идентифицировать и удалять эти уязвимости до того, как они станут проблемами.
 
 ---
 
-Next: [System Statistics](statistics.md) →
+Далее: [Системная статистика](statistics.md) →

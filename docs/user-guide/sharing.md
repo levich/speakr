@@ -1,224 +1,224 @@
 ---
 layout: default
-title: Sharing & Collaboration
-parent: User Guide
+title: Обмен и сотрудничество
+parent: Руководство пользователя
 nav_order: 5
 ---
 
-# Sharing & Collaboration
+# Обмен и сотрудничество
 
-Speakr offers flexible collaboration options to match your workflow. Share recordings internally with group members for collaborative work, organize access through groups for seamless project management, or create public links for external stakeholders. Each sharing method serves different needs while maintaining security and control over your content.
+Speakr предлагает гибкие варианты сотрудничества, соответствующие вашему рабочему процессу. Делитесь записями внутри с участниками группы для совместной работы, организуйте доступ через группы для бесшовного управления проектами или создавайте публичные ссылки для внешних заинтересованных сторон. Каждый метод обмена служит разным потребностям, поддерживая безопасность и контроль над вашим контентом.
 
-## Internal Sharing (User-to-User)
+## Внутренний обмен (пользователь-пользователь)
 
-Internal sharing enables direct collaboration between users in your Speakr instance. Share recordings one-on-one with family or colleagues, grant precise permissions based on trust levels, and maintain control over who can access your content.
+Внутренний обмен обеспечивает прямое сотрудничество между пользователями в вашем экземпляре Speakr. Делитесь записями один на один с семьей или коллегами, предоставляйте точные разрешения на основе уровней доверия и поддерживайте контроль над тем, кто может получить доступ к вашему контенту.
 
-### Understanding Internal Sharing
+### Понимание внутреннего обмена
 
-Unlike public share links that work for anyone with the URL, internal sharing creates secure connections between authenticated users within your Speakr instance. When you share internally, the recipient must log in to access the recording, and their permissions are tracked and enforceable. This makes internal sharing ideal for sensitive content and ongoing collaboration.
+В отличие от публичных ссылок для обмена, которые работают для любого, у кого есть URL, внутренний обмен создает безопасные соединения между аутентифицированными пользователями в вашем экземпляре Speakr. Когда вы делитесь внутри, получатель должен войти в систему для доступа к записи, и их разрешения отслеживаются и принудительно применяются. Это делает внутренний обмен идеальным для чувствительного контента и постоянного сотрудничества.
 
-### Requirements for Internal Sharing
+### Требования для внутреннего обмена
 
-Your Speakr administrator must enable internal sharing before this feature becomes available. Once enabled, you'll see sharing buttons in the recording detail view. If you don't see these options, contact your administrator about enabling the `ENABLE_INTERNAL_SHARING` feature.
+Ваш администратор Speakr должен включить внутренний обмен, прежде чем эта функция станет доступной. После включения вы увидите кнопки обмена в детальном виде записи. Если вы не видите эти опции, свяжитесь с вашим администратором о включении функции `ENABLE_INTERNAL_SHARING`.
 
-### Sharing a Recording with Another User
+### Обмен записью с другим пользователем
 
-![Share with User Modal](../assets/images/screenshots/Share modal.png)
+![Модальное окно обмена с пользователем](../assets/images/screenshots/Share modal.png)
 
-When viewing any recording you own, look for the blue users icon button in the toolbar. Clicking this opens the share modal where you can search for colleagues and configure access permissions.
+При просмотре любой записи, которой вы владеете, ищите синюю кнопку со значком пользователей на панели инструментов. Нажатие на это открывает модальное окно обмена, где вы можете искать коллег и настраивать разрешения доступа.
 
-The search functionality makes finding the right person quick and intuitive. Type at least two characters of a username to see matching results. The system filters out your own name since you can't share recordings with yourself, and shows only other users in your instance.
+Функция поиска делает поиск нужного человека быстрым и интуитивным. Введите хотя бы два символа имени пользователя, чтобы увидеть совпадающие результаты. Система фильтрует ваше собственное имя, поскольку вы не можете делиться записями с самим собой, и показывает только других пользователей в вашем экземпляре.
 
-Before sharing, consider what level of access makes sense for this collaboration. Speakr offers three permission levels that build on each other, letting you grant exactly the access needed without oversharing control.
+Перед обменом рассмотрите, какой уровень доступа имеет смысл для этого сотрудничества. Speakr предлагает три уровня разрешений, которые строятся друг на друге, позволяя вам предоставить именно необходимый доступ без избыточного обмена контролем.
 
-**View-Only Access** provides the foundation - recipients can read the transcription, review your summary and notes, listen to the audio if it hasn't been deleted, and use the AI chat feature to ask questions about the content. They cannot modify anything, ensuring your original content remains intact. This works well when you're distributing information but don't need input or edits.
+**Доступ только для просмотра** предоставляет основу — получатели могут читать транскрипцию, просматривать вашу сводку и заметки, слушать аудио, если оно не было удалено, и использовать функцию ИИ-чата для задавания вопросов о контенте. Они не могут ничего изменять, обеспечивая, что ваш оригинальный контент остается нетронутым. Это хорошо работает, когда вы распространяете информацию, но не нуждаетесь во вводе или редактировании.
 
-**Edit Permissions** add the ability to modify the recording's metadata and shared content. Recipients with edit access can change the title, update participant lists, adjust the meeting date and time, modify the shared summary, and add or remove tags. However, they still cannot delete the recording or share it with others. Edit access works well for collaborative documentation where multiple group members contribute context and refinements. Note that all users can maintain their own personal notes regardless of edit permissions.
+**Разрешения на редактирование** добавляют возможность изменять метаданные записи и общий контент. Получатели с доступом для редактирования могут изменять заголовок, обновлять списки участников, корректировать дату и время встречи, изменять общую сводку и добавлять или удалять теги. Однако они все еще не могут удалить запись или поделиться ею с другими. Доступ для редактирования хорошо работает для совместной документации, где несколько участников группы вносят контекст и улучшения. Обратите внимание, что все пользователи могут поддерживать свои собственные личные заметки независимо от разрешений на редактирование.
 
-**Re-share Permissions** grant the highest level of access short of full ownership. Recipients can do everything editors can do, plus share the recording with additional users and manage those shares by revoking access. This creates a chain of trust where you empower certain colleagues to extend access as needed. However, even with re-share permissions, recipients cannot delete the recording - only the original owner can do that.
+**Разрешения на повторный обмен** предоставляют самый высокий уровень доступа, не достигая полного владения. Получатели могут делать все, что могут редакторы, плюс делиться записью с дополнительными пользователями и управлять этими общими доступами, отзывая доступ. Это создает цепочку доверия, где вы наделяете определенных коллег возможностью расширять доступ по мере необходимости. Однако даже с разрешениями на повторный обмен получатели не могут удалить запись — только первоначальный владелец может это сделать.
 
-To share with view-only access, simply search for the user and click their name in the results. For edit or re-share permissions, check the appropriate boxes before clicking the username. The share takes effect immediately, and the recipient gains access to the recording in their main interface.
+Чтобы поделиться с доступом только для просмотра, просто найдите пользователя и нажмите на его имя в результатах. Для разрешений на редактирование или повторный обмен установите соответствующие флажки перед нажатием на имя пользователя. Обмен вступает в силу немедленно, и получатель получает доступ к записи в своем основном интерфейсе.
 
-### Managing Your Shares
+### Управление вашими общими доступами
 
-![Manage Shares Modal](../assets/images/screenshots/Share modal.png)
+![Модальное окно управления общими доступами](../assets/images/screenshots/Share modal.png)
 
-The unified share modal shows everyone who has access to a recording, making it easy to track and control sharing. Each entry displays the recipient's name, their permissions level, and when you granted access. The red user-times icon lets you instantly revoke access when collaboration ends or circumstances change.
+Объединенное модальное окно обмена показывает всех, кто имеет доступ к записи, упрощая отслеживание и контроль обмена. Каждая запись отображает имя получателя, уровень их разрешений и когда вы предоставили доступ. Красный значок пользователя-времени позволяет вам мгновенно отозвать доступ, когда сотрудничество заканчивается или обстоятельства меняются.
 
-Revoking access is immediate and thorough. When you revoke someone's access, they lose the ability to view the recording, and any personal notes they created on the shared recording are removed. This ensures complete separation when collaboration ends.
+Отзыв доступа немедленный и тщательный. Когда вы отзываете чей-то доступ, он теряет возможность просматривать запись, и любые личные заметки, которые он создал на общей записи, удаляются. Это обеспечивает полное разделение, когда сотрудничество заканчивается.
 
-### Personal Notes on Shared Recordings
+### Личные заметки на общих записях
 
-One of internal sharing's most powerful features is support for personal notes. When someone shares a recording with you, you can add your own private notes that only you can see. These personal notes never appear to the original owner or other recipients - they're your private space for observations, follow-ups, or context.
+Одна из самых мощных функций внутреннего обмена — поддержка личных заметок. Когда кто-то делится с вами записью, вы можете добавлять свои собственные приватные заметки, которые видите только вы. Эти личные заметки никогда не появляются первоначальному владельцу или другим получателям — это ваше приватное пространство для наблюдений, последующих действий или контекста.
 
-**Important: Notes vs. Summaries**
-- **Notes**: Always personal and private. Each user (owner and shared recipients) can create their own notes that only they can see. No edit permission is required to add personal notes to a shared recording.
-- **Summary**: Shared globally. The recording owner's AI-generated summary is visible to all users who have access to the recording. Only users with edit permission can modify the summary.
+**Важно: Заметки против сводок**
+- **Заметки**: Всегда личные и приватные. Каждый пользователь (владелец и получатели обмена) может создавать свои собственные заметки, которые видит только он. Разрешение на редактирование не требуется для добавления личных заметок к общей записи.
+- **Сводка**: Общий контент, созданный владельцем записи. Только пользователи с разрешением на редактирование могут изменять сводку, и все пользователи с доступом к записи видят одну и ту же сводку.
 
-This separation means you can freely annotate shared recordings with your own thoughts and action items without cluttering the shared content or requiring special permissions. The owner maintains control over the official summary while everyone can maintain their own personal notes.
+Это разделение означает, что вы можете свободно аннотировать общие записи своими мыслями и пунктами действий, не загромождая общий контент или требуя специальных разрешений. Владелец поддерживает контроль над официальной сводкой, в то время как все могут поддерживать свои собственные личные заметки.
 
-Personal notes persist until access is revoked. If the owner removes your access, your personal notes are automatically deleted since you no longer need notes on content you can't access. This automatic cleanup prevents orphaned data and maintains security.
+Личные заметки сохраняются до тех пор, пока доступ не отозван. Если владелец удаляет ваш доступ, ваши личные заметки автоматически удаляются, поскольку вам больше не нужны заметки на контент, к которому вы не можете получить доступ. Эта автоматическая очистка предотвращает сиротские данные и поддерживает безопасность.
 
-### Independent Inbox and Favorite Status
+### Независимый почтовый ящик и статус избранного
 
-Each user maintains their own inbox and favorite status for shared recordings. Your inbox and starred items are completely independent from other users - when you mark a shared recording as read or favorite it, this doesn't affect how it appears to the owner or other recipients. This allows everyone to organize their personal workspace without interfering with collaborators' views.
+Каждый пользователь поддерживает свой собственный почтовый ящик и статус избранного для общих записей. Ваш почтовый ящик и помеченные элементы полностью независимы от других пользователей — когда вы отмечаете общую запись как прочитанную или добавляете её в избранное, это не влияет на то, как она появляется владельцу или другим получателям. Это позволяет всем организовывать свое личное рабочее пространство, не мешая взглядам сотрудников.
 
-### Viewing Recordings Shared With You
+### Просмотр записей, которыми поделились с вами
 
-Recordings that others have shared with you appear in your main recording list with distinctive visual indicators. Shared recordings display with an accent-colored title and a subtle border to make them immediately distinguishable from your own recordings. When you hover over a shared recording, you can see the owner's username (if your administrator has enabled username visibility), so you always know the content source.
+Записи, которыми другие поделились с вами, появляются в вашем основном списке записей с отличительными визуальными индикаторами. Общие записи отображаются с акцентным цветом заголовка и тонкой границей, чтобы сделать их сразу отличимыми от ваших собственных записей. Когда вы наводите курсор на общую запись, вы можете увидеть имя пользователя владельца (если ваш администратор включил видимость имени пользователя), поэтому вы всегда знаете источник контента.
 
-The "Shared with Me" toggle in the sidebar filters your view to show only recordings that others have shared with you. This focused view helps when you need to review collaborative content without distraction from your own recordings.
+Переключатель "Shared with Me" в боковой панели фильтрует ваш вид, чтобы показывать только записи, которыми другие поделились с вами. Этот сфокусированный вид помогает, когда вам нужно просмотреть совместный контент без отвлечения от ваших собственных записей.
 
-Your permissions determine what you can do with shared recordings. View-only access means read and listen capabilities, while edit permissions let you contribute to the recording's metadata and shared summary. Regardless of your permission level, you can always add and edit your own personal notes - these are private to you and don't require any special permissions. The interface adapts to your permissions, showing or hiding controls based on your access level.
+Ваши разрешения определяют, что вы можете делать с общими записями. Доступ только для просмотра означает возможности чтения и прослушивания, в то время как разрешения на редактирование позволяют вам вносить вклад в метаданные записи и общую сводку. Независимо от вашего уровня разрешений, вы всегда можете добавлять и редактировать свои собственные личные заметки — они приватны для вас и не требуют никаких специальных разрешений. Интерфейс адаптируется к вашим разрешениям, показывая или скрывая элементы управления на основе вашего уровня доступа.
 
-### Security and Privacy
+### Безопасность и конфиденциальность
 
-Internal sharing implements multiple security layers to protect your content. Only authenticated users in your Speakr instance can receive shares - external parties cannot gain access through internal sharing mechanisms. Each share creates a tracked database record that links specific users to specific recordings with defined permissions.
+Внутренний обмен реализует несколько уровней безопасности для защиты вашего контента. Только аутентифицированные пользователи в вашем экземпляре Speakr могут получать общие доступы — внешние стороны не могут получить доступ через механизмы внутреннего обмена. Каждый обмен создает отслеживаемую запись базы данных, которая связывает конкретных пользователей с конкретными записями с определенными разрешениями.
 
-The permission system enforces strict boundaries. View-only recipients cannot accidentally or intentionally modify content. Edit permissions don't include deletion rights, preventing data loss from collaborative editing. Re-share permissions create an audit trail of who granted access to whom, maintaining accountability.
+Система разрешений обеспечивает строгие границы. Получатели только для просмотра не могут случайно или намеренно изменять контент. Разрешения на редактирование не включают права на удаление, предотвращая потерю данных от совместного редактирования. Разрешения на повторный обмен создают аудиторский след того, кто предоставил доступ кому, поддерживая подотчетность.
 
-When you delete a recording, all associated shares are automatically removed. Recipients lose access immediately, ensuring that content deletion is complete and final. Similarly, if an administrator disables a user's account, all their shares (both granted and received) become inactive.
+Когда вы удаляете запись, все связанные общие доступы автоматически удаляются. Получатели теряют доступ немедленно, обеспечивая, что удаление контента является полным и окончательным. Аналогично, если администратор отключает аккаунт пользователя, все его общие доступы (как предоставленные, так и полученные) становятся неактивными.
 
-### Practical Use Cases
+### Практические случаи использования
 
-Internal sharing and group features work together to handle different collaboration scenarios. Here's how people actually use them:
+Внутренний обмен и групповые функции работают вместе для обработки различных сценариев сотрудничества. Вот как люди фактически их используют:
 
-### One-on-One Sharing
+### Обмен один на один
 
-Share individual recordings with specific people when you need targeted collaboration. Your manager asks about yesterday's client call - share it directly with view access so they can review what was discussed. A colleague missed the group meeting - share it with edit access so they can add their notes and questions. You're working on a project with someone from another department - share relevant recordings as you create them to keep them in the loop.
+Делитесь отдельными записями с конкретными людьми, когда вам нужно целевое сотрудничество. Ваш менеджер спрашивает о вчерашнем звонке клиента — поделитесь напрямую с доступом для просмотра, чтобы он мог просмотреть, что обсуждалось. Коллега пропустил групповую встречу — поделитесь с доступом для редактирования, чтобы он мог добавить свои заметки и вопросы. Вы работаете над проектом с кем-то из другого отдела — делитесь релевантными записями по мере их создания, чтобы держать их в курсе.
 
-This works well when the collaboration is temporary or involves people who don't regularly need access to your recordings. You control exactly who sees what, and you can revoke access when the collaboration ends.
+Это хорошо работает, когда сотрудничество временное или включает людей, которым регулярно не нужен доступ к вашим записям. Вы контролируете точно, кто видит что, и можете отозвать доступ, когда сотрудничество заканчивается.
 
-### Group-Based Sharing
+### Обмен на основе групп
 
-Groups automate sharing for groups who regularly work together. Create an engineering group and apply group tags to architecture discussions - everyone on the group automatically gets access. Sales group members tag customer calls with group tags so the whole group learns from each interaction. HR group shares interview recordings with all interviewers without manually sharing each one.
+Группы автоматизируют обмен для групп, которые регулярно работают вместе. Создайте инженерную группу и применяйте групповые теги к обсуждениям архитектуры — все в группе автоматически получают доступ. Участники группы продаж помечают звонки клиентов групповыми тегами, чтобы вся группа училась на каждом взаимодействии. Группа HR делится записями интервью со всеми интервьюерами без ручного обмена каждой.
 
-Group sharing makes sense when the same group of people consistently needs access to similar content. Set it up once, and recordings flow to the right people automatically. The group structure persists, so new recordings tagged for the group reach all members without additional work.
+Групповой обмен имеет смысл, когда одна и та же группа людей постоянно нуждается в доступе к похожему контенту. Настройте один раз, и записи автоматически попадают к нужным людям. Структура группы сохраняется, поэтому новые записи, помеченные для группы, достигают всех участников без дополнительной работы.
 
-### Combining Both Approaches
+### Комбинирование обоих подходов
 
-You can use groups for regular collaboration and individual sharing for exceptions. Your engineering group has automatic access to technical discussions through group tags. When a design decision needs executive review, you individually share that specific recording with your VP. The group gets their automated access, and you layer on targeted sharing for special cases.
+Вы можете использовать группы для регулярного сотрудничества и индивидуальный обмен для исключений. Ваша инженерная группа имеет автоматический доступ к техническим обсуждениям через групповые теги. Когда решение по дизайну требует исполнительного обзора, вы индивидуально делитесь этой конкретной записью с вашим вице-президентом. Группа получает свой автоматический доступ, и вы добавляете целевой обмен для особых случаев.
 
-This combination handles both routine collaboration (groups) and exceptional needs (individual shares) without creating organizational overhead.
+Эта комбинация обрабатывает как рутинное сотрудничество (группы), так и исключительные потребности (индивидуальные обмены), не создавая организационных накладных расходов.
 
-### Real-World Scenarios
+### Реальные сценарии
 
-| Scenario | Approach | Why It Works |
-|----------|----------|--------------|
-| Family recording memories | Create "Family" group, tag trips and events | Everyone gets access automatically, can add their own notes |
-| Book club discussions | Create "Book Club" group with protected tag | Recordings preserved permanently, all members auto-share |
-| Work project with 3 people | Share individually with edit access | Temporary collaboration, easy to revoke when project ends |
-| Department meetings | Create department group, tag all meetings | New group members get future meetings, not historical ones |
-| Client presentations | Individual share with view-only | Controlled access, clients can't accidentally edit |
-| Research group | Group with custom 7-year retention | Automatic sharing + compliance with retention policies |
-| Daily standups | Group with 14-day retention | Auto-share with group, auto-cleanup of routine recordings |
+| Сценарий | Подход | Почему это работает |
+|----------|--------|----------------------|
+| Семейные записи воспоминаний | Создайте группу "Family", помечайте поездки и события | Все получают доступ автоматически, могут добавлять свои заметки |
+| Обсуждения книжного клуба | Создайте группу "Book Club" с защищенным тегом | Записи сохраняются постоянно, все участники автоматически делятся |
+| Рабочий проект с 3 людьми | Делитесь индивидуально с доступом для редактирования | Временное сотрудничество, легко отозвать, когда проект заканчивается |
+| Встречи отдела | Создайте группу отдела, помечайте все встречи | Новые участники группы получают будущие встречи, а не исторические |
+| Презентации клиентам | Индивидуальный обмен только для просмотра | Контролируемый доступ, клиенты не могут случайно редактировать |
+| Исследовательская группа | Группа с пользовательским хранением 7 лет | Автоматический обмен + соответствие политикам хранения |
+| Ежедневные стендапы | Группа с хранением 14 дней | Автоматический обмен с группой, автоматическая очистка рутинных записей |
 
-### Combining with Retention Policies
+### Комбинирование с политиками хранения
 
-Group tags can enforce retention policies that match how your group works. Your daily standup group tag auto-deletes recordings after two weeks since they're routine updates. Your architecture decisions group tag protects recordings permanently because those discussions document important choices. Your client calls group tag keeps recordings for one year to match your data retention policy.
+Групповые теги могут применять политики хранения, которые соответствуют тому, как работает ваша группа. Ваш групповой тег ежедневных стендапов автоматически удаляет записи через две недели, поскольку это рутинные обновления. Ваш групповой тег решений по архитектуре защищает записи постоянно, потому что эти обсуждения документируют важные выборы. Ваш групповой тег звонков клиентов хранит записи в течение одного года, чтобы соответствовать вашей политике хранения данных.
 
-This means the same recordings that automatically share with your group also automatically follow the right lifecycle. Tag it once, and both sharing and retention happen correctly.
+Это означает, что те же записи, которые автоматически делятся с вашей группой, также автоматически следуют правильному жизненному циклу. Пометите один раз, и обмен, и хранение происходят правильно.
 
-## Best Practices for Internal Sharing
+## Лучшие практики для внутреннего обмена
 
-Share recordings promptly after meetings or discussions while context is fresh. Recipients can review content, add notes, and ask questions through the AI chat while details are still top-of-mind. This immediacy makes collaboration more effective and valuable.
+Делитесь записями сразу после встреч или обсуждений, пока контекст свеж. Получатели могут просматривать контент, добавлять заметки и задавать вопросы через ИИ-чат, пока детали еще свежи в памяти. Эта немедленность делает сотрудничество более эффективным и ценным.
 
-Use view-only access by default, granting edit permissions only when recipients truly need to contribute. This prevents accidental modifications while still enabling information sharing. Reserve re-share permissions for trusted group leads or project managers who need to coordinate access for their groups.
+Используйте доступ только для просмотра по умолчанию, предоставляя разрешения на редактирование только когда получатели действительно нуждаются во вкладе. Это предотвращает случайные изменения, все еще обеспечивая обмен информацией. Резервируйте разрешения на повторный обмен для доверенных лидеров групп или менеджеров проектов, которым нужно координировать доступ для своих групп.
 
-Periodically review your shared recordings to ensure access remains appropriate. Group members change roles, projects end, and sensitive content that once needed sharing might now warrant restricted access. The manage shares interface makes regular audits quick and straightforward.
+Периодически просматривайте ваши общие записи, чтобы убедиться, что доступ остается подходящим. Участники групп меняют роли, проекты заканчиваются, и чувствительный контент, который когда-то нуждался в обмене, может теперь требовать ограниченного доступа. Интерфейс управления общими доступами делает регулярные аудиты быстрыми и простыми.
 
-When collaborating on sensitive content, verify recipient permissions match their role and need. Legal discussions might need view-only access even for close colleagues, while brainstorming sessions benefit from liberal edit permissions. Match permissions to content sensitivity and collaboration needs.
+При сотрудничестве над чувствительным контентом проверяйте, что разрешения получателей соответствуют их роли и потребностям. Юридические обсуждения могут нуждаться в доступе только для просмотра даже для близких коллег, в то время как сессии мозгового штурма выигрывают от либеральных разрешений на редактирование. Соответствуйте разрешения чувствительности контента и потребностям сотрудничества.
 
-## Public Share Links
+## Публичные ссылки для обмена
 
-Sometimes you need to share a recording with someone who doesn't have a Speakr account - perhaps a client needs to review a meeting, a colleague missed an important discussion, or you want to provide documentation to stakeholders. Speakr's public sharing feature lets you create secure, read-only links to your recordings while maintaining complete control over what information is shared.
+Иногда вам нужно поделиться записью с кем-то, у кого нет аккаунта Speakr — возможно, клиенту нужно просмотреть встречу, коллега пропустил важное обсуждение, или вы хотите предоставить документацию заинтересованным сторонам. Функция публичного обмена Speakr позволяет создавать безопасные ссылки только для чтения к вашим записям, поддерживая полный контроль над тем, какая информация передается.
 
-### Understanding Public Shares
+### Понимание публичных общих доступов
 
-When you share a recording, Speakr generates a unique, secure link that provides access to that specific recording without requiring the recipient to log in or have an account. Each share link is cryptographically secure and impossible to guess, ensuring that only people you explicitly share with can access your content.
+Когда вы делитесь записью, Speakr генерирует уникальную, безопасную ссылку, которая предоставляет доступ к этой конкретной записи без требования от получателя входа в систему или наличия аккаунта. Каждая ссылка для обмена криптографически безопасна и невозможна для угадывания, обеспечивая, что только люди, с которыми вы явно делитесь, могут получить доступ к вашему контенту.
 
-The sharing system gives you granular control over what recipients can see. You decide whether to include your AI-generated summary, your personal notes, or both. The transcription itself is always included, as it forms the core content of the recording. Recipients get a clean, professional view of your recording without any of the administrative interface or your other recordings.
+Система обмена дает вам детальный контроль над тем, что получатели могут видеть. Вы решаете, включать ли вашу сгенерированную ИИ сводку, ваши личные заметки или оба. Сама транскрипция всегда включается, так как она формирует основной контент записи. Получатели получают чистый, профессиональный вид вашей записи без административного интерфейса или ваших других записей.
 
-## Requirements for Sharing
+## Требования для обмена
 
-Before you can share recordings, your Speakr instance must meet two critical requirements. First, it must be accessible via HTTPS with a valid SSL certificate. Second, it must be reachable from the internet with a proper domain name or public IP address.
+Перед тем, как вы сможете делиться записями, ваш экземпляр Speakr должен соответствовать двум критическим требованиям. Во-первых, он должен быть доступен через HTTPS с действительным SSL-сертификатом. Во-вторых, он должен быть доступен из интернета с правильным доменным именем или публичным IP-адресом.
 
-These requirements exist because share links need to be accessible to recipients who don't have accounts and may be accessing from anywhere. A local network installation or non-HTTPS setup cannot generate shareable links - the share button will either be disabled or display an error message explaining that sharing requires a secure, internet-accessible connection. If you're running Speakr internally without SSL or public access, you'll need to work with your IT group to set up proper HTTPS and internet routing before the sharing feature becomes available.
+Эти требования существуют, потому что ссылки для обмена должны быть доступны получателям, у которых нет аккаунтов и которые могут получать доступ из любого места. Локальная сетевая установка или настройка без HTTPS не может генерировать ссылки для обмена — кнопка обмена будет либо отключена, либо отобразит сообщение об ошибке, объясняющее, что обмен требует безопасного, доступного из интернета соединения. Если вы запускаете Speakr внутри без SSL или публичного доступа, вам нужно будет работать с вашей IT-группой, чтобы настроить правильный HTTPS и интернет-маршрутизацию, прежде чем функция обмена станет доступной.
 
-## Creating a Share Link
+## Создание ссылки для обмена
 
-![Share Recording Modal](../assets/images/screenshots/Share modal.png)
+![Модальное окно обмена записью](../assets/images/screenshots/Share modal.png)
 
-Once your instance meets the requirements, sharing a recording takes just a few clicks. While viewing any recording, click the share button in the toolbar to open the sharing modal. This presents you with two simple checkboxes that control what information will be visible to recipients.
+После того, как ваш экземпляр соответствует требованиям, обмен записью занимает всего несколько кликов. При просмотре любой записи нажмите кнопку обмена на панели инструментов, чтобы открыть модальное окно обмена. Это представляет вам два простых флажка, которые контролируют, какая информация будет видна получателям.
 
-The "Share Summary" option determines whether recipients can see the AI-generated summary of your recording. This is particularly useful when sharing with executives or stakeholders who need a quick overview without reading the entire transcription. The summary provides them with key points, decisions, and action items in a digestible format.
+Опция "Share Summary" определяет, могут ли получатели видеть сгенерированную ИИ сводку вашей записи. Это особенно полезно при обмене с руководителями или заинтересованными сторонами, которым нужен быстрый обзор без чтения всей транскрипции. Сводка предоставляет им ключевые моменты, решения и пункты действий в удобном формате.
 
-The "Share Notes" option controls whether your personal notes are visible. These are the markdown notes you've added to provide context, follow-ups, or additional thoughts about the recording. Consider carefully whether these notes are appropriate for your audience - they might contain internal observations or personal reminders that aren't meant for external viewing.
+Опция "Share Notes" контролирует, видны ли ваши личные заметки. Это markdown-заметки, которые вы добавили для предоставления контекста, последующих действий или дополнительных мыслей о записи. Тщательно рассмотрите, подходят ли эти заметки для вашей аудитории — они могут содержать внутренние наблюдения или личные напоминания, которые не предназначены для внешнего просмотра.
 
-Once you've selected your options, click "Create Share Link" to generate the secure URL. The link appears immediately in the modal, ready to copy to your clipboard. This link is permanent until you explicitly revoke it, so recipients can bookmark it for future reference.
+После выбора ваших опций нажмите "Create Share Link", чтобы сгенерировать безопасный URL. Ссылка появляется немедленно в модальном окне, готовая для копирования в буфер обмена. Эта ссылка постоянна, пока вы явно не отзовете её, поэтому получатели могут добавить её в закладки для будущей справки.
 
-## What Recipients Experience
+## Что испытывают получатели
 
-![Shared Recording View](../assets/images/screenshots/Share link.png)
+![Вид общей записи](../assets/images/screenshots/Share link.png)
 
-When someone clicks your share link, they're taken to a streamlined view of your recording designed for easy consumption without distractions. The interface is clean and professional, branded with Speakr but showing only the content you've chosen to share.
+Когда кто-то нажимает на вашу ссылку для обмена, он переносится в упрощенный вид вашей записи, разработанный для легкого потребления без отвлечений. Интерфейс чистый и профессиональный, с брендингом Speakr, но показывающий только контент, который вы выбрали для обмена.
 
-At the top of the page, recipients see the recording title prominently displayed along with a note indicating it's a shared recording. The audio player sits just below, providing full playback controls so they can listen to the original recording at their own pace. The player shows the total duration and current position, allowing recipients to navigate to specific moments or replay important sections.
+В верхней части страницы получатели видят заголовок записи, заметно отображаемый вместе с примечанием, указывающим, что это общая запись. Аудиоплеер находится чуть ниже, предоставляя полные элементы управления воспроизведением, чтобы они могли слушать оригинальную запись в своем темпе. Плеер показывает общую длительность и текущую позицию, позволяя получателям навигировать к конкретным моментам или переигрывать важные разделы.
 
-The main content area is divided between the transcription and summary (if you've chosen to share it). The transcription appears with clear formatting, including speaker labels if your recording includes speaker diarization. Each identified speaker appears as a colored tag, making it easy to follow multi-person conversations. The interface includes view options like Simple and Bubble modes if speaker identification is present, and a copy button to easily extract the text.
+Основная область контента разделена между транскрипцией и сводкой (если вы выбрали её для обмена). Транскрипция появляется с четким форматированием, включая метки говорящих, если ваша запись включает идентификацию говорящих. Каждый идентифицированный говорящий появляется как цветной тег, упрощая отслеживание бесед с несколькими людьми. Интерфейс включает опции просмотра, такие как режимы Simple и Bubble, если присутствует идентификация говорящих, и кнопку копирования для легкого извлечения текста.
 
-If you've enabled summary sharing, it appears in a dedicated panel with its own copy functionality. The summary is rendered with full markdown formatting, presenting a professional overview of the key points from your recording. Your notes, if shared, would appear in a similar panel, providing additional context and insights.
+Если вы включили обмен сводкой, она появляется в выделенной панели с собственной функцией копирования. Сводка отображается с полным форматированием markdown, представляя профессиональный обзор ключевых моментов из вашей записи. Ваши заметки, если они были общими, появились бы в аналогичной панели, предоставляя дополнительный контекст и инсайты.
 
-At the bottom of the page, recipients see a subtle footer indicating the content is "Powered by advanced AI transcription" with a link to Speakr. This gives your shares a professional appearance while maintaining the focus on your content. The entire experience is read-only - recipients cannot edit anything, cannot access your other recordings, and cannot see any of your account information or settings.
+Внизу страницы получатели видят тонкий футер, указывающий, что контент "Powered by advanced AI transcription" со ссылкой на Speakr. Это придает вашим общим доступам профессиональный вид, сохраняя фокус на вашем контенте. Весь опыт только для чтения — получатели не могут ничего редактировать, не могут получить доступ к вашим другим записям и не могут видеть никакую информацию о вашем аккаунте или настройках.
 
-## Managing Your Shared Recordings
+## Управление вашими общими записями
 
-![Shared Transcripts](../assets/images/screenshots/share-summary-view.png)
+![Общие транскрипты](../assets/images/screenshots/share-summary-view.png)
 
-All your shared recordings are centrally managed through the Shared Transcripts section in your account settings. This gives you a complete overview of everything you've shared and with whom.
+Все ваши общие записи централизованно управляются через раздел Shared Transcripts в настройках вашего аккаунта. Это дает вам полный обзор всего, чем вы поделились и с кем.
 
-The shared transcripts list shows each recording you've shared, when you created the share link, and what options you selected (summary and/or notes). Each entry includes the full share URL that you can copy again if needed - perhaps you've lost the original link or need to reshare with additional people.
+Список общих транскриптов показывает каждую запись, которой вы поделились, когда вы создали ссылку для обмена и какие опции вы выбрали (сводка и/или заметки). Каждая запись включает полный URL для обмена, который вы можете скопировать снова при необходимости — возможно, вы потеряли оригинальную ссылку или нужно поделиться с дополнительными людьми.
 
-You can modify what's included in a share by toggling the summary and notes checkboxes directly in this interface. These changes take effect immediately for anyone accessing the link. This is useful when you initially share just the transcription but later decide to include the summary, or when you want to remove notes that are no longer relevant.
+Вы можете изменять то, что включено в обмен, переключая флажки сводки и заметок напрямую в этом интерфейсе. Эти изменения вступают в силу немедленно для любого, кто получает доступ к ссылке. Это полезно, когда вы изначально делитесь только транскрипцией, но позже решаете включить сводку, или когда вы хотите удалить заметки, которые больше не релевантны.
 
-The delete button next to each share instantly revokes access. Once deleted, the share link becomes invalid and anyone trying to access it will see an error message. This gives you complete control over the lifecycle of your shared content.
+Кнопка удаления рядом с каждым обменом мгновенно отзывает доступ. После удаления ссылка для обмена становится недействительной, и любой, кто пытается получить к ней доступ, увидит сообщение об ошибке. Это дает вам полный контроль над жизненным циклом вашего общего контента.
 
-## Security and Privacy Considerations
+## Соображения безопасности и конфиденциальности
 
-Speakr requires HTTPS for all sharing operations, ensuring that share links can only be created and accessed over secure connections. This protects the content during transmission and prevents interception of sensitive recordings.
+Speakr требует HTTPS для всех операций обмена, обеспечивая, что ссылки для обмена могут быть созданы и доступны только через безопасные соединения. Это защищает контент во время передачи и предотвращает перехват чувствительных записей.
 
-Each share link contains a cryptographically secure random token that's unique to that specific share. These tokens are generated using security best practices and are long enough to make guessing or brute-force attacks infeasible. Even if someone knows you've shared other recordings, they cannot derive or guess the links to those shares.
+Каждая ссылка для обмена содержит криптографически безопасный случайный токен, который уникален для этого конкретного обмена. Эти токены генерируются с использованием лучших практик безопасности и достаточно длинны, чтобы сделать угадывание или атаки грубой силы неосуществимыми. Даже если кто-то знает, что вы поделились другими записями, он не может вывести или угадать ссылки на эти обмены.
 
-It's important to understand that share links don't require authentication - anyone with the link can access the recording. This makes sharing convenient but means you should treat these links with the same care you'd treat sensitive documents. Share them only through secure channels like encrypted email or private messages, never post them publicly, and revoke access when it's no longer needed.
+Важно понимать, что ссылки для обмена не требуют аутентификации — любой, у кого есть ссылка, может получить доступ к записи. Это делает обмен удобным, но означает, что вы должны обращаться с этими ссылками с той же осторожностью, с которой обращаетесь с чувствительными документами. Делитесь ими только через безопасные каналы, такие как зашифрованная электронная почта или приватные сообщения, никогда не публикуйте их публично и отзывайте доступ, когда он больше не нужен.
 
-The system doesn't track who accesses shared links or how often they're viewed. This respects recipient privacy but means you won't know if a link has been forwarded to others. If you need tighter access control, consider asking recipients to create Speakr accounts instead of using public sharing.
+Система не отслеживает, кто получает доступ к общим ссылкам или как часто они просматриваются. Это уважает конфиденциальность получателей, но означает, что вы не будете знать, была ли ссылка переслана другим. Если вам нужен более строгий контроль доступа, рассмотрите просьбу получателям создать аккаунты Speakr вместо использования публичного обмена.
 
-## Best Practices for Sharing
+## Лучшие практики для обмена
 
-When sharing internally within your organization, you can generally include both summaries and notes since colleagues have context about the discussions and need complete information. The notes often contain valuable action items, follow-ups, and clarifications that help group members understand not just what was said, but what needs to happen next.
+При обмене внутри вашей организации вы обычно можете включать как сводки, так и заметки, поскольку коллеги имеют контекст об обсуждениях и нуждаются в полной информации. Заметки часто содержат ценные пункты действий, последующие действия и уточнения, которые помогают участникам группы понимать не только то, что было сказано, но и то, что нужно сделать дальше.
 
-For external sharing with clients or partners, consider sharing only the summary without your internal notes. The summary provides them with professional, polished takeaways while your notes remain private for internal use. Review the content before sharing to ensure nothing confidential or inappropriate is included.
+Для внешнего обмена с клиентами или партнерами рассмотрите обмен только сводкой без ваших внутренних заметок. Сводка предоставляет им профессиональные, отполированные выводы, в то время как ваши заметки остаются приватными для внутреннего использования. Просмотрите контент перед обменом, чтобы убедиться, что ничего конфиденциального или неуместного не включено.
 
-When sharing for documentation or compliance purposes, focus on the transcription itself as the authoritative record. The word-for-word transcription with timestamps provides an accurate account of what was discussed, while summaries and notes represent interpretations that might not be appropriate for official records.
+При обмене для целей документации или соответствия требованиям сосредоточьтесь на самой транскрипции как на авторитетной записи. Дословная транскрипция с временными метками предоставляет точный отчет о том, что обсуждалось, в то время как сводки и заметки представляют интерпретации, которые могут быть неуместны для официальных записей.
 
-Always review what you're sharing before sending the link. Once someone has accessed the content, they could save or screenshot it, so revoking the link later won't remove their access to information they've already viewed. If you realize you've shared something inappropriate, revoke the link immediately to prevent further access, but assume that previous viewers may have retained the information.
+Всегда просматривайте то, чем вы делитесь, перед отправкой ссылки. После того, как кто-то получил доступ к контенту, он может сохранить или сделать скриншот, поэтому отзыв ссылки позже не удалит их доступ к информации, которую они уже просмотрели. Если вы понимаете, что поделились чем-то неуместным, немедленно отзовите ссылку, чтобы предотвратить дальнейший доступ, но предполагайте, что предыдущие просмотревшие могли сохранить информацию.
 
-## Common Sharing Scenarios
+## Распространенные сценарии обмена
 
-Meeting participants often appreciate receiving a share link after important discussions. Include both the summary and notes to give them a complete picture of decisions made and actions required. This is especially valuable for participants who may have missed parts of the meeting or need to review specific details.
+Участники встреч часто ценят получение ссылки для обмена после важных обсуждений. Включите как сводку, так и заметки, чтобы дать им полную картину принятых решений и требуемых действий. Это особенно ценно для участников, которые могли пропустить части встречи или нуждаются в просмотре конкретных деталей.
 
-When updating clients on project progress, share recordings of internal discussions with summaries but without internal notes. This gives them transparency into your process and decisions while maintaining appropriate boundaries about internal deliberations.
+При обновлении клиентов о прогрессе проекта делитесь записями внутренних обсуждений со сводками, но без внутренних заметок. Это дает им прозрачность в ваш процесс и решения, поддерживая соответствующие границы относительно внутренних обсуждений.
 
-For training and onboarding, shared recordings become valuable learning resources. New group members can listen to past discussions to understand project history, decision rationale, and group dynamics. Include comprehensive notes to provide context that might not be obvious from the transcription alone.
+Для обучения и адаптации общие записи становятся ценными учебными ресурсами. Новые участники группы могут слушать прошлые обсуждения, чтобы понять историю проекта, обоснование решений и динамику группы. Включите всесторонние заметки, чтобы предоставить контекст, который может быть неочевиден только из транскрипции.
 
-Legal and compliance groups may require unedited transcriptions of important conversations. In these cases, share only the transcription without summaries or notes that could be seen as interpretation or editorial commentary. The raw transcription provides an objective record of what was said.
+Юридические и группы соответствия требованиям могут требовать неотредактированные транскрипции важных бесед. В этих случаях делитесь только транскрипцией без сводок или заметок, которые могут рассматриваться как интерпретация или редакционный комментарий. Сырая транскрипция предоставляет объективную запись того, что было сказано.
 
-## Limitations and Considerations
+## Ограничения и соображения
 
-Share links are designed for occasional sharing with individuals or small groups, not for mass distribution or public posting. The system isn't optimized for hundreds of concurrent viewers, and publicly posted links could expose sensitive information to unintended audiences.
+Ссылки для обмена разработаны для периодического обмена с отдельными людьми или небольшими группами, а не для массового распространения или публичной публикации. Система не оптимизирована для сотен одновременных просмотревших, и публично опубликованные ссылки могут раскрыть чувствительную информацию непреднамеренным аудиториям.
 
-Currently, shares don't expire automatically, though this feature may be added in future updates. Once created, a share link remains valid until you manually revoke it. This means you should periodically review your shared recordings and remove access to those no longer needed.
+В настоящее время обмены не истекают автоматически, хотя эта функция может быть добавлена в будущих обновлениях. После создания ссылка для обмена остается действительной, пока вы вручную не отзовете её. Это означает, что вы должны периодически просматривать ваши общие записи и удалять доступ к тем, которые больше не нужны.
 
-The sharing feature is only available over HTTPS connections for security reasons. If you're running Speakr on a local network without SSL certificates, you won't be able to create share links. This is a deliberate security measure to prevent sensitive recordings from being shared over unencrypted connections.
+Функция обмена доступна только через HTTPS-соединения по соображениям безопасности. Если вы запускаете Speakr в локальной сети без SSL-сертификатов, вы не сможете создавать ссылки для обмена. Это намеренная мера безопасности для предотвращения обмена чувствительными записями через незашифрованные соединения.
 
-Recipients need a modern web browser to view shared recordings. The audio player and transcription display require JavaScript and HTML5 support. While this covers the vast majority of users, recipients using very old browsers or restrictive corporate environments might experience issues.
+Получателям нужен современный веб-браузер для просмотра общих записей. Аудиоплеер и отображение транскрипции требуют поддержки JavaScript и HTML5. Хотя это покрывает подавляющее большинство пользователей, получатели, использующие очень старые браузеры или ограничительные корпоративные среды, могут испытывать проблемы.

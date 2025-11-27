@@ -1,51 +1,51 @@
-# Frequently Asked Questions
+# Часто задаваемые вопросы
 
-These are the questions that come up most often when people start using Speakr. The answers here will save you time and help you understand how to get the most from the platform.
+Это вопросы, которые чаще всего возникают, когда люди начинают использовать Speakr. Ответы здесь сэкономят ваше время и помогут понять, как получить максимум от платформы.
 
-## General Questions
+## Общие вопросы
 
-### What is Speakr exactly?
+### Что такое Speakr?
 
-Speakr is a self-hosted web application that transforms your audio recordings into organized, searchable, and intelligent notes. It combines [transcription](features.md#core-transcription-features), [AI summarization](features.md#automatic-summarization), [speaker identification](features.md#speaker-diarization), and [semantic search](user-guide/inquire-mode.md) into a single platform you control completely. If you self-host an ASR model like a Whisper endpoint or the recommended ASR service, and an openAI compatible API for LLMs, your data never leaves your infrastructure, giving you complete privacy and control.
+Speakr — это веб-приложение с самостоятельным размещением, которое превращает ваши аудиозаписи в организованные, доступные для поиска и интеллектуальные заметки. Оно объединяет [транскрибацию](features.md#core-transcription-features), [ИИ-суммирование](features.md#automatic-summarization), [идентификацию говорящих](features.md#speaker-diarization) и [семантический поиск](user-guide/inquire-mode.md) в единую платформу, которую вы полностью контролируете. Если вы самостоятельно размещаете ASR-модель, такую как Whisper-эндпоинт или рекомендуемый ASR-сервис, и совместимый с OpenAI API для LLM, ваши данные никогда не покидают вашу инфраструктуру, давая вам полную приватность и контроль.
 
-### How is Speakr different from other transcription services?
+### Чем Speakr отличается от других сервисов транскрибации?
 
-The key difference is self-hosting - you run Speakr on your own server, keeping complete control of your data. Beyond privacy, Speakr integrates transcription with AI-powered features like [intelligent summarization](features.md#automatic-summarization), [interactive chat](user-guide/transcripts.md) with your recordings, and [semantic search](user-guide/inquire-mode.md) across all your content. It's not just about converting speech to text; it's about making that text useful and accessible.
+Ключевое отличие — самостоятельное размещение — вы запускаете Speakr на своем собственном сервере, сохраняя полный контроль над вашими данными. Помимо приватности, Speakr интегрирует транскрибацию с функциями на основе ИИ, такими как [интеллектуальное суммирование](features.md#automatic-summarization), [интерактивный чат](user-guide/transcripts.md) с вашими записями и [семантический поиск](user-guide/inquire-mode.md) по всему вашему контенту. Речь идет не только о преобразовании речи в текст; речь идет о том, чтобы сделать этот текст полезным и доступным.
 
-### What audio formats does Speakr support?
+### Какие аудиоформаты поддерживает Speakr?
 
-Speakr handles most common audio formats including MP3, WAV, M4A, OGG, FLAC, and more. The system uses FFmpeg internally to process audio, so essentially any format FFmpeg supports will work. Video files containing audio tracks are also supported - Speakr will extract and process the audio component.
+Speakr обрабатывает большинство распространенных аудиоформатов, включая MP3, WAV, M4A, OGG, FLAC и другие. Система использует FFmpeg внутри для обработки аудио, поэтому по сути любой формат, поддерживаемый FFmpeg, будет работать. Видеофайлы, содержащие аудиодорожки, также поддерживаются — Speakr извлечет и обработает аудиокомпонент.
 
-### Can multiple people use the same Speakr instance?
+### Могут ли несколько человек использовать один и тот же экземпляр Speakr?
 
-Yes, Speakr is designed as a multi-user system. Each user has their own account with separate recordings, settings, and speaker libraries. Admins can [create and manage user accounts](admin-guide/user-management.md). See [system statistics](admin-guide/statistics.md) to monitor usage, monitor usage, and configure system-wide settings. Users can't see each other's recordings unless explicitly shared through [share links](user-guide/sharing.md). Learn about [sharing security](user-guide/sharing.md#security-and-privacy-considerations).
+Да, Speakr разработан как многопользовательская система. У каждого пользователя есть свой аккаунт с отдельными записями, настройками и библиотеками говорящих. Администраторы могут [создавать и управлять учетными записями пользователей](admin-guide/user-management.md). См. [системную статистику](admin-guide/statistics.md) для мониторинга использования, мониторинга использования и настройки системных параметров. Пользователи не могут видеть записи друг друга, если они явно не обменяны через [ссылки для обмена](user-guide/sharing.md). Узнайте о [безопасности обмена](user-guide/sharing.md#security-and-privacy-considerations).
 
-## Installation and Setup
+## Установка и настройка
 
-### What are the minimum system requirements?
+### Каковы минимальные системные требования?
 
-Speakr runs comfortably on modest hardware. You need at least 2GB of RAM, though 4GB is recommended for better performance. CPU requirements depend on your usage - a dual-core processor handles single-user instances fine, while busy multi-user installations benefit from more cores. Storage needs depend on your recording volume, but start with at least 20GB free space for the application and initial recordings.
+Speakr комфортно работает на скромном оборудовании. Вам нужно не менее 2 ГБ оперативной памяти, хотя 4 ГБ рекомендуется для лучшей производительности. Требования к процессору зависят от вашего использования — двухъядерный процессор хорошо справляется с однопользовательскими экземплярами, в то время как загруженные многопользовательские установки выигрывают от большего количества ядер. Потребности в хранилище зависят от объема ваших записей, но начните с не менее 20 ГБ свободного места для приложения и начальных записей.
 
-### Do I need to know Docker to install Speakr?
+### Нужно ли знать Docker для установки Speakr?
 
-Basic Docker knowledge helps but isn't essential. The [quick start guide](getting-started.md) provides exact commands to copy and run. For production deployments, see the [installation guide](getting-started/installation.md). You'll need to install Docker and Docker Compose on your server, create a configuration file with your API keys, then run a single command to start everything. The hardest part is usually getting your API keys from OpenAI or OpenRouter.
+Базовые знания Docker помогают, но не обязательны. [Руководство по быстрому старту](getting-started.md) предоставляет точные команды для копирования и запуска. Для производственных развертываний см. [руководство по установке](getting-started/installation.md). Вам нужно установить Docker и Docker Compose на вашем сервере, создать файл конфигурации с вашими API-ключами, а затем запустить одну команду, чтобы запустить все. Самая сложная часть обычно — получение ваших API-ключей от OpenAI или OpenRouter.
 
-### Can I run Speakr on a Raspberry Pi?
+### Могу ли я запустить Speakr на Raspberry Pi?
 
-Yes, Speakr can run on a Raspberry Pi 4 or newer with at least 4GB of RAM. Performance won't match a full server, especially for transcription processing, but it's perfectly usable for personal use. The ARM-compatible Docker images work out of the box. Just be patient with longer processing times for large recordings.
+Да, Speakr может работать на Raspberry Pi 4 или новее с не менее 4 ГБ оперативной памяти. Производительность не будет соответствовать полноценному серверу, особенно для обработки транскрибации, но это вполне пригодно для личного использования. Образы Docker, совместимые с ARM, работают из коробки. Просто будьте терпеливы с более длительным временем обработки для больших записей.
 
-### Can I use the ASR webservice for speaker diarization on Mac?
+### Могу ли я использовать ASR-веб-сервис для идентификации говорящих на Mac?
 
-The optional ASR webservice (`onerahmet/openai-whisper-asr-webservice`) that provides [speaker diarization](features.md#speaker-diarization) has specific requirements on macOS:
+Необязательный ASR-веб-сервис (`onerahmet/openai-whisper-asr-webservice`), который предоставляет [идентификацию говорящих](features.md#speaker-diarization), имеет особые требования на macOS:
 
-**GPU limitation**: GPU passthrough doesn't work on macOS because Docker runs containers within a Linux VM. This is a fundamental Docker limitation on Mac.
+**Ограничение GPU**: Проброс GPU не работает на macOS, потому что Docker запускает контейнеры внутри виртуальной машины Linux. Это фундаментальное ограничение Docker на Mac.
 
-**Solution**: Use the standard CPU image instead of the GPU version:
-- Use `onerahmet/openai-whisper-asr-webservice:latest` (NOT `:latest-gpu`)
-- The `:latest` tag provides both amd64 (Intel) and arm64 (Apple Silicon) architectures
-- Processing will be slower without GPU acceleration but fully functional
+**Решение**: Используйте стандартный образ CPU вместо версии GPU:
+- Используйте `onerahmet/openai-whisper-asr-webservice:latest` (НЕ `:latest-gpu`)
+- Тег `:latest` предоставляет обе архитектуры amd64 (Intel) и arm64 (Apple Silicon)
+- Обработка будет медленнее без ускорения GPU, но полностью функциональна
 
-Example configuration for Mac:
+Пример конфигурации для Mac:
 ```bash
 docker run -d -p 9000:9000 \
   -e ASR_MODEL=base \
@@ -54,11 +54,11 @@ docker run -d -p 9000:9000 \
   onerahmet/openai-whisper-asr-webservice:latest
 ```
 
-Note: If you don't need speaker identification in your transcriptions, you can use Speakr with the standard Whisper API instead, which doesn't require this additional container.
+Примечание: Если вам не нужна идентификация говорящих в ваших транскрипциях, вы можете использовать Speakr со стандартным API Whisper вместо этого, что не требует этого дополнительного контейнера.
 
-### How do I backup my Speakr data?
+### Как создать резервную копию моих данных Speakr?
 
-Your Speakr data consists of three essential components: the SQLite database in the `instance/` directory, audio files and transcriptions in the `uploads/` directory, and your configuration in the `.env` file. To create a complete backup, stop the container first to ensure database consistency, then backup all three directories:
+Ваши данные Speakr состоят из трех основных компонентов: база данных SQLite в директории `instance/`, аудиофайлы и транскрипции в директории `uploads/`, и ваша конфигурация в файле `.env`. Чтобы создать полную резервную копию, сначала остановите контейнер, чтобы обеспечить согласованность базы данных, затем создайте резервную копию всех трех директорий:
 
 ```bash
 docker compose down
@@ -66,124 +66,124 @@ tar czf speakr_backup_$(date +%Y%m%d).tar.gz uploads/ instance/ .env
 docker compose up -d
 ```
 
-Regular automated backups are highly recommended for production use.
+Регулярные автоматические резервные копии настоятельно рекомендуются для производственного использования.
 
-## Transcription and AI Features
+## Транскрибация и функции ИИ
 
-### How accurate is the transcription?
+### Насколько точна транскрибация?
 
-Transcription accuracy depends on several factors - audio quality, speaker clarity, background noise, and technical vocabulary. See the [troubleshooting guide](troubleshooting.md#poor-transcription-quality) for tips. Configure [custom prompts](admin-guide/prompts.md) for technical vocabulary. With good audio, expect 90-95% accuracy for clear English speech. Accuracy decreases with heavy accents, multiple overlapping speakers, or poor recording quality. The ASR endpoint with speaker diarization often provides better practical usability even if raw accuracy is similar.
+Точность транскрибации зависит от нескольких факторов — качества аудио, четкости говорящего, фонового шума и технической лексики. См. [руководство по решению проблем](troubleshooting.md#poor-transcription-quality) для советов. Настройте [пользовательские промпты](admin-guide/prompts.md) для технической лексики. При хорошем аудио ожидайте 90-95% точности для четкой английской речи. Точность снижается при сильных акцентах, нескольких перекрывающихся говорящих или плохом качестве записи. ASR-эндпоинт с идентификацией говорящих часто обеспечивает лучшую практическую пригодность, даже если исходная точность аналогична.
 
-### What's the difference between Whisper API and ASR endpoints?
+### В чем разница между API Whisper и ASR-эндпоинтами?
 
-Whisper API provides basic transcription - converting speech to text without speaker identification. The [recommended ASR container](getting-started.md#option-b-custom-asr-endpoint-configuration) (`onerahmet/openai-whisper-asr-webservice`) offers advanced features like [speaker diarization](features.md#speaker-diarization), which identifies and labels different speakers in the conversation. Learn to [manage speakers](user-guide/transcripts.md#speaker-identification) after transcription. Diarization is essential for meetings with multiple participants, while Whisper API works fine for single-speaker recordings like dictations or podcasts.
+API Whisper предоставляет базовую транскрибацию — преобразование речи в текст без идентификации говорящих. [Рекомендуемый ASR-контейнер](getting-started.md#option-b-custom-asr-endpoint-configuration) (`onerahmet/openai-whisper-asr-webservice`) предлагает расширенные функции, такие как [идентификация говорящих](features.md#speaker-diarization), которая идентифицирует и маркирует разных говорящих в беседе. Узнайте, как [управлять говорящими](user-guide/transcripts.md#speaker-identification) после транскрибации. Идентификация говорящих необходима для встреч с несколькими участниками, в то время как API Whisper хорошо работает для одноголосых записей, таких как диктовки или подкасты.
 
-**Note on ASR engines**: For speaker diarization to work properly with the ASR webservice, you must use `ASR_ENGINE=whisperx`, not `faster_whisper`. While faster_whisper provides transcription, it doesn't support speaker identification.
+**Примечание о ASR-движках**: Для правильной работы идентификации говорящих с ASR-веб-сервисом вы должны использовать `ASR_ENGINE=whisperx`, а не `faster_whisper`. Хотя faster_whisper предоставляет транскрибацию, он не поддерживает идентификацию говорящих.
 
-### Can Speakr transcribe languages other than English?
+### Может ли Speakr транскрибировать языки, отличные от английского?
 
-Yes, Speakr supports multiple languages through its transcription services. Whisper models handle dozens of languages with varying accuracy - major languages like Spanish, French, German, and Chinese work well, while less common languages may have reduced accuracy. Set your preferred language in [account settings](user-guide/settings.md#language-preferences) or leave it blank for automatic detection. See [language support details](features.md#language-support).
+Да, Speakr поддерживает несколько языков через свои сервисы транскрибации. Модели Whisper обрабатывают десятки языков с различной точностью — основные языки, такие как испанский, французский, немецкий и китайский, работают хорошо, в то время как менее распространенные языки могут иметь сниженную точность. Установите предпочитаемый язык в [настройках аккаунта](user-guide/settings.md#language-preferences) или оставьте пустым для автоматического определения. См. [детали поддержки языков](features.md#language-support).
 
-**Important for Chinese transcription**: When using ASR endpoints for Chinese audio, avoid using distil models (e.g., distil-large-v3) as they may incorrectly recognize Chinese as English. Use the full large-v3 model or similar non-distilled models for accurate Chinese transcription.
+**Важно для китайской транскрибации**: При использовании ASR-эндпоинтов для китайского аудио избегайте использования дистиллированных моделей (например, distil-large-v3), так как они могут неправильно распознавать китайский как английский. Используйте полную модель large-v3 или аналогичные недистиллированные модели для точной китайской транскрибации.
 
-### How long can my recordings be?
+### Как долго могут быть мои записи?
 
-There's no hard limit on recording length, but practical considerations apply. Very long recordings (over 2-3 hours) take longer to process, use more API credits, and can make the interface sluggish. The file upload limit defaults to 300MB, which accommodates several hours of compressed audio. For very long content like all-day workshops, consider splitting into logical segments.
+Нет жесткого ограничения на длину записи, но применяются практические соображения. Очень длинные записи (более 2-3 часов) занимают больше времени на обработку, используют больше API-кредитов и могут сделать интерфейс медленным. Лимит загрузки файлов по умолчанию составляет 300 МБ, что вмещает несколько часов сжатого аудио. Для очень длинного контента, такого как целые дневные семинары, рассмотрите разделение на логические сегменты.
 
-### What AI model generates the summaries?
+### Какая модель ИИ генерирует сводки?
 
-Summary generation uses the language model configured in your [environment file](getting-started.md#step-3-configure-your-transcription-service). Customize summaries with [AI prompts](admin-guide/prompts.md) - through a local LLM endpoint or a Cloud provider like OpenAI or OpenRouter. The model choice affects [summary quality](features.md#automatic-summarization), cost, and processing speed. Monitor performance in [system statistics](admin-guide/statistics.md).
+Генерация сводок использует языковую модель, настроенную в вашем [файле окружения](getting-started.md#step-3-configure-your-transcription-service). Настройте сводки с помощью [ИИ-промптов](admin-guide/prompts.md) — через локальный LLM-эндпоинт или облачного провайдера, такого как OpenAI или OpenRouter. Выбор модели влияет на [качество сводки](features.md#automatic-summarization), стоимость и скорость обработки. Мониторьте производительность в [системной статистике](admin-guide/statistics.md).
 
-## Privacy and Security
+## Приватность и безопасность
 
-### Is my data really private?
+### Действительно ли мои данные приватны?
 
-When self-hosted properly, your audio and transcriptions never leave your server. However, the transcription and summarization APIs (OpenAI, OpenRouter) do process your content on their servers. For complete privacy, you'd need to use local models for both transcription and summarization, which requires significant computational resources.
+При правильном самостоятельном размещении ваше аудио и транскрипции никогда не покидают ваш сервер. Однако API транскрибации и суммирования (OpenAI, OpenRouter) обрабатывают ваш контент на своих серверах. Для полной приватности вам нужно использовать локальные модели как для транскрибации, так и для суммирования, что требует значительных вычислительных ресурсов.
 
-### Can I use Speakr for confidential business meetings?
+### Могу ли я использовать Speakr для конфиденциальных деловых встреч?
 
-Yes, with appropriate precautions. Self-hosting keeps data under your control, but consider your API provider's data policies. OpenAI and OpenRouter have different data retention and usage policies. For maximum security, use local transcription and summarization models, though this requires powerful hardware and technical expertise.
+Да, с соответствующими мерами предосторожности. Самостоятельное размещение сохраняет данные под вашим контролем, но учитывайте политики данных вашего провайдера API. OpenAI и OpenRouter имеют разные политики хранения и использования данных. Для максимальной безопасности используйте локальные модели транскрибации и суммирования, хотя это требует мощного оборудования и технических знаний.
 
-### Are share links secure?
+### Безопасны ли ссылки для обмена?
 
-[Share links](user-guide/sharing.md) use cryptographically secure random tokens that are impossible to guess. Manage shared recordings from the [sharing dashboard](user-guide/sharing.md#managing-your-shared-recordings). However, anyone with the link can access the shared content without authentication. Treat share links like passwords - only send them through secure channels and revoke access when no longer needed. For sensitive content, consider alternative sharing methods that require authentication.
+[Ссылки для обмена](user-guide/sharing.md) используют криптографически безопасные случайные токены, которые невозможно угадать. Управляйте общими записями с [панели управления обменом](user-guide/sharing.md#managing-your-shared-recordings). Однако любой, у кого есть ссылка, может получить доступ к общему контенту без аутентификации. Относитесь к ссылкам для обмена как к паролям — отправляйте их только через безопасные каналы и отзывайте доступ, когда он больше не нужен. Для чувствительного контента рассмотрите альтернативные методы обмена, которые требуют аутентификации.
 
-### Who can see my recordings?
+### Кто может видеть мои записи?
 
-Only you can see your recordings by default. [Admin users](admin-guide/user-management.md) cannot directly view other users' recordings through the interface, though they can monitor [usage patterns](admin-guide/statistics.md), though they have database access that could theoretically allow it. Shared recordings are accessible to anyone with the share link. Other users on the same Speakr instance cannot see your recordings unless you explicitly share them.
+По умолчанию только вы можете видеть ваши записи. [Пользователи-администраторы](admin-guide/user-management.md) не могут напрямую просматривать записи других пользователей через интерфейс, хотя они могут отслеживать [паттерны использования](admin-guide/statistics.md), хотя у них есть доступ к базе данных, который теоретически может это позволить. Общие записи доступны любому, у кого есть ссылка для обмена. Другие пользователи в том же экземпляре Speakr не могут видеть ваши записи, если вы явно не поделитесь ими.
 
-## Features and Functionality
+## Функции и функциональность
 
-### What is Inquire Mode?
+### Что такое режим Inquire?
 
-[Inquire Mode](user-guide/inquire-mode.md) is Speakr's semantic search feature that lets you find information across all your recordings using natural language questions. The [vector store](admin-guide/vector-store.md) must be configured for this to work. Instead of searching for exact keywords, you can ask questions like "What did we decide about the marketing budget?" and get relevant excerpts from any recording that discussed that topic. It uses AI embeddings to understand meaning and context.
+[Режим Inquire](user-guide/inquire-mode.md) — это функция семантического поиска Speakr, которая позволяет находить информацию по всем вашим записям, используя вопросы на естественном языке. [Векторное хранилище](admin-guide/vector-store.md) должно быть настроено для работы этой функции. Вместо поиска точных ключевых слов вы можете задавать вопросы типа "Что мы решили по поводу маркетингового бюджета?" и получать релевантные выдержки из любой записи, которая обсуждала эту тему. Он использует ИИ-эмбеддинги для понимания значения и контекста.
 
-### How do speaker profiles work?
+### Как работают профили говорящих?
 
-When you [identify speakers](user-guide/transcripts.md#speaker-identification) in a transcription by clicking on generic labels (SPEAKER_01, etc.) and assigning names, Speakr saves these as speaker profiles. Manage them in [account settings](user-guide/settings.md#speakers-management-tab). In future updates, we intend to add functionality to allow recordings can then use these profiles to automatically suggest speaker identities based on voice characteristics. Over time, you build a library of recognized speakers that makes multi-person transcriptions much more useful.
+Когда вы [идентифицируете говорящих](user-guide/transcripts.md#speaker-identification) в транскрипции, нажимая на общие метки (SPEAKER_01 и т.д.) и назначая имена, Speakr сохраняет их как профили говорящих. Управляйте ими в [настройках аккаунта](user-guide/settings.md#speakers-management-tab). В будущих обновлениях мы намерены добавить функциональность, чтобы записи могли использовать эти профили для автоматического предложения идентичностей говорящих на основе голосовых характеристик. Со временем вы создаете библиотеку распознанных говорящих, что делает транскрипции с несколькими людьми намного более полезными.
 
-### Can I edit transcriptions after they're generated?
+### Могу ли я редактировать транскрипции после их генерации?
 
-Yes, transcriptions are fully editable. Click the Edit button above any transcription to make corrections. See the [transcripts guide](user-guide/transcripts.md#editing-transcriptions) for editing options. This is particularly useful for fixing misrecognized technical terms, proper names, or correcting speaker assignments. Your edits are preserved - they won't be lost if you regenerate the summary or use the [chat feature](user-guide/transcripts.md). Export edited transcripts using [various formats](user-guide/transcripts.md).
+Да, транскрипции полностью редактируемы. Нажмите кнопку Edit над любой транскрипцией, чтобы внести исправления. См. [руководство по транскриптам](user-guide/transcripts.md#editing-transcriptions) для опций редактирования. Это особенно полезно для исправления неправильно распознанных технических терминов, собственных имен или исправления назначений говорящих. Ваши правки сохраняются — они не будут потеряны, если вы регенерируете сводку или используете [функцию чата](user-guide/transcripts.md). Экспортируйте отредактированные транскрипты, используя [различные форматы](user-guide/transcripts.md).
 
-### What export formats are available?
+### Какие форматы экспорта доступны?
 
-Speakr can export recordings in multiple formats. Copy transcriptions directly to your clipboard for pasting into other applications. Learn about [export options](features.md#export-options) and [sharing](user-guide/sharing.md). Download complete recordings as Word documents (.docx) including transcription, summary, and notes. [Share links](user-guide/sharing.md) provide read-only web access. Configure what's visible in [share settings](user-guide/sharing.md#creating-a-share-link). The chat history can also be exported for documentation purposes.
+Speakr может экспортировать записи в нескольких форматах. Копируйте транскрипции напрямую в буфер обмена для вставки в другие приложения. Узнайте об [опциях экспорта](features.md#export-options) и [обмене](user-guide/sharing.md). Загружайте полные записи как документы Word (.docx), включая транскрипцию, сводку и заметки. [Ссылки для обмена](user-guide/sharing.md) предоставляют доступ только для чтения через веб. Настройте, что видно в [настройках обмена](user-guide/sharing.md#creating-a-share-link). История чата также может быть экспортирована для целей документации.
 
-## Troubleshooting
+## Решение проблем
 
-### Why is transcription taking so long?
+### Почему транскрибация занимает так много времени?
 
-Several factors affect transcription speed - file size, API service load, network speed, and model selection. Large files naturally take longer. API services can slow down during peak usage. Slow internet connections create bottlenecks uploading audio. Using larger, more accurate models like Whisper Large takes longer than smaller models.
+Несколько факторов влияют на скорость транскрибации — размер файла, нагрузка на API-сервис, скорость сети и выбор модели. Большие файлы естественно занимают больше времени. API-сервисы могут замедляться во время пикового использования. Медленные интернет-соединения создают узкие места при загрузке аудио. Использование более крупных, более точных моделей, таких как Whisper Large, занимает больше времени, чем меньшие модели.
 
-### My recordings are stuck in "pending" status
+### Мои записи застряли в статусе "pending"
 
-This usually means the background processor has stopped or encountered an error. Check the Docker logs for error messages. See the [troubleshooting guide](troubleshooting.md#transcription-never-starts) for details. Monitor processing in [vector store](admin-guide/vector-store.md). Common causes include invalid API keys, exceeded API quotas, or network connectivity issues. Restarting the container often resolves temporary issues. Check your API provider's dashboard for usage limits or billing problems.
+Обычно это означает, что фоновый процессор остановился или столкнулся с ошибкой. Проверьте логи Docker на наличие сообщений об ошибках. См. [руководство по решению проблем](troubleshooting.md#transcription-never-starts) для деталей. Мониторьте обработку в [векторном хранилище](admin-guide/vector-store.md). Распространенные причины включают недействительные API-ключи, превышенные квоты API или проблемы с сетевым подключением. Перезапуск контейнера часто решает временные проблемы. Проверьте панель управления вашего провайдера API на лимиты использования или проблемы с выставлением счетов.
 
-### Why are all speakers showing as "UNKNOWN_SPEAKER"?
+### Почему все говорящие отображаются как "UNKNOWN_SPEAKER"?
 
-This is a common issue when speaker diarization isn't configured correctly. Here's how to fix it:
+Это распространенная проблема, когда идентификация говорящих настроена неправильно. Вот как это исправить:
 
-1. **Check ASR_ENGINE**: Ensure you're using `ASR_ENGINE=whisperx` in your ASR container, not `faster_whisper`
-2. **Verify ASR_DIARIZE**: While this is set to `true` by default when `USE_ASR_ENDPOINT=true`, explicitly set `ASR_DIARIZE=true` in your .env file
-3. **HuggingFace Token**: The ASR container needs a valid `HF_TOKEN` environment variable for downloading diarization models
-4. **Docker networking**: If containers are in the same docker-compose, use the container name (e.g., `http://whisper-asr:9000`), not localhost or external IPs
-5. **Check logs**: Look for pyannote/VAD messages in your ASR container logs to confirm diarization is active
+1. **Проверьте ASR_ENGINE**: Убедитесь, что вы используете `ASR_ENGINE=whisperx` в вашем ASR-контейнере, а не `faster_whisper`
+2. **Проверьте ASR_DIARIZE**: Хотя это установлено в `true` по умолчанию, когда `USE_ASR_ENDPOINT=true`, явно установите `ASR_DIARIZE=true` в вашем файле .env
+3. **Токен HuggingFace**: ASR-контейнеру нужна действительная переменная окружения `HF_TOKEN` для загрузки моделей идентификации говорящих
+4. **Сеть Docker**: Если контейнеры находятся в одном docker-compose, используйте имя контейнера (например, `http://whisper-asr:9000`), а не localhost или внешние IP
+5. **Проверьте логи**: Ищите сообщения pyannote/VAD в логах вашего ASR-контейнера, чтобы подтвердить, что идентификация говорящих активна
 
-The ASR service should return speaker labels like "SPEAKER_00", "SPEAKER_01" in the transcription. You can then [identify these speakers](user-guide/transcripts.md#speaker-identification) with real names.
+ASR-сервис должен возвращать метки говорящих, такие как "SPEAKER_00", "SPEAKER_01" в транскрипции. Затем вы можете [идентифицировать этих говорящих](user-guide/transcripts.md#speaker-identification) с реальными именами.
 
-### Why can't I share recordings?
+### Почему я не могу делиться записями?
 
-[Sharing](user-guide/sharing.md) requires your Speakr instance to be accessible from the internet with HTTPS/SSL encryption. Check [sharing requirements](user-guide/sharing.md#requirements-for-sharing) and [troubleshooting](troubleshooting.md#sharing-links-dont-work). Local installations or non-HTTPS setups cannot generate working share links. The system disables sharing features when these requirements aren't met. To enable sharing, deploy Speakr on a public server with a domain name and SSL certificate.
+[Обмен](user-guide/sharing.md) требует, чтобы ваш экземпляр Speakr был доступен из интернета с шифрованием HTTPS/SSL. Проверьте [требования для обмена](user-guide/sharing.md#requirements-for-sharing) и [решение проблем](troubleshooting.md#sharing-links-dont-work). Локальные установки или настройки без HTTPS не могут генерировать рабочие ссылки для обмена. Система отключает функции обмена, когда эти требования не выполнены. Чтобы включить обмен, разверните Speakr на публичном сервере с доменным именем и SSL-сертификатом.
 
-### The interface is slow with large transcriptions
+### Интерфейс медленный с большими транскрипциями
 
-Browsers struggle displaying very large amounts of text, especially in the bubble view with speaker diarization. For recordings over 2 hours, consider using the simple view instead of bubble view. Clear your browser cache if performance degrades over time. Breaking very long recordings into segments improves both performance and usability.
+Браузеры с трудом отображают очень большие объемы текста, особенно в пузырьковом виде с идентификацией говорящих. Для записей более 2 часов рассмотрите использование простого вида вместо пузырькового вида. Очистите кеш браузера, если производительность ухудшается со временем. Разделение очень длинных записей на сегменты улучшает как производительность, так и удобство использования.
 
-## Best Practices
+## Лучшие практики
 
-### How should I organize my recordings?
+### Как мне организовать мои записи?
 
-Develop a consistent [tagging system](user-guide/settings.md#tag-management-tab) early. Create tags for different projects, meeting types, or clients. Tags can include [custom prompts](admin-guide/prompts.md) for specialized processing. Use descriptive titles that will help you find recordings months later. Add notes immediately after recordings while context is fresh. Regular maintenance - archiving old recordings and cleaning up test files - keeps your library manageable.
+Разработайте последовательную [систему тегов](user-guide/settings.md#tag-management-tab) рано. Создавайте теги для разных проектов, типов встреч или клиентов. Теги могут включать [пользовательские промпты](admin-guide/prompts.md) для специализированной обработки. Используйте описательные заголовки, которые помогут вам найти записи через месяцы. Добавляйте заметки сразу после записей, пока контекст свеж. Регулярное обслуживание — архивирование старых записей и очистка тестовых файлов — поддерживает вашу библиотеку управляемой.
 
-### Do I need to inform people they're being recorded?
+### Нужно ли мне информировать людей, что их записывают?
 
-Legal requirements vary by jurisdiction. Many regions require explicit consent from all parties being recorded. Speakr includes a configurable [recording disclaimer](admin-guide/system-settings.md#recording-disclaimer) feature. See [compliance considerations](troubleshooting.md#recording-disclaimer-for-legal-compliance). Set appropriate legal text that displays before recordings start. Consult local laws to ensure compliance - this is especially important in regions with strict recording laws like the EU, California, or Australia.
+Юридические требования различаются в зависимости от юрисдикции. Многие регионы требуют явного согласия от всех сторон, которые записываются. Speakr включает настраиваемую функцию [отказа от ответственности при записи](admin-guide/system-settings.md#recording-disclaimer). См. [соображения соответствия](troubleshooting.md#recording-disclaimer-for-legal-compliance). Установите соответствующий юридический текст, который отображается перед началом записей. Проконсультируйтесь с местными законами, чтобы обеспечить соответствие — это особенно важно в регионах со строгими законами о записи, таких как ЕС, Калифорния или Австралия.
 
-### What's the best audio quality for transcription?
+### Какое лучшее качество аудио для транскрибации?
 
-Record in quiet environments when possible. Use a good microphone positioned close to speakers. For meetings, place the recording device centrally where all participants are clearly audible. Avoid background music or TV noise. Higher quality audio not only improves transcription accuracy but also reduces processing time and API costs.
+Записывайте в тихих средах, когда это возможно. Используйте хороший микрофон, расположенный близко к говорящим. Для встреч размещайте записывающее устройство центрально, где все участники четко слышны. Избегайте фоновой музыки или шума телевизора. Более высокое качество аудио не только улучшает точность транскрибации, но и сокращает время обработки и затраты на API.
 
-### How can I maximize transcription accuracy?
+### Как максимизировать точность транскрибации?
 
-Speak clearly and avoid talking over others. Minimize background noise and echo. For technical content, consider adding a custom vocabulary or glossary to your [prompts](admin-guide/prompts.md). Users can set [personal prompts](user-guide/settings.md#custom-prompts-tab) for their recordings. Use the appropriate [language setting](user-guide/settings.md#language-preferences) rather than relying on auto-detection. Review [language support](features.md#language-support) for best results. For multi-speaker recordings, use the [ASR endpoint](getting-started.md#option-b-custom-asr-endpoint-configuration) with appropriate speaker count settings. [Identify speakers](user-guide/transcripts.md#speaker-identification) after transcription for best results.
+Говорите четко и избегайте перебивать других. Минимизируйте фоновый шум и эхо. Для технического контента рассмотрите добавление пользовательского словаря или глоссария в ваши [промпты](admin-guide/prompts.md). Пользователи могут устанавливать [личные промпты](user-guide/settings.md#custom-prompts-tab) для своих записей. Используйте соответствующую [языковую настройку](user-guide/settings.md#language-preferences), а не полагайтесь на автоматическое определение. Просмотрите [поддержку языков](features.md#language-support) для лучших результатов. Для записей с несколькими говорящими используйте [ASR-эндпоинт](getting-started.md#option-b-custom-asr-endpoint-configuration) с соответствующими настройками количества говорящих. [Идентифицируйте говорящих](user-guide/transcripts.md#speaker-identification) после транскрибации для лучших результатов.
 
-For Chinese transcription specifically, use the large-v3 model as smaller models may not output Chinese characters correctly. For other languages, test different models to find the best accuracy for your specific language and accent.
+Для китайской транскрибации конкретно используйте модель large-v3, так как меньшие модели могут неправильно выводить китайские символы. Для других языков тестируйте разные модели, чтобы найти лучшую точность для вашего конкретного языка и акцента.
 
-### What's the difference between chunking by size vs duration?
+### В чем разница между разделением по размеру и по длительности?
 
-Chunking by file size (e.g., CHUNK_LIMIT=20MB) works well for consistent bitrate audio. Chunking by duration (e.g., CHUNK_LIMIT=1400s) is better when your transcription service has time limits, like Azure's 1500-second maximum. Duration-based chunking ensures no chunk exceeds the time limit regardless of file compression or quality.
+Разделение по размеру файла (например, CHUNK_LIMIT=20MB) хорошо работает для аудио с постоянным битрейтом. Разделение по длительности (например, CHUNK_LIMIT=1400s) лучше, когда ваш сервис транскрибации имеет временные ограничения, такие как максимум 1500 секунд Azure. Разделение на основе длительности гарантирует, что ни одна часть не превышает временной лимит, независимо от сжатия файла или качества.
 
 ---
 
-Return to [Home](index.md) →
+Вернуться на [Главную](index.md) →

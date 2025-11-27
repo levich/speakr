@@ -1,196 +1,196 @@
-# Progressive Web App (PWA)
+# Прогрессивное веб-приложение (PWA)
 
-Speakr is a Progressive Web App that can be installed on your device for a more native-app like experience and wake lock support to prevent screen sleep during recording.
+Speakr — это прогрессивное веб-приложение, которое можно установить на ваше устройство для более нативного опыта приложения и поддержки блокировки пробуждения для предотвращения засыпания экрана во время записи.
 
-## What is a PWA?
+## Что такое PWA?
 
-A Progressive Web App combines the best of web and mobile apps:
+Прогрессивное веб-приложение сочетает в себе лучшее из веб и мобильных приложений:
 
-- **Installable** - Add to your home screen like a native app
-- **Fast loading** - Cached assets load instantly
-- **Wake lock** - Prevents screen from auto-sleeping during recording
-- **No app store** - Install directly from your browser
-- **Auto-updates** - Always get the latest version automatically
+- **Устанавливаемое** - Добавьте на главный экран, как нативное приложение
+- **Быстрая загрузка** - Кешированные ресурсы загружаются мгновенно
+- **Блокировка пробуждения** - Предотвращает автоматическое засыпание экрана во время записи
+- **Без магазина приложений** - Установите напрямую из браузера
+- **Автообновления** - Всегда получайте последнюю версию автоматически
 
-## Installing Speakr as a PWA
+## Установка Speakr как PWA
 
-### On Android (Chrome/Edge)
+### На Android (Chrome/Edge)
 
-1. **Open Speakr** in Chrome or Edge browser
-2. Look for the **"Add to Home Screen"** prompt at the bottom of the screen
-3. Tap **"Add"** or **"Install"**
-4. Alternatively:
-   - Tap the three-dot menu (⋮) in the browser
-   - Select **"Add to Home screen"** or **"Install app"**
-   - Follow the prompts
+1. **Откройте Speakr** в браузере Chrome или Edge
+2. Ищите подсказку **"Add to Home Screen"** внизу экрана
+3. Нажмите **"Add"** или **"Install"**
+4. Альтернативно:
+   - Нажмите меню с тремя точками (⋮) в браузере
+   - Выберите **"Add to Home screen"** или **"Install app"**
+   - Следуйте подсказкам
 
-5. **Launch** the app from your home screen
+5. **Запустите** приложение с главного экрана
 
-!!! tip "Banner Prompt"
-    If you don't see the install prompt, you may need to visit Speakr a few times first. The browser will offer installation after detecting regular usage.
+!!! tip "Баннер подсказки"
+    Если вы не видите подсказку об установке, вам может потребоваться посетить Speakr несколько раз сначала. Браузер предложит установку после обнаружения регулярного использования.
 
-### On iOS (Safari)
+### На iOS (Safari)
 
-1. **Open Speakr** in Safari
-2. Tap the **Share** button (□↑) at the bottom of the screen
-3. Scroll down and tap **"Add to Home Screen"**
-4. Edit the name if desired and tap **"Add"**
-5. **Launch** the app from your home screen
+1. **Откройте Speakr** в Safari
+2. Нажмите кнопку **Share** (□↑) внизу экрана
+3. Прокрутите вниз и нажмите **"Add to Home Screen"**
+4. Отредактируйте имя, если хотите, и нажмите **"Add"**
+5. **Запустите** приложение с главного экрана
 
-!!! note "iOS Limitations"
-    iOS has some restrictions on PWAs:
-    - Wake Lock API requires iOS 16.4+ (Safari 16.4+)
-    - Background execution is more limited than Android
-    - Some features work better on iOS 17+
+!!! note "Ограничения iOS"
+    iOS имеет некоторые ограничения на PWA:
+    - Wake Lock API требует iOS 16.4+ (Safari 16.4+)
+    - Фоновое выполнение более ограничено, чем на Android
+    - Некоторые функции работают лучше на iOS 17+
 
-### On Desktop (Chrome/Edge/Brave)
+### На рабочем столе (Chrome/Edge/Brave)
 
-1. **Open Speakr** in your browser
-2. Look for the **install icon** (⊕) in the address bar
-3. Click it and select **"Install"**
-4. Alternatively:
-   - Click the three-dot menu
-   - Select **"Install Speakr"** or **"Add to applications"**
+1. **Откройте Speakr** в вашем браузере
+2. Ищите **значок установки** (⊕) в адресной строке
+3. Нажмите на него и выберите **"Install"**
+4. Альтернативно:
+   - Нажмите меню с тремя точками
+   - Выберите **"Install Speakr"** или **"Add to applications"**
 
-5. **Launch** from your applications menu or desktop shortcut
+5. **Запустите** из меню приложений или ярлыка на рабочем столе
 
-## PWA Features
+## Функции PWA
 
-### Offline Support
+### Поддержка офлайн
 
-Once installed, Speakr caches essential files for offline use:
+После установки Speakr кеширует основные файлы для офлайн-использования:
 
-- Application interface and UI
-- CSS stylesheets and fonts
-- JavaScript application code
-- Icons and images
+- Интерфейс приложения и UI
+- CSS таблицы стилей и шрифты
+- JavaScript код приложения
+- Иконки и изображения
 
-Note: API calls and file uploads require internet connection.
+Примечание: API-вызовы и загрузка файлов требуют интернет-соединения.
 
-!!! info "Offline Capabilities"
-    While you can access the app offline, transcription and AI features require an internet connection to your configured API endpoints.
+!!! info "Офлайн возможности"
+    Хотя вы можете получить доступ к приложению офлайн, транскрибация и функции ИИ требуют интернет-соединения с настроенными API-эндпоинтами.
 
-### Mobile Recording Features
+### Функции мобильной записи
 
 #### Wake Lock API
-Prevents your device screen from auto-sleeping while app is visible:
+Предотвращает автоматическое засыпание экрана вашего устройства, пока приложение видимо:
 
-- **Automatic activation** - Enabled when you start recording
-- **Keeps screen on** - Prevents screen from turning off while app is in foreground
-- **Auto-recovery** - Re-acquires if released during recording
-- **Battery consideration** - Only active during recording sessions
+- **Автоматическая активация** - Включается, когда вы начинаете запись
+- **Держит экран включенным** - Предотвращает выключение экрана, пока приложение на переднем плане
+- **Автовосстановление** - Повторно получает, если освобожден во время записи
+- **Учет батареи** - Активен только во время сессий записи
 
-#### Persistent Notifications
-Shows recording status in your notification tray (mobile only):
+#### Постоянные уведомления
+Показывает статус записи в вашем лотке уведомлений (только мобильные):
 
-- **Status indicator** - Visual reminder that recording is active
-- **One-tap return** - Tap notification to return to the app
-- **Silent** - No sound or vibration
+- **Индикатор статуса** - Визуальное напоминание, что запись активна
+- **Возврат одним нажатием** - Нажмите уведомление, чтобы вернуться в приложение
+- **Тихое** - Без звука или вибрации
 
-#### Page Visibility Detection
-Monitors when the app goes to background:
+#### Обнаружение видимости страницы
+Отслеживает, когда приложение уходит в фон:
 
-- **Detects minimization** - Knows when app is backgrounded
-- **Smart recovery** - Re-activates wake lock when returning to app
-- **State awareness** - Tracks recording state across visibility changes
+- **Обнаруживает минимизацию** - Знает, когда приложение отправлено в фон
+- **Умное восстановление** - Повторно активирует wake lock при возврате в приложение
+- **Осведомленность о состоянии** - Отслеживает состояние записи при изменениях видимости
 
-### How Background Recording Works
+### Как работает фоновая запись
 
-!!! danger "Critical Limitation: Keep App Visible on Mobile"
-    **Mobile browsers (Chrome, Safari, etc.) suspend audio recording when the app is minimized or the screen is locked.** This is a fundamental browser limitation that cannot be overcome with PWA features.
+!!! danger "Критическое ограничение: Держите приложение видимым на мобильных устройствах"
+    **Мобильные браузеры (Chrome, Safari и т.д.) приостанавливают запись аудио, когда приложение минимизировано или экран заблокирован.** Это фундаментальное ограничение браузера, которое нельзя преодолеть с помощью функций PWA.
 
-    **What this means:**
-    - Recording **will pause** if you minimize the window
-    - Recording **will pause** if you lock your screen
-    - Recording **will pause** if you switch to another app
-    - Recording **continues** if you keep Speakr visible in foreground
-    - Wake lock **prevents screen from auto-sleeping** while Speakr is visible
+    **Что это означает:**
+    - Запись **будет приостановлена**, если вы минимизируете окно
+    - Запись **будет приостановлена**, если вы заблокируете экран
+    - Запись **будет приостановлена**, если вы переключитесь на другое приложение
+    - Запись **продолжается**, если вы держите Speakr видимым на переднем плане
+    - Wake lock **предотвращает автоматическое засыпание экрана**, пока Speakr видим
 
-    **For long meetings on mobile**, you have two options:
-    1. **Keep Speakr visible** - Don't minimize, lock screen, or switch apps
-    2. **Use native recorder** - Use your phone's built-in voice recorder app, then upload the file to Speakr afterward
+    **Для длинных встреч на мобильных устройствах** у вас есть два варианта:
+    1. **Держите Speakr видимым** - Не минимизируйте, не блокируйте экран и не переключайтесь на другие приложения
+    2. **Используйте нативный диктофон** - Используйте встроенное приложение диктофона вашего телефона, затем загрузите файл в Speakr после завершения
 
-**Why this happens:**
+**Почему это происходит:**
 
-Mobile browsers intentionally suspend web pages in the background to save battery. This affects:
-- JavaScript execution (timers, code)
-- MediaRecorder API (audio capture)
-- Audio context (audio processing)
+Мобильные браузеры намеренно приостанавливают веб-страницы в фоне для экономии батареи. Это влияет на:
+- Выполнение JavaScript (таймеры, код)
+- MediaRecorder API (захват аудио)
+- Аудиоконтекст (обработка аудио)
 
-Native apps don't have this limitation because they use platform-specific APIs that run outside the browser.
+Нативные приложения не имеют этого ограничения, поскольку они используют специфичные для платформы API, которые работают вне браузера.
 
-**Desktop browsers work differently:**
-- Recording continues when window is minimized
-- Can switch to other apps
-- Only stops when browser is completely closed
+**Настольные браузеры работают по-другому:**
+- Запись продолжается, когда окно минимизировано
+- Можно переключаться на другие приложения
+- Останавливается только когда браузер полностью закрыт
 
-**Starting a recording on mobile (with limitations):**
+**Запуск записи на мобильном устройстве (с ограничениями):**
 
-1. Start recording (microphone or system audio)
-2. Wake lock prevents screen from auto-sleeping
-3. Notification appears in notification tray
-4. **Keep Speakr visible** in the foreground
-5. Do not minimize, lock screen, or switch apps
+1. Начните запись (микрофон или системное аудио)
+2. Wake lock предотвращает автоматическое засыпание экрана
+3. Появляется уведомление в лотке уведомлений
+4. **Держите Speakr видимым** на переднем плане
+5. Не минимизируйте, не блокируйте экран и не переключайтесь на другие приложения
 
-**If you accidentally minimize:**
+**Если вы случайно минимизировали:**
 
-- Recording audio will pause (silence)
-- Timer continues counting
-- When you return to app, recording resumes
-- Silent gap will be in the final recording
+- Запись аудио будет приостановлена (тишина)
+- Таймер продолжает считать
+- Когда вы вернетесь в приложение, запись возобновится
+- Тихий промежуток будет в финальной записи
 
-## Permissions
+## Разрешения
 
-### Required Permissions
+### Необходимые разрешения
 
-#### Microphone Access
-- **When**: Starting a microphone recording
-- **Why**: Capture audio from your device's microphone
-- **Scope**: Only active during recording
+#### Доступ к микрофону
+- **Когда**: Начало записи с микрофона
+- **Почему**: Захват аудио с микрофона вашего устройства
+- **Область**: Активно только во время записи
 
-#### System Audio Access (Desktop)
-- **When**: Recording system audio or both mic + system
-- **Why**: Capture audio from browser tabs, applications
-- **Scope**: Only active during recording
+#### Доступ к системному аудио (Рабочий стол)
+- **Когда**: Запись системного аудио или и микрофона, и системы
+- **Почему**: Захват аудио из вкладок браузера, приложений
+- **Область**: Активно только во время записи
 
-### Recommended Permissions
+### Рекомендуемые разрешения
 
-#### Notification Permission (Mobile)
-- **When**: First recording on mobile device
-- **Why**: Show visual reminder that recording is active
-- **Impact**: Provides quick access to return to app
-- **Scope**: Only shown during active recordings
+#### Разрешение на уведомления (Мобильные устройства)
+- **Когда**: Первая запись на мобильном устройстве
+- **Почему**: Показать визуальное напоминание, что запись активна
+- **Влияние**: Обеспечивает быстрый доступ для возврата в приложение
+- **Область**: Показывается только во время активных записей
 
-!!! tip "Granting Permissions"
-    If you accidentally deny a permission, you can reset it in your browser/device settings:
+!!! tip "Предоставление разрешений"
+    Если вы случайно отклонили разрешение, вы можете сбросить его в настройках браузера/устройства:
 
-    - **Android Chrome**: Settings → Site settings → Speakr URL → Permissions
-    - **iOS Safari**: Settings → Safari → Speakr URL → Permissions
-    - **Desktop**: Click the lock icon (🔒) in the address bar → Permissions
+    - **Android Chrome**: Настройки → Настройки сайта → URL Speakr → Разрешения
+    - **iOS Safari**: Настройки → Safari → URL Speakr → Разрешения
+    - **Рабочий стол**: Нажмите значок замка (🔒) в адресной строке → Разрешения
 
 ## Service Worker
 
-Speakr uses a service worker to provide PWA capabilities:
+Speakr использует service worker для предоставления возможностей PWA:
 
-### What it Does
+### Что он делает
 
-- **Caches static assets** - For offline access and faster loading
-- **Manages updates** - Automatically updates cached content
-- **Handles notifications** - Manages persistent recording notifications
-- **Background sync** - Foundation for future features like upload retry
+- **Кеширует статические ресурсы** - Для офлайн-доступа и более быстрой загрузки
+- **Управляет обновлениями** - Автоматически обновляет кешированный контент
+- **Обрабатывает уведомления** - Управляет постоянными уведомлениями о записи
+- **Фоновая синхронизация** - Основа для будущих функций, таких как повторная попытка загрузки
 
-### Viewing Service Worker Status
+### Просмотр статуса Service Worker
 
 **Chrome DevTools:**
 
-1. Press F12 to open DevTools
-2. Go to **Application** tab
-3. Select **Service Workers** in the sidebar
-4. See registration status and version
+1. Нажмите F12, чтобы открыть DevTools
+2. Перейдите на вкладку **Application**
+3. Выберите **Service Workers** в боковой панели
+4. Увидите статус регистрации и версию
 
-**Console Logs:**
+**Логи консоли:**
 
-The service worker logs its activity to the browser console:
+Service worker логирует свою активность в консоль браузера:
 
 ```
 [Service Worker] Installing...
@@ -199,142 +199,142 @@ The service worker logs its activity to the browser console:
 [Service Worker] Script loaded
 ```
 
-### Updating Service Worker
+### Обновление Service Worker
 
-The service worker automatically updates:
+Service worker автоматически обновляется:
 
-- **Check interval**: Every 60 seconds while app is open
-- **Update process**: Downloads new version in background
-- **Activation**: Takes effect on next page reload
+- **Интервал проверки**: Каждые 60 секунд, пока приложение открыто
+- **Процесс обновления**: Загружает новую версию в фоне
+- **Активация**: Вступает в силу при следующей перезагрузке страницы
 
-To force an update:
+Чтобы принудительно обновить:
 
-1. Close all Speakr tabs/windows
-2. Reopen Speakr
-3. New service worker activates automatically
+1. Закройте все вкладки/окна Speakr
+2. Снова откройте Speakr
+3. Новый service worker активируется автоматически
 
-## Browser Compatibility
+## Совместимость с браузерами
 
-### Mobile Browsers
+### Мобильные браузеры
 
-| Feature | Chrome Android | Safari iOS | Samsung Internet |
+| Функция | Chrome Android | Safari iOS | Samsung Internet |
 |---------|----------------|------------|------------------|
-| PWA Install | ✅ Android 5+ | ✅ iOS 11.3+ | ✅ 4.0+ |
+| Установка PWA | ✅ Android 5+ | ✅ iOS 11.3+ | ✅ 4.0+ |
 | Service Worker | ✅ Chrome 40+ | ✅ iOS 11.3+ | ✅ 4.0+ |
 | Wake Lock | ✅ Chrome 84+ | ✅ iOS 16.4+ | ✅ 13.0+ |
-| Notifications | ✅ Chrome 42+ | ✅ iOS 16.4+ | ✅ 4.0+ |
-| Page Visibility | ✅ All versions | ✅ All versions | ✅ All versions |
+| Уведомления | ✅ Chrome 42+ | ✅ iOS 16.4+ | ✅ 4.0+ |
+| Видимость страницы | ✅ Все версии | ✅ Все версии | ✅ Все версии |
 
-### Desktop Browsers
+### Настольные браузеры
 
-| Feature | Chrome | Edge | Brave | Firefox | Safari |
+| Функция | Chrome | Edge | Brave | Firefox | Safari |
 |---------|--------|------|-------|---------|--------|
-| PWA Install | ✅ 73+ | ✅ 79+ | ✅ All | ⚠️ Limited | ⚠️ Limited |
-| Service Worker | ✅ 40+ | ✅ 17+ | ✅ All | ✅ 44+ | ✅ 11.1+ |
-| Wake Lock | ✅ 84+ | ✅ 84+ | ✅ All | ❌ | ✅ 16.4+ |
+| Установка PWA | ✅ 73+ | ✅ 79+ | ✅ Все | ⚠️ Ограничено | ⚠️ Ограничено |
+| Service Worker | ✅ 40+ | ✅ 17+ | ✅ Все | ✅ 44+ | ✅ 11.1+ |
+| Wake Lock | ✅ 84+ | ✅ 84+ | ✅ Все | ❌ | ✅ 16.4+ |
 
 !!! info "Firefox & Safari Desktop"
-    Firefox and Safari have limited PWA install support on desktop but all core features work in the browser.
+    Firefox и Safari имеют ограниченную поддержку установки PWA на рабочем столе, но все основные функции работают в браузере.
 
-## Troubleshooting
+## Решение проблем
 
-### Recording Stops When Screen Locks
+### Запись останавливается при блокировке экрана
 
-**This is expected behavior on mobile browsers.** Recording will pause when you minimize the app or lock the screen.
+**Это ожидаемое поведение в мобильных браузерах.** Запись будет приостановлена, когда вы минимизируете приложение или заблокируете экран.
 
-**Solutions:**
+**Решения:**
 
-1. **Keep app visible** - Don't minimize or lock screen during recording
-2. **Wake lock prevents auto-sleep** - Screen won't turn off automatically while recording
-3. **Use native recorder** - For long meetings, use your phone's built-in voice recorder
-4. **Desktop works differently** - Recording continues when minimized on desktop browsers
+1. **Держите приложение видимым** - Не минимизируйте и не блокируйте экран во время записи
+2. **Wake lock предотвращает автоматическое засыпание** - Экран не выключится автоматически во время записи
+3. **Используйте нативный диктофон** - Для длинных встреч используйте встроенный диктофон вашего телефона
+4. **На рабочем столе работает по-другому** - Запись продолжается при минимизации в настольных браузерах
 
-### PWA Not Offered for Installation
+### PWA не предлагается для установки
 
-**Solutions:**
+**Решения:**
 
-1. **Visit the app multiple times** - Browser may require several visits
-2. **Check HTTPS** - PWA requires secure connection (https://)
-3. **Try different browser** - Use Chrome/Edge for best support
-4. **Clear browser cache** - Force refresh of manifest
+1. **Посетите приложение несколько раз** - Браузер может потребовать несколько посещений
+2. **Проверьте HTTPS** - PWA требует безопасное соединение (https://)
+3. **Попробуйте другой браузер** - Используйте Chrome/Edge для лучшей поддержки
+4. **Очистите кеш браузера** - Принудительно обновите манифест
 
-### Service Worker Not Registering
+### Service Worker не регистрируется
 
-**Check console for errors:**
+**Проверьте консоль на ошибки:**
 
 ```javascript
-// Open browser console (F12)
-// Look for service worker errors
+// Откройте консоль браузера (F12)
+// Ищите ошибки service worker
 ```
 
-**Solutions:**
+**Решения:**
 
-1. **Verify HTTPS** - Service workers require secure context
-2. **Check browser support** - Update to latest browser version
-3. **Clear site data** - Browser settings → Clear site data
-4. **Hard reload** - Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac)
+1. **Проверьте HTTPS** - Service workers требуют безопасный контекст
+2. **Проверьте поддержку браузера** - Обновите до последней версии браузера
+3. **Очистите данные сайта** - Настройки браузера → Очистить данные сайта
+4. **Жесткая перезагрузка** - Ctrl+Shift+R (Windows) или Cmd+Shift+R (Mac)
 
-### Offline Features Not Working
+### Офлайн функции не работают
 
-**Verify:**
+**Проверьте:**
 
-1. Service worker is registered (check DevTools → Application)
-2. Assets are cached (check DevTools → Application → Cache Storage)
-3. You've visited the site at least once while online
+1. Service worker зарегистрирован (проверьте DevTools → Application)
+2. Ресурсы кешированы (проверьте DevTools → Application → Cache Storage)
+3. Вы посетили сайт хотя бы один раз, будучи онлайн
 
-**Solutions:**
+**Решения:**
 
-- Reload the page while online
-- Clear cache and reload
-- Uninstall and reinstall PWA
+- Перезагрузите страницу, будучи онлайн
+- Очистите кеш и перезагрузите
+- Удалите и переустановите PWA
 
-## Best Practices
+## Лучшие практики
 
-### For Mobile Recording
+### Для мобильной записи
 
-1. **Keep app visible** - Don't minimize, lock screen, or switch apps
-2. **Keep phone plugged in** for long recordings
-3. **Close unnecessary apps** to free memory
-4. **Avoid taking calls** during recording (will pause)
-5. **For long meetings** - Consider using native recorder app instead
+1. **Держите приложение видимым** - Не минимизируйте, не блокируйте экран и не переключайтесь на другие приложения
+2. **Держите телефон подключенным** для длинных записей
+3. **Закрывайте ненужные приложения** для освобождения памяти
+4. **Избегайте принятия звонков** во время записи (будет приостановлена)
+5. **Для длинных встреч** - Рассмотрите использование нативного приложения диктофона вместо этого
 
-### For Optimal Performance
+### Для оптимальной производительности
 
-1. **Install as PWA** for better performance
-2. **Keep browser updated** for latest features
-3. **Clear old recordings** to free space
-4. **Monitor storage** in device settings
+1. **Установите как PWA** для лучшей производительности
+2. **Держите браузер обновленным** для последних функций
+3. **Очищайте старые записи** для освобождения места
+4. **Мониторьте хранилище** в настройках устройства
 
-### Privacy Considerations
+### Соображения конфиденциальности
 
-1. **Microphone access** - Only granted during recording
-2. **Notifications** - Only shown during recording (mobile)
-3. **Cached data** - Stored locally on your device
-4. **Service worker** - Can be unregistered in browser settings
+1. **Доступ к микрофону** - Предоставляется только во время записи
+2. **Уведомления** - Показываются только во время записи (мобильные)
+3. **Кешированные данные** - Хранятся локально на вашем устройстве
+4. **Service worker** - Может быть отменен в настройках браузера
 
-## Uninstalling the PWA
+## Удаление PWA
 
 ### Android
 
-1. Long-press the app icon on home screen
-2. Select **"App info"** or drag to **"Remove"**
-3. Tap **"Uninstall"**
+1. Долгое нажатие на иконку приложения на главном экране
+2. Выберите **"App info"** или перетащите в **"Remove"**
+3. Нажмите **"Uninstall"**
 
 ### iOS
 
-1. Long-press the app icon
-2. Select **"Remove App"**
-3. Confirm **"Delete App"**
+1. Долгое нажатие на иконку приложения
+2. Выберите **"Remove App"**
+3. Подтвердите **"Delete App"**
 
-### Desktop
+### Рабочий стол
 
-1. Open installed app
-2. Click three-dot menu
-3. Select **"Uninstall Speakr"**
+1. Откройте установленное приложение
+2. Нажмите меню с тремя точками
+3. Выберите **"Uninstall Speakr"**
 
-Alternatively, remove from:
-- **Chrome**: `chrome://apps` → Right-click app → Remove
-- **Edge**: `edge://apps` → Click ⋮ on app → Uninstall
+Альтернативно, удалите из:
+- **Chrome**: `chrome://apps` → Правый клик на приложение → Remove
+- **Edge**: `edge://apps` → Нажмите ⋮ на приложении → Uninstall
 ---
 
-Have questions about PWA features? Check the [FAQ](../faq.md) or [Troubleshooting Guide](../troubleshooting.md).
+Есть вопросы о функциях PWA? Проверьте [FAQ](../faq.md) или [Руководство по решению проблем](../troubleshooting.md).

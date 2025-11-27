@@ -3,7 +3,7 @@
 </div>
 
 <h1 align="center">Speakr</h1>
-<p align="center">Self-hosted AI transcription and intelligent note-taking platform</p>
+<p align="center">Самодостаточная платформа ИИ-транскрибации и интеллектуального ведения заметок</p>
 
 <p align="center">
   <a href="https://www.gnu.org/licenses/agpl-3.0"><img alt="AGPL v3" src="https://img.shields.io/badge/License-AGPL_v3-blue.svg"></a>
@@ -13,277 +13,277 @@
 </p>
 
 <p align="center">
-  <a href="https://murtaza-nasir.github.io/speakr">Documentation</a> •
-  <a href="https://murtaza-nasir.github.io/speakr/getting-started">Quick Start</a> •
-  <a href="https://murtaza-nasir.github.io/speakr/screenshots">Screenshots</a> •
+  <a href="https://murtaza-nasir.github.io/speakr">Документация</a> •
+  <a href="https://murtaza-nasir.github.io/speakr/getting-started">Быстрый старт</a> •
+  <a href="https://murtaza-nasir.github.io/speakr/screenshots">Скриншоты</a> •
   <a href="https://hub.docker.com/r/learnedmachine/speakr">Docker Hub</a> •
-  <a href="https://github.com/murtaza-nasir/speakr/releases">Releases</a>
+  <a href="https://github.com/murtaza-nasir/speakr/releases">Релизы</a>
 </p>
 
 ---
 
-## Overview
+## Обзор
 
-Speakr transforms your audio recordings into organized, searchable, and intelligent notes. Built for privacy-conscious groups and individuals, it runs entirely on your own infrastructure, ensuring your sensitive conversations remain completely private.
+Speakr преобразует ваши аудиозаписи в организованные, доступные для поиска и интеллектуальные заметки. Созданный для групп и отдельных лиц, заботящихся о конфиденциальности, он работает полностью на вашей собственной инфраструктуре, обеспечивая, что ваши конфиденциальные беседы остаются полностью приватными.
 
 <div align="center">
-    <img src="docs/assets/images/screenshots/Main view.png" alt="Speakr Main Interface" width="750"/>
+    <img src="docs/assets/images/screenshots/Main view.png" alt="Главный интерфейс Speakr" width="750"/>
 </div>
 
-## Key Features
+## Ключевые функции
 
-### Core Functionality
-- **Smart Recording & Upload** - Record directly in browser or upload existing audio files
-- **AI Transcription** - High-accuracy transcription with speaker identification
-- **Voice Profiles** - AI-powered speaker recognition with voice embeddings (requires WhisperX ASR service)
-- **Audio-Transcript Sync** - Click transcript to jump to audio, auto-highlight current text, follow mode for hands-free playback
-- **Interactive Chat** - Ask questions about your recordings and get AI-powered answers
-- **Inquire Mode** - Semantic search across all recordings using natural language
-- **Internationalization** - Full support for English, Spanish, French, German, and Chinese
-- **Beautiful Themes** - Light and dark modes with customizable color schemes
+### Основная функциональность
+- **Умная запись и загрузка** - Записывайте напрямую в браузере или загружайте существующие аудиофайлы
+- **ИИ-транскрибация** - Высокоточная транскрибация с идентификацией говорящих
+- **Голосовые профили** - Распознавание говорящих на основе ИИ с голосовыми эмбеддингами (требуется сервис WhisperX ASR)
+- **Синхронизация аудио-транскрипта** - Нажмите на транскрипт, чтобы перейти к аудио, автоматическая подсветка текущего текста, режим следования для воспроизведения без рук
+- **Интерактивный чат** - Задавайте вопросы о ваших записях и получайте ответы на основе ИИ
+- **Режим Inquire** - Семантический поиск по всем записям, используя естественный язык
+- **Интернационализация** - Полная поддержка английского, испанского, французского, немецкого и китайского языков
+- **Красивые темы** - Светлый и темный режимы с настраиваемыми цветовыми схемами
 
-### Collaboration & Sharing
-- **Internal Sharing** - Share recordings with specific users with granular permissions (view/edit/reshare)
-- **Group Management** - Create groups with automatic sharing via group-scoped tags
-- **Public Sharing** - Generate secure links to share recordings externally (admin-controlled)
-- **Group Tags** - Tags that automatically share recordings with all group members
+### Сотрудничество и обмен
+- **Внутренний обмен** - Делитесь записями с конкретными пользователями с детальными разрешениями (просмотр/редактирование/повторный обмен)
+- **Управление группами** - Создавайте группы с автоматическим обменом через теги, ограниченные группой
+- **Публичный обмен** - Генерируйте безопасные ссылки для обмена записями внешне (контролируется администратором)
+- **Групповые теги** - Теги, которые автоматически делятся записями со всеми участниками группы
 
-### Organization & Management
-- **Smart Tagging** - Organize with tags that include custom AI prompts and ASR settings
-- **Tag Prompt Stacking** - Combine multiple tags to layer AI instructions for powerful transformations
-- **Tag Protection** - Prevent specific recordings from being auto-deleted
-- **Group Retention Policies** - Set custom retention periods per group tag
-- **Auto-Deletion** - Automatic cleanup of old recordings with flexible retention policies
+### Организация и управление
+- **Умное тегирование** - Организуйте с тегами, которые включают пользовательские промпты ИИ и настройки ASR
+- **Наложение промптов тегов** - Объединяйте несколько тегов для наслоения инструкций ИИ для мощных преобразований
+- **Защита тегов** - Предотвращайте автоматическое удаление конкретных записей
+- **Политики хранения групп** - Устанавливайте пользовательские периоды хранения для каждого группового тега
+- **Автоматическое удаление** - Автоматическая очистка старых записей с гибкими политиками хранения
 
-## Real-World Use Cases
+## Реальные случаи использования
 
-Different people use Speakr's collaboration and retention features in different ways:
+Разные люди используют функции сотрудничества и хранения Speakr по-разному:
 
-| Use Case | Setup | What It Does |
-|----------|-------|-------------|
-| **Family memories** | Create "Family" group with protected tag | Everyone gets access to trips and events automatically, recordings preserved forever |
-| **Book club discussions** | "Book Club" group, tag monthly meetings | All members auto-share discussions, can add personal notes about what resonated |
-| **Work project group** | Share individually with 3 teammates | Temporary collaboration, easy to revoke when project ends |
-| **Daily group standups** | Group tag with 14-day retention | Auto-share with group, auto-cleanup of routine meetings |
-| **Architecture decisions** | Engineering group tag, protected from deletion | Technical discussions automatically shared, preserved permanently as reference |
-| **Client consultations** | Individual share with view-only permission | Controlled external access, clients can't accidentally edit |
-| **Research interviews** | Protected tag + Obsidian export | Preserve recordings indefinitely, transcripts auto-import to note-taking system |
-| **Legal consultations** | Group tag with 7-year retention | Automatic sharing with legal group, compliance-based retention |
-| **Sales calls** | Group tag with 1-year retention | Whole sales group learns from each call, cleanup after sales cycle |
+| Случай использования | Настройка | Что это делает |
+|---------------------|-----------|----------------|
+| **Семейные воспоминания** | Создайте группу "Family" с защищенным тегом | Все получают доступ к поездкам и событиям автоматически, записи сохраняются навсегда |
+| **Обсуждения книжного клуба** | Группа "Book Club", тег ежемесячных встреч | Все участники автоматически делятся обсуждениями, могут добавлять личные заметки о том, что отозвалось |
+| **Рабочая группа проекта** | Делитесь индивидуально с 3 коллегами | Временное сотрудничество, легко отозвать, когда проект заканчивается |
+| **Ежедневные групповые стендапы** | Групповой тег с хранением 14 дней | Автоматический обмен с группой, автоматическая очистка рутинных встреч |
+| **Решения по архитектуре** | Тег группы Engineering, защищен от удаления | Технические обсуждения автоматически делятся, сохраняются постоянно как справочник |
+| **Консультации клиентов** | Индивидуальный обмен с разрешением только просмотр | Контролируемый внешний доступ, клиенты не могут случайно редактировать |
+| **Исследовательские интервью** | Защищенный тег + экспорт Obsidian | Сохраняйте записи бесконечно, транскрипты автоматически импортируются в систему ведения заметок |
+| **Юридические консультации** | Групповой тег с хранением 7 лет | Автоматический обмен с юридической группой, хранение на основе соответствия требованиям |
+| **Звонки продаж** | Групповой тег с хранением 1 год | Вся группа продаж учится на каждом звонке, очистка после цикла продаж |
 
-### Creative Tag Prompt Examples
+### Примеры творческих промптов тегов
 
-Tags with custom prompts transform raw recordings into exactly what you need:
+Теги с пользовательскими промптами преобразуют сырые записи именно в то, что вам нужно:
 
-- **Recipe recordings**: Record yourself cooking while narrating - tag with "Recipe" to convert messy speech into formatted recipes with ingredient lists and numbered steps
-- **Lecture notes**: Students tag lectures with "Study Notes" to get organized outlines with concepts, examples, and definitions instead of raw transcripts
-- **Code reviews**: "Code Review" tag extracts issues, suggested changes, and action items in technical language developers can use directly
-- **Meeting summaries**: "Action Items" tag ignores discussion and returns just decisions, tasks, and deadlines
+- **Записи рецептов**: Записывайте себя, готовя, с повествованием - пометьте "Recipe", чтобы преобразовать беспорядочную речь в отформатированные рецепты со списками ингредиентов и нумерованными шагами
+- **Заметки лекций**: Студенты помечают лекции тегом "Study Notes", чтобы получить организованные конспекты с концепциями, примерами и определениями вместо сырых транскриптов
+- **Обзоры кода**: Тег "Code Review" извлекает проблемы, предложенные изменения и пункты действий на техническом языке, который разработчики могут использовать напрямую
+- **Сводки встреч**: Тег "Action Items" игнорирует обсуждение и возвращает только решения, задачи и сроки
 
-### Tag Stacking for Combined Effects
+### Наложение тегов для комбинированных эффектов
 
-Stack multiple tags to layer instructions:
-- "Recipe" + "Gluten Free" = Formatted recipe with gluten substitution suggestions
-- "Lecture" + "Biology 301" = Study notes format focused on biological terminology
-- "Client Meeting" + "Legal Review" = Client requirements plus legal implications highlighted
+Наложите несколько тегов для наслоения инструкций:
+- "Recipe" + "Gluten Free" = Отформатированный рецепт с предложениями замены глютена
+- "Lecture" + "Biology 301" = Формат учебных заметок, сфокусированный на биологической терминологии
+- "Client Meeting" + "Legal Review" = Требования клиента плюс юридические последствия, выделенные
 
-The order can matter - start with format tags, then add focus tags for best results.
+Порядок может иметь значение - начните с тегов формата, затем добавьте теги фокуса для лучших результатов.
 
-### Integration Examples
+### Примеры интеграции
 
-- **Obsidian/Logseq**: Enable auto-export to write completed transcripts directly to your vault using your custom template - no manual export needed
-- **Documentation wikis**: Map auto-export to your wiki's import folder for seamless transcript publishing
-- **Content creation**: Create SRT subtitle templates from your audio recordings for podcasts or video content
-- **Project management**: Extract action items with custom tag prompts, then auto-export for automated task creation
+- **Obsidian/Logseq**: Включите автоматический экспорт для записи завершенных транскриптов напрямую в ваше хранилище, используя ваш пользовательский шаблон - без необходимости ручного экспорта
+- **Вики документации**: Сопоставьте автоматический экспорт с папкой импорта вашей вики для бесшовной публикации транскриптов
+- **Создание контента**: Создавайте шаблоны субтитров SRT из ваших аудиозаписей для подкастов или видеоконтента
+- **Управление проектами**: Извлекайте пункты действий с пользовательскими промптами тегов, затем автоматически экспортируйте для автоматического создания задач
 
-## Quick Start
+## Быстрый старт
 
-### Using Docker (Recommended)
+### Использование Docker (Рекомендуется)
 
 ```bash
-# Create project directory
+# Создайте директорию проекта
 mkdir speakr && cd speakr
 
-# Download docker-compose configuration:
+# Загрузите конфигурацию docker-compose:
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/docker-compose.example.yml -O docker-compose.yml
 
-# Choose your transcription method and download the corresponding .env file:
+# Выберите ваш метод транскрибации и загрузите соответствующий файл .env:
 
-# Option 1: Standard Whisper API (no speaker diarization):
+# Вариант 1: Стандартный Whisper API (без идентификации говорящих):
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.whisper.example -O .env
 
-# Option 2: WhisperX ASR with voice profiles (recommended for speaker features):
+# Вариант 2: WhisperX ASR с голосовыми профилями (рекомендуется для функций говорящих):
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.whisperx.example -O .env
 
-# Option 3: Basic ASR with diarization (no voice profiles):
+# Вариант 3: Базовый ASR с идентификацией говорящих (без голосовых профилей):
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.asr.example -O .env
 
-# Configure your service endpoints and API keys
-nano .env  # Set API endpoints (Local/OpenAI/OpenRouter/etc) and add your API keys
+# Настройте ваши эндпоинты сервисов и ключи API
+nano .env  # Установите эндпоинты API (Local/OpenAI/OpenRouter/и т.д.) и добавьте ваши ключи API
 
-# Launch Speakr
+# Запустите Speakr
 docker compose up -d
 
-# Access at http://localhost:8899
+# Доступ по адресу http://localhost:8899
 ```
 
-**Note:** ASR option requires running an additional ASR service container alongside Speakr:
-- **For voice profiles & speaker embeddings:** Use [WhisperX ASR Service](https://github.com/murtaza-nasir/whisperx-asr-service) (recommended)
-- **For basic speaker diarization:** Use [OpenAI Whisper ASR Webservice](https://github.com/ahmetoner/whisper-asr-webservice)
+**Примечание:** Опция ASR требует запуска дополнительного контейнера ASR сервиса вместе с Speakr:
+- **Для голосовых профилей и эмбеддингов говорящих:** Используйте [WhisperX ASR Service](https://github.com/murtaza-nasir/whisperx-asr-service) (рекомендуется)
+- **Для базовой идентификации говорящих:** Используйте [OpenAI Whisper ASR Webservice](https://github.com/ahmetoner/whisper-asr-webservice)
 
-See [installation guide](https://murtaza-nasir.github.io/speakr/getting-started/installation#running-asr-service-for-speaker-diarization) for complete setup instructions.
+См. [руководство по установке](https://murtaza-nasir.github.io/speakr/getting-started/installation#running-asr-service-for-speaker-diarization) для полных инструкций по настройке.
 
-**[View Full Installation Guide →](https://murtaza-nasir.github.io/speakr/getting-started)**
+**[Просмотреть полное руководство по установке →](https://murtaza-nasir.github.io/speakr/getting-started)**
 
-## Documentation
+## Документация
 
-Complete documentation is available at **[murtaza-nasir.github.io/speakr](https://murtaza-nasir.github.io/speakr)**
+Полная документация доступна на **[murtaza-nasir.github.io/speakr](https://murtaza-nasir.github.io/speakr)**
 
-- [Getting Started](https://murtaza-nasir.github.io/speakr/getting-started) - Quick setup guide
-- [User Guide](https://murtaza-nasir.github.io/speakr/user-guide/) - Learn all features
-- [Admin Guide](https://murtaza-nasir.github.io/speakr/admin-guide/) - Administration and configuration
-- [Troubleshooting](https://murtaza-nasir.github.io/speakr/troubleshooting) - Common issues and solutions
-- [FAQ](https://murtaza-nasir.github.io/speakr/faq) - Frequently asked questions
+- [Быстрый старт](https://murtaza-nasir.github.io/speakr/getting-started) - Руководство по быстрой настройке
+- [Руководство пользователя](https://murtaza-nasir.github.io/speakr/user-guide/) - Изучите все функции
+- [Руководство администратора](https://murtaza-nasir.github.io/speakr/admin-guide/) - Администрирование и конфигурация
+- [Решение проблем](https://murtaza-nasir.github.io/speakr/troubleshooting) - Распространенные проблемы и решения
+- [FAQ](https://murtaza-nasir.github.io/speakr/faq) - Часто задаваемые вопросы
 
-## Latest Release (v0.5.10)
+## Последний релиз (v0.5.10)
 
-**Patch Release** - Bug fixes and UX improvements
+**Патч-релиз** - Исправления ошибок и улучшения UX
 
-- **iOS File Upload Fix** - Resolved issue preventing iOS users from uploading audio/video files
-- **Click-Outside Menus** - Dropdown menus now close when clicking outside them
-- **PWA i18n** - Added internationalization for PWA install button
+- **Исправление загрузки файлов iOS** - Решена проблема, препятствующая пользователям iOS загружать аудио/видео файлы
+- **Меню с кликом снаружи** - Выпадающие меню теперь закрываются при клике вне их
+- **PWA i18n** - Добавлена интернационализация для кнопки установки PWA
 
-Fully backward compatible with v0.5.9. No configuration changes required.
+Полностью обратно совместим с v0.5.9. Изменения конфигурации не требуются.
 
-**[View Full Release Notes →](RELEASE_NOTES_v0.5.10.md)**
+**[Просмотреть полные заметки о релизе →](RELEASE_NOTES_v0.5.10.md)**
 
-### Previous Release (v0.5.9)
+### Предыдущий релиз (v0.5.9)
 
-> **⚠️ IMPORTANT - Major Release Warning:**
+> **⚠️ ВАЖНО - Предупреждение о крупном релизе:**
 >
-> v0.5.9 was a **major release** with significant architectural changes and new features. Before upgrading from earlier versions:
+> v0.5.9 был **крупным релизом** со значительными архитектурными изменениями и новыми функциями. Перед обновлением с более ранних версий:
 >
-> - **BACKUP YOUR DATA** - Database schema changes require migration
-> - **Review new environment variables** - Many features require `.env` configuration
-> - **Test in development first** - Major refactoring may affect existing workflows
+> - **СОЗДАЙТЕ РЕЗЕРВНУЮ КОПИЮ ВАШИХ ДАННЫХ** - Изменения схемы базы данных требуют миграции
+> - **Просмотрите новые переменные окружения** - Многие функции требуют конфигурации `.env`
+> - **Сначала протестируйте в разработке** - Крупный рефакторинг может повлиять на существующие рабочие процессы
 >
-> **Required Environment Variables for New Features:**
-> - `ENABLE_INTERNAL_SHARING` - User-to-user sharing (default: false)
-> - `SHOW_USERNAMES_IN_UI` - Username visibility control (default: false)
-> - `USERS_CAN_DELETE` - Deletion permissions (default: true)
-> - `ENABLE_AUTO_DELETION` - Retention system (default: false)
-> - `GLOBAL_RETENTION_DAYS` - Retention period (default: 0)
-> - `ENABLE_AUTO_EXPORT` - Automated markdown export (default: false)
-> - `ENABLE_PUBLIC_SHARING` - Public share links (default: true)
+> **Необходимые переменные окружения для новых функций:**
+> - `ENABLE_INTERNAL_SHARING` - Обмен пользователь-пользователь (по умолчанию: false)
+> - `SHOW_USERNAMES_IN_UI` - Контроль видимости имени пользователя (по умолчанию: false)
+> - `USERS_CAN_DELETE` - Разрешения на удаление (по умолчанию: true)
+> - `ENABLE_AUTO_DELETION` - Система хранения (по умолчанию: false)
+> - `GLOBAL_RETENTION_DAYS` - Период хранения (по умолчанию: 0)
+> - `ENABLE_AUTO_EXPORT` - Автоматический экспорт markdown (по умолчанию: false)
+> - `ENABLE_PUBLIC_SHARING` - Публичные ссылки для обмена (по умолчанию: true)
 >
-> See [configuration guide](https://murtaza-nasir.github.io/speakr/getting-started/installation#configuration-updates) for complete setup instructions.
+> См. [руководство по конфигурации](https://murtaza-nasir.github.io/speakr/getting-started/installation#configuration-updates) для полных инструкций по настройке.
 
-#### Highlights
-- **Complete Internal Sharing System** - Share recordings with users with granular permissions (view/edit/reshare)
-- **Group Management & Collaboration** - Create groups with auto-sharing via group tags and custom retention policies
-- **Speaker Voice Profiles** - AI-powered speaker identification with 256-dimensional voice embeddings
-- **Audio-Transcript Synchronization** - Click-to-jump, auto-highlight, and follow mode for interactive navigation
-- **Auto-Deletion & Retention System** - Flexible retention policies with global and group-level controls
-- **Automated Export** - Auto-export transcriptions to markdown for Obsidian, Logseq, and other note-taking apps
-- **Permission System** - Fine-grained access control throughout the application
-- **Modular Architecture** - Backend refactored into blueprints, frontend composables for maintainability
-- **UI/UX Enhancements** - Compact controls, inline editing, unified toast notifications, improved badges
-- **Enhanced Internationalization** - 29 new tooltip translations across all supported languages
+#### Основные моменты
+- **Полная система внутреннего обмена** - Делитесь записями с пользователями с детальными разрешениями (просмотр/редактирование/повторный обмен)
+- **Управление группами и сотрудничество** - Создавайте группы с автоматическим обменом через групповые теги и пользовательские политики хранения
+- **Голосовые профили говорящих** - Идентификация говорящих на основе ИИ с 256-мерными голосовыми эмбеддингами
+- **Синхронизация аудио-транскрипта** - Клик для перехода, автоматическая подсветка и режим следования для интерактивной навигации
+- **Система автоматического удаления и хранения** - Гибкие политики хранения с глобальным и групповым контролем
+- **Автоматический экспорт** - Автоматический экспорт транскрипций в markdown для Obsidian, Logseq и других приложений для ведения заметок
+- **Система разрешений** - Детальный контроль доступа по всему приложению
+- **Модульная архитектура** - Бэкенд рефакторен в blueprints, фронтенд composables для поддерживаемости
+- **Улучшения UI/UX** - Компактные элементы управления, встроенное редактирование, унифицированные уведомления toast, улучшенные значки
+- **Расширенная интернационализация** - 29 новых переводов подсказок на всех поддерживаемых языках
 
-## Screenshots
+## Скриншоты
 
 <table align="center" border="0">
   <tr>
     <td align="center">
-      <img src="docs/assets/images/screenshots/Main view.png" alt="Main Dashboard" width="400"/>
-      <br><em>Main Dashboard with Chat</em>
+      <img src="docs/assets/images/screenshots/Main view.png" alt="Главная панель управления" width="400"/>
+      <br><em>Главная панель управления с чатом</em>
     </td>
     <td align="center">
-      <img src="docs/assets/images/screenshots/Inquire mode.png" alt="Inquire Mode" width="400"/>
-      <br><em>AI-Powered Semantic Search</em>
+      <img src="docs/assets/images/screenshots/Inquire mode.png" alt="Режим Inquire" width="400"/>
+      <br><em>Семантический поиск на основе ИИ</em>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <img src="docs/assets/images/screenshots/chat-interface.png" alt="Transcription with Chat" width="400"/>
-      <br><em>Interactive Transcription & Chat</em>
+      <img src="docs/assets/images/screenshots/chat-interface.png" alt="Транскрибация с чатом" width="400"/>
+      <br><em>Интерактивная транскрибация и чат</em>
     </td>
     <td align="center">
-      <img src="docs/assets/images/screenshots/multilingual-chinese.png" alt="Multi-language Support" width="400"/>
-      <br><em>Full Internationalization</em>
+      <img src="docs/assets/images/screenshots/multilingual-chinese.png" alt="Поддержка нескольких языков" width="400"/>
+      <br><em>Полная интернационализация</em>
     </td>
   </tr>
 </table>
 
-**[View Full Screenshot Gallery →](https://murtaza-nasir.github.io/speakr/screenshots)**
+**[Просмотреть полную галерею скриншотов →](https://murtaza-nasir.github.io/speakr/screenshots)**
 
-## Technology Stack
+## Технологический стек
 
-- **Backend**: Python/Flask with SQLAlchemy
-- **Frontend**: Vue.js 3 with Tailwind CSS
-- **AI/ML**: OpenAI Whisper, OpenRouter, Ollama support
-- **Database**: SQLite (default) or PostgreSQL
-- **Deployment**: Docker, Docker Compose
+- **Бэкенд**: Python/Flask с SQLAlchemy
+- **Фронтенд**: Vue.js 3 с Tailwind CSS
+- **ИИ/ML**: OpenAI Whisper, OpenRouter, поддержка Ollama
+- **База данных**: SQLite (по умолчанию) или PostgreSQL
+- **Развертывание**: Docker, Docker Compose
 
-## Roadmap
+## Дорожная карта
 
-### Completed
-- ✅ Speaker voice profiles with AI-powered identification (v0.5.9)
-- ✅ Group workspaces with shared recordings (v0.5.9)
-- ✅ PWA enhancements with offline support and background sync (v0.5.10)
+### Завершено
+- ✅ Голосовые профили говорящих с идентификацией на основе ИИ (v0.5.9)
+- ✅ Групповые рабочие пространства с общими записями (v0.5.9)
+- ✅ Улучшения PWA с поддержкой офлайн и фоновой синхронизацией (v0.5.10)
 
-### Near-term
-- Bulk operations for recordings (mass delete, export, tagging)
-- Quick language switching for transcription
-- Automated workflow triggers
+### Ближайшие планы
+- Массовые операции для записей (массовое удаление, экспорт, тегирование)
+- Быстрое переключение языка для транскрибации
+- Автоматизированные триггеры рабочих процессов
 
-### Long-term
-- Plugin system for custom integrations
-- End-to-end encryption option
-- Enterprise SSO integration
+### Долгосрочные планы
+- Система плагинов для пользовательских интеграций
+- Опция сквозного шифрования
+- Интеграция корпоративного SSO
 
-### Reporting Issues
+### Сообщение о проблемах
 
-- [Report bugs](https://github.com/murtaza-nasir/speakr/issues)
-- [Request features](https://github.com/murtaza-nasir/speakr/discussions)
+- [Сообщить об ошибках](https://github.com/murtaza-nasir/speakr/issues)
+- [Запросить функции](https://github.com/murtaza-nasir/speakr/discussions)
 
-## License
+## Лицензия
 
-This project is **dual-licensed**:
+Этот проект имеет **двойную лицензию**:
 
 1.  **GNU Affero General Public License v3.0 (AGPLv3)**
     [![License: AGPL v3](https://img.shields.io/badge/License-AGPL_v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 
-    Speakr is offered under the AGPLv3 as its open-source license. You are free to use, modify, and distribute this software under the terms of the AGPLv3. A key condition of the AGPLv3 is that if you run a modified version on a network server and provide access to it for others, you must also make the source code of your modified version available to those users under the AGPLv3.
+    Speakr предлагается под AGPLv3 как его лицензией с открытым исходным кодом. Вы можете свободно использовать, изменять и распространять это программное обеспечение в соответствии с условиями AGPLv3. Ключевое условие AGPLv3 заключается в том, что если вы запускаете измененную версию на сетевом сервере и предоставляете доступ к ней другим, вы также должны сделать исходный код вашей измененной версии доступным этим пользователям под AGPLv3.
 
-    * You **must** create a file named `LICENSE` (or `COPYING`) in the root of your repository and paste the full text of the [GNU AGPLv3 license](https://www.gnu.org/licenses/agpl-3.0.txt) into it.
-    * Read the full license text carefully to understand your rights and obligations.
+    * Вы **должны** создать файл с именем `LICENSE` (или `COPYING`) в корне вашего репозитория и вставить полный текст [лицензии GNU AGPLv3](https://www.gnu.org/licenses/agpl-3.0.txt) в него.
+    * Внимательно прочитайте полный текст лицензии, чтобы понять ваши права и обязанности.
 
-2.  **Commercial License**
+2.  **Коммерческая лицензия**
 
-    For users or organizations who cannot or do not wish to comply with the terms of the AGPLv3 (for example, if you want to integrate Speakr into a proprietary commercial product or service without being obligated to share your modifications under AGPLv3), a separate commercial license is available.
+    Для пользователей или организаций, которые не могут или не хотят соблюдать условия AGPLv3 (например, если вы хотите интегрировать Speakr в проприетарный коммерческий продукт или сервис без обязательства делиться вашими модификациями под AGPLv3), доступна отдельная коммерческая лицензия.
 
-    Please contact **speakr maintainers** for details on obtaining a commercial license.
+    Пожалуйста, свяжитесь с **поддерживающими Speakr** для получения подробной информации о получении коммерческой лицензии.
 
-**You must choose one of these licenses** under which to use, modify, or distribute this software. If you are using or distributing the software without a commercial license agreement, you must adhere to the terms of the AGPLv3.
+**Вы должны выбрать одну из этих лицензий**, под которой использовать, изменять или распространять это программное обеспечение. Если вы используете или распространяете программное обеспечение без коммерческого лицензионного соглашения, вы должны соблюдать условия AGPLv3.
 
-## Contributing
+## Вклад
 
-We welcome contributions to Speakr! There are many ways to help:
+Мы приветствуем вклад в Speakr! Есть много способов помочь:
 
-- **Bug Reports & Feature Requests**: [Open an issue](https://github.com/murtaza-nasir/speakr/issues)
-- **Discussions**: [Share ideas and ask questions](https://github.com/murtaza-nasir/speakr/discussions)
-- **Documentation**: Help improve our docs
-- **Translations**: Contribute translations for internationalization
+- **Отчеты об ошибках и запросы функций**: [Откройте issue](https://github.com/murtaza-nasir/speakr/issues)
+- **Обсуждения**: [Поделитесь идеями и задайте вопросы](https://github.com/murtaza-nasir/speakr/discussions)
+- **Документация**: Помогите улучшить нашу документацию
+- **Переводы**: Внесите вклад в переводы для интернационализации
 
-### Code Contributions
+### Вклад в код
 
-All code contributions require signing a [Contributor License Agreement (CLA)](CLA.md). This one-time process ensures we can maintain our dual-license model (AGPLv3 and Commercial).
+Весь вклад в код требует подписания [Соглашения о лицензии участника (CLA)](CLA.md). Этот одноразовый процесс обеспечивает, что мы можем поддерживать нашу модель двойной лицензии (AGPLv3 и Коммерческая).
 
-**See our [Contributing Guide](CONTRIBUTING.md) for complete details on:**
-- How the CLA works and why we need it
-- Step-by-step contribution process
-- Development setup instructions
-- Coding standards and best practices
+**См. наше [Руководство по вкладу](CONTRIBUTING.md) для полных деталей о:**
+- Как работает CLA и почему он нам нужен
+- Пошаговый процесс вклада
+- Инструкции по настройке разработки
+- Стандарты кодирования и лучшие практики
 
-The CLA is automatically enforced via GitHub Actions. When you submit your first PR, our bot will guide you through signing.
+CLA автоматически применяется через GitHub Actions. Когда вы отправите ваш первый PR, наш бот проведет вас через процесс подписания.

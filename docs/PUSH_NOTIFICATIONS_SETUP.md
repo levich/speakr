@@ -1,25 +1,25 @@
-# Push Notifications Setup Guide
+# Руководство по настройке push-уведомлений
 
-This guide explains how to complete the push notification setup for Speakr.
+Это руководство объясняет, как завершить настройку push-уведомлений для Speakr.
 
-## Overview
+## Обзор
 
-The client-side push notification infrastructure is now complete. To enable push notifications, you need to:
+Инфраструктура push-уведомлений на стороне клиента теперь завершена. Чтобы включить push-уведомления, вам нужно:
 
-1. Generate VAPID keys
-2. Configure the client with the public key
-3. Implement backend endpoints to store subscriptions and send notifications
+1. Сгенерировать VAPID ключи
+2. Настроить клиент с публичным ключом
+3. Реализовать бэкенд-эндпоинты для хранения подписок и отправки уведомлений
 
-## Step 1: Generate VAPID Keys
+## Шаг 1: Генерация VAPID ключей
 
-### Method A: Using web-push (Node.js)
+### Метод A: Использование web-push (Node.js)
 
 ```bash
 npm install -g web-push
 web-push generate-vapid-keys
 ```
 
-### Method B: Using Python
+### Метод B: Использование Python
 
 ```bash
 pip install pywebpush
@@ -33,20 +33,20 @@ print("Public Key:", vapid_keys['publicKey'])
 print("Private Key:", vapid_keys['privateKey'])
 ```
 
-### Method C: Using pywebpush CLI
+### Метод C: Использование pywebpush CLI
 
 ```bash
 pywebpush generate-vapid-keys
 ```
 
-**IMPORTANT:** Keep the private key secret! Never commit it to version control.
+**ВАЖНО:** Держите приватный ключ в секрете! Никогда не коммитьте его в систему контроля версий.
 
-## Step 2: Configure Client
+## Шаг 2: Настройка клиента
 
-1. Open `static/js/config/push-config.js`
-2. Set `ENABLED: true`
-3. Add your VAPID public key to `VAPID_PUBLIC_KEY`
-4. Update `CONTACT_INFO` with your admin email or website
+1. Откройте `static/js/config/push-config.js`
+2. Установите `ENABLED: true`
+3. Добавьте ваш VAPID публичный ключ в `VAPID_PUBLIC_KEY`
+4. Обновите `CONTACT_INFO` с вашей административной электронной почтой или веб-сайтом
 
 ```javascript
 export const PUSH_CONFIG = {
@@ -56,17 +56,17 @@ export const PUSH_CONFIG = {
 };
 ```
 
-## Step 3: Implement Backend Endpoints
+## Шаг 3: Реализация бэкенд-эндпоинтов
 
-### Required Backend Endpoints
+### Необходимые бэкенд-эндпоинты
 
-#### 1. Store Push Subscription
+#### 1. Сохранение push-подписки
 
-**Endpoint:** `POST /api/push/subscribe`
+**Эндпоинт:** `POST /api/push/subscribe`
 
-**Purpose:** Save user's push subscription to database
+**Назначение:** Сохранить push-подписку пользователя в базе данных
 
-**Request Body:**
+**Тело запроса:**
 ```json
 {
     "endpoint": "https://fcm.googleapis.com/fcm/send/...",
@@ -77,7 +77,7 @@ export const PUSH_CONFIG = {
 }
 ```
 
-**Response:**
+**Ответ:**
 ```json
 {
     "success": true,
@@ -85,7 +85,7 @@ export const PUSH_CONFIG = {
 }
 ```
 
-**Implementation Example (Flask):**
+**Пример реализации (Flask):**
 
 ```python
 from flask import Blueprint, request, jsonify
@@ -123,15 +123,15 @@ def subscribe():
     return jsonify({'success': True, 'message': 'Subscription saved'})
 ```
 
-#### 2. Remove Push Subscription
+#### 2. Удаление push-подписки
 
-**Endpoint:** `POST /api/push/unsubscribe`
+**Эндпоинт:** `POST /api/push/unsubscribe`
 
-**Purpose:** Remove user's push subscription from database
+**Назначение:** Удалить push-подписку пользователя из базы данных
 
-**Request Body:** Same as subscribe
+**Тело запроса:** То же, что и для subscribe
 
-**Response:**
+**Ответ:**
 ```json
 {
     "success": true,
@@ -139,7 +139,7 @@ def subscribe():
 }
 ```
 
-**Implementation Example:**
+**Пример реализации:**
 
 ```python
 @push_bp.route('/api/push/unsubscribe', methods=['POST'])
@@ -161,9 +161,9 @@ def unsubscribe():
     return jsonify({'success': False, 'message': 'Subscription not found'}), 404
 ```
 
-## Step 4: Database Model
+## Шаг 4: Модель базы данных
 
-Add a `PushSubscription` model to your database:
+Добавьте модель `PushSubscription` в вашу базу данных:
 
 ```python
 from models import db
@@ -185,16 +185,16 @@ class PushSubscription(db.Model):
     )
 ```
 
-Create the migration:
+Создайте миграцию:
 
 ```bash
 flask db migrate -m "Add push subscriptions table"
 flask db upgrade
 ```
 
-## Step 5: Send Push Notifications
+## Шаг 5: Отправка push-уведомлений
 
-Use the `pywebpush` library to send notifications when transcription is complete:
+Используйте библиотеку `pywebpush` для отправки уведомлений, когда транскрибация завершена:
 
 ```python
 from pywebpush import webpush, WebPushException
@@ -239,9 +239,9 @@ def send_push_notification(user_id, title, body, data=None):
                 db.session.commit()
 ```
 
-## Step 6: Integrate with Transcription
+## Шаг 6: Интеграция с транскрибацией
 
-Call the push notification function when transcription is complete:
+Вызовите функцию push-уведомления, когда транскрибация завершена:
 
 ```python
 # In your transcription completion handler
@@ -260,9 +260,9 @@ def on_transcription_complete(recording_id):
         )
 ```
 
-## Step 7: Environment Variables
+## Шаг 7: Переменные окружения
 
-Add these environment variables to your `.env` file:
+Добавьте эти переменные окружения в ваш файл `.env`:
 
 ```bash
 # VAPID keys for push notifications
@@ -270,18 +270,18 @@ VAPID_PRIVATE_KEY=your_private_key_here
 VAPID_CONTACT=mailto:admin@yourdomain.com
 ```
 
-## Testing Push Notifications
+## Тестирование push-уведомлений
 
-1. Open the app in a browser
-2. Open Developer Tools > Console
-3. Run: `await pwaComposable.subscribeToPushNotifications()`
-4. Check database to verify subscription was saved
-5. Trigger a test notification from the backend
-6. Verify notification appears
+1. Откройте приложение в браузере
+2. Откройте Developer Tools > Console
+3. Выполните: `await pwaComposable.subscribeToPushNotifications()`
+4. Проверьте базу данных, чтобы убедиться, что подписка была сохранена
+5. Запустите тестовое уведомление с бэкенда
+6. Убедитесь, что уведомление появилось
 
-## Browser Support
+## Поддержка браузеров
 
-| Browser | Desktop | Mobile |
+| Браузер | Desktop | Mobile |
 |---------|---------|--------|
 | Chrome  | ✅      | ✅     |
 | Edge    | ✅      | ✅     |
@@ -289,34 +289,34 @@ VAPID_CONTACT=mailto:admin@yourdomain.com
 | Safari  | ✅      | ⚠️ iOS 16.4+ |
 | Opera   | ✅      | ✅     |
 
-**Note:** iOS Safari requires iOS 16.4+ and the app must be added to the home screen.
+**Примечание:** iOS Safari требует iOS 16.4+ и приложение должно быть добавлено на главный экран.
 
-## Troubleshooting
+## Решение проблем
 
-### Subscription fails with "NotAllowedError"
-- User denied notification permission
-- Ask user to enable notifications in browser settings
+### Подписка терпит неудачу с "NotAllowedError"
+- Пользователь отклонил разрешение на уведомления
+- Попросите пользователя включить уведомления в настройках браузера
 
-### Subscription not saving on server
-- Check backend endpoint is accessible
-- Verify CSRF token is valid
-- Check server logs for errors
+### Подписка не сохраняется на сервере
+- Проверьте, что бэкенд-эндпоинт доступен
+- Проверьте, что CSRF токен действителен
+- Проверьте логи сервера на ошибки
 
-### Push notifications not received
-- Verify VAPID keys match between client and server
-- Check subscription is in database
-- Test with browser developer tools
-- Ensure service worker is registered
+### Push-уведомления не получены
+- Проверьте, что VAPID ключи совпадают между клиентом и сервером
+- Проверьте, что подписка есть в базе данных
+- Протестируйте с инструментами разработчика браузера
+- Убедитесь, что service worker зарегистрирован
 
-## Security Considerations
+## Соображения безопасности
 
-1. **Never expose private VAPID key** - Keep it on server only
-2. **Validate subscriptions** - Ensure they belong to authenticated users
-3. **Rate limit subscriptions** - Prevent abuse
-4. **Clean up expired subscriptions** - Remove 404/410 responses
-5. **Use HTTPS** - Required for push notifications
+1. **Никогда не раскрывайте приватный VAPID ключ** - Держите его только на сервере
+2. **Проверяйте подписки** - Убедитесь, что они принадлежат аутентифицированным пользователям
+3. **Ограничивайте частоту подписок** - Предотвращайте злоупотребления
+4. **Очищайте истекшие подписки** - Удаляйте ответы 404/410
+5. **Используйте HTTPS** - Требуется для push-уведомлений
 
-## Additional Resources
+## Дополнительные ресурсы
 
 - [Web Push Protocol](https://datatracker.ietf.org/doc/html/rfc8030)
 - [VAPID Specification](https://datatracker.ietf.org/doc/html/rfc8292)

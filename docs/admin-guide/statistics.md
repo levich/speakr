@@ -1,39 +1,39 @@
-# System Statistics
+# Системная статистика
 
-The System Statistics tab transforms raw data into actionable insights about your Speakr instance. At a glance, you can see how many users you're serving, how many recordings they've created, how much storage they're consuming, and whether everything is processing smoothly.
+Вкладка Системная статистика преобразует сырые данные в действенные инсайты о вашем экземпляре Speakr. С первого взгляда вы можете увидеть, скольким пользователям вы обслуживаете, сколько записей они создали, сколько хранилища они потребляют, и все ли обрабатывается гладко.
 
-![System Statistics](../assets/images/screenshots/Admin stats.png)
+![Системная статистика](../assets/images/screenshots/Admin stats.png)
 
-## Key Metrics Overview
+## Обзор ключевых метрик
 
-Four prominent cards at the top of the statistics page give you immediate insight into your system's scale. Total Users shows your current user base size, helping you understand your instance's reach. Total Recordings reveals the cumulative content in your system, while Total Storage presents the actual disk space consumed. Total Queries, when Inquire Mode is enabled, indicates how actively users are searching their recordings.
+Четыре заметные карточки в верхней части страницы статистики дают вам немедленное понимание масштаба вашей системы. Total Users показывает размер вашей текущей пользовательской базы, помогая понять охват вашего экземпляра. Total Recordings раскрывает совокупный контент в вашей системе, в то время как Total Storage представляет фактическое дисковое пространство, которое потребляется. Total Queries, когда режим Inquire включен, указывает, насколько активно пользователи ищут свои записи.
 
-These numbers tell a story about your instance's health and growth. A growing user count with proportional recording growth suggests healthy adoption. Storage growing faster than recordings might indicate users are uploading longer files. Query counts reveal whether users are finding value in the semantic search features.
+Эти числа рассказывают историю о здоровье и росте вашего экземпляра. Растущее количество пользователей с пропорциональным ростом записей предполагает здоровое принятие. Хранилище, растущее быстрее, чем записи, может указывать, что пользователи загружают более длинные файлы. Количество запросов раскрывает, находят ли пользователи ценность в функциях семантического поиска.
 
-## Recording Status Distribution
+## Распределение статуса записей
 
-The status distribution section breaks down your recordings into four critical states. Completed recordings are fully processed and ready for use - this should be the vast majority of your content. Processing recordings are currently being transcribed or analyzed. Pending recordings are queued and waiting their turn. Failed recordings encountered errors and need attention.
+Раздел распределения статуса разбивает ваши записи на четыре критических состояния. Завершенные записи полностью обработаны и готовы к использованию — это должно быть подавляющее большинство вашего контента. Обрабатываемые записи в настоящее время транскрибируются или анализируются. Ожидающие записи находятся в очереди и ждут своей очереди. Неудачные записи столкнулись с ошибками и требуют внимания.
 
-In a healthy system, you'll see mostly completed recordings with perhaps a few processing at any given moment. A large number of pending recordings might indicate your system is overwhelmed or that background processing has stopped. Failed recordings always deserve investigation - they might reveal configuration issues, API problems, or corrupted files that users are trying to upload.
+В здоровой системе вы увидите в основном завершенные записи с, возможно, несколькими обрабатываемыми в любой момент. Большое количество ожидающих записей может указывать, что ваша система перегружена или что фоновая обработка остановилась. Неудачные записи всегда заслуживают расследования — они могут раскрыть проблемы конфигурации, проблемы с API или поврежденные файлы, которые пользователи пытаются загрузить.
 
-## Storage Analysis
+## Анализ хранилища
 
-The "Top Users by Storage" section reveals who's consuming the most resources in your system. Each user is listed with their total storage consumption and recording count, giving you context about whether they have many small files or fewer large ones.
+Раздел "Top Users by Storage" раскрывает, кто потребляет больше всего ресурсов в вашей системе. Каждый пользователь перечислен с его общим потреблением хранилища и количеством записей, давая вам контекст о том, есть ли у них много маленьких файлов или меньше больших.
 
-This information proves invaluable for capacity planning and user education. If one user consumes disproportionate storage, you might need to understand their use case better. Are they recording multi-hour meetings? Keeping everything forever? Understanding the why behind the numbers helps you make better policy decisions.
+Эта информация оказывается бесценной для планирования мощности и обучения пользователей. Если один пользователь потребляет непропорциональное хранилище, вам может потребоваться лучше понять его случай использования. Записывают ли они многочасовые встречи? Хранят ли все навсегда? Понимание причины за числами помогает вам принимать лучшие политические решения.
 
-## Understanding Usage Patterns
+## Понимание паттернов использования
 
-Statistics aren't just numbers - they're insights waiting to be discovered. Sudden spikes in recordings might coincide with project kickoffs, academic semesters, or company initiatives. Storage growth that outpaces recording growth could indicate users are uploading longer content or higher quality audio files.
+Статистика — это не просто числа — это инсайты, ожидающие открытия. Внезапные всплески записей могут совпадать с запусками проектов, академическими семестрами или корпоративными инициативами. Рост хранилища, который опережает рост записей, может указывать, что пользователи загружают более длинный контент или аудиофайлы более высокого качества.
 
-Regular monitoring helps you spot trends before they become problems. If storage grows 10% monthly, you can project when you'll need to expand capacity. If failed recordings suddenly spike, you can investigate whether an API key expired or a service is down.
+Регулярный мониторинг помогает вам обнаруживать тренды до того, как они станут проблемами. Если хранилище растет на 10% ежемесячно, вы можете спроектировать, когда вам нужно будет расширить мощность. Если неудачные записи внезапно всплескивают, вы можете расследовать, истек ли ключ API или сервис не работает.
 
-## Capacity Planning
+## Планирование мощности
 
-System statistics are your crystal ball for infrastructure needs. Storage growth trends tell you when you'll need more disk space. User growth patterns indicate when you might need to scale your server resources. Processing queues reveal whether your current setup can handle the workload.
+Системная статистика — это ваш хрустальный шар для потребностей инфраструктуры. Тренды роста хранилища говорят вам, когда вам понадобится больше дискового пространства. Паттерны роста пользователей указывают, когда вам может потребоваться масштабировать ресурсы сервера. Очереди обработки раскрывают, может ли ваша текущая настройка справиться с рабочей нагрузкой.
 
-Use these insights proactively. If you see storage growing at 50GB monthly and you have 200GB free, you know you have about four months before needing intervention. This lead time lets you budget for upgrades, plan migrations, or implement retention policies before hitting critical limits.
+Используйте эти инсайты проактивно. Если вы видите, что хранилище растет на 50 ГБ ежемесячно, и у вас есть 200 ГБ свободно, вы знаете, что у вас есть около четырех месяцев до необходимости вмешательства. Это время упреждения позволяет вам планировать бюджет на обновления, планировать миграции или внедрять политики хранения до достижения критических лимитов.
 
 ---
 
-Next: [System Settings](system-settings.md) →
+Далее: [Системные настройки](system-settings.md) →

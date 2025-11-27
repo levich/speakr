@@ -1,99 +1,99 @@
-# Quick Start Guide
+# Руководство по быстрому старту
 
-Get Speakr up and running in just a few minutes using the pre-built Docker image! This guide will walk you through the fastest way to deploy Speakr with either OpenAI Whisper API or a [custom ASR endpoint](features.md#speaker-diarization).
+Запустите Speakr за несколько минут, используя предварительно собранный образ Docker! Это руководство проведет вас через самый быстрый способ развертывания Speakr с помощью OpenAI Whisper API или [пользовательского ASR-эндпоинта](features.md#speaker-diarization).
 
-> **Note:** If you want to use the ASR endpoint option for speaker diarization features, you'll need to run an additional Docker container (`onerahmet/openai-whisper-asr-webservice`). See [Running ASR Service for Speaker Diarization](getting-started/installation.md#running-asr-service-for-speaker-diarization) for detailed setup instructions.
+> **Примечание:** Если вы хотите использовать опцию ASR-эндпоинта для функций идентификации говорящих, вам нужно будет запустить дополнительный контейнер Docker (`onerahmet/openai-whisper-asr-webservice`). См. [Запуск ASR-сервиса для идентификации говорящих](getting-started/installation.md#running-asr-service-for-speaker-diarization) для подробных инструкций по настройке.
 
-## Prerequisites
+## Требования
 
-Before you begin, make sure you have Docker and Docker Compose installed on your system. You'll also need an API key for either OpenAI or OpenRouter (or a compatible service), at least 2GB of available RAM, and about 10GB of available disk space for storing recordings and transcriptions.
+Перед началом убедитесь, что на вашей системе установлены Docker и Docker Compose. Вам также понадобится API-ключ для OpenAI или OpenRouter (или совместимого сервиса), не менее 2 ГБ доступной оперативной памяти и около 10 ГБ свободного места на диске для хранения записей и транскрипций.
 
-## Step 1: Create Project Directory
+## Шаг 1: Создание директории проекта
 
-First, create a directory for your Speakr installation and navigate into it:
+Сначала создайте директорию для установки Speakr и перейдите в неё:
 
 ```bash
 mkdir speakr
 cd speakr
 ```
 
-## Step 2: Download Configuration Files
+## Шаг 2: Загрузка файлов конфигурации
 
-Download the Docker Compose configuration and choose the appropriate environment template based on your transcription service:
+Загрузите конфигурацию Docker Compose и выберите подходящий шаблон окружения в зависимости от вашего сервиса транскрибации:
 
 ```bash
-# Download docker compose example
+# Загрузить пример docker compose
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/docker-compose.example.yml -O docker-compose.yml
 ```
 
-Now download the environment configuration template. You have two options depending on which transcription service you want to use.
+Теперь загрузите шаблон конфигурации окружения. У вас есть два варианта в зависимости от того, какой сервис транскрибации вы хотите использовать.
 
-For standard OpenAI Whisper API (recommended for most users):
+Для стандартного OpenAI Whisper API (рекомендуется для большинства пользователей):
 ```bash
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.whisper.example -O .env
 ```
 
-Or for a custom ASR endpoint with speaker diarization (requires additional ASR container - see note below):
+Или для пользовательского ASR-эндпоинта с идентификацией говорящих (требуется дополнительный ASR-контейнер - см. примечание ниже):
 ```bash
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.asr.example -O .env
 ```
 
-> **Important:** The ASR endpoint option requires running an additional Docker container (`onerahmet/openai-whisper-asr-webservice`) alongside Speakr. For complete setup instructions including docker-compose configurations for both containers, see [Running ASR Service for Speaker Diarization](getting-started/installation.md#running-asr-service-for-speaker-diarization).
+> **Важно:** Опция ASR-эндпоинта требует запуска дополнительного контейнера Docker (`onerahmet/openai-whisper-asr-webservice`) вместе с Speakr. Для полных инструкций по настройке, включая конфигурации docker-compose для обоих контейнеров, см. [Запуск ASR-сервиса для идентификации говорящих](getting-started/installation.md#running-asr-service-for-speaker-diarization).
 
-## Step 3: Configure Your Transcription Service
+## Шаг 3: Настройка вашего сервиса транскрибации
 
-Open the `.env` file in your preferred text editor and configure it based on your chosen service.
+Откройте файл `.env` в предпочитаемом текстовом редакторе и настройте его в зависимости от выбранного сервиса.
 
-### Option A: OpenAI Whisper Configuration
+### Вариант A: Конфигурация OpenAI Whisper
 
-If you're using OpenAI Whisper, you'll need to set up both the transcription service and the text generation model. The text generation model is used for creating summaries, generating titles, and powering the chat features.
+Если вы используете OpenAI Whisper, вам нужно настроить как сервис транскрибации, так и модель генерации текста. Модель генерации текста используется для создания сводок, генерации заголовков и работы функций чата.
 
-Edit your `.env` file and update these key variables:
+Отредактируйте файл `.env` и обновите эти ключевые переменные:
 
 ```bash
-# For text generation (summaries, chat, titles)
+# Для генерации текста (сводки, чат, заголовки)
 TEXT_MODEL_BASE_URL=https://openrouter.ai/api/v1
 TEXT_MODEL_API_KEY=your_openrouter_api_key_here
 TEXT_MODEL_NAME=openai/gpt-4o-mini
 
-# For transcription
+# Для транскрибации
 TRANSCRIPTION_BASE_URL=https://api.openai.com/v1
 TRANSCRIPTION_API_KEY=your_openai_api_key_here
 WHISPER_MODEL=whisper-1
 ```
 
-The text model can use OpenRouter for access to various AI models, or you can point it directly to OpenAI by using the same base URL and API key as your transcription service. OpenRouter provides access to multiple models including GPT-4, Claude, and others, which can be more cost-effective for text generation tasks.
+Модель текста может использовать OpenRouter для доступа к различным моделям ИИ, или вы можете указать её напрямую на OpenAI, используя тот же базовый URL и API-ключ, что и для вашего сервиса транскрибации. OpenRouter предоставляет доступ к множеству моделей, включая GPT-4, Claude и другие, что может быть более экономичным для задач генерации текста.
 
-For OpenAI's latest GPT-5 models (`gpt-5`, `gpt-5-mini`, `gpt-5-nano`), you must use the OpenAI API directly with `TEXT_MODEL_BASE_URL=https://api.openai.com/v1`. See the [Model Configuration Guide](admin-guide/model-configuration.md) for detailed GPT-5 setup and optimization.
+Для последних моделей GPT-5 от OpenAI (`gpt-5`, `gpt-5-mini`, `gpt-5-nano`) вы должны использовать API OpenAI напрямую с `TEXT_MODEL_BASE_URL=https://api.openai.com/v1`. См. [Руководство по конфигурации моделей](admin-guide/model-configuration.md) для подробной настройки и оптимизации GPT-5.
 
-### Option B: Custom ASR Endpoint Configuration
+### Вариант B: Конфигурация пользовательского ASR-эндпоинта
 
-> **Prerequisites:** This option requires running an additional ASR service container (`onerahmet/openai-whisper-asr-webservice`). You can either:
+> **Требования:** Этот вариант требует запуска дополнительного контейнера ASR-сервиса (`onerahmet/openai-whisper-asr-webservice`). Вы можете:
 >
-> - Run both containers in the same Docker Compose stack (recommended) - see [complete setup guide](getting-started/installation.md#running-asr-service-for-speaker-diarization)
-> - Run the ASR service separately on the same or different machine
-> - Use an existing ASR service if you already have one deployed
+> - Запустить оба контейнера в одном стеке Docker Compose (рекомендуется) - см. [полное руководство по настройке](getting-started/installation.md#running-asr-service-for-speaker-diarization)
+> - Запустить ASR-сервис отдельно на той же или другой машине
+> - Использовать существующий ASR-сервис, если он уже развернут
 
-If you're using a custom ASR service like WhisperX or a self-hosted Whisper server, configure these variables:
+Если вы используете пользовательский ASR-сервис, такой как WhisperX или самостоятельно размещенный сервер Whisper, настройте эти переменные:
 
 ```bash
-# For text generation (summaries, chat, titles)
+# Для генерации текста (сводки, чат, заголовки)
 TEXT_MODEL_BASE_URL=https://openrouter.ai/api/v1
 TEXT_MODEL_API_KEY=your_openrouter_api_key_here
 TEXT_MODEL_NAME=openai/gpt-4o-mini
 
-# Enable ASR endpoint
+# Включить ASR-эндпоинт
 USE_ASR_ENDPOINT=true
 
-# ASR service URL (use container name if in same docker compose)
+# URL ASR-сервиса (используйте имя контейнера, если в том же docker compose)
 ASR_BASE_URL=http://whisper-asr:9000
 ```
 
-When using an ASR endpoint, [speaker diarization](features.md#speaker-diarization) is automatically enabled, allowing Speakr to identify different speakers in your recordings. After transcription, you'll need to [identify speakers](user-guide/transcripts.md#speaker-identification) to build your speaker library. The ASR_BASE_URL should point to your ASR service. If you're running the ASR service in the same Docker Compose stack, use the container name and internal port (like `http://whisper-asr:9000`). For external services, use the full URL with the appropriate IP address or domain name.
+При использовании ASR-эндпоинта [идентификация говорящих](features.md#speaker-diarization) автоматически включается, позволяя Speakr идентифицировать разных говорящих в ваших записях. После транскрибации вам нужно будет [идентифицировать говорящих](user-guide/transcripts.md#speaker-identification), чтобы создать библиотеку говорящих. ASR_BASE_URL должен указывать на ваш ASR-сервис. Если вы запускаете ASR-сервис в том же стеке Docker Compose, используйте имя контейнера и внутренний порт (например, `http://whisper-asr:9000`). Для внешних сервисов используйте полный URL с соответствующим IP-адресом или доменным именем.
 
-## Step 4: Configure Admin Account
+## Шаг 4: Настройка учетной записи администратора
 
-Speakr automatically creates an admin user on first startup. Configure these credentials in your `.env` file before launching:
+Speakr автоматически создает пользователя-администратора при первом запуске. Настройте эти учетные данные в файле `.env` перед запуском:
 
 ```bash
 ADMIN_USERNAME=admin
@@ -101,137 +101,137 @@ ADMIN_EMAIL=admin@example.com
 ADMIN_PASSWORD=changeme
 ```
 
-Make sure to change these values to something secure, especially the password. This admin account will be created automatically when you first start Speakr, and you'll use these credentials to log in. The first user created through this method becomes the system administrator with full access to all features including user management and system settings.
+Обязательно измените эти значения на безопасные, особенно пароль. Эта учетная запись администратора будет создана автоматически при первом запуске Speakr, и вы будете использовать эти учетные данные для входа. Первый пользователь, созданный этим методом, становится системным администратором с полным доступом ко всем функциям, включая управление пользователями и системные настройки.
 
-## Step 5: Launch Speakr
+## Шаг 5: Запуск Speakr
 
-With your configuration complete, start Speakr using Docker Compose:
+После завершения настройки запустите Speakr с помощью Docker Compose:
 
 ```bash
 docker compose up -d
 ```
 
-The first launch will take a few minutes as Docker downloads the pre-built image (about 3GB) and initializes the database. You can monitor the startup process by viewing the logs:
+Первый запуск займет несколько минут, так как Docker загружает предварительно собранный образ (около 3 ГБ) и инициализирует базу данных. Вы можете отслеживать процесс запуска, просматривая логи:
 
 ```bash
 docker compose logs -f app
 ```
 
-Look for a message indicating that the Flask application is running and ready to accept connections. Press Ctrl+C to exit the log view (this won't stop the container).
+Ищите сообщение, указывающее, что приложение Flask запущено и готово принимать соединения. Нажмите Ctrl+C, чтобы выйти из просмотра логов (это не остановит контейнер).
 
-## Step 6: Access Speakr
+## Шаг 6: Доступ к Speakr
 
-Once the container is running, open your web browser and navigate to:
+После запуска контейнера откройте веб-браузер и перейдите по адресу:
 
 ```
 http://localhost:8899
 ```
 
-Log in using the admin credentials you configured in Step 4. You should now see the Speakr dashboard, ready for your first recording.
+Войдите, используя учетные данные администратора, настроенные на шаге 4. Теперь вы должны увидеть панель управления Speakr, готовую для вашей первой записи.
 
-## Your First Recording
+## Ваша первая запись
 
-After logging in, you can immediately start using Speakr. Click the "New Recording" button in the top navigation to either upload an existing audio file or start a [live recording](user-guide/recording.md). For detailed instructions, see the [recording guide](user-guide/recording.md). For uploads, Speakr supports [common audio formats](faq.md#what-audio-formats-does-speakr-support) like MP3, M4A, WAV, and more, with files up to 500MB by default. You can adjust this limit in [system settings](admin-guide/system-settings.md). For live recording, you can capture from your microphone, system audio, or both simultaneously.
+После входа вы можете сразу начать использовать Speakr. Нажмите кнопку "New Recording" в верхней навигации, чтобы загрузить существующий аудиофайл или начать [прямую запись](user-guide/recording.md). Подробные инструкции см. в [руководстве по записи](user-guide/recording.md). Для загрузки Speakr поддерживает [распространенные аудиоформаты](faq.md#what-audio-formats-does-speakr-support), такие как MP3, M4A, WAV и другие, с файлами до 500 МБ по умолчанию. Вы можете изменить этот лимит в [системных настройках](admin-guide/system-settings.md). Для прямой записи вы можете захватывать с микрофона, системного аудио или обоих одновременно.
 
-## Setting Up Collaboration (Optional)
+## Настройка совместной работы (необязательно)
 
-If you're using Speakr with your family or team, you can leverage powerful collaboration features including groups, group tags, and automatic sharing. These features work great for project teams, departments, or families who want to automatically share certain types of recordings.
+Если вы используете Speakr с семьей или командой, вы можете использовать мощные функции совместной работы, включая группы, групповые теги и автоматический обмен. Эти функции отлично работают для проектных команд, отделов или семей, которые хотят автоматически делиться определенными типами записей.
 
-### Creating a Group
+### Создание группы
 
-As an admin, you can create groups to organize users who regularly collaborate:
+Как администратор, вы можете создавать группы для организации пользователей, которые регулярно сотрудничают:
 
-1. Navigate to **Admin → User Groups** in the admin dashboard
-2. Click "Create New Group" and enter a group name (e.g., "Engineering Team", "Family", "Sales Department")
-3. Optionally assign a group lead who can manage group settings
-4. Add members by searching for usernames and clicking to add them
-5. Save the group
+1. Перейдите в **Admin → User Groups** в панели администратора
+2. Нажмите "Create New Group" и введите имя группы (например, "Engineering Team", "Family", "Sales Department")
+3. При необходимости назначьте лидера группы, который может управлять настройками группы
+4. Добавьте участников, выполнив поиск по именам пользователей и нажав для добавления
+5. Сохраните группу
 
-### Creating Group Tags
+### Создание групповых тегов
 
-Group tags automatically share recordings with all group members when applied:
+Групповые теги автоматически делятся записями со всеми участниками группы при применении:
 
-1. While editing or creating a group, navigate to the **Tags** section
-2. Click "Create Group Tag" and enter:
-   - **Tag Name**: What the tag will be called (e.g., "Team Meetings", "Family Events")
-   - **Color**: Choose a color for easy visual identification
-   - **Custom Prompt** (optional): AI instructions for how to summarize recordings with this tag
-   - **Protected**: Enable to prevent automatic deletion by retention policies
-   - **Retention Days** (optional): Auto-delete recordings after this many days (leave blank to keep forever)
-3. Save the tag
+1. При редактировании или создании группы перейдите в раздел **Tags**
+2. Нажмите "Create Group Tag" и введите:
+   - **Имя тега**: Как будет называться тег (например, "Team Meetings", "Family Events")
+   - **Цвет**: Выберите цвет для легкой визуальной идентификации
+   - **Пользовательский промпт** (необязательно): Инструкции ИИ о том, как суммировать записи с этим тегом
+   - **Защищенный**: Включите, чтобы предотвратить автоматическое удаление политиками хранения
+   - **Дни хранения** (необязательно): Автоматически удалять записи после этого количества дней (оставьте пустым, чтобы хранить навсегда)
+3. Сохраните тег
 
-When any group member applies this tag to a recording, all group members automatically get access to it.
+Когда любой участник группы применяет этот тег к записи, все участники группы автоматически получают доступ к ней.
 
-### Sharing a Recording with a Group
+### Обмен записью с группой
 
-There are two ways to share recordings with groups:
+Есть два способа делиться записями с группами:
 
-**Method 1: Using Group Tags** (Automatic)
-1. When uploading or after creating a recording, click the tag icon
-2. Select any group tag you have access to
-3. All group members automatically receive access to this recording
-4. Future group members will NOT see historical recordings, only new ones tagged after they join
+**Метод 1: Использование групповых тегов** (Автоматический)
+1. При загрузке или после создания записи нажмите значок тега
+2. Выберите любой групповой тег, к которому у вас есть доступ
+3. Все участники группы автоматически получают доступ к этой записи
+4. Будущие участники группы НЕ увидят исторические записи, только новые, помеченные после их присоединения
 
-**Method 2: Individual Sharing** (Manual)
-1. Open any recording and click the share icon (users icon) in the toolbar
-2. Search for and select users to share with
-3. Choose permission level: view-only, edit, or reshare
-4. Each user receives immediate access
+**Метод 2: Индивидуальный обмен** (Ручной)
+1. Откройте любую запись и нажмите значок обмена (значок пользователей) на панели инструментов
+2. Найдите и выберите пользователей для обмена
+3. Выберите уровень разрешений: только просмотр, редактирование или повторный обмен
+4. Каждый пользователь получает немедленный доступ
 
-For more details on collaboration features, see the [Sharing & Collaboration guide](user-guide/sharing.md).
+Для получения более подробной информации о функциях совместной работы см. [Руководство по обмену и совместной работе](user-guide/sharing.md).
 
-## Optional Features
+## Необязательные функции
 
-### Enable Inquire Mode
+### Включение режима Inquire
 
-[Inquire Mode](user-guide/inquire-mode.md) allows you to search across all your recordings using natural language questions. Learn more about [semantic search capabilities](features.md#semantic-search-inquire-mode) in the features guide. To enable it, set this in your `.env` file:
+[Режим Inquire](user-guide/inquire-mode.md) позволяет искать по всем вашим записям, используя вопросы на естественном языке. Узнайте больше о [возможностях семантического поиска](features.md#semantic-search-inquire-mode) в руководстве по функциям. Чтобы включить его, установите это в файле `.env`:
 
 ```bash
 ENABLE_INQUIRE_MODE=true
 ```
 
-Then restart the container with `docker compose restart` for the change to take effect.
+Затем перезапустите контейнер с помощью `docker compose restart`, чтобы изменения вступили в силу.
 
-### Enable User Registration
+### Включение регистрации пользователей
 
-By default, only the admin can create new users. Learn more about [user management](admin-guide/user-management.md) in the admin guide. To allow self-registration, set:
+По умолчанию только администратор может создавать новых пользователей. Узнайте больше об [управлении пользователями](admin-guide/user-management.md) в руководстве администратора. Чтобы разрешить самостоятельную регистрацию, установите:
 
 ```bash
 ALLOW_REGISTRATION=true
 ```
 
-### Configure Your Timezone
+### Настройка вашего часового пояса
 
-Set your local timezone for accurate timestamp display:
+Установите ваш местный часовой пояс для точного отображения временных меток:
 
 ```bash
 TIMEZONE="America/New_York"
 ```
 
-Use any valid timezone from the TZ database like "Europe/London", "Asia/Tokyo", or "UTC".
+Используйте любой действительный часовой пояс из базы данных TZ, например "Europe/London", "Asia/Tokyo" или "UTC".
 
-## Stopping and Starting Speakr
+## Остановка и запуск Speakr
 
-To stop Speakr while preserving all your data:
+Чтобы остановить Speakr, сохранив все ваши данные:
 
 ```bash
 docker compose down
 ```
 
-To start it again:
+Чтобы запустить снова:
 
 ```bash
 docker compose up -d
 ```
 
-Your recordings, transcriptions, and settings are preserved in the `./uploads` and `./instance` directories on your host system.
+Ваши записи, транскрипции и настройки сохраняются в директориях `./uploads` и `./instance` на вашей хост-системе.
 
-## Troubleshooting
+## Решение проблем
 
-If Speakr doesn't start properly, check the logs for error messages using `docker compose logs app`. For more detailed help, see the [Troubleshooting Guide](troubleshooting.md), particularly the [installation issues](troubleshooting.md#installation-and-setup-issues) section. Common issues include incorrect API keys, which will show authentication errors in the logs, or port conflicts if another service is using port 8899. You can change the port by editing the `docker-compose.yml` file and modifying the ports section.
+Если Speakr не запускается должным образом, проверьте логи на наличие сообщений об ошибках, используя `docker compose logs app`. Для получения более подробной помощи см. [Руководство по решению проблем](troubleshooting.md), особенно раздел [проблемы с установкой](troubleshooting.md#installation-and-setup-issues). Распространенные проблемы включают неправильные API-ключи, которые будут показывать ошибки аутентификации в логах, или конфликты портов, если другой сервис использует порт 8899. Вы можете изменить порт, отредактировав файл `docker-compose.yml` и изменив раздел портов.
 
-If transcription fails, verify your API keys are correct and you have sufficient credits with your chosen service. The logs will show detailed error messages that can help identify the issue.
+Если транскрибация не удалась, убедитесь, что ваши API-ключи правильные и у вас достаточно кредитов с выбранным сервисом. Логи покажут подробные сообщения об ошибках, которые могут помочь определить проблему.
 
 ---
 
-Next: [Installation Guide](getting-started/installation.md) for production deployments and advanced configuration
+Далее: [Руководство по установке](getting-started/installation.md) для производственных развертываний и расширенной конфигурации

@@ -1,174 +1,175 @@
-# Troubleshooting
+# Решение проблем
 
-When something goes wrong with Speakr, this guide helps you identify and resolve common issues quickly. Most problems fall into a few categories - [installation issues](getting-started/installation.md), transcription failures, performance problems, or feature-specific quirks. Also check the [FAQ](faq.md) for common questions. Understanding where to look and what to check saves hours of frustration.
+Когда что-то идет не так с Speakr, это руководство поможет вам быстро определить и решить распространенные проблемы. Большинство проблем попадают в несколько категорий — [проблемы с установкой](getting-started/installation.md), сбои транскрибации, проблемы с производительностью или особенности конкретных функций. Также проверьте [FAQ](faq.md) для общих вопросов. Понимание, где искать и что проверять, экономит часы разочарований.
 
-## Installation and Setup Issues
+## Проблемы с установкой и настройкой
 
-### Container Won't Start
+### Контейнер не запускается
 
-When your Docker container refuses to start or immediately exits, the problem usually lies in your configuration. Check your [environment file](getting-started.md#step-3-configure-your-transcription-service) first - a single typo in API keys or mismatched quotes can prevent startup. Review the [installation guide](getting-started/installation.md) for proper setup. Run `docker compose logs app` to see the actual error messages. Common culprits include port conflicts (another service using 8899), missing volume mounts, or incorrect file permissions on your data directory.
+Когда ваш контейнер Docker отказывается запускаться или сразу завершается, проблема обычно заключается в вашей конфигурации. Сначала проверьте ваш [файл окружения](getting-started.md#step-3-configure-your-transcription-service) — одна опечатка в API-ключах или несоответствующие кавычки могут предотвратить запуск. Просмотрите [руководство по установке](getting-started/installation.md) для правильной настройки. Запустите `docker compose logs app`, чтобы увидеть фактические сообщения об ошибках. Распространенные причины включают конфликты портов (другой сервис использует 8899), отсутствующие монтирования томов или неправильные права доступа к файлам в вашей директории данных.
 
-If you see database connection errors, ensure your database file has proper permissions. The container runs as a specific user and needs read/write access to the data directories. On Linux systems, you might need to adjust ownership with `chown -R 1000:1000 ./uploads ./instance`.
+Если вы видите ошибки подключения к базе данных, убедитесь, что ваш файл базы данных имеет правильные права доступа. Контейнер запускается от имени конкретного пользователя и нуждается в доступе на чтение/запись к директориям данных. В системах Linux вам может потребоваться настроить владельца с помощью `chown -R 1000:1000 ./uploads ./instance`.
 
-### Can't Access the Web Interface
+### Не могу получить доступ к веб-интерфейсу
 
-When Speakr starts successfully but you can't reach the web interface, network configuration is usually the issue. First, verify the container is actually running with `docker ps`. Check that port 8899 is properly mapped - the docker-compose file should show `"8899:8899"` in the ports section.
+Когда Speakr успешно запускается, но вы не можете получить доступ к веб-интерфейсу, проблема обычно в сетевой конфигурации. Сначала убедитесь, что контейнер действительно запущен с помощью `docker ps`. Проверьте, что порт 8899 правильно сопоставлен — файл docker-compose должен показывать `"8899:8899"` в разделе портов.
 
-Firewall rules often block access, especially on cloud servers. Ensure port 8899 is open in your firewall, security groups (AWS), or network policies. If accessing from another machine, remember that `localhost` won't work - use the server's actual IP address or hostname.
+Правила файрвола часто блокируют доступ, особенно на облачных серверах. Убедитесь, что порт 8899 открыт в вашем файрволе, группах безопасности (AWS) или сетевых политиках. Если вы обращаетесь с другой машины, помните, что `localhost` не будет работать — используйте фактический IP-адрес сервера или имя хоста.
 
-### Admin Login Fails
+### Не удается войти как администратор
 
-If you can't log in with your [admin credentials](getting-started.md#step-4-configure-admin-account), first verify you're using the exact username and password from your environment file. For user management issues, see the [admin guide](admin-guide/user-management.md). These are case-sensitive and must match exactly. Check the Docker logs for admin user creation messages - you should see "Admin user created successfully" during first startup.
+Если вы не можете войти с вашими [учетными данными администратора](getting-started.md#step-4-configure-admin-account), сначала убедитесь, что вы используете точное имя пользователя и пароль из вашего файла окружения. Для проблем с управлением пользователями см. [руководство администратора](admin-guide/user-management.md). Они чувствительны к регистру и должны точно совпадать. Проверьте логи Docker на сообщения о создании пользователя-администратора — вы должны увидеть "Admin user created successfully" при первом запуске.
 
-Sometimes the admin user creation fails silently if the password doesn't meet requirements. Ensure your admin password is at least 8 characters long. If the admin user wasn't created, you might need to remove the database file and restart the container to trigger initialization again.
+Иногда создание пользователя-администратора молча завершается неудачей, если пароль не соответствует требованиям. Убедитесь, что ваш пароль администратора имеет длину не менее 8 символов. Если пользователь-администратор не был создан, вам может потребоваться удалить файл базы данных и перезапустить контейнер, чтобы снова запустить инициализацию.
 
-## Transcription Problems
+## Проблемы с транскрибацией
 
-### Transcription Never Starts
+### Транскрибация никогда не начинается
 
-When recordings stay in "pending" status indefinitely, the background processor might have stopped. Check the logs for error messages about the [transcription service](features.md#multi-engine-support). Monitor processing status in the [vector store](admin-guide/vector-store.md) admin panel. API key issues are the most common cause - verify your OpenAI or OpenRouter API key is valid and has available credits.
+Когда записи остаются в статусе "pending" бесконечно, фоновый процессор мог остановиться. Проверьте логи на сообщения об ошибках о [сервисе транскрибации](features.md#multi-engine-support). Мониторьте статус обработки в панели администратора [векторного хранилища](admin-guide/vector-store.md). Проблемы с API-ключами — наиболее распространенная причина — убедитесь, что ваш API-ключ OpenAI или OpenRouter действителен и имеет доступные кредиты.
 
-Network connectivity problems can also prevent transcription. The container needs to reach external API endpoints. If you're behind a corporate proxy, you'll need to configure proxy settings in your Docker environment.
+Проблемы с сетевым подключением также могут предотвращать транскрибацию. Контейнеру нужно достичь внешних API-эндпоинтов. Если вы за корпоративным прокси, вам нужно настроить параметры прокси в вашем окружении Docker.
 
-### Transcription Fails Immediately
+### Транскрибация сразу завершается неудачей
 
-Quick failures usually indicate API authentication problems. Double-check your API keys in the environment file. Remember that OpenAI and OpenRouter use different key formats. OpenAI keys start with "sk-" while OpenRouter keys look different. Ensure you're using the right key for your configured service.
+Быстрые сбои обычно указывают на проблемы с аутентификацией API. Дважды проверьте ваши API-ключи в файле окружения. Помните, что OpenAI и OpenRouter используют разные форматы ключей. Ключи OpenAI начинаются с "sk-", в то время как ключи OpenRouter выглядят иначе. Убедитесь, что вы используете правильный ключ для вашего настроенного сервиса.
 
-API rate limits or insufficient credits also cause immediate failures. Log into your API provider's dashboard to check your usage and limits. Some API plans have restrictive rate limits that Speakr might exceed with large files.
+Лимиты скорости API или недостаточные кредиты также вызывают немедленные сбои. Войдите в панель управления вашего провайдера API, чтобы проверить ваше использование и лимиты. Некоторые планы API имеют ограничительные лимиты скорости, которые Speakr может превысить с большими файлами.
 
-### ASR Endpoint Returns 405 or 404 Errors
+### ASR-эндпоинт возвращает ошибки 405 или 404
 
-If you're getting "405 Method Not Allowed" or "404 Not Found" errors with the Whisper ASR webservice, check your ASR_BASE_URL configuration. The URL should not include trailing comments or descriptions - remove anything after the # symbol in your environment file. For the Whisper ASR webservice, use just the base URL like `http://whisper-asr:9000` without `/asr` at the end.
+Если вы получаете ошибки "405 Method Not Allowed" или "404 Not Found" с Whisper ASR-веб-сервисом, проверьте вашу конфигурацию ASR_BASE_URL. URL не должен включать завершающие комментарии или описания — удалите все после символа # в вашем файле окружения. Для Whisper ASR-веб-сервиса используйте только базовый URL, например `http://whisper-asr:9000`, без `/asr` в конце.
 
-When using Docker Compose, always use container names rather than IP addresses for service communication. Instead of `http://192.168.1.132:9000`, use `http://whisper-asr-webservice:9000` where `whisper-asr-webservice` is your container name.
+При использовании Docker Compose всегда используйте имена контейнеров, а не IP-адреса для связи между сервисами. Вместо `http://192.168.1.132:9000` используйте `http://whisper-asr-webservice:9000`, где `whisper-asr-webservice` — это имя вашего контейнера.
 
-### Poor Transcription Quality
+### Плохое качество транскрибации
 
-Transcription accuracy depends heavily on audio quality. Background noise, multiple overlapping speakers, or poor microphone placement all degrade results. The AI models work best with clear, single-speaker audio or well-separated multiple speakers.
+Точность транскрибации сильно зависит от качества аудио. Фоновый шум, несколько перекрывающихся говорящих или плохое размещение микрофона — все это ухудшает результаты. Модели ИИ работают лучше всего с четким одноголосым аудио или хорошо разделенными несколькими говорящими.
 
-Language mismatches cause poor results too. If you've set a specific transcription language in settings but upload audio in a different language, accuracy suffers. Either set the correct language or leave it blank for auto-detection.
+Несоответствия языков также вызывают плохие результаты. Если вы установили конкретный язык транскрибации в настройках, но загружаете аудио на другом языке, точность страдает. Либо установите правильный язык, либо оставьте пустым для автоматического определения.
 
-For recordings with multiple speakers, using the [ASR endpoint with speaker diarization](features.md#speaker-diarization) dramatically improves usability. Learn how to [identify speakers](user-guide/transcripts.md#speaker-identification) after transcription, even if the raw transcription accuracy is similar.
+Для записей с несколькими говорящими использование [ASR-эндпоинта с идентификацией говорящих](features.md#speaker-diarization) значительно улучшает пригодность. Узнайте, как [идентифицировать говорящих](user-guide/transcripts.md#speaker-identification) после транскрибации, даже если исходная точность транскрибации аналогична.
 
-### Chinese Transcription Issues
+### Проблемы с китайской транскрибацией
 
-For [Chinese language transcription](features.md#language-support), model selection is critical. See the [FAQ on language support](faq.md#can-speakr-transcribe-languages-other-than-english) for more details.
+Для [китайской транскрибации](features.md#language-support) выбор модели критичен. См. [FAQ о поддержке языков](faq.md#can-speakr-transcribe-languages-other-than-english) для получения более подробной информации.
 
-**Important**: Distil models (like distil-large-v3) do not support Chinese transcription properly. Even when you set the language to "zh", these models may recognize Chinese audio as English and produce incorrect output. Always use the full large-v3 model or similar non-distilled models for Chinese content. If you're getting English transcription for Chinese audio or romanized output instead of Chinese characters, switch from a distil model to large-v3.
+**Важно**: Дистиллированные модели (такие как distil-large-v3) не поддерживают китайскую транскрибацию должным образом. Даже когда вы устанавливаете язык на "zh", эти модели могут распознавать китайское аудио как английское и производить неправильный вывод. Всегда используйте полную модель large-v3 или аналогичные недистиллированные модели для китайского контента. Если вы получаете английскую транскрибацию для китайского аудио или романизированный вывод вместо китайских символов, переключитесь с дистиллированной модели на large-v3.
 
-### Summary Language Doesn't Match Preference
+### Язык сводки не соответствует предпочтениям
 
-If [summaries](features.md#automatic-summarization) revert to English when you click "Reprocess Summary" despite having [language preferences](user-guide/settings.md#language-preferences) set, this might be a model limitation. Configure [custom prompts](admin-guide/prompts.md) to enforce language requirements. Some models like Qwen3-30B don't always follow language instructions correctly. Try using a different model that better respects language directives, or ensure your custom prompt explicitly specifies the output language.
+Если [сводки](features.md#automatic-summarization) возвращаются к английскому, когда вы нажимаете "Reprocess Summary", несмотря на установленные [языковые предпочтения](user-guide/settings.md#language-preferences), это может быть ограничением модели. Настройте [пользовательские промпты](admin-guide/prompts.md), чтобы принудительно применять языковые требования. Некоторые модели, такие как Qwen3-30B, не всегда правильно следуют языковым инструкциям. Попробуйте использовать другую модель, которая лучше уважает языковые директивы, или убедитесь, что ваш пользовательский промпт явно указывает язык вывода.
 
-## Performance Issues
+## Проблемы с производительностью
 
-### Slow Transcription Processing
+### Медленная обработка транскрибации
 
-Large audio files naturally take longer to process, but excessive delays indicate problems. Check your [server resources](getting-started.md#prerequisites) and review [system statistics](admin-guide/statistics.md) for performance metrics - Speakr needs adequate CPU and RAM, especially when processing multiple recordings simultaneously. The `docker stats` command shows current resource usage.
+Большие аудиофайлы естественно занимают больше времени для обработки, но чрезмерные задержки указывают на проблемы. Проверьте ваши [ресурсы сервера](getting-started.md#prerequisites) и просмотрите [системную статистику](admin-guide/statistics.md) для метрик производительности — Speakr нуждается в достаточном CPU и RAM, особенно при обработке нескольких записей одновременно. Команда `docker stats` показывает текущее использование ресурсов.
 
-Network speed affects transcription time since audio must upload to API services. Slow internet connections create bottlenecks, particularly for large files. Consider chunking settings if you consistently work with long recordings.
+Скорость сети влияет на время транскрибации, поскольку аудио должно загружаться в API-сервисы. Медленные интернет-соединения создают узкие места, особенно для больших файлов. Рассмотрите настройки разделения, если вы постоянно работаете с длинными записями.
 
-The choice of transcription model impacts speed. Whisper Large is more accurate but slower than Whisper Base. If speed matters more than perfect accuracy, consider using a smaller model through your API settings.
+Выбор модели транскрибации влияет на скорость. Whisper Large более точен, но медленнее, чем Whisper Base. Если скорость важнее идеальной точности, рассмотрите использование меньшей модели через ваши настройки API.
 
-### Files Over 25MB Fail with OpenAI
+### Файлы более 25 МБ завершаются неудачей с OpenAI
 
-OpenAI's Whisper API has a 25MB file size limit. For larger files, enable [chunking](features.md#audio-chunking) in your environment configuration. Learn about [chunking strategies](faq.md#whats-the-difference-between-chunking-by-size-vs-duration):
+API Whisper от OpenAI имеет лимит размера файла 25 МБ. Для больших файлов включите [разделение](features.md#audio-chunking) в вашей конфигурации окружения. Узнайте о [стратегиях разделения](faq.md#whats-the-difference-between-chunking-by-size-vs-duration):
+
 ```
 ENABLE_CHUNKING=true
-CHUNK_LIMIT=20MB  # or use duration: CHUNK_LIMIT=1400s
+CHUNK_LIMIT=20MB  # или используйте длительность: CHUNK_LIMIT=1400s
 CHUNK_OVERLAP_SECONDS=3
 ```
 
-You can specify chunk limits either by file size (MB) or duration (seconds). For models with specific duration limits like Azure's 1500-second maximum, use duration-based chunking. The system will automatically split your recordings and reassemble the transcription.
+Вы можете указать лимиты частей либо по размеру файла (МБ), либо по длительности (секунды). Для моделей с конкретными временными лимитами, такими как максимум 1500 секунд Azure, используйте разделение на основе длительности. Система автоматически разделит ваши записи и соберет транскрипцию обратно.
 
-### ASR Timeout on Long Recordings
+### Таймаут ASR на длинных записях
 
-Long recordings (over 30 minutes) may timeout during ASR processing. Increase the timeout in Admin Settings > System Settings > "ASR Timeout Seconds". For a 2-hour recording, set it to at least 7200 seconds (2 hours). Very long recordings like 3+ hour files may need longer timeouts depending on the GPU you are using for transcription (if local).
+Длинные записи (более 30 минут) могут таймаутиться во время обработки ASR. Увеличьте таймаут в Настройки администратора > Системные настройки > "ASR Timeout Seconds". Для 2-часовой записи установите его как минимум на 7200 секунд (2 часа). Очень длинные записи, такие как файлы 3+ часа, могут потребовать более длительных таймаутов в зависимости от GPU, который вы используете для транскрибации (если локально).
 
-### Web Interface Feels Sluggish
+### Веб-интерфейс кажется медленным
 
-Browser performance degrades with very large transcriptions. Recordings over 2 hours can generate massive amounts of text that some browsers may struggle to display smoothly. The bubble view for speaker-labeled transcriptions is particularly resource-intensive.
+Производительность браузера ухудшается с очень большими транскрипциями. Записи более 2 часов могут генерировать огромные объемы текста, с отображением которых некоторые браузеры могут с трудом справляться плавно. Пузырьковый вид для транскрипций с метками говорящих особенно ресурсоемок.
 
-Clear your browser cache if the interface gradually becomes slower over time. Speakr caches data locally for performance, but this cache can become corrupted. In Chrome or Firefox, hard refresh with Ctrl+Shift+R to reload fresh assets.
+Очистите кеш браузера, если интерфейс постепенно становится медленнее со временем. Speakr кеширует данные локально для производительности, но этот кеш может стать поврежденным. В Chrome или Firefox выполните жесткое обновление с помощью Ctrl+Shift+R, чтобы перезагрузить свежие ресурсы.
 
-## Feature-Specific Issues
+## Проблемы с конкретными функциями
 
-### Speaker Identification Not Working
+### Идентификация говорящих не работает
 
-[Speaker diarization](features.md#speaker-diarization) requires the [ASR endpoint](getting-started.md#option-b-custom-asr-endpoint-configuration), not standard Whisper API. Configure speaker settings in [system settings](admin-guide/system-settings.md). Verify you've configured ASR settings correctly in your environment file. The ASR_BASE_URL should point to a valid ASR service that supports diarization.
+[Идентификация говорящих](features.md#speaker-diarization) требует [ASR-эндпоинта](getting-started.md#option-b-custom-asr-endpoint-configuration), а не стандартного API Whisper. Настройте параметры говорящих в [системных настройках](admin-guide/system-settings.md). Убедитесь, что вы правильно настроили параметры ASR в вашем файле окружения. ASR_BASE_URL должен указывать на действительный ASR-сервис, который поддерживает идентификацию говорящих.
 
-Even with ASR enabled, you must explicitly request diarization when uploading or reprocessing recordings. Speakr should do this by default, but user settings may override this behavior. Check the speaker count settings - if you set min and max speakers to 1, diarization effectively disables. Use reasonable ranges like 2-6 speakers for most recordings.
+Даже при включенном ASR вы должны явно запросить идентификацию говорящих при загрузке или повторной обработке записей. Speakr должен делать это по умолчанию, но пользовательские настройки могут переопределить это поведение. Проверьте настройки количества говорящих — если вы установите минимальное и максимальное количество говорящих на 1, идентификация говорящих эффективно отключается. Используйте разумные диапазоны, такие как 2-6 говорящих для большинства записей.
 
-After transcription, speakers appear as generic labels (SPEAKER_01, etc.). You must manually [identify speakers](user-guide/transcripts.md#speaker-identification) by clicking the labels and assigning names. Manage your [speaker library](user-guide/settings.md#speakers-management-tab) in account settings.
+После транскрибации говорящие появляются как общие метки (SPEAKER_01 и т.д.). Вы должны вручную [идентифицировать говорящих](user-guide/transcripts.md#speaker-identification), нажимая на метки и назначая имена. Управляйте вашей [библиотекой говорящих](user-guide/settings.md#speakers-management-tab) в настройках аккаунта.
 
-### WhisperX Shows UNKNOWN_SPEAKER
+### WhisperX показывает UNKNOWN_SPEAKER
 
-If WhisperX only shows "UNKNOWN_SPEAKER" instead of numbered speakers (SPEAKER_00, SPEAKER_01, etc.), check these common issues:
+Если WhisperX показывает только "UNKNOWN_SPEAKER" вместо пронумерованных говорящих (SPEAKER_00, SPEAKER_01 и т.д.), проверьте эти распространенные проблемы:
 
-1. **Wrong ASR_ENGINE**: You must use `ASR_ENGINE=whisperx` in your ASR container's Docker environment. The `faster_whisper` engine does NOT support speaker diarization, even though it can transcribe audio.
+1. **Неправильный ASR_ENGINE**: Вы должны использовать `ASR_ENGINE=whisperx` в окружении Docker вашего ASR-контейнера. Движок `faster_whisper` НЕ поддерживает идентификацию говорящих, хотя он может транскрибировать аудио.
 
-2. **Missing or invalid HF_TOKEN**: The ASR container needs a valid HuggingFace token to download the diarization models. Ensure your `HF_TOKEN` environment variable is set in the ASR container configuration.
+2. **Отсутствующий или недействительный HF_TOKEN**: ASR-контейнеру нужен действительный токен HuggingFace для загрузки моделей идентификации говорящих. Убедитесь, что ваша переменная окружения `HF_TOKEN` установлена в конфигурации ASR-контейнера.
 
-3. **ASR_DIARIZE not enabled**: While this should be automatic when `USE_ASR_ENDPOINT=true`, explicitly set `ASR_DIARIZE=true` in your Speakr .env file if speakers aren't being detected.
+3. **ASR_DIARIZE не включен**: Хотя это должно быть автоматическим, когда `USE_ASR_ENDPOINT=true`, явно установите `ASR_DIARIZE=true` в вашем файле .env Speakr, если говорящие не обнаруживаются.
 
-4. **Docker networking issues**: If using the Speakr and ASR webservice containers in the same docker-compose, containers must communicate via service names (e.g., `http://whisper-asr:9000`), not localhost or external IPs.
+4. **Проблемы с сетью Docker**: Если используете контейнеры Speakr и ASR-веб-сервиса в одном docker-compose, контейнеры должны общаться через имена сервисов (например, `http://whisper-asr:9000`), а не localhost или внешние IP.
 
-Check your ASR container logs for pyannote/VAD messages to confirm diarization models are loading correctly.
+Проверьте логи вашего ASR-контейнера на сообщения pyannote/VAD, чтобы подтвердить, что модели идентификации говорящих загружаются правильно.
 
-### ASR Service on Mac Shows GPU Errors
+### ASR-сервис на Mac показывает ошибки GPU
 
-If you're running the ASR webservice on macOS and getting GPU-related errors or "no matching manifest" errors:
+Если вы запускаете ASR-веб-сервис на macOS и получаете ошибки, связанные с GPU, или ошибки "no matching manifest":
 
-- **Use the CPU image**: Replace `onerahmet/openai-whisper-asr-webservice:latest-gpu` with `onerahmet/openai-whisper-asr-webservice:latest`
-- **Remove GPU configuration**: Delete the entire `deploy` section with GPU device reservations from your docker-compose.yml
-- **Expect slower processing**: CPU-based transcription works but is significantly slower than GPU acceleration
+- **Используйте образ CPU**: Замените `onerahmet/openai-whisper-asr-webservice:latest-gpu` на `onerahmet/openai-whisper-asr-webservice:latest`
+- **Удалите конфигурацию GPU**: Удалите весь раздел `deploy` с резервированием устройств GPU из вашего docker-compose.yml
+- **Ожидайте более медленную обработку**: Транскрибация на основе CPU работает, но значительно медленнее, чем ускорение GPU
 
-This is a Docker limitation on macOS - GPU passthrough isn't supported because Docker runs in a Linux VM. See the [FAQ](faq.md#can-i-use-the-asr-webservice-for-speaker-diarization-on-mac) for complete Mac configuration.
+Это ограничение Docker на macOS — проброс GPU не поддерживается, потому что Docker запускается в виртуальной машине Linux. См. [FAQ](faq.md#can-i-use-the-asr-webservice-for-speaker-diarization-on-mac) для полной конфигурации Mac.
 
-### Sharing Links Don't Work
+### Ссылки для обмена не работают
 
-[Sharing](user-guide/sharing.md) requires your Speakr instance to be accessible from the internet with HTTPS. See [sharing requirements](user-guide/sharing.md#requirements-for-sharing) and [security considerations](user-guide/sharing.md#security-and-privacy-considerations). Local installations or non-SSL setups cannot generate working share links. The share button will be disabled or show an error explaining the requirements.
+[Обмен](user-guide/sharing.md) требует, чтобы ваш экземпляр Speakr был доступен из интернета с HTTPS. См. [требования для обмена](user-guide/sharing.md#requirements-for-sharing) и [соображения безопасности](user-guide/sharing.md#security-and-privacy-considerations). Локальные установки или настройки без SSL не могут генерировать рабочие ссылки для обмена. Кнопка обмена будет отключена или покажет ошибку, объясняющую требования.
 
-If your instance meets the requirements but shares still fail, check that your configured URL in the environment matches reality. Mismatched URLs cause share links to point to the wrong location. The URL must be exactly what external users will use to access your instance.
+Если ваш экземпляр соответствует требованиям, но обмены все еще не работают, проверьте, что настроенный URL в окружении соответствует реальности. Несоответствующие URL вызывают, что ссылки для обмена указывают на неправильное местоположение. URL должен быть точно тем, что внешние пользователи будут использовать для доступа к вашему экземпляру.
 
-### Inquire Mode Returns No Results
+### Режим Inquire не возвращает результатов
 
-[Semantic search](user-guide/inquire-mode.md) requires the embedding model to be properly installed and initialized. Check the [Vector Store tab](admin-guide/vector-store.md) in admin settings and review [vector store troubleshooting](admin-guide/vector-store.md#troubleshooting-common-issues) - it should show "Available" status. If not, the sentence-transformers library might be missing or failed to load.
+[Семантический поиск](user-guide/inquire-mode.md) требует, чтобы модель эмбеддингов была правильно установлена и инициализирована. Проверьте [вкладку Vector Store](admin-guide/vector-store.md) в настройках администратора и просмотрите [решение проблем с векторным хранилищем](admin-guide/vector-store.md#troubleshooting-common-issues) — она должна показывать статус "Available". Если нет, библиотека sentence-transformers может отсутствовать или не загрузиться.
 
-All recordings need processing before they're searchable. The Vector Store tab shows how many recordings are processed versus pending. Use the process button to manually trigger embedding generation if automatic processing has stalled.
+Все записи нуждаются в обработке, прежде чем они станут доступными для поиска. Вкладка Vector Store показывает, сколько записей обработано по сравнению с ожидающими. Используйте кнопку обработки, чтобы вручную запустить генерацию эмбеддингов, если автоматическая обработка остановилась.
 
-Query formulation matters enormously. [Inquire Mode](user-guide/inquire-mode.md) understands context and meaning, not just keywords. Learn [effective search strategies](user-guide/inquire-mode.md#asking-effective-questions) in the user guide. Ask complete questions rather than typing isolated words. "What did we decide about the budget?" works better than just "budget decision".
+Формулировка запроса имеет огромное значение. [Режим Inquire](user-guide/inquire-mode.md) понимает контекст и значение, а не только ключевые слова. Узнайте [эффективные стратегии поиска](user-guide/inquire-mode.md#asking-effective-questions) в руководстве пользователя. Задавайте полные вопросы, а не просто вводите изолированные слова. "Что мы решили по поводу бюджета?" работает лучше, чем просто "решение бюджета".
 
-## Additional Considerations
+## Дополнительные соображения
 
-### Recording Disclaimer for Legal Compliance
+### Отказ от ответственности при записи для юридического соответствия
 
-In many jurisdictions, you must inform participants they're being recorded. Enable a recording disclaimer in [System Settings](admin-guide/system-settings.md#recording-disclaimer). Check the [FAQ on recording compliance](faq.md#do-i-need-to-inform-people-theyre-being-recorded). Set custom text that appears before any recording starts, such as legal notices about consent requirements. This feature is particularly important in regions with strict recording laws like Australia or California.
+Во многих юрисдикциях вы должны информировать участников, что их записывают. Включите отказ от ответственности при записи в [Системных настройках](admin-guide/system-settings.md#recording-disclaimer). Проверьте [FAQ о соответствии при записи](faq.md#do-i-need-to-inform-people-theyre-being-recorded). Установите пользовательский текст, который появляется перед началом любой записи, такой как юридические уведомления о требованиях согласия. Эта функция особенно важна в регионах со строгими законами о записи, таких как Австралия или Калифорния.
 
-### Offline Deployment
+### Офлайн-развертывание
 
-Speakr can run completely offline as all dependencies are built into the Docker image. For offline deployments, use local models via Ollama for [text generation](features.md#automatic-summarization) and ensure your ASR endpoint is hosted locally. The system will work without internet access once properly configured.
+Speakr может работать полностью офлайн, так как все зависимости встроены в образ Docker. Для офлайн-развертываний используйте локальные модели через Ollama для [генерации текста](features.md#automatic-summarization) и убедитесь, что ваш ASR-эндпоинт размещен локально. Система будет работать без доступа к интернету после правильной настройки.
 
-### Non-Docker Installation
+### Установка без Docker
 
-While Docker is the only officially supported installation method, you can attempt manual installation using npm and Python. You'll need to handle dependencies, environment setup, and configuration yourself. This approach is not recommended for regular use and you'll need to troubleshoot issues independently.
+Хотя Docker — единственный официально поддерживаемый метод установки, вы можете попытаться выполнить ручную установку, используя npm и Python. Вам нужно будет самостоятельно обрабатывать зависимости, настройку окружения и конфигурацию. Этот подход не рекомендуется для регулярного использования, и вам нужно будет самостоятельно решать проблемы.
 
-## Getting Help
+## Получение помощи
 
-### Check the Logs
+### Проверка логов
 
-Docker logs contain valuable debugging information. Use `docker compose logs -f app` to see real-time logs. Look for ERROR or WARNING messages that correspond to when problems occurred. Python tracebacks indicate code-level issues that might require support.
+Логи Docker содержат ценную информацию для отладки. Используйте `docker compose logs -f app`, чтобы увидеть логи в реальном времени. Ищите сообщения ERROR или WARNING, которые соответствуют времени возникновения проблем. Трассировки Python указывают на проблемы на уровне кода, которые могут потребовать поддержки.
 
-For ASR issues, also check the ASR container logs: `docker compose logs -f whisper-asr-webservice`
+Для проблем с ASR также проверьте логи ASR-контейнера: `docker compose logs -f whisper-asr-webservice`
 
-### System Information
+### Системная информация
 
-When requesting help, provide your system configuration from the About tab in account settings. Include the Speakr version, configured AI model, transcription service type, and any error messages. This context helps others understand your specific setup.
+При запросе помощи предоставьте конфигурацию вашей системы из вкладки About в настройках аккаунта. Включите версию Speakr, настроенную модель ИИ, тип сервиса транскрибации и любые сообщения об ошибках. Этот контекст помогает другим понять вашу конкретную настройку.
 
-### Community Support
+### Поддержка сообщества
 
-The GitHub repository's issue tracker is your best resource for reporting bugs or requesting features. Search existing issues first - someone might have already encountered and solved your problem. When creating new issues, include specific steps to reproduce the problem.
+Трекер проблем репозитория GitHub — ваш лучший ресурс для сообщения об ошибках или запроса функций. Сначала поищите существующие проблемы — кто-то мог уже столкнуться с вашей проблемой и решить её. При создании новых проблем включите конкретные шаги для воспроизведения проблемы.
 
 ---
 
-Next: [FAQ](faq.md) →
+Далее: [FAQ](faq.md) →

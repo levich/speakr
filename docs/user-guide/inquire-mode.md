@@ -1,100 +1,100 @@
 ---
 layout: default
-title: Inquire Mode
-parent: User Guide
+title: Режим Inquire
+parent: Руководство пользователя
 nav_order: 4
 ---
 
-# Inquire Mode - Semantic Search
+# Режим Inquire - Семантический поиск
 
-Inquire Mode transforms your entire recording library into an intelligent knowledge base that you can search using natural language questions. Instead of hunting through individual recordings or trying to remember which meeting contained a specific discussion, you can simply ask questions and receive comprehensive answers drawn from all your relevant recordings.
+Режим Inquire преобразует всю вашу библиотеку записей в интеллектуальную базу знаний, которую вы можете искать, используя вопросы на естественном языке. Вместо поиска по отдельным записям или попыток вспомнить, в какой встрече содержалось конкретное обсуждение, вы можете просто задавать вопросы и получать всесторонние ответы, извлеченные из всех ваших релевантных записей.
 
-![Inquire Mode Interface](../assets/images/screenshots/Inquire mode.png)
+![Интерфейс режима Inquire](../assets/images/screenshots/Inquire mode.png)
 
-## Understanding Inquire Mode
+## Понимание режима Inquire
 
-Think of Inquire Mode as having a knowledgeable assistant who has listened to every recording in your library and can instantly recall and synthesize information from any of them. When you ask a question, the system searches across all your transcriptions, understands the context and meaning behind your query, and provides a coherent answer with citations back to the source recordings.
+Думайте о режиме Inquire как о знающем ассистенте, который прослушал каждую запись в вашей библиотеке и может мгновенно вспомнить и синтезировать информацию из любой из них. Когда вы задаете вопрос, система ищет по всем вашим транскрипциям, понимает контекст и значение вашего запроса и предоставляет связный ответ с цитатами обратно к исходным записям.
 
-This semantic search capability goes far beyond simple keyword matching. The system understands concepts, relationships, and context. If you ask about "budget concerns," it will find discussions about financial constraints, cost overruns, funding issues, and resource limitations - even if the exact phrase "budget concerns" was never spoken.
+Эта способность семантического поиска выходит далеко за рамки простого сопоставления ключевых слов. Система понимает концепции, отношения и контекст. Если вы спросите о "проблемах с бюджетом", она найдет обсуждения о финансовых ограничениях, превышении затрат, проблемах с финансированием и ограничениях ресурсов — даже если точная фраза "проблемы с бюджетом" никогда не произносилась.
 
-## Getting Started with Inquire Mode
+## Начало работы с режимом Inquire
 
-Access Inquire Mode by clicking the Inquire button in the top navigation bar. The interface opens with a clean search area at the top and powerful filtering options on the left side. Your search results appear in the main content area, organized and formatted for easy reading.
+Доступ к режиму Inquire можно получить, нажав кнопку Inquire в верхней панели навигации. Интерфейс открывается с чистой областью поиска вверху и мощными опциями фильтрации слева. Ваши результаты поиска появляются в основной области контента, организованные и отформатированные для легкого чтения.
 
-The beauty of Inquire Mode is its simplicity. You don't need to learn special search syntax or commands. Just type your question as you would ask a colleague, and the system handles the complexity of finding and synthesizing the relevant information.
+Красота режима Inquire в его простоте. Вам не нужно изучать специальный синтаксис поиска или команды. Просто введите ваш вопрос, как вы бы спросили коллегу, и система обработает сложность поиска и синтеза релевантной информации.
 
-## Using Filters to Focus Your Search
+## Использование фильтров для фокусировки поиска
 
-The left sidebar contains filters that help you narrow your search to specific recordings before asking your question. This is particularly useful when you have a large library and want to focus on certain contexts.
+Левая боковая панель содержит фильтры, которые помогают сузить ваш поиск до конкретных записей перед заданием вопроса. Это особенно полезно, когда у вас большая библиотека и вы хотите сосредоточиться на определенных контекстах.
 
-The tag filter lets you select recordings with specific tags, which is perfect when you want to search within a particular project, client, or type of meeting. If you've tagged your recordings consistently, this becomes a powerful way to segment your searches. The system shows how many recordings match each tag, helping you understand the scope of your search.
+Фильтр тегов позволяет выбирать записи с конкретными тегами, что идеально, когда вы хотите искать в рамках конкретного проекта, клиента или типа встречи. Если вы последовательно тегировали свои записи, это становится мощным способом сегментации ваших поисков. Система показывает, сколько записей соответствует каждому тегу, помогая вам понять масштаб вашего поиска.
 
-Speaker filtering allows you to focus on what specific people have said across recordings. This is invaluable when you need to track commitments from a particular person, understand someone's perspective on various topics, or prepare for a meeting with specific individuals.
+Фильтрация по говорящим позволяет сосредоточиться на том, что конкретные люди сказали в записях. Это бесценно, когда вам нужно отслеживать обязательства от конкретного человека, понимать чью-то точку зрения по различным темам или готовиться к встрече с конкретными людьми.
 
-Date range filtering helps you focus on recent discussions or search within a specific time period. This is particularly useful for tracking how discussions have evolved over time or finding information from a specific quarter or project phase.
+Фильтрация по диапазону дат помогает сосредоточиться на недавних обсуждениях или искать в определенный период времени. Это особенно полезно для отслеживания того, как обсуждения развивались со временем, или поиска информации из конкретного квартала или фазы проекта.
 
-## Asking Effective Questions
+## Задание эффективных вопросов
 
-![Inquire Mode Example Results](../assets/images/screenshots/inquire-dark-mode.png)
+![Примеры результатов режима Inquire](../assets/images/screenshots/inquire-dark-mode.png)
 
-The key to getting great results from Inquire Mode is asking clear, specific questions. The system works best when you provide context and be specific about what you're looking for.
+Ключ к получению отличных результатов от режима Inquire — задавать четкие, конкретные вопросы. Система работает лучше всего, когда вы предоставляете контекст и конкретизируете то, что ищете.
 
-Instead of searching for single words like "deadline," ask complete questions like "What are the upcoming deadlines for the mobile app project?" This helps the AI understand not just what information you want, but why you want it and how to present it most usefully.
+Вместо поиска отдельных слов, таких как "deadline", задавайте полные вопросы, такие как "Какие предстоящие сроки для проекта мобильного приложения?" Это помогает ИИ понять не только какую информацию вы хотите, но и почему вы её хотите и как представить её наиболее полезно.
 
-The system excels at different types of queries. You can ask for summaries of specific topics across multiple meetings, request lists of action items or decisions, search for specific statements or commitments, analyze patterns or trends in discussions, or identify problems and proposed solutions.
+Система превосходно справляется с различными типами запросов. Вы можете запрашивать сводки конкретных тем по нескольким встречам, запрашивать списки пунктов действий или решений, искать конкретные утверждения или обязательства, анализировать паттерны или тенденции в обсуждениях или идентифицировать проблемы и предложенные решения.
 
-## Understanding Your Results
+## Понимание ваших результатов
 
-![Contextual Search Results](../assets/images/screenshots/Inquire mode.png)
+![Контекстные результаты поиска](../assets/images/screenshots/Inquire mode.png)
 
-When Inquire Mode returns results, it provides a synthesized answer that draws from all relevant recordings. The response isn't just a list of search hits - it's a coherent narrative that combines information from multiple sources into a unified answer.
+Когда режим Inquire возвращает результаты, он предоставляет синтезированный ответ, извлеченный из всех релевантных записей. Ответ — это не просто список результатов поиска — это связное повествование, которое объединяет информацию из нескольких источников в единый ответ.
 
-Each piece of information includes a citation in the format (Recording ID: XX) that links directly to the source recording. Clicking these links takes you to the full recording where you can see the complete context. This transparency ensures you can always verify the information and dive deeper when needed.
+Каждый фрагмент информации включает цитату в формате (Recording ID: XX), которая напрямую ссылается на исходную запись. Нажатие на эти ссылки переносит вас к полной записи, где вы можете увидеть полный контекст. Эта прозрачность гарантирует, что вы всегда можете проверить информацию и углубиться при необходимости.
 
-The system intelligently organizes information, grouping related points together and presenting them in a logical flow. If multiple recordings discuss the same topic, the answer will synthesize these discussions, showing how the conversation evolved over time while maintaining clear attribution to each source.
+Система интеллектуально организует информацию, группируя связанные пункты вместе и представляя их в логическом потоке. Если несколько записей обсуждают одну и ту же тему, ответ синтезирует эти обсуждения, показывая, как беседа развивалась со временем, сохраняя четкую атрибуцию каждого источника.
 
-## Practical Applications
+## Практические применения
 
-Inquire Mode shines in numerous real-world scenarios. When preparing for meetings, you can quickly review what was previously discussed about agenda topics, what questions remained unresolved, and what commitments were made. This ensures you walk into meetings fully informed without spending hours reviewing old recordings.
+Режим Inquire превосходно работает в многочисленных реальных сценариях. При подготовке к встречам вы можете быстро просмотреть, что ранее обсуждалось по темам повестки дня, какие вопросы остались нерешенными и какие обязательства были взяты. Это гарантирует, что вы входите на встречи полностью информированными, не тратя часы на просмотр старых записей.
 
-For project management, the system helps track decisions across multiple meetings, identify all action items assigned to group members, and monitor how project requirements or priorities have changed over time. You can ask questions like "What risks have been identified for the product launch?" and receive a comprehensive list drawn from all relevant discussions.
+Для управления проектами система помогает отслеживать решения по нескольким встречам, идентифицировать все пункты действий, назначенные участникам группы, и отслеживать, как требования проекта или приоритеты изменились со временем. Вы можете задавать вопросы, такие как "Какие риски были идентифицированы для запуска продукта?" и получать всесторонний список, извлеченный из всех релевантных обсуждений.
 
-Research and analysis become dramatically more efficient. Whether you're analyzing customer feedback patterns, tracking competitor mentions, or identifying recurring themes across interviews, Inquire Mode can surface insights that might otherwise remain buried in hours of recordings.
+Исследования и анализ становятся значительно более эффективными. Независимо от того, анализируете ли вы паттерны обратной связи клиентов, отслеживаете упоминания конкурентов или идентифицируете повторяющиеся темы в интервью, режим Inquire может выявить инсайты, которые в противном случае остались бы похороненными в часах записей.
 
-The system also serves as an excellent compliance and documentation tool. You can quickly find specific commitments made to clients, locate discussions about regulatory requirements, or verify what was agreed upon in negotiations. The citation system provides an audit trail back to the original recordings.
+Система также служит отличным инструментом для соответствия требованиям и документирования. Вы можете быстро найти конкретные обязательства, данные клиентам, найти обсуждения о регуляторных требованиях или проверить, что было согласовано в переговорах. Система цитирования предоставляет аудиторский след обратно к исходным записям.
 
-## Advanced Search Strategies
+## Расширенные стратегии поиска
 
-As you become more comfortable with Inquire Mode, you can develop sophisticated search strategies. Start with broader questions to understand the landscape of available information, then drill down with increasingly specific queries. This iterative approach helps you discover information you might not have known to ask about directly.
+По мере того, как вы становитесь более комфортными с режимом Inquire, вы можете разрабатывать сложные стратегии поиска. Начните с более широких вопросов, чтобы понять ландшафт доступной информации, затем углубитесь с все более конкретными запросами. Этот итеративный подход помогает вам обнаружить информацию, о которой вы, возможно, не знали, что нужно спросить напрямую.
 
-Combine filters strategically. For instance, when preparing for a client meeting, filter by that client's tag and the relevant date range, then ask about outstanding issues or commitments. This focused approach yields highly relevant results without noise from unrelated recordings.
+Комбинируйте фильтры стратегически. Например, при подготовке к встрече с клиентом фильтруйте по тегу этого клиента и соответствующему диапазону дат, затем спрашивайте о нерешенных проблемах или обязательствах. Этот сфокусированный подход дает высокорелевантные результаты без шума от несвязанных записей.
 
-Pay attention to how the system interprets your questions. If results aren't quite what you expected, try rephrasing with different terms or adding more context. The system learns from the patterns in your recordings, so using terminology consistent with your actual discussions often yields better results.
+Обращайте внимание на то, как система интерпретирует ваши вопросы. Если результаты не совсем то, что вы ожидали, попробуйте переформулировать с разными терминами или добавить больше контекста. Система учится на паттернах в ваших записях, поэтому использование терминологии, согласованной с вашими фактическими обсуждениями, часто дает лучшие результаты.
 
-## Technical Considerations
+## Технические соображения
 
-Inquire Mode's power comes from its semantic understanding capabilities. When embeddings are enabled (with sentence-transformers installed), the system creates mathematical representations of meaning that allow it to understand concepts beyond simple keyword matching. This means it can find relevant information even when different words are used to express the same ideas.
+Мощь режима Inquire исходит от его способностей семантического понимания. Когда включены эмбеддинги (с установленными sentence-transformers), система создает математические представления значения, которые позволяют ей понимать концепции за пределами простого сопоставления ключевых слов. Это означает, что она может находить релевантную информацию, даже когда используются разные слова для выражения одних и тех же идей.
 
-Speakr uses the all-MiniLM-L6-v2 embedding model, a deliberately lightweight choice that balances performance with resource efficiency. This model generates 384-dimensional vectors and runs comfortably on CPU-only systems, which is crucial since most Speakr deployments are on standard servers or personal machines without dedicated GPUs. While newer, larger embedding models exist, they would require significantly more computational resources and could make the system sluggish or unusable on typical hardware. The MiniLM model provides excellent semantic understanding for conversational content while remaining fast and responsive even when processing hundreds of recordings.
+Speakr использует модель эмбеддингов all-MiniLM-L6-v2, намеренно легковесный выбор, который балансирует производительность с эффективностью ресурсов. Эта модель генерирует 384-мерные векторы и комфортно работает на системах только с CPU, что критично, поскольку большинство развертываний Speakr находятся на стандартных серверах или персональных машинах без выделенных GPU. Хотя существуют более новые, более крупные модели эмбеддингов, они потребовали бы значительно больше вычислительных ресурсов и могли бы сделать систему медленной или непригодной на типичном оборудовании. Модель MiniLM обеспечивает отличное семантическое понимание для разговорного контента, оставаясь быстрой и отзывчивой даже при обработке сотен записей.
 
-The system processes recordings in chunks, allowing it to search through even very long recordings efficiently. Each chunk is analyzed independently but results are synthesized to maintain context and continuity. This approach ensures both speed and accuracy, even with large recording libraries.
+Система обрабатывает записи частями, позволяя эффективно искать даже в очень длинных записях. Каждая часть анализируется независимо, но результаты синтезируются для поддержания контекста и непрерывности. Этот подход обеспечивает как скорость, так и точность, даже с большими библиотеками записей.
 
-Performance scales well with proper setup. The initial indexing of recordings happens automatically after transcription, and subsequent searches leverage this pre-computed index. Response times typically range from a few seconds for focused searches to slightly longer for complex queries across large libraries.
+Производительность хорошо масштабируется при правильной настройке. Начальная индексация записей происходит автоматически после транскрибации, и последующие поиски используют этот предварительно вычисленный индекс. Время отклика обычно варьируется от нескольких секунд для сфокусированных поисков до немного дольше для сложных запросов по большим библиотекам.
 
-## Making the Most of Inquire Mode
+## Максимальное использование режима Inquire
 
-To maximize the value of Inquire Mode, maintain good recording hygiene. Ensure your recordings have clear audio quality for accurate transcription, use speaker identification to track who said what, and apply consistent tags to organize your content. The better your input data, the more powerful your searches become.
+Чтобы максимизировать ценность режима Inquire, поддерживайте хорошую гигиену записей. Убедитесь, что ваши записи имеют четкое качество аудио для точной транскрибации, используйте идентификацию говорящих для отслеживания того, кто что сказал, и применяйте последовательные теги для организации вашего контента. Чем лучше ваши входные данные, тем мощнее становятся ваши поиски.
 
-Take advantage of the iterative nature of search. Start with a general question, review the results, then ask follow-up questions to drill deeper. The system maintains context within a session, making it easy to refine your search based on initial results.
+Используйте итеративную природу поиска. Начните с общего вопроса, просмотрите результаты, затем задавайте уточняющие вопросы для более глубокого изучения. Система поддерживает контекст в рамках сессии, что упрощает уточнение вашего поиска на основе начальных результатов.
 
-Remember that Inquire Mode complements, not replaces, the standard recording interface. Use Inquire Mode for discovery and synthesis across recordings, but when you need deep focus on a single recording, the standard transcription view with its chat interface might be more appropriate.
+Помните, что режим Inquire дополняет, а не заменяет стандартный интерфейс записей. Используйте режим Inquire для обнаружения и синтеза по записям, но когда вам нужна глубокая фокусировка на одной записи, стандартный вид транскрипции с его интерфейсом чата может быть более подходящим.
 
-## Limitations to Keep in Mind
+## Ограничения, которые следует иметь в виду
 
-While powerful, Inquire Mode has boundaries. It searches only transcribed text, not audio directly, so any errors in transcription will affect search results. The system cannot infer information that isn't explicitly stated in recordings - it finds and synthesizes what was said, not what was meant but left unsaid.
+Хотя мощный, режим Inquire имеет границы. Он ищет только транскрибированный текст, а не аудио напрямую, поэтому любые ошибки в транскрибации повлияют на результаты поиска. Система не может вывести информацию, которая не явно указана в записях — она находит и синтезирует то, что было сказано, а не то, что имелось в виду, но осталось невысказанным.
 
-Language support is optimized for English, as the embedding model (all-MiniLM-L6-v2) was primarily trained on English text. Other languages may work with varying degrees of success. Very long recordings might be summarized rather than fully indexed if they exceed processing limits. The system requires recordings to be fully processed before they're searchable, so very recent recordings might not appear immediately in results.
+Поддержка языков оптимизирована для английского, так как модель эмбеддингов (all-MiniLM-L6-v2) была в основном обучена на английском тексте. Другие языки могут работать с разной степенью успеха. Очень длинные записи могут быть суммированы, а не полностью проиндексированы, если они превышают лимиты обработки. Система требует, чтобы записи были полностью обработаны перед тем, как они станут доступны для поиска, поэтому очень недавние записи могут не появиться сразу в результатах.
 
 ---
 
-Next: [Sharing Recordings](sharing.md) →
+Далее: [Обмен записями](sharing.md) →

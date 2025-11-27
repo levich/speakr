@@ -1,164 +1,164 @@
-# Main View
+# Главный вид
 
-The Speakr main view is where you'll spend most of your time. It's designed as a three-panel interface that makes it easy to navigate your recordings, review transcriptions, and interact with your content. Understanding each component will help you work more efficiently with your audio recordings.
+Главный вид Speakr — это место, где вы проведете большую часть времени. Он разработан как трехпанельный интерфейс, который упрощает навигацию по вашим записям, просмотр транскрипций и взаимодействие с вашим контентом. Понимание каждого компонента поможет вам более эффективно работать с вашими аудиозаписями.
 
-![Main View Interface](../assets/images/screenshots/Main view.png)
+![Главный вид интерфейса](../assets/images/screenshots/Main view.png)
 
-## Understanding the Interface Layout
+## Понимание компоновки интерфейса
 
-The main view is organized into three distinct sections that work together seamlessly. On the left, you have the recordings sidebar where all your audio files are listed and can be filtered. The center panel displays the full transcription of your selected recording. If your recording was processed with ASR and speaker diarization, you'll see speaker labels and can click any sentence to jump to that position in the audio. The right panel contains the AI-generated summary, your personal notes, and an interactive chat interface. Above both the center and right panels, spanning across the top, is the metadata bar with recording information and action buttons.
+Главный вид организован в три отдельных раздела, которые работают вместе бесшовно. Слева у вас есть боковая панель записей, где перечислены все ваши аудиофайлы и их можно фильтровать. Центральная панель отображает полную транскрипцию выбранной записи. Если ваша запись была обработана с ASR и идентификацией говорящих, вы увидите метки говорящих и сможете нажать на любое предложение, чтобы перейти к этой позиции в аудио. Правая панель содержит сгенерированную ИИ сводку, ваши личные заметки и интерактивный интерфейс чата. Над обеими центральной и правой панелями, простираясь сверху, находится панель метаданных с информацией о записи и кнопками действий.
 
-## Top Navigation Bar
+## Верхняя панель навигации
 
-The navigation bar at the top of the screen provides quick access to essential features:
+Панель навигации в верхней части экрана обеспечивает быстрый доступ к основным функциям:
 
-![Navigation Elements](../assets/images/screenshots/Main view.png)
+![Элементы навигации](../assets/images/screenshots/Main view.png)
 
-Starting from the left, you'll find the Speakr logo which always brings you back to the main view from anywhere in the application. The Inquire button opens the semantic search interface, allowing you to search across all your recordings using natural language questions. The New Recording button is your gateway to creating new content, either by uploading existing audio files or recording directly in your browser. On the right side, your username appears with a dropdown menu containing access to settings, language preferences, and the logout option.
+Начиная слева, вы найдете логотип Speakr, который всегда возвращает вас к главному виду из любого места в приложении. Кнопка Inquire открывает интерфейс семантического поиска, позволяя искать по всем вашим записям, используя вопросы на естественном языке. Кнопка New Recording — это ваш путь к созданию нового контента, либо путем загрузки существующих аудиофайлов, либо записи напрямую в браузере. С правой стороны ваше имя пользователя появляется с выпадающим меню, содержащим доступ к настройкам, языковым предпочтениям и опции выхода.
 
-## Left Sidebar - Recording List and Filters
+## Левая боковая панель - Список записей и фильтры
 
-The left sidebar is your command center for organizing and finding recordings. At the top, you'll see a search bar that lets you quickly find recordings by title or content. Below that, the filter system helps you narrow down your recording list.
+Левая боковая панель — это ваш командный центр для организации и поиска записей. Вверху вы увидите строку поиска, которая позволяет быстро находить записи по заголовку или содержимому. Ниже система фильтров помогает сузить ваш список записей.
 
-### Using Filters
+### Использование фильтров
 
-![Filter Interface](../assets/images/screenshots/filters-sidebar-expanded.png)
+![Интерфейс фильтров](../assets/images/screenshots/filters-sidebar-expanded.png)
 
-The filter system in Speakr is designed to be both powerful and intuitive. Click on "Active filters" to expand the filtering panel. You can filter by tags, which appear as colored pills that you can click to select or deselect. The date range filter offers convenient presets like "Today", "Yesterday", "This Week", and "Last Week", or you can set a custom date range using the date pickers. When filters are active, their count appears next to the filter label, and a clear button lets you reset all filters at once.
+Система фильтров в Speakr разработана так, чтобы быть одновременно мощной и интуитивной. Нажмите на "Active filters", чтобы развернуть панель фильтрации. Вы можете фильтровать по тегам, которые отображаются как цветные пилюли, на которые вы можете нажать, чтобы выбрать или отменить выбор. Фильтр диапазона дат предлагает удобные предустановки, такие как "Сегодня", "Вчера", "На этой неделе" и "На прошлой неделе", или вы можете установить пользовательский диапазон дат, используя селекторы дат. Когда фильтры активны, их количество отображается рядом с меткой фильтра, и кнопка очистки позволяет сбросить все фильтры сразу.
 
-### Recording List
+### Список записей
 
-Below the filters, your recordings are displayed as cards showing essential information at a glance. Each recording card displays the title prominently, followed by metadata including the participants (if speaker diarization was used), the recording date, and the duration. Colored tag pills show which categories have been assigned to each recording. The small icons on the right indicate the recording's processing status, with different colors for completed, processing, or failed transcriptions.
+Ниже фильтров ваши записи отображаются как карточки, показывающие основную информацию с первого взгляда. Каждая карточка записи отображает заголовок заметно, за которым следуют метаданные, включая участников (если использовалась идентификация говорящих), дату записи и длительность. Цветные пилюли тегов показывают, какие категории были назначены каждой записи. Маленькие значки справа указывают статус обработки записи, с разными цветами для завершенных, обрабатываемых или неудачных транскрипций.
 
-## Center Panel - Transcription View
+## Центральная панель - Вид транскрипции
 
-The center panel is where you'll read and interact with your transcription. This is the heart of Speakr, displaying the complete text of your recording.
+Центральная панель — это место, где вы будете читать и взаимодействовать с вашей транскрипцией. Это сердце Speakr, отображающее полный текст вашей записи.
 
-### Transcription Display
+### Отображение транскрипции
 
-![Transcription with Speakers](../assets/images/screenshots/main-view-with-speakers.png)
-![Summary View](../assets/images/screenshots/main-view-summary-tab.png)
+![Транскрипция с говорящими](../assets/images/screenshots/main-view-with-speakers.png)
+![Вид сводки](../assets/images/screenshots/main-view-summary-tab.png)
 
-The transcription display varies depending on how your audio was processed. If you used a standard Whisper API endpoint, you'll see a simple continuous text transcription without speaker identification. The text flows as a single narrative, which works well for single-speaker recordings or when speaker identification isn't needed.
+Отображение транскрипции варьируется в зависимости от того, как было обработано ваше аудио. Если вы использовали стандартный эндпоинт API Whisper, вы увидите простую непрерывную текстовую транскрипцию без идентификации говорящих. Текст течет как единое повествование, что хорошо работает для одноголосых записей или когда идентификация говорящих не нужна.
 
-If you've used an ASR endpoint with speaker diarization enabled, each speaker's contributions are clearly labeled with colored tags like "SPEAKER_01", "SPEAKER_02", etc. These labels are color-coded to help you follow multi-person conversations visually. While timestamps aren't displayed in the text, clicking on any sentence will automatically move the audio player to that exact position, making it easy to navigate through the recording.
+Если вы использовали ASR-эндпоинт с включенной идентификацией говорящих, вклад каждого говорящего четко помечен цветными тегами, такими как "SPEAKER_01", "SPEAKER_02" и т.д. Эти метки имеют цветовую кодировку, чтобы помочь вам визуально следить за беседами с несколькими людьми. Хотя временные метки не отображаются в тексте, нажатие на любое предложение автоматически переместит аудиоплеер к этой точной позиции, что упрощает навигацию по записи.
 
-### View Options
+### Опции просмотра
 
-Above the transcription, several buttons control how the content is displayed. The Copy button lets you copy the entire transcription to your clipboard. The Edit button enables inline editing of the transcription if you need to make corrections.
+Над транскрипцией несколько кнопок управляют тем, как отображается контент. Кнопка Copy позволяет скопировать всю транскрипцию в буфер обмена. Кнопка Edit включает встроенное редактирование транскрипции, если вам нужно внести исправления.
 
-If your recording was processed with speaker diarization, you'll also see a Simple/Bubble toggle that switches between a flowing text view and a conversation bubble format. This toggle is only available when speaker identification is present in the transcription.
+Если ваша запись была обработана с идентификацией говорящих, вы также увидите переключатель Simple/Bubble, который переключается между видом текущего текста и форматом пузырьков беседы. Этот переключатель доступен только тогда, когда идентификация говорящих присутствует в транскрипции.
 
-## Recording Metadata Bar
+## Панель метаданных записи
 
-Spanning across the top of both the center and right panels, the metadata bar displays important recording information and provides quick access to actions. From left to right, you'll see the recording title, participant names (if identified), recording date and time, file size, and duration. The action buttons on the right side of this bar allow you to bookmark the recording (star icon), edit recording details (pencil icon), manage tags (tag icon), reprocess the transcription (refresh icon), share the recording (share icon), and delete the recording (trash icon).
+Простираясь сверху обеих центральной и правой панелей, панель метаданных отображает важную информацию о записи и обеспечивает быстрый доступ к действиям. Слева направо вы увидите заголовок записи, имена участников (если идентифицированы), дату и время записи, размер файла и длительность. Кнопки действий в правой части этой панели позволяют добавить запись в закладки (значок звезды), редактировать детали записи (значок карандаша), управлять тегами (значок тега), повторно обработать транскрипцию (значок обновления), поделиться записью (значок обмена) и удалить запись (значок корзины).
 
-## Right Panel - Playback, Summary, Notes, and Chat
+## Правая панель - Воспроизведение, сводка, заметки и чат
 
-The right panel contains three tabbed sections that enhance your transcription with AI-powered features and personal annotations.
+Правая панель содержит три вкладки, которые улучшают вашу транскрипцию функциями на основе ИИ и личными аннотациями.
 
-### Playback Controls
+### Элементы управления воспроизведением
 
-At the top of the right panel, you'll find the audio player controls. The play button starts and pauses playback, while the timeline shows your current position in the recording. You can click anywhere on the timeline to jump to that point. The speed control lets you adjust playback from 0.5x to 2x speed, which is particularly useful for quickly reviewing content or carefully analyzing specific sections.
+В верхней части правой панели вы найдете элементы управления аудиоплеером. Кнопка воспроизведения запускает и приостанавливает воспроизведение, в то время как временная шкала показывает вашу текущую позицию в записи. Вы можете нажать в любом месте временной шкалы, чтобы перейти к этой точке. Элемент управления скоростью позволяет вам регулировать скорость воспроизведения от 0.5x до 2x, что особенно полезно для быстрого просмотра контента или тщательного анализа конкретных разделов.
 
-If your recording has speaker diarization, clicking on any sentence in the transcription will automatically seek the audio player to that exact moment, providing seamless navigation through the recording.
+Если ваша запись имеет идентификацию говорящих, нажатие на любое предложение в транскрипции автоматически переместит аудиоплеер к этому точному моменту, обеспечивая бесшовную навигацию по записи.
 
-### Summary Tab
+### Вкладка сводки
 
-The Summary tab displays an AI-generated overview of your recording. This summary captures the key points, decisions, and action items from your recording, saving you time when reviewing content. The summary is automatically generated after transcription completes but can be regenerated with different settings if needed.
+Вкладка Summary отображает обзор вашей записи, сгенерированный ИИ. Эта сводка фиксирует ключевые моменты, решения и пункты действий из вашей записи, экономя ваше время при просмотре контента. Сводка автоматически генерируется после завершения транскрибации, но может быть регенерирована с разными настройками при необходимости.
 
-### Notes Tab
+### Вкладка заметок
 
-The Notes tab is your personal workspace for adding context, thoughts, or follow-up items related to the recording. These notes are private to you and searchable, making them perfect for adding meeting outcomes, personal reminders, or additional context that wasn't captured in the recording. The notes support markdown formatting, allowing you to create lists, headers, and formatted text.
+Вкладка Notes — это ваше личное рабочее пространство для добавления контекста, мыслей или пунктов последующих действий, связанных с записью. Эти заметки приватны для вас и доступны для поиска, что делает их идеальными для добавления результатов встреч, личных напоминаний или дополнительного контекста, который не был захвачен в записи. Заметки поддерживают форматирование markdown, позволяя создавать списки, заголовки и отформатированный текст.
 
-### Chat Tab
+### Вкладка чата
 
-The Chat tab provides an interactive AI assistant that can answer questions about your recording. Simply type a question like "What were the main decisions made?" or "What did John say about the budget?" and the AI will analyze the transcription to provide relevant answers. This is particularly useful for long recordings where you need to quickly find specific information.
+Вкладка Chat предоставляет интерактивного ИИ-ассистента, который может отвечать на вопросы о вашей записи. Просто введите вопрос, например "Какие основные решения были приняты?" или "Что Джон сказал о бюджете?", и ИИ проанализирует транскрипцию, чтобы предоставить релевантные ответы. Это особенно полезно для длинных записей, где вам нужно быстро найти конкретную информацию.
 
-## Reprocessing Options
+## Опции повторной обработки
 
-Speakr provides two types of reprocessing to update your recordings with improved settings or different parameters.
+Speakr предоставляет два типа повторной обработки для обновления ваших записей с улучшенными настройками или разными параметрами.
 
-### Full Reprocessing
+### Полная повторная обработка
 
-![Full Reprocessing Modal](../assets/images/screenshots/full recording reprocessing.png)
+![Модальное окно полной повторной обработки](../assets/images/screenshots/full recording reprocessing.png)
 
-Full reprocessing completely re-transcribes your audio file using the ASR endpoint. This is useful when you want to change speaker diarization settings or use a different transcription model. Access this by clicking the refresh icon in the metadata bar and selecting "Transcription Reprocessing". You can adjust the language setting, minimum and maximum speakers for diarization, and other ASR-specific options. Note that full reprocessing will overwrite any manual edits you've made to the transcription.
+Полная повторная обработка полностью перетранскрибирует ваш аудиофайл, используя ASR-эндпоинт. Это полезно, когда вы хотите изменить настройки идентификации говорящих или использовать другую модель транскрибации. Доступ к этому можно получить, нажав значок обновления в панели метаданных и выбрав "Transcription Reprocessing". Вы можете настроить языковую настройку, минимальное и максимальное количество говорящих для идентификации и другие опции, специфичные для ASR. Обратите внимание, что полная повторная обработка перезапишет любые ручные правки, которые вы внесли в транскрипцию.
 
-### Summary Reprocessing
+### Повторная обработка сводки
 
-![Summary Reprocessing Modal](../assets/images/screenshots/summary reprocessing modal.png)
+![Модальное окно повторной обработки сводки](../assets/images/screenshots/summary reprocessing modal.png)
 
-Summary reprocessing generates a new title and summary based on the existing transcription. This is faster than full reprocessing and preserves any edits you've made to the transcription text. Use this when you want to regenerate the summary with different AI settings or after making significant edits to the transcription. Access this option from the same refresh menu by selecting "Summary Reprocessing".
+Повторная обработка сводки генерирует новый заголовок и сводку на основе существующей транскрипции. Это быстрее, чем полная повторная обработка, и сохраняет любые правки, которые вы внесли в текст транскрипции. Используйте это, когда вы хотите регенерировать сводку с разными настройками ИИ или после внесения значительных правок в транскрипцию. Доступ к этой опции можно получить из того же меню обновления, выбрав "Summary Reprocessing".
 
-## Working with Multiple Recordings
+## Работа с несколькими записями
 
-The main view is designed to handle large libraries of recordings efficiently. You can combine multiple filters to find exactly what you're looking for. For example, you might filter for all "Meeting" tagged recordings from last week that mention "budget" in the transcription. The filters work together, narrowing down your results with each additional criterion.
+Главный вид разработан для эффективной обработки больших библиотек записей. Вы можете комбинировать несколько фильтров, чтобы найти именно то, что вы ищете. Например, вы можете фильтровать все записи с тегом "Meeting" с прошлой недели, которые упоминают "budget" в транскрипции. Фильтры работают вместе, сужая ваши результаты с каждым дополнительным критерием.
 
-When working with many recordings, consider using the sort options to organize by either creation date (when you uploaded or recorded) or meeting date (when the recording actually took place). This distinction is particularly useful when you're uploading older recordings or processing a backlog of audio files.
+При работе со многими записями рассмотрите использование опций сортировки для организации по дате создания (когда вы загрузили или записали) или дате встречи (когда запись фактически произошла). Это различие особенно полезно, когда вы загружаете старые записи или обрабатываете накопившиеся аудиофайлы.
 
-## Tips for Effective Use
+## Советы для эффективного использования
 
-To get the most out of the main view, develop a consistent tagging strategy early on. Create tags for different projects, clients, or meeting types, and apply them consistently. This small investment of time pays dividends when you need to find specific recordings later.
+Чтобы получить максимум от главного вида, разработайте последовательную стратегию тегов рано. Создавайте теги для разных проектов, клиентов или типов встреч и применяйте их последовательно. Эта небольшая инвестиция времени окупается, когда вам нужно найти конкретные записи позже.
 
-The search function is powerful but works best with specific terms. Instead of searching for common words like "the" or "meeting", search for unique terms, project names, or specific topics discussed in your recordings.
+Функция поиска мощная, но работает лучше всего с конкретными терминами. Вместо поиска общих слов, таких как "the" или "meeting", ищите уникальные термины, названия проектов или конкретные темы, обсуждаемые в ваших записях.
 
-Make use of the notes section immediately after meetings while the context is fresh in your mind. These personal annotations become invaluable when revisiting recordings weeks or months later.
+Используйте раздел заметок сразу после встреч, пока контекст свеж в вашей памяти. Эти личные аннотации становятся бесценными при повторном просмотре записей через недели или месяцы.
 
-For long recordings, the chat interface can save significant time. Instead of reading through an entire hour-long transcription, ask the AI specific questions about decisions made, action items assigned, or topics discussed.
+Для длинных записей интерфейс чата может сэкономить значительное время. Вместо чтения всего часового транскрипта задайте ИИ конкретные вопросы о принятых решениях, назначенных пунктах действий или обсуждаемых темах.
 
-Remember that the interface updates in real-time. When you upload a new recording or when transcription completes, the interface will automatically refresh to show the latest status. You don't need to manually reload the page to see updates.
+Помните, что интерфейс обновляется в реальном времени. Когда вы загружаете новую запись или когда транскрибация завершается, интерфейс автоматически обновится, чтобы показать последний статус. Вам не нужно вручную перезагружать страницу, чтобы увидеть обновления.
 
-## Collaboration Features (Optional)
+## Функции совместной работы (необязательно)
 
-If you're working with a team or family, Speakr's collaboration features help you automatically share recordings with the right people. This section covers groups, group tags, and sharing - all optional but powerful when you need them.
+Если вы работаете с командой или семьей, функции совместной работы Speakr помогают вам автоматически делиться записями с нужными людьми. Этот раздел охватывает группы, групповые теги и обмен — все необязательно, но мощно, когда они вам нужны.
 
-### Understanding Groups and Group Tags
+### Понимание групп и групповых тегов
 
-**Groups** are collections of users who regularly work together (e.g., "Engineering Team", "Family", "Sales Department"). Your administrator creates and manages groups, and you're automatically a member of any groups you've been added to.
+**Группы** — это коллекции пользователей, которые регулярно работают вместе (например, "Engineering Team", "Family", "Sales Department"). Ваш администратор создает и управляет группами, и вы автоматически являетесь участником любых групп, в которые вас добавили.
 
-**Group Tags** are special tags that belong to a group. When you apply a group tag to a recording, all current members of that group automatically get access to it. This is perfect for project-specific content, department meetings, or family events that everyone should see.
+**Групповые теги** — это специальные теги, которые принадлежат группе. Когда вы применяете групповой тег к записи, все текущие участники этой группы автоматически получают доступ к ней. Это идеально для контента, специфичного для проекта, встреч отдела или семейных событий, которые все должны видеть.
 
-### Using Group Tags to Share Recordings
+### Использование групповых тегов для обмена записями
 
-If your administrator has created groups and group tags for you:
+Если ваш администратор создал для вас группы и групповые теги:
 
-1. When creating or editing a recording, click the **tag icon** in the metadata bar
-2. Look for tags that show a group indicator (these are your group tags)
-3. Select any group tag to apply it
-4. All group members instantly receive access to this recording
+1. При создании или редактировании записи нажмите значок **тега** в панели метаданных
+2. Ищите теги, которые показывают индикатор группы (это ваши групповые теги)
+3. Выберите любой групповой тег, чтобы применить его
+4. Все участники группы мгновенно получают доступ к этой записи
 
-Group tags can also include custom AI prompts for specialized summaries and retention policies for automatic cleanup. For example, a "Daily Standup" group tag might auto-delete recordings after 14 days, while a "Legal Consultations" tag keeps recordings permanently.
+Групповые теги также могут включать пользовательские промпты ИИ для специализированных сводок и политики хранения для автоматической очистки. Например, групповой тег "Daily Standup" может автоматически удалять записи через 14 дней, в то время как тег "Legal Consultations" хранит записи постоянно.
 
-### Individual Sharing
+### Индивидуальный обмен
 
-For one-off collaborations or sharing with specific people outside your groups:
+Для разовых сотрудничеств или обмена с конкретными людьми вне ваших групп:
 
-1. Open the recording you want to share
-2. Click the **share icon** (users icon) in the toolbar
-3. Search for the user's name and select them
-4. Choose their permission level:
-   - **View Only**: Can read and listen, but not edit
-   - **Edit**: Can modify metadata, notes, and summary
-   - **Reshare**: Can share with additional users
-5. Click to add them - they immediately receive access
+1. Откройте запись, которой хотите поделиться
+2. Нажмите значок **обмена** (значок пользователей) на панели инструментов
+3. Найдите имя пользователя и выберите его
+4. Выберите уровень их разрешений:
+   - **Только просмотр**: Может читать и слушать, но не редактировать
+   - **Редактирование**: Может изменять метаданные, заметки и сводку
+   - **Повторный обмен**: Может делиться с дополнительными пользователями
+5. Нажмите, чтобы добавить их — они немедленно получают доступ
 
-### Personal Notes on Shared Recordings
+### Личные заметки на общих записях
 
-When someone shares a recording with you, you can add your own private notes that only you can see. This is perfect for tracking your action items or personal observations without cluttering the shared content. Your notes are completely separate from the recording owner's notes and the shared summary.
+Когда кто-то делится с вами записью, вы можете добавить свои собственные приватные заметки, которые видите только вы. Это идеально для отслеживания ваших пунктов действий или личных наблюдений, не загромождая общий контент. Ваши заметки полностью отделены от заметок владельца записи и общей сводки.
 
-To add personal notes to a shared recording, simply click on the **Notes** tab and start typing. These notes are yours alone and won't be visible to the recording owner or other people who have access.
+Чтобы добавить личные заметки к общей записи, просто нажмите на вкладку **Notes** и начните печатать. Эти заметки принадлежат только вам и не будут видны владельцу записи или другим людям, у которых есть доступ.
 
-### Viewing Recordings Shared With You
+### Просмотр записей, которыми поделились с вами
 
-Recordings that others have shared with you appear in your main recording list with a subtle visual indicator. Use the **"Shared with Me"** filter in the sidebar to view only recordings others have shared with you, making it easy to focus on collaborative content.
+Записи, которыми другие поделились с вами, появляются в вашем основном списке записей с тонким визуальным индикатором. Используйте фильтр **"Shared with Me"** в боковой панели, чтобы просматривать только записи, которыми другие поделились с вами, что упрощает фокусировку на совместном контенте.
 
-For complete details on all collaboration features, see the [Sharing & Collaboration guide](sharing.md).
+Для полных деталей обо всех функциях совместной работы см. [Руководство по обмену и совместной работе](sharing.md).
 
-## Creating New Content
+## Создание нового контента
 
-Now that you understand how to navigate and interact with existing recordings in the main view, let's explore how to create new content. Speakr offers two ways to add recordings to your library: uploading existing audio files or recording directly in your browser.
+Теперь, когда вы понимаете, как навигировать и взаимодействовать с существующими записями в главном виде, давайте изучим, как создавать новый контент. Speakr предлагает два способа добавления записей в вашу библиотеку: загрузка существующих аудиофайлов или запись напрямую в браузере.
 
 ---
 
-Next: [Recording and Uploading Audio](recording.md) →
+Далее: [Запись и загрузка аудио](recording.md) →

@@ -1,106 +1,106 @@
 ---
 layout: default
-title: WhisperX ASR Setup
-parent: Admin Guide
+title: Настройка WhisperX ASR
+parent: Руководство администратора
 nav_order: 8
 ---
 
-# WhisperX ASR Service Setup
+# Настройка сервиса WhisperX ASR
 
-WhisperX is an advanced ASR (Automatic Speech Recognition) service that provides superior speaker diarization and word-level timestamps compared to standard Whisper implementations. This guide covers setting up WhisperX as an alternative ASR backend for Speakr.
+WhisperX — это продвинутый ASR (Automatic Speech Recognition) сервис, который предоставляет превосходную идентификацию говорящих и временные метки на уровне слов по сравнению со стандартными реализациями Whisper. Это руководство охватывает настройку WhisperX как альтернативного ASR-бэкенда для Speakr.
 
-## Overview
+## Обзор
 
-**WhisperX Benefits:**
-- ✅ Better speaker diarization accuracy (Pyannote.audio 4.0)
-- ✅ More precise word-level timestamps
-- ✅ Improved multi-speaker handling
-- ✅ Active development and updates
-- ✅ Production-ready Docker deployment
+**Преимущества WhisperX:**
+- ✅ Лучшая точность идентификации говорящих (Pyannote.audio 4.0)
+- ✅ Более точные временные метки на уровне слов
+- ✅ Улучшенная обработка нескольких говорящих
+- ✅ Активная разработка и обновления
+- ✅ Готовое к продакшену развертывание Docker
 
-**vs. Standard Whisper ASR:**
-- Standard: Simple, lightweight, good for single speakers
-- WhisperX: Advanced diarization, better for meetings/conversations
+**vs. Стандартный Whisper ASR:**
+- Стандартный: Простой, легковесный, хорош для одного говорящего
+- WhisperX: Продвинутая идентификация говорящих, лучше для встреч/бесед
 
-## Prerequisites
+## Предварительные требования
 
-### Hardware Requirements
+### Требования к оборудованию
 
-**Minimum:**
-- NVIDIA GPU with 8GB+ VRAM (RTX 3060, RTX 2080, etc.)
-- 16GB RAM
-- 50GB free disk space
+**Минимум:**
+- NVIDIA GPU с 8 ГБ+ VRAM (RTX 3060, RTX 2080 и т.д.)
+- 16 ГБ RAM
+- 50 ГБ свободного дискового пространства
 
-**Recommended:**
-- NVIDIA GPU with 16GB+ VRAM (RTX 3080, RTX 4080, A100)
-- 32GB RAM
-- 100GB SSD storage
+**Рекомендуется:**
+- NVIDIA GPU с 16 ГБ+ VRAM (RTX 3080, RTX 4080, A100)
+- 32 ГБ RAM
+- 100 ГБ SSD хранилища
 
-### Software Requirements
+### Требования к программному обеспечению
 
-- Docker and Docker Compose
+- Docker и Docker Compose
 - NVIDIA Container Toolkit
-- Hugging Face account with model access
+- Аккаунт Hugging Face с доступом к моделям
 
-## Quick Start
+## Быстрый старт
 
-### 1. Get the WhisperX Service
+### 1. Получите сервис WhisperX
 
-The WhisperX ASR service is maintained in a separate repository:
+Сервис WhisperX ASR поддерживается в отдельном репозитории:
 
 ```bash
-# Clone the WhisperX ASR service
+# Клонируйте сервис WhisperX ASR
 git clone https://github.com/murtaza-nasir/whisperx-asr-service.git
 cd whisperx-asr-service
 ```
 
-### 2. Configure Hugging Face Access
+### 2. Настройте доступ Hugging Face
 
-**Complete ALL steps below to enable speaker diarization:**
+**Выполните ВСЕ шаги ниже для включения идентификации говорящих:**
 
-#### Step 1: Create Account
-- Visit: [https://huggingface.co/join](https://huggingface.co/join)
-- Sign up with your email
+#### Шаг 1: Создайте аккаунт
+- Посетите: [https://huggingface.co/join](https://huggingface.co/join)
+- Зарегистрируйтесь с вашей электронной почтой
 
-#### Step 2: Accept Model Agreements (CRITICAL - ALL THREE REQUIRED)
+#### Шаг 2: Примите соглашения моделей (КРИТИЧНО - ВСЕ ТРИ ТРЕБУЮТСЯ)
 
-You must accept agreements for **all three models** used by the diarization pipeline:
+Вы должны принять соглашения для **всех трех моделей**, используемых конвейером идентификации говорящих:
 
-1. **Main diarization model:**
+1. **Основная модель идентификации говорящих:**
    - [https://huggingface.co/pyannote/speaker-diarization-community-1](https://huggingface.co/pyannote/speaker-diarization-community-1)
 
-2. **Segmentation model:**
+2. **Модель сегментации:**
    - [https://huggingface.co/pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0)
 
-3. **Speaker diarization 3.1:**
+3. **Идентификация говорящих 3.1:**
    - [https://huggingface.co/pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1)
 
-For each model:
-- Click the **"Agree and access repository"** button
-- Fill out form (Company/university: your organization, Use case: "Meeting note taker")
-- Submit (approval is instant)
+Для каждой модели:
+- Нажмите кнопку **"Agree and access repository"**
+- Заполните форму (Компания/университет: ваша организация, Случай использования: "Meeting note taker")
+- Отправьте (одобрение мгновенное)
 
-#### Step 3: Generate Access Token
-- Visit: [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
-- Click **"New token"**
-- Name: `whisperx-diarization`
-- Permission: **Read**
-- Click **"Generate token"**
-- Copy the token (starts with `hf_...`)
+#### Шаг 3: Сгенерируйте токен доступа
+- Посетите: [https://huggingface.co/settings/tokens](https://huggingface.co/settings/tokens)
+- Нажмите **"New token"**
+- Имя: `whisperx-diarization`
+- Разрешение: **Read**
+- Нажмите **"Generate token"**
+- Скопируйте токен (начинается с `hf_...`)
 
-**⚠️ Important:** You MUST accept the model agreement in Step 2. Without this, you'll get "403 Access Denied" errors even with a valid token.
+**⚠️ Важно:** Вы ДОЛЖНЫ принять соглашение модели в Шаге 2. Без этого вы получите ошибки "403 Access Denied" даже с действительным токеном.
 
-### 3. Set Up Environment
+### 3. Настройте окружение
 
 ```bash
-# Copy example configuration
+# Скопируйте пример конфигурации
 cp .env.example .env
 
-# Edit and add your Hugging Face token
+# Отредактируйте и добавьте ваш токен Hugging Face
 nano .env
 ```
 
-Update `.env`:
+Обновите `.env`:
 ```bash
 HF_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 DEVICE=cuda
@@ -108,26 +108,26 @@ COMPUTE_TYPE=float16
 BATCH_SIZE=16
 ```
 
-### 4. Deploy the Service
+### 4. Разверните сервис
 
 ```bash
-# Build Docker image
+# Соберите Docker образ
 docker compose build
 
-# Start service
+# Запустите сервис
 docker compose up -d
 
-# Check logs
+# Проверьте логи
 docker compose logs -f
 ```
 
-### 5. Test the Service
+### 5. Протестируйте сервис
 
 ```bash
-# Health check
+# Проверка здоровья
 curl http://localhost:9000/health
 
-# Should return:
+# Должно вернуть:
 {
   "status": "healthy",
   "device": "cuda",
@@ -135,284 +135,284 @@ curl http://localhost:9000/health
 }
 ```
 
-## Integration with Speakr
+## Интеграция с Speakr
 
-### Same Machine Deployment
+### Развертывание на той же машине
 
-If WhisperX is running on the same machine as Speakr:
+Если WhisperX работает на той же машине, что и Speakr:
 
-Update Speakr's `.env` file:
+Обновите файл `.env` Speakr:
 
 ```bash
-# Enable ASR endpoint
+# Включить ASR эндпоинт
 USE_ASR_ENDPOINT=true
 
-# Point to WhisperX service
+# Указать на сервис WhisperX
 ASR_BASE_URL=http://whisperx-asr-api:9000
 ```
 
-Restart Speakr:
+Перезапустите Speakr:
 
 ```bash
 docker compose restart
 ```
 
-### Separate GPU Machine Deployment
+### Развертывание на отдельной GPU-машине
 
-If WhisperX is on a dedicated GPU server:
+Если WhisperX находится на выделенном GPU-сервере:
 
-**On GPU Machine:**
+**На GPU-машине:**
 
-1. Expose service to network in `docker-compose.yml`:
+1. Откройте сервис для сети в `docker-compose.yml`:
    ```yaml
    ports:
      - "0.0.0.0:9000:9000"
    ```
 
-2. Configure firewall:
+2. Настройте файрвол:
    ```bash
    sudo ufw allow 9000/tcp
    ```
 
-**On Speakr Machine:**
+**На машине Speakr:**
 
-Update Speakr's `.env`:
+Обновите `.env` Speakr:
 
 ```bash
 USE_ASR_ENDPOINT=true
 ASR_BASE_URL=http://GPU_MACHINE_IP:9000
 ```
 
-Replace `GPU_MACHINE_IP` with actual IP address.
+Замените `GPU_MACHINE_IP` на фактический IP-адрес.
 
-## Configuration
+## Конфигурация
 
-### Performance Tuning
+### Настройка производительности
 
-Edit WhisperX service `.env`:
+Отредактируйте `.env` сервиса WhisperX:
 
-**High-End GPU (RTX 3080+, A100):**
+**Высокопроизводительный GPU (RTX 3080+, A100):**
 ```bash
 BATCH_SIZE=32
 COMPUTE_TYPE=float16
 ```
 
-**Mid-Range GPU (RTX 3060, RTX 2080):**
+**Средний GPU (RTX 3060, RTX 2080):**
 ```bash
 BATCH_SIZE=16
 COMPUTE_TYPE=float16
 ```
 
-**Low-End GPU (GTX 1660, RTX 2060):**
+**Низкопроизводительный GPU (GTX 1660, RTX 2060):**
 ```bash
 BATCH_SIZE=8
 COMPUTE_TYPE=int8
 ```
 
-### Model Selection
+### Выбор модели
 
-Models are selected per-recording in Speakr. Available options:
+Модели выбираются для каждой записи в Speakr. Доступные опции:
 
-| Model | Quality | Speed | VRAM Required |
-|-------|---------|-------|---------------|
-| tiny | Low | Fastest | 1GB |
-| base | Low | Very Fast | 1GB |
-| small | Medium | Fast | 2GB |
-| medium | Good | Moderate | 5GB |
-| large-v2 | Excellent | Slow | 10GB |
-| large-v3 | Best | Slow | 10GB |
+| Модель | Качество | Скорость | Требуется VRAM |
+|--------|----------|----------|----------------|
+| tiny | Низкое | Самая быстрая | 1 ГБ |
+| base | Низкое | Очень быстрая | 1 ГБ |
+| small | Среднее | Быстрая | 2 ГБ |
+| medium | Хорошее | Умеренная | 5 ГБ |
+| large-v2 | Отличное | Медленная | 10 ГБ |
+| large-v3 | Лучшее | Медленная | 10 ГБ |
 
-**Recommendation:** Use `large-v3` for best quality, `small` for speed.
+**Рекомендация:** Используйте `large-v3` для лучшего качества, `small` для скорости.
 
-## Speaker Diarization
+## Идентификация говорящих
 
-WhisperX provides superior speaker diarization compared to standard implementations.
+WhisperX предоставляет превосходную идентификацию говорящих по сравнению со стандартными реализациями.
 
-### Settings in Speakr
+### Настройки в Speakr
 
-When uploading or processing recordings:
+При загрузке или обработке записей:
 
-- **Min Speakers:** Minimum expected number of speakers
-- **Max Speakers:** Maximum expected number of speakers
-- Leave blank for automatic detection
+- **Min Speakers:** Минимальное ожидаемое количество говорящих
+- **Max Speakers:** Максимальное ожидаемое количество говорящих
+- Оставьте пустым для автоматического обнаружения
 
-**Tips:**
-- Set `min_speakers=2` and `max_speakers=6` for typical meetings
-- For interviews: `min_speakers=2`, `max_speakers=2`
-- For panels: `min_speakers=3`, `max_speakers=8`
+**Советы:**
+- Установите `min_speakers=2` и `max_speakers=6` для типичных встреч
+- Для интервью: `min_speakers=2`, `max_speakers=2`
+- Для панелей: `min_speakers=3`, `max_speakers=8`
 
-### After Transcription
+### После транскрибации
 
-Use Speakr's speaker identification feature to assign real names to detected speakers. WhisperX's improved diarization makes this more accurate.
+Используйте функцию идентификации говорящих Speakr для назначения реальных имен обнаруженным говорящим. Улучшенная идентификация говорящих WhisperX делает это более точным.
 
-## Monitoring
+## Мониторинг
 
-### Check Service Health
+### Проверка здоровья сервиса
 
 ```bash
-# Container status
+# Статус контейнера
 cd /path/to/whisperx-asr-service
 docker compose ps
 
-# View logs
+# Просмотр логов
 docker compose logs -f
 
-# Check GPU usage
+# Проверка использования GPU
 nvidia-smi -l 1
 ```
 
-### Performance Metrics
+### Метрики производительности
 
-Monitor in Speakr's admin interface:
-- Transcription times
-- Error rates
-- Model usage statistics
+Отслеживайте в административном интерфейсе Speakr:
+- Времена транскрибации
+- Частоты ошибок
+- Статистика использования моделей
 
-## Troubleshooting
+## Решение проблем
 
-### WhisperX Service Won't Start
+### Сервис WhisperX не запускается
 
-**Check logs:**
+**Проверьте логи:**
 ```bash
 docker compose logs whisperx-asr
 ```
 
-**Common issues:**
-- GPU not accessible: Verify `nvidia-smi` works
-- Invalid HF_TOKEN: Check token and model agreements
-- Port conflict: Change port in `docker-compose.yml`
+**Распространенные проблемы:**
+- GPU недоступен: Проверьте, что `nvidia-smi` работает
+- Недействительный HF_TOKEN: Проверьте токен и соглашения моделей
+- Конфликт портов: Измените порт в `docker-compose.yml`
 
-### Speakr Can't Connect
+### Speakr не может подключиться
 
-**Test connectivity:**
+**Протестируйте подключение:**
 ```bash
 curl http://ASR_BASE_URL/health
 ```
 
-**Solutions:**
-- Verify firewall rules
-- Check network connectivity
-- Ensure service is running
-- Try IP address instead of hostname
+**Решения:**
+- Проверьте правила файрвола
+- Проверьте сетевое подключение
+- Убедитесь, что сервис запущен
+- Попробуйте IP-адрес вместо имени хоста
 
-### Slow Processing
+### Медленная обработка
 
-**Solutions:**
-- Increase `BATCH_SIZE` (if GPU has memory)
-- Use smaller model (`small` instead of `large-v3`)
-- Disable diarization for faster processing
-- Check GPU usage with `nvidia-smi`
+**Решения:**
+- Увеличьте `BATCH_SIZE` (если у GPU есть память)
+- Используйте меньшую модель (`small` вместо `large-v3`)
+- Отключите идентификацию говорящих для более быстрой обработки
+- Проверьте использование GPU с `nvidia-smi`
 
-### Out of Memory
+### Нехватка памяти
 
-**Error:** `CUDA out of memory`
+**Ошибка:** `CUDA out of memory`
 
-**Solutions:**
-1. Reduce `BATCH_SIZE`: Set to `8` or `4`
-2. Use smaller model
-3. Use `COMPUTE_TYPE=int8`
-4. Close other GPU applications
+**Решения:**
+1. Уменьшите `BATCH_SIZE`: Установите в `8` или `4`
+2. Используйте меньшую модель
+3. Используйте `COMPUTE_TYPE=int8`
+4. Закройте другие GPU-приложения
 
-### Speaker Diarization Fails
+### Идентификация говорящих терпит неудачу
 
-**Check:**
-1. HF_TOKEN is set correctly in `.env`
-2. Accepted pyannote model agreements
-3. Service has internet access (for first-time model download)
+**Проверьте:**
+1. HF_TOKEN установлен правильно в `.env`
+2. Приняты соглашения моделей pyannote
+3. Сервис имеет доступ к интернету (для первоначальной загрузки моделей)
 
-**Solutions:**
-- Regenerate HF token
-- Accept model agreements again
-- Check logs for specific errors
+**Решения:**
+- Регенерируйте HF токен
+- Примите соглашения моделей снова
+- Проверьте логи на конкретные ошибки
 
-## Upgrading
+## Обновление
 
-### Update WhisperX Service
+### Обновление сервиса WhisperX
 
 ```bash
 cd /path/to/whisperx-asr-service
 
-# Pull latest changes (if using Git)
+# Получите последние изменения (если используете Git)
 git pull
 
-# Rebuild image
+# Пересоберите образ
 docker compose build --no-cache
 
-# Restart service
+# Перезапустите сервис
 docker compose up -d
 ```
 
-### Update Models
+### Обновление моделей
 
-Models are cached automatically. To use newer models:
+Модели кешируются автоматически. Чтобы использовать более новые модели:
 
 ```bash
-# Remove cache volume
+# Удалите том кеша
 docker compose down -v
 
-# Restart (models will re-download)
+# Перезапустите (модели перезагрузятся)
 docker compose up -d
 ```
 
-## Security Considerations
+## Соображения безопасности
 
-### For Production
+### Для продакшена
 
-1. **Use HTTPS:** Deploy behind reverse proxy with SSL
-2. **Firewall Rules:** Restrict access to Speakr machine only
-3. **API Authentication:** Add API key validation
-4. **Secrets Management:** Use Docker secrets for HF_TOKEN
-5. **Regular Updates:** Keep service updated monthly
+1. **Используйте HTTPS:** Разверните за обратным прокси с SSL
+2. **Правила файрвола:** Ограничьте доступ только к машине Speakr
+3. **Аутентификация API:** Добавьте проверку ключа API
+4. **Управление секретами:** Используйте Docker secrets для HF_TOKEN
+5. **Регулярные обновления:** Поддерживайте сервис обновленным ежемесячно
 
-### Example Firewall Rule
+### Пример правила файрвола
 
-Only allow from Speakr machine:
+Разрешить только с машины Speakr:
 
 ```bash
 sudo ufw allow from SPEAKR_IP to any port 9000
 sudo ufw deny 9000/tcp
 ```
 
-## Performance Benchmarks
+## Бенчмарки производительности
 
-Tested on RTX 3080 (10GB VRAM):
+Протестировано на RTX 3080 (10 ГБ VRAM):
 
-| Model | 10min Audio | Processing Time | Real-time Factor |
-|-------|-------------|-----------------|------------------|
-| small | 10 min | 45 sec | 13x |
-| medium | 10 min | 90 sec | 6.7x |
-| large-v3 | 10 min | 180 sec | 3.3x |
+| Модель | 10 мин аудио | Время обработки | Фактор реального времени |
+|--------|--------------|-----------------|-------------------------|
+| small | 10 мин | 45 сек | 13x |
+| medium | 10 мин | 90 сек | 6.7x |
+| large-v3 | 10 мин | 180 сек | 3.3x |
 
-*With diarization: add ~30% processing time*
+*С идентификацией говорящих: добавьте ~30% времени обработки*
 
-## Comparison: WhisperX vs Standard Whisper
+## Сравнение: WhisperX vs Стандартный Whisper
 
-| Feature | Standard Whisper | WhisperX |
-|---------|-----------------|----------|
-| Transcription Quality | Excellent | Excellent |
-| Word Timestamps | Good | Excellent |
-| Speaker Diarization | Good | Excellent |
-| Setup Complexity | Low | Medium |
-| Resource Usage | Lower | Higher |
-| Active Development | Moderate | High |
-| Production Ready | Yes | Yes |
+| Функция | Стандартный Whisper | WhisperX |
+|---------|---------------------|----------|
+| Качество транскрибации | Отличное | Отличное |
+| Временные метки слов | Хорошее | Отличное |
+| Идентификация говорящих | Хорошее | Отличное |
+| Сложность настройки | Низкая | Средняя |
+| Использование ресурсов | Ниже | Выше |
+| Активная разработка | Умеренная | Высокая |
+| Готовность к продакшену | Да | Да |
 
-## Best Practices
+## Лучшие практики
 
-1. **Start with small model** to verify setup
-2. **Monitor GPU memory** during first runs
-3. **Use model caching** via Docker volumes
-4. **Set appropriate speaker counts** for better diarization
-5. **Regular backups** of cache volume
-6. **Monitor logs** for errors
-7. **Update monthly** for latest improvements
+1. **Начните с маленькой модели** для проверки настройки
+2. **Отслеживайте память GPU** во время первых запусков
+3. **Используйте кеширование моделей** через Docker volumes
+4. **Установите соответствующее количество говорящих** для лучшей идентификации
+5. **Регулярные резервные копии** тома кеша
+6. **Отслеживайте логи** на ошибки
+7. **Обновляйте ежемесячно** для последних улучшений
 
-## Getting Help
+## Получение помощи
 
-- **Service Documentation:** See WhisperX service README
-- **WhisperX Issues:** [GitHub](https://github.com/m-bain/whisperX/issues)
-- **Speakr Integration:** Check Speakr logs and admin dashboard
+- **Документация сервиса:** См. README сервиса WhisperX
+- **Проблемы WhisperX:** [GitHub](https://github.com/m-bain/whisperX/issues)
+- **Интеграция Speakr:** Проверьте логи Speakr и административную панель
 
 ---
 
-For detailed setup instructions, see the [WhisperX Service Setup Guide](https://github.com/murtaza-nasir/whisperx-asr-service/blob/main/SETUP_GUIDE.md).
+Для подробных инструкций по настройке см. [Руководство по настройке сервиса WhisperX](https://github.com/murtaza-nasir/whisperx-asr-service/blob/main/SETUP_GUIDE.md).

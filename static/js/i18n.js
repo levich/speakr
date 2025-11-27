@@ -13,9 +13,9 @@ class I18n {
 
     /**
      * Initialize i18n with default locale
-     * @param {string} locale - Initial locale code (e.g., 'en', 'es', 'fr', 'zh')
+     * @param {string} locale - Initial locale code (e.g., 'en', 'es', 'fr', 'zh', 'ru')
      */
-    async init(locale = 'en') {
+    async init(locale = 'ru') {
         // Get saved locale from localStorage or use browser language
         const savedLocale = localStorage.getItem('preferredLanguage');
         const browserLocale = navigator.language.split('-')[0];
@@ -94,7 +94,8 @@ class I18n {
             { code: 'en', name: 'English', nativeName: 'English' },
             { code: 'es', name: 'Spanish', nativeName: 'Español' },
             { code: 'fr', name: 'French', nativeName: 'Français' },
-            { code: 'zh', name: 'Chinese', nativeName: '中文' }
+            { code: 'zh', name: 'Chinese', nativeName: '中文' },
+            { code: 'ru', name: 'Russian', nativeName: 'Русский' }
         ];
     }
 

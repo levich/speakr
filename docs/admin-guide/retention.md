@@ -1,138 +1,138 @@
 ---
 layout: default
-title: Retention & Auto-Deletion
-parent: Admin Guide
+title: Хранение и автоматическое удаление
+parent: Руководство администратора
 nav_order: 7
 ---
 
-# Auto-Deletion and Retention Policies
+# Автоматическое удаление и политики хранения
 
-This document describes the automated retention and deletion system for Speakr recordings.
+Этот документ описывает автоматизированную систему хранения и удаления для записей Speakr.
 
-## Overview
+## Обзор
 
-The auto-deletion system provides automated lifecycle management for your recordings, helping you:
-- **Comply with data retention policies** - Automatically remove recordings after a specified retention period
-- **Manage storage** - Prevent unlimited growth of audio files
-- **Maintain critical data** - Keep transcriptions and metadata even after audio deletion
-- **Protect important recordings** - Exempt specific recordings from automatic deletion
+Система автоматического удаления предоставляет автоматизированное управление жизненным циклом для ваших записей, помогая вам:
+- **Соответствовать политикам хранения данных** - Автоматически удалять записи после указанного периода хранения
+- **Управлять хранилищем** - Предотвращать неограниченный рост аудиофайлов
+- **Поддерживать критические данные** - Сохранять транскрипции и метаданные даже после удаления аудио
+- **Защищать важные записи** - Освобождать конкретные записи от автоматического удаления
 
-## Configuration
+## Конфигурация
 
-### Environment Variables
+### Переменные окружения
 
-Add these to your `.env` file to configure auto-deletion:
-
-```bash
-# Enable or disable the auto-deletion feature
-ENABLE_AUTO_DELETION=false  # Set to 'true' to enable
-
-# Global retention period in days (0 = disabled)
-GLOBAL_RETENTION_DAYS=90    # Recordings older than this will be processed
-
-# Deletion mode: what to delete
-DELETION_MODE=full_recording  # Options: 'audio_only' or 'full_recording'
-```
-
-### Deletion Modes
-
-#### Audio-Only Mode (`DELETION_MODE=audio_only`)
-- **Deletes**: Audio file only
-- **Keeps**: Transcription, summary, notes, metadata
-- **Use case**: Long-term record keeping with storage optimization
-- **Result**: Recordings appear in "Archived" view, transcription remains searchable
-
-#### Full Recording Mode (`DELETION_MODE=full_recording`)
-- **Deletes**: Complete recording including audio, transcription, summary, notes
-- **Keeps**: Nothing - recording is permanently removed
-- **Use case**: Complete data removal for compliance
-- **Result**: Recording is completely removed from the system
-
-## Multi-Tier Retention System
-
-Speakr uses a hierarchical retention policy system:
-
-### 1. Global Retention (System-Wide)
-Set via `GLOBAL_RETENTION_DAYS` environment variable. Applies to all recordings unless overridden.
+Добавьте это в ваш файл `.env` для настройки автоматического удаления:
 
 ```bash
-GLOBAL_RETENTION_DAYS=90  # All recordings older than 90 days
+# Включить или отключить функцию автоматического удаления
+ENABLE_AUTO_DELETION=false  # Установите в 'true' для включения
+
+# Глобальный период хранения в днях (0 = отключено)
+GLOBAL_RETENTION_DAYS=90    # Записи старше этого будут обработаны
+
+# Режим удаления: что удалять
+DELETION_MODE=full_recording  # Опции: 'audio_only' или 'full_recording'
 ```
 
-### 2. Tag-Based Retention
-Tags can override the global retention period with custom retention periods. This is especially powerful with group tags, where group admins can set retention policies for their group's content.
+### Режимы удаления
+
+#### Режим только аудио (`DELETION_MODE=audio_only`)
+- **Удаляет**: Только аудиофайл
+- **Сохраняет**: Транскрипцию, сводку, заметки, метаданные
+- **Случай использования**: Долгосрочное ведение записей с оптимизацией хранилища
+- **Результат**: Записи появляются в виде "Archived", транскрипция остается доступной для поиска
+
+#### Режим полной записи (`DELETION_MODE=full_recording`)
+- **Удаляет**: Полную запись, включая аудио, транскрипцию, сводку, заметки
+- **Сохраняет**: Ничего — запись постоянно удаляется
+- **Случай использования**: Полное удаление данных для соответствия требованиям
+- **Результат**: Запись полностью удаляется из системы
+
+## Многоуровневая система хранения
+
+Speakr использует иерархическую систему политик хранения:
+
+### 1. Глобальное хранение (Системное)
+Устанавливается через переменную окружения `GLOBAL_RETENTION_DAYS`. Применяется ко всем записям, если не переопределено.
+
+```bash
+GLOBAL_RETENTION_DAYS=90  # Все записи старше 90 дней
+```
+
+### 2. Хранение на основе тегов
+Теги могут переопределять глобальный период хранения с пользовательскими периодами хранения. Это особенно мощно с групповыми тегами, где администраторы групп могут устанавливать политики хранения для контента их группы.
 
 ```
-Global: 90 days
-Tag "Legal Records": 2555 days (7 years)  # Longer retention
-Tag "Daily Standups": 14 days  # Shorter retention
-Untagged recordings: Uses global (90 days)
+Глобальное: 90 дней
+Тег "Legal Records": 2555 дней (7 лет)  # Более длительное хранение
+Тег "Daily Standups": 14 дней  # Более короткое хранение
+Непомеченные записи: Используют глобальное (90 дней)
 ```
 
-When a recording has multiple tags with different retention periods, the **shortest** period applies.
+Когда запись имеет несколько тегов с разными периодами хранения, применяется **самый короткий** период.
 
-### 3. Tag-Based Protection
-Individual tags can protect recordings from auto-deletion entirely.
+### 3. Защита на основе тегов
+Отдельные теги могут защищать записи от автоматического удаления полностью.
 
-**Example Hierarchy:**
-- Global retention: 90 days
-- Tag "Sprint Reviews": 180 days (longer than global)
-- Tag "Daily Standups": 14 days (shorter than global)
-- Tag "Legal" with protection enabled: Never deleted (permanent)
+**Пример иерархии:**
+- Глобальное хранение: 90 дней
+- Тег "Sprint Reviews": 180 дней (дольше глобального)
+- Тег "Daily Standups": 14 дней (короче глобального)
+- Тег "Legal" с включенной защитой: Никогда не удаляется (постоянно)
 
-## Protecting Recordings from Deletion
+## Защита записей от удаления
 
-1. Go to **Account Settings** → **Tags** tab
-2. Click **Create Tag** or **Edit** an existing tag
-3. Enable **"Protect from Auto-Deletion"** checkbox
-4. Apply this tag to recordings you want to protect
+1. Перейдите в **Настройки аккаунта** → Вкладка **Tags**
+2. Нажмите **Create Tag** или **Edit** существующего тега
+3. Включите флажок **"Protect from Auto-Deletion"**
+4. Примените этот тег к записям, которые хотите защитить
 
-**When protected:**
-- ✅ Recordings with protected tags are exempt from auto-deletion
-- ✅ Works regardless of age or retention period
-- ✅ Applies to all recordings with that tag
+**Когда защищено:**
+- ✅ Записи с защищенными тегами освобождаются от автоматического удаления
+- ✅ Работает независимо от возраста или периода хранения
+- ✅ Применяется ко всем записям с этим тегом
 
-## Archived Recordings
+## Архивированные записи
 
-When `DELETION_MODE=audio_only`, recordings become "archived" after audio deletion.
+Когда `DELETION_MODE=audio_only`, записи становятся "архивированными" после удаления аудио.
 
-### Accessing Archived Recordings
+### Доступ к архивированным записям
 
-1. Open the **Recordings** sidebar
-2. Click **Advanced Filters**
-3. Toggle **"Archived Recordings"** ON
+1. Откройте боковую панель **Recordings**
+2. Нажмите **Advanced Filters**
+3. Переключите **"Archived Recordings"** ВКЛ
 
-### What You Can Do with Archived Recordings
+### Что вы можете делать с архивированными записями
 
-| Feature | Available | Notes |
-|---------|-----------|-------|
-| View transcription | ✅ | Full transcript accessible |
-| Search content | ✅ | Text search still works |
-| Read summary | ✅ | AI summary preserved |
-| View/edit notes | ✅ | All metadata accessible |
-| Play audio | ❌ | Audio file deleted |
-| Re-process | ❌ | Source audio unavailable |
-| Share | ✅ | Can share transcription |
-| Export | ✅ | Download transcript, summary, notes |
+| Функция | Доступна | Примечания |
+|---------|----------|------------|
+| Просмотр транскрипции | ✅ | Полный транскрипт доступен |
+| Поиск контента | ✅ | Текстовый поиск все еще работает |
+| Чтение сводки | ✅ | Сводка ИИ сохранена |
+| Просмотр/редактирование заметок | ✅ | Все метаданные доступны |
+| Воспроизведение аудио | ❌ | Аудиофайл удален |
+| Повторная обработка | ❌ | Исходное аудио недоступно |
+| Обмен | ✅ | Можно делиться транскрипцией |
+| Экспорт | ✅ | Загрузить транскрипт, сводку, заметки |
 
-### Archived Recording Indicators
+### Индикаторы архивированных записей
 
-- **Sidebar**: Gray "Archived" badge next to recording title
-- **Player**: Info banner: "Audio file has been deleted, but the transcription remains available"
-- **Filter**: Separate "Archived" view toggle in advanced filters
+- **Боковая панель**: Серый значок "Archived" рядом с заголовком записи
+- **Плеер**: Информационный баннер: "Audio file has been deleted, but the transcription remains available"
+- **Фильтр**: Отдельный переключатель вида "Archived" в расширенных фильтрах
 
-## Admin Controls
+## Административные элементы управления
 
-### Running Auto-Deletion
+### Запуск автоматического удаления
 
-Auto-deletion runs automatically based on configured schedule. Admins can also trigger manually:
+Автоматическое удаление запускается автоматически на основе настроенного расписания. Администраторы также могут запускать вручную:
 
 **API Endpoint:**
 ```bash
 POST /admin/auto-deletion/run
 ```
 
-**Response:**
+**Ответ:**
 ```json
 {
   "checked": 150,
@@ -143,14 +143,14 @@ POST /admin/auto-deletion/run
 }
 ```
 
-### Checking Auto-Deletion Stats
+### Проверка статистики автоматического удаления
 
 **API Endpoint:**
 ```bash
 GET /admin/auto-deletion/stats
 ```
 
-**Response:**
+**Ответ:**
 ```json
 {
   "enabled": true,
@@ -162,60 +162,60 @@ GET /admin/auto-deletion/stats
 }
 ```
 
-## Speaker Data Cleanup
+## Очистка данных говорящих
 
-When recordings are automatically deleted, Speakr manages associated speaker voice profile data to maintain privacy and GDPR compliance.
+Когда записи автоматически удаляются, Speakr управляет связанными данными голосовых профилей говорящих для поддержания конфиденциальности и соответствия GDPR.
 
-### What Gets Cleaned Up
+### Что очищается
 
-When the auto-deletion job runs, the system automatically:
+Когда задача автоматического удаления запускается, система автоматически:
 
-1. **Removes orphaned speaker profiles**: Speakers with no remaining recordings are deleted entirely
-2. **Cleans embedding references**: Recording IDs are removed from speaker voice profile metadata
-3. **Applies to both deletion modes**: Works with both `audio_only` and `full_recording` deletion modes
+1. **Удаляет сиротские профили говорящих**: Говорящие без оставшихся записей удаляются полностью
+2. **Очищает ссылки эмбеддингов**: ID записей удаляются из метаданных голосового профиля говорящего
+3. **Применяется к обоим режимам удаления**: Работает как с `audio_only`, так и с `full_recording` режимами удаления
 
-### Cleanup Schedule
+### Расписание очистки
 
-Speaker cleanup runs on the same schedule as auto-deletion:
+Очистка говорящих запускается по тому же расписанию, что и автоматическое удаление:
 
-- **Frequency**: Daily at 2:00 AM (server time)
-- **Trigger**: Automatically when `ENABLE_AUTO_DELETION=true`
-- **No additional configuration**: Uses existing auto-deletion settings
+- **Частота**: Ежедневно в 2:00 AM (время сервера)
+- **Триггер**: Автоматически, когда `ENABLE_AUTO_DELETION=true`
+- **Без дополнительной конфигурации**: Использует существующие настройки автоматического удаления
 
-### When Speakers Are Deleted
+### Когда говорящие удаляются
 
-A speaker is considered "orphaned" and deleted when:
+Говорящий считается "сиротским" и удаляется, когда:
 
-- No `SpeakerSnippet` records exist for the speaker (no voice samples in any recordings)
-- No valid recording references remain in the speaker's voice profile metadata
-- This occurs after all recordings containing that speaker have been deleted
+- Не существует записей `SpeakerSnippet` для говорящего (нет голосовых образцов ни в одной записи)
+- Не осталось действительных ссылок на записи в метаданных голосового профиля говорящего
+- Это происходит после того, как все записи, содержащие этого говорящего, были удалены
 
-**Note**: Speakers are preserved as long as they have at least one active recording with speaker identifications.
+**Примечание**: Говорящие сохраняются, пока у них есть хотя бы одна активная запись с идентификацией говорящих.
 
-### Privacy & GDPR Compliance
+### Конфиденциальность и соответствие GDPR
 
-This automatic cleanup ensures:
+Эта автоматическая очистка обеспечивает:
 
-- **Data Minimization**: Removes biometric voice data (embeddings) when no longer needed for system function
-- **Right to Erasure**: Deletes personal data (voice profiles) when recordings are removed
-- **Transparency**: Cleanup activity is logged for audit purposes
-- **No Manual Action Required**: Cleanup happens automatically with retention policies
+- **Минимизацию данных**: Удаляет биометрические голосовые данные (эмбеддинги), когда они больше не нужны для функции системы
+- **Право на удаление**: Удаляет личные данные (голосовые профили), когда записи удаляются
+- **Прозрачность**: Активность очистки логируется для целей аудита
+- **Без ручных действий**: Очистка происходит автоматически с политиками хранения
 
-The system treats voice embeddings as biometric data under GDPR. When recordings are deleted (either through auto-deletion or manual deletion), the associated voice profile data is evaluated for removal. This ensures compliance with data protection regulations without requiring manual intervention.
+Система обрабатывает голосовые эмбеддинги как биометрические данные в соответствии с GDPR. Когда записи удаляются (либо через автоматическое удаление, либо ручное удаление), связанные данные голосового профиля оцениваются для удаления. Это обеспечивает соответствие правилам защиты данных без необходимости ручного вмешательства.
 
-### Monitoring Cleanup Activity
+### Мониторинг активности очистки
 
-View cleanup statistics in:
+Просматривайте статистику очистки в:
 
-- **System logs**: Check application logs for cleanup counts and activity
-- **Auto-deletion response**: Speaker cleanup counts included in scheduled job output
+- **Системных логах**: Проверьте логи приложения на количество очистки и активность
+- **Ответе автоматического удаления**: Количество очистки говорящих включено в вывод запланированной задачи
 
-Example log entry:
+Пример записи лога:
 ```
 INFO - Speaker cleanup completed: 5 speakers deleted, 12 embedding references removed
 ```
 
-The cleanup process includes these statistics in the auto-deletion job response:
+Процесс очистки включает эту статистику в ответ задачи автоматического удаления:
 
 ```json
 {
@@ -229,225 +229,225 @@ The cleanup process includes these statistics in the auto-deletion job response:
 }
 ```
 
-### What Data Is Retained
+### Какие данные сохраняются
 
-The system preserves:
+Система сохраняет:
 
-- **Active speakers**: Speakers with at least one recording containing their voice
-- **Speaker names**: Names are retained as long as associated recordings exist
-- **Voice profiles**: Embedding data is kept when recordings reference the speaker
+- **Активные говорящие**: Говорящие с хотя бы одной записью, содержащей их голос
+- **Имена говорящих**: Имена сохраняются, пока существуют связанные записи
+- **Голосовые профили**: Данные эмбеддингов сохраняются, когда записи ссылаются на говорящего
 
-### What Data Is Removed
+### Какие данные удаляются
 
-The system removes:
+Система удаляет:
 
-- **Orphaned voice embeddings**: Biometric voice data for speakers with no recordings
-- **Speaker records**: Entire speaker profile when completely orphaned
-- **Invalid references**: Recording IDs in embedding history that point to deleted recordings
-- **Usage statistics**: Use counts and timestamps for deleted speakers
+- **Сиротские голосовые эмбеддинги**: Биометрические голосовые данные для говорящих без записей
+- **Записи говорящих**: Весь профиль говорящего, когда полностью сиротский
+- **Недействительные ссылки**: ID записей в истории эмбеддингов, которые указывают на удаленные записи
+- **Статистика использования**: Количество использований и временные метки для удаленных говорящих
 
-This ensures that biometric data is only retained when there's a legitimate purpose (active recordings), fulfilling GDPR's data minimization requirement.
+Это обеспечивает, что биометрические данные сохраняются только тогда, когда есть законная цель (активные записи), выполняя требование минимизации данных GDPR.
 
-## Practical Use Cases
+## Практические случаи использования
 
-The retention system solves real problems people have with accumulating recordings. Here's how it gets used:
+Система хранения решает реальные проблемы, которые люди имеют с накоплением записей. Вот как она используется:
 
-### Personal Use
+### Личное использование
 
-You record everything during your workday to capture ideas and discussions. Most of these recordings are ephemeral - useful for a week or two, then forgotten. Set a 30-day global retention with audio-only deletion. After a month, the audio files disappear but the searchable transcriptions remain. You can still find what was said in old recordings, but you're not paying to store hours of audio you'll never listen to again.
+Вы записываете все в течение рабочего дня, чтобы захватить идеи и обсуждения. Большинство этих записей эфемерны — полезны в течение недели или двух, затем забыты. Установите 30-дневное глобальное хранение с удалением только аудио. Через месяц аудиофайлы исчезают, но доступные для поиска транскрипции остаются. Вы все еще можете найти то, что было сказано в старых записях, но вы не платите за хранение часов аудио, которые вы никогда больше не будете слушать.
 
-If something turns out to be important, tag it with a protected tag before the 30 days expire. The tag prevents deletion, preserving both audio and transcript for as long as you need.
+Если что-то оказывается важным, пометьте это защищенным тегом до истечения 30 дней. Тег предотвращает удаление, сохраняя как аудио, так и транскрипт столько, сколько вам нужно.
 
-### Group Collaboration
+### Групповое сотрудничество
 
-Different types of group content need different lifecycles:
+Разные типы группового контента нуждаются в разных жизненных циклах:
 
-| Content Type | Retention Approach | Why |
-|--------------|-------------------|-----|
-| Daily standups | Group tag with 14-day retention | Routine updates, no long-term value |
-| Sprint planning | Group tag with 90-day retention | Reference value for current quarter |
-| Architecture decisions | Group tag with protection enabled | Document important choices permanently |
-| Customer calls (sales) | Group tag with 1-year retention | Sales cycle duration + follow-up window |
-| Interviews (HR) | Group tag with 2-year retention | Typical employment litigation window |
-| Legal meetings | Protected tag | Indefinite retention for compliance |
+| Тип контента | Подход к хранению | Почему |
+|--------------|-------------------|--------|
+| Ежедневные стендапы | Групповой тег с хранением 14 дней | Рутинные обновления, нет долгосрочной ценности |
+| Планирование спринта | Групповой тег с хранением 90 дней | Справочная ценность для текущего квартала |
+| Решения по архитектуре | Групповой тег с включенной защитой | Документировать важные выборы постоянно |
+| Звонки клиентов (продажи) | Групповой тег с хранением 1 год | Длительность цикла продаж + окно последующих действий |
+| Интервью (HR) | Групповой тег с хранением 2 года | Типичное окно трудовых споров |
+| Юридические встречи | Защищенный тег | Неопределенное хранение для соответствия требованиям |
 
-Each group sets up their tags once with appropriate retention. Members just tag recordings normally, and lifecycle management happens automatically. Nobody has to remember which recordings to keep or delete.
+Каждая группа настраивает свои теги один раз с соответствующим хранением. Участники просто помечают записи нормально, и управление жизненным циклом происходит автоматически. Никому не нужно помнить, какие записи сохранять или удалять.
 
-### Compliance Requirements
+### Требования соответствия
 
-Organizations with data retention policies can enforce them automatically. Healthcare organization needs 7-year retention for patient consultations - set that in the relevant group tag. Law firm needs indefinite retention for client meetings - use protected tags. Financial services deletes routine internal calls after 90 days but keeps compliance-related recordings for 7 years - different tags with different retention.
+Организации с политиками хранения данных могут применять их автоматически. Организация здравоохранения нуждается в 7-летнем хранении для консультаций пациентов — установите это в соответствующем групповом теге. Юридическая фирма нуждается в неопределенном хранении для встреч с клиентами — используйте защищенные теги. Финансовые услуги удаляют рутинные внутренние звонки через 90 дней, но хранят записи, связанные с соответствием требованиям, в течение 7 лет — разные теги с разным хранением.
 
-The system enforces policy without requiring anyone to remember the rules. Tag correctly, and retention happens automatically.
+Система применяет политику без требования, чтобы кто-то помнил правила. Пометите правильно, и хранение происходит автоматически.
 
-### Storage Cost Management
+### Управление затратами на хранилище
 
-Audio files are large - a one-hour meeting might be 50-100MB. Transcriptions are text - the same meeting might be 10-20KB. Audio-only deletion mode keeps the valuable searchable text while reclaiming storage.
+Аудиофайлы большие — часовая встреча может быть 50-100 МБ. Транскрипции — это текст — та же встреча может быть 10-20 КБ. Режим удаления только аудио сохраняет ценный доступный для поиска текст, освобождая хранилище.
 
-Run audio-only deletion with a 90-day retention. Recordings older than 90 days lose their audio but remain fully searchable. You can still use Inquire Mode to find information, read transcripts, review summaries, and see notes. You just can't play the original audio. For most use cases, that's fine - once you've extracted the information into text, the audio serves no purpose.
+Запустите удаление только аудио с хранением 90 дней. Записи старше 90 дней теряют свое аудио, но остаются полностью доступными для поиска. Вы все еще можете использовать режим Inquire для поиска информации, читать транскрипты, просматривать сводки и видеть заметки. Вы просто не можете воспроизвести оригинальное аудио. Для большинства случаев использования это нормально — как только вы извлекли информацию в текст, аудио не служит цели.
 
-This approach lets you keep years of searchable conversation history without accumulating terabytes of audio files.
+Этот подход позволяет вам хранить годы доступной для поиска истории бесед без накопления терабайтов аудиофайлов.
 
-## Best Practices
+## Лучшие практики
 
-### For Compliance
+### Для соответствия требованиям
 
-1. **Set appropriate retention periods**
+1. **Установите соответствующие периоды хранения**
    ```bash
-   # Example: 7-year retention for financial records
-   GLOBAL_RETENTION_DAYS=2555  # 7 years × 365 days
+   # Пример: 7-летнее хранение для финансовых записей
+   GLOBAL_RETENTION_DAYS=2555  # 7 лет × 365 дней
    DELETION_MODE=full_recording
    ```
 
-2. **Use tag-based protection** for records requiring indefinite retention
-   - Create "Legal Hold" or "Permanent" tags
-   - Enable protection on these tags
-   - Apply to relevant recordings
+2. **Используйте защиту на основе тегов** для записей, требующих неопределенного хранения
+   - Создайте теги "Legal Hold" или "Permanent"
+   - Включите защиту на этих тегах
+   - Примените к релевантным записям
 
-3. **Document your retention policy** in your organization's compliance documentation
+3. **Документируйте вашу политику хранения** в документации соответствия требованиям вашей организации
 
-### For Storage Management
+### Для управления хранилищем
 
-1. **Start with audio-only deletion**
+1. **Начните с удаления только аудио**
    ```bash
    DELETION_MODE=audio_only
    ```
-   - Keeps searchable transcriptions
-   - Frees up 95%+ of storage (audio files are large)
-   - Maintains business value of conversations
+   - Сохраняет доступные для поиска транскрипции
+   - Освобождает 95%+ хранилища (аудиофайлы большие)
+   - Поддерживает бизнес-ценность бесед
 
-2. **Use shorter retention periods** for routine recordings
+2. **Используйте более короткие периоды хранения** для рутинных записей
    ```bash
-   GLOBAL_RETENTION_DAYS=30  # Routine meetings
+   GLOBAL_RETENTION_DAYS=30  # Рутинные встречи
    ```
 
-3. **Protect important content** with tags
-   - "Executive Meetings" tag → protect from deletion
-   - "Daily Standup" tag → no protection (routine)
+3. **Защищайте важный контент** тегами
+   - Тег "Executive Meetings" → защита от удаления
+   - Тег "Daily Standup" → без защиты (рутинное)
 
-### For Groups
+### Для групп
 
-When groups are enabled:
-1. **Set conservative global retention** (shorter period as a baseline)
-2. **Configure group tags with custom retention** to match each group's needs
-3. **Use protected group tags** for group content requiring permanent retention
-4. **Document retention policies** so group members understand lifecycle expectations
+Когда группы включены:
+1. **Установите консервативное глобальное хранение** (более короткий период как базовый)
+2. **Настройте групповые теги с пользовательским хранением** для соответствия потребностям каждой группы
+3. **Используйте защищенные групповые теги** для группового контента, требующего постоянного хранения
+4. **Документируйте политики хранения** чтобы участники группы понимали ожидания жизненного цикла
 
-Example group tag retention configuration:
-- Engineering group "Architecture Decisions": Protected (never deleted)
-- Sales group "Customer Calls": 365 days
-- HR group "Interviews": 90 days
-- Operations group "Daily Standups": 14 days
+Пример конфигурации хранения групповых тегов:
+- Группа Engineering "Architecture Decisions": Защищено (никогда не удаляется)
+- Группа Sales "Customer Calls": 365 дней
+- Группа HR "Interviews": 90 дней
+- Группа Operations "Daily Standups": 14 дней
 
-## Deletion Process Flow
+## Процесс удаления
 
 ```
-1. Automated Check (Daily/Manual Trigger)
+1. Автоматическая проверка (Ежедневно/Ручной триггер)
    ↓
-2. Find recordings older than retention period
+2. Найти записи старше периода хранения
    ↓
-3. For each recording:
-   - Check manual exemption flag
-   - Check tags for protection
-   - Skip if exempt
+3. Для каждой записи:
+   - Проверить флаг ручного освобождения
+   - Проверить теги на защиту
+   - Пропустить, если освобождена
    ↓
-4. Delete based on mode:
-   - audio_only: Remove file, keep DB record, set audio_deleted_at
-   - full_recording: Remove file and DB record
+4. Удалить на основе режима:
+   - audio_only: Удалить файл, сохранить запись БД, установить audio_deleted_at
+   - full_recording: Удалить файл и запись БД
    ↓
-5. Return statistics
+5. Вернуть статистику
 ```
 
-## Migration Guide
+## Руководство по миграции
 
-### Enabling Auto-Deletion on Existing System
+### Включение автоматического удаления на существующей системе
 
-1. **Test with audio-only mode first:**
+1. **Сначала протестируйте с режимом только аудио:**
    ```bash
    ENABLE_AUTO_DELETION=true
-   GLOBAL_RETENTION_DAYS=365  # Start with long period
-   DELETION_MODE=audio_only   # Test safely
+   GLOBAL_RETENTION_DAYS=365  # Начните с длинного периода
+   DELETION_MODE=audio_only   # Тестируйте безопасно
    ```
 
-2. **Protect existing important content:**
-   - Create protected tags
-   - Apply to critical recordings
-   - Verify exemptions via `/admin/auto-deletion/stats`
+2. **Защитите существующий важный контент:**
+   - Создайте защищенные теги
+   - Примените к критическим записям
+   - Проверьте освобождения через `/admin/auto-deletion/stats`
 
-3. **Run manual test:**
+3. **Запустите ручной тест:**
    ```bash
    POST /admin/auto-deletion/run
    ```
 
-4. **Monitor results** and adjust retention period as needed
+4. **Отслеживайте результаты** и настройте период хранения по мере необходимости
 
-### Reverting Changes
+### Откат изменений
 
-If you need to disable auto-deletion:
+Если вам нужно отключить автоматическое удаление:
 ```bash
 ENABLE_AUTO_DELETION=false
 ```
 
-**Note:** Already deleted audio files cannot be recovered. Database records (if using audio-only mode) remain intact.
+**Примечание:** Уже удаленные аудиофайлы не могут быть восстановлены. Записи базы данных (если используется режим только аудио) остаются нетронутыми.
 
-## API Reference
+## Справочник API
 
-### Run Auto-Deletion (Admin Only)
+### Запустить автоматическое удаление (Только администратор)
 
 ```http
 POST /admin/auto-deletion/run
 ```
 
-Manually trigger the auto-deletion process.
+Вручную запустить процесс автоматического удаления.
 
-### Get Deletion Statistics (Admin Only)
+### Получить статистику удаления (Только администратор)
 
 ```http
 GET /admin/auto-deletion/stats
 ```
 
-Get statistics about eligible recordings and current configuration.
+Получить статистику о подходящих записях и текущей конфигурации.
 
-## Troubleshooting
+## Решение проблем
 
-### Auto-Deletion Not Running
+### Автоматическое удаление не запускается
 
-**Check:**
-1. `ENABLE_AUTO_DELETION=true` in `.env`
+**Проверьте:**
+1. `ENABLE_AUTO_DELETION=true` в `.env`
 2. `GLOBAL_RETENTION_DAYS > 0`
-3. Admin status for manual triggers
-4. Server logs for errors
+3. Статус администратора для ручных триггеров
+4. Логи сервера на ошибки
 
-### Too Many Recordings Being Deleted
+### Слишком много записей удаляется
 
-**Solutions:**
-1. Increase `GLOBAL_RETENTION_DAYS`
-2. Add protected tags to important categories
-3. Check tag assignments on recordings
-4. Review exemption status via stats endpoint
+**Решения:**
+1. Увеличьте `GLOBAL_RETENTION_DAYS`
+2. Добавьте защищенные теги к важным категориям
+3. Проверьте назначения тегов на записях
+4. Просмотрите статус освобождения через эндпоинт статистики
 
-### Archived Recordings Not Showing
+### Архивированные записи не отображаются
 
-**Check:**
-1. Toggle "Archived Recordings" filter in sidebar
-2. Verify `DELETION_MODE=audio_only` (full_recording doesn't archive)
-3. Check `audio_deleted_at` field in database
+**Проверьте:**
+1. Переключатель фильтра "Archived Recordings" в боковой панели
+2. Проверьте `DELETION_MODE=audio_only` (full_recording не архивирует)
+3. Проверьте поле `audio_deleted_at` в базе данных
 
-## Security Considerations
+## Соображения безопасности
 
-1. **Admin-only endpoints**: Auto-deletion triggers require admin authentication
-2. **Irreversible deletion**: Deleted audio files cannot be recovered
-3. **Audit trail**: Check server logs for deletion events
-4. **GDPR compliance**: Full deletion mode helps meet "right to be forgotten" requirements
+1. **Эндпоинты только для администраторов**: Триггеры автоматического удаления требуют аутентификации администратора
+2. **Необратимое удаление**: Удаленные аудиофайлы не могут быть восстановлены
+3. **Аудиторский след**: Проверьте логи сервера на события удаления
+4. **Соответствие GDPR**: Режим полного удаления помогает соответствовать требованиям "права быть забытым"
 
-## Support
+## Поддержка
 
-For issues or questions about auto-deletion:
-1. Check server logs for detailed error messages
-2. Verify environment variable configuration
-3. Test with `/admin/auto-deletion/stats` endpoint
-4. Review this documentation
-5. Submit issues on GitHub with logs attached
+Для проблем или вопросов об автоматическом удалении:
+1. Проверьте логи сервера на подробные сообщения об ошибках
+2. Проверьте конфигурацию переменных окружения
+3. Протестируйте с эндпоинтом `/admin/auto-deletion/stats`
+4. Просмотрите эту документацию
+5. Отправьте проблемы на GitHub с прикрепленными логами
 
 ---
 
-Return to [Admin Guide](index.md) →
+Вернуться к [Руководству администратора](index.md) →

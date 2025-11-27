@@ -1,71 +1,71 @@
-# Vector Store Management
+# Управление векторным хранилищем
 
-The Vector Store tab controls the intelligence behind Inquire Mode, Speakr's semantic search capability that lets users find information across all their recordings using natural language questions. This is where you monitor and manage the embedding system that transforms transcripts into searchable knowledge.
+Вкладка Векторное хранилище контролирует интеллект за режимом Inquire, возможностью семантического поиска Speakr, которая позволяет пользователям находить информацию по всем их записям, используя вопросы на естественном языке. Это место, где вы отслеживаете и управляете системой эмбеддингов, которая преобразует транскрипты в доступные для поиска знания.
 
-![Vector Store Management](../assets/images/screenshots/Admin vector store.png)
+![Управление векторным хранилищем](../assets/images/screenshots/Admin vector store.png)
 
-## Understanding Inquire Mode
+## Понимание режима Inquire
 
-Before diving into management, it's worth understanding what you're managing. Inquire Mode breaks each transcript into overlapping chunks of text, converts these chunks into mathematical representations called embeddings, and stores them in a searchable format. When users ask questions, their query gets converted to the same mathematical format and compared against all stored chunks to find the most relevant information.
+Перед погружением в управление стоит понять, чем вы управляете. Режим Inquire разбивает каждый транскрипт на перекрывающиеся фрагменты текста, преобразует эти фрагменты в математические представления, называемые эмбеддингами, и хранит их в доступном для поиска формате. Когда пользователи задают вопросы, их запрос преобразуется в тот же математический формат и сравнивается со всеми сохраненными фрагментами, чтобы найти наиболее релевантную информацию.
 
-This approach goes beyond simple keyword matching. The system understands that "budget concerns" relates to "financial constraints" and "cost overruns" even though the exact words differ. This semantic understanding makes Inquire Mode powerful for discovering information that users might not remember precisely.
+Этот подход выходит за рамки простого сопоставления ключевых слов. Система понимает, что "проблемы с бюджетом" связаны с "финансовыми ограничениями" и "превышением затрат", даже если точные слова различаются. Это семантическое понимание делает режим Inquire мощным для обнаружения информации, которую пользователи могут не помнить точно.
 
-## The Embedding Model
+## Модель эмбеддингов
 
-Your Speakr instance uses the all-MiniLM-L6-v2 model, shown prominently in the interface. This model generates 384-dimensional vectors - imagine each chunk of text mapped to a point in 384-dimensional space where similar meanings cluster together.
+Ваш экземпляр Speakr использует модель all-MiniLM-L6-v2, показанную заметно в интерфейсе. Эта модель генерирует 384-мерные векторы — представьте каждый фрагмент текста, отображенный в точку в 384-мерном пространстве, где похожие значения группируются вместе.
 
-This specific model was chosen carefully. Larger models exist with better accuracy, but they require GPUs and significant computational resources. The MiniLM model runs efficiently on CPU-only systems, making advanced search accessible without expensive infrastructure. It processes text quickly, understands context well, and produces compact embeddings that don't overwhelm your storage.
+Эта конкретная модель была выбрана тщательно. Существуют более крупные модели с лучшей точностью, но они требуют GPU и значительных вычислительных ресурсов. Модель MiniLM работает эффективно на системах только с CPU, делая продвинутый поиск доступным без дорогой инфраструктуры. Она обрабатывает текст быстро, хорошо понимает контекст и производит компактные эмбеддинги, которые не перегружают ваше хранилище.
 
-The model works best with English text, as that's what dominated its training data. Other languages may work with varying success, but English content will always produce the most reliable results. This limitation is a trade-off for the model's efficiency and accessibility.
+Модель лучше всего работает с английским текстом, так как это доминировало в её обучающих данных. Другие языки могут работать с разной степенью успеха, но английский контент всегда будет производить наиболее надежные результаты. Это ограничение — компромисс за эффективность и доступность модели.
 
-## Processing Status Overview
+## Обзор статуса обработки
 
-The status cards give you immediate insight into your vector store's health. Total Recordings shows how many audio files exist in your system, while Processed for Inquire indicates how many have been converted to searchable embeddings. These numbers should eventually match, though there's often a lag as background processing catches up.
+Карточки статуса дают вам немедленное понимание здоровья вашего векторного хранилища. Total Recordings показывает, сколько аудиофайлов существует в вашей системе, в то время как Processed for Inquire указывает, сколько было преобразовано в доступные для поиска эмбеддинги. Эти числа должны в конечном итоге совпадать, хотя часто есть задержка, пока фоновая обработка догоняет.
 
-Need Processing reveals recordings waiting for embedding generation. This number grows when users upload new content and shrinks as the background processor works through the queue. A consistently high number might indicate processing has stalled or your system is overwhelmed.
+Need Processing раскрывает записи, ожидающие генерации эмбеддингов. Это число растет, когда пользователи загружают новый контент, и уменьшается, когда фоновый процессор работает через очередь. Постоянно высокое число может указывать, что обработка остановилась или ваша система перегружена.
 
-Total Chunks shows the granular pieces your recordings have been divided into. A typical one-hour recording might generate 50-60 chunks, depending on transcript density. This chunking ensures relevant segments can be found even in very long recordings.
+Total Chunks показывает гранулярные части, на которые были разделены ваши записи. Типичная часовая запись может генерировать 50-60 фрагментов, в зависимости от плотности транскрипта. Это разбиение обеспечивает, что релевантные сегменты могут быть найдены даже в очень длинных записях.
 
-The Embeddings Status indicator provides a quick health check. "Available" in green means everything is working correctly. Other states might indicate the model is loading, processing is running, or attention is needed.
+Индикатор Embeddings Status предоставляет быструю проверку здоровья. "Available" зеленым означает, что все работает правильно. Другие состояния могут указывать, что модель загружается, обработка выполняется или требуется внимание.
 
-## Processing Progress
+## Прогресс обработки
 
-The processing progress bar shows real-time advancement through the embedding queue. When at 100%, all recordings are processed and searchable. Lower percentages indicate work in progress, with the bar filling as recordings are completed.
+Полоса прогресса обработки показывает продвижение в реальном времени через очередь эмбеддингов. Когда на 100%, все записи обработаны и доступны для поиска. Более низкие проценты указывают на работу в процессе, с заполнением полосы по мере завершения записей.
 
-This visual feedback helps you understand system status at a glance. A stuck progress bar suggests processing has stopped. Slow progress might indicate system resource constraints. Rapid progress shows everything is working efficiently.
+Эта визуальная обратная связь помогает вам понять статус системы с первого взгляда. Застрявшая полоса прогресса предполагает, что обработка остановилась. Медленный прогресс может указывать на ограничения системных ресурсов. Быстрый прогресс показывает, что все работает эффективно.
 
-## Managing the Processing Queue
+## Управление очередью обработки
 
-The Refresh Status button updates all statistics and progress indicators, useful for monitoring active processing or verifying recent uploads have been queued. The interface doesn't auto-refresh, so manual refreshes ensure you're seeing current information.
+Кнопка Refresh Status обновляет всю статистику и индикаторы прогресса, полезно для мониторинга активной обработки или проверки, что недавние загрузки были поставлены в очередь. Интерфейс не обновляется автоматически, поэтому ручные обновления обеспечивают, что вы видите текущую информацию.
 
-When the system shows recordings need processing but progress isn't advancing, several factors might be at play. The background processor might have stopped, the embedding model might have failed to load, or system resources might be exhausted. Check your logs for specific error messages.
+Когда система показывает, что записи нуждаются в обработке, но прогресс не продвигается, могут играть роль несколько факторов. Фоновый процессор мог остановиться, модель эмбеддингов могла не загрузиться, или системные ресурсы могут быть исчерпаны. Проверьте ваши логи на наличие конкретных сообщений об ошибках.
 
-The processing system is designed to be resilient. If processing fails for a specific recording, the system marks it and moves on rather than getting stuck. These failures appear in your logs and might require manual intervention to resolve.
+Система обработки разработана для устойчивости. Если обработка терпит неудачу для конкретной записи, система отмечает её и движется дальше, а не застревает. Эти неудачи появляются в ваших логах и могут потребовать ручного вмешательства для разрешения.
 
-## Optimizing Performance
+## Оптимизация производительности
 
-Processing performance depends heavily on your system resources. The embedding model needs about 500MB of RAM when loaded, plus additional memory for processing text. CPU speed directly impacts how quickly embeddings are generated - a modern multi-core processor can handle several recordings simultaneously.
+Производительность обработки сильно зависит от ваших системных ресурсов. Модель эмбеддингов нуждается примерно в 500 МБ RAM при загрузке, плюс дополнительная память для обработки текста. Скорость CPU напрямую влияет на то, как быстро генерируются эмбеддинги — современный многоядерный процессор может обрабатывать несколько записей одновременно.
 
-Disk I/O also matters. The system reads transcripts, processes them, and writes embeddings back to the database. Fast storage, particularly SSDs, significantly improves processing throughput. If your vector store is on a different disk than your transcripts, ensure both have adequate performance.
+Дисковый ввод-вывод также имеет значение. Система читает транскрипты, обрабатывает их и записывает эмбеддинги обратно в базу данных. Быстрое хранилище, особенно SSD, значительно улучшает пропускную способность обработки. Если ваше векторное хранилище находится на другом диске, чем ваши транскрипты, убедитесь, что оба имеют адекватную производительность.
 
-Network latency shouldn't affect processing since everything happens locally, but database performance matters. Regular database maintenance, including index optimization and vacuum operations, keeps queries fast even as your vector store grows.
+Сетевая задержка не должна влиять на обработку, поскольку все происходит локально, но производительность базы данных имеет значение. Регулярное обслуживание базы данных, включая оптимизацию индексов и операции вакуума, сохраняет запросы быстрыми даже по мере роста вашего векторного хранилища.
 
-## Troubleshooting Common Issues
+## Решение распространенных проблем
 
-When Inquire Mode returns poor results despite processed recordings, the issue might be query formulation rather than the vector store. Encourage users to ask complete questions rather than typing keywords. "What did John say about the budget?" works better than just "John budget."
+Когда режим Inquire возвращает плохие результаты, несмотря на обработанные записи, проблема может быть в формулировке запроса, а не в векторном хранилище. Поощряйте пользователей задавать полные вопросы, а не вводить ключевые слова. "Что Джон сказал о бюджете?" работает лучше, чем просто "Джон бюджет."
 
-If processing seems frozen, check whether the sentence-transformers library is properly installed. The system gracefully degrades without it, disabling Inquire Mode rather than crashing, but processing won't advance. Your logs will show whether the embedding model loaded successfully.
+Если обработка кажется замороженной, проверьте, правильно ли установлена библиотека sentence-transformers. Система изящно деградирует без неё, отключая режим Inquire, а не падая, но обработка не будет продвигаться. Ваши логи покажут, загрузилась ли модель эмбеддингов успешно.
 
-Memory errors during processing usually indicate your system is trying to process too much simultaneously. The chunking system prevents individual recordings from overwhelming memory, but processing multiple large recordings in parallel might exceed available RAM.
+Ошибки памяти во время обработки обычно указывают, что ваша система пытается обработать слишком много одновременно. Система разбиения предотвращает перегрузку памяти отдельными записями, но обработка нескольких больших записей параллельно может превысить доступную RAM.
 
-## Scaling Considerations
+## Соображения масштабирования
 
-The vector store grows predictably with your content. Each chunk requires about 2KB of storage for its embedding and metadata. A typical one-hour recording generating 50 chunks needs about 100KB of embedding storage. Ten thousand hours of recordings might require 100MB for embeddings - manageable even on modest systems.
+Векторное хранилище растет предсказуемо с вашим контентом. Каждый фрагмент требует примерно 2 КБ хранилища для своего эмбеддинга и метаданных. Типичная часовая запись, генерирующая 50 фрагментов, нуждается примерно в 100 КБ хранилища эмбеддингов. Десять тысяч часов записей могут потребовать 100 МБ для эмбеддингов — управляемо даже на скромных системах.
 
-Search performance remains fast even with large vector stores thanks to efficient indexing. However, extremely large instances (hundreds of thousands of recordings) might benefit from dedicated vector database solutions rather than the built-in SQLite storage.
+Производительность поиска остается быстрой даже с большими векторными хранилищами благодаря эффективной индексации. Однако чрезвычайно большие экземпляры (сотни тысяч записей) могут выиграть от выделенных решений векторной базы данных, а не встроенного хранилища SQLite.
 
-If your instance grows beyond comfortable limits, consider archiving old recordings. The vector store only includes active recordings, so removing obsolete content improves both storage and search performance.
+Если ваш экземпляр растет за комфортные лимиты, рассмотрите архивирование старых записей. Векторное хранилище включает только активные записи, поэтому удаление устаревшего контента улучшает как хранилище, так и производительность поиска.
 
 ---
 
-Return to [Admin Guide Overview](index.md) →
+Вернуться к [Обзору руководства администратора](index.md) →

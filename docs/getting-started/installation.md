@@ -1,37 +1,37 @@
-# Installation Guide
+# Руководство по установке
 
-This comprehensive guide covers deploying Speakr for production use, including detailed configuration options, performance tuning, and deployment best practices. While the Quick Start guide gets you running quickly, this guide provides everything you need for a robust production deployment.
+Это всестороннее руководство охватывает развертывание Speakr для продакшена, включая подробные опции конфигурации, настройку производительности и лучшие практики развертывания. В то время как руководство Quick Start быстро запускает вас, это руководство предоставляет все необходимое для надежного продакшен-развертывания.
 
-## Understanding Speakr's Architecture
+## Понимание архитектуры Speakr
 
-Before diving into installation, it's helpful to understand how Speakr works. The application integrates with external APIs for two main purposes: transcription services that convert your audio to text, and text generation services that power features like summaries, titles, and interactive chat. Speakr is designed to be flexible, supporting both cloud-based services like OpenAI and self-hosted solutions running on your own infrastructure.
+Перед погружением в установку полезно понять, как работает Speakr. Приложение интегрируется с внешними API для двух основных целей: сервисы транскрибации, которые преобразуют ваше аудио в текст, и сервисы генерации текста, которые питают функции, такие как сводки, заголовки и интерактивный чат. Speakr разработан для гибкости, поддерживая как облачные сервисы, такие как OpenAI, так и самодостаточные решения, работающие на вашей собственной инфраструктуре.
 
-Speakr uses specific API endpoint formats for these integrations. For transcription, it supports the standard OpenAI Whisper API format using the `/audio/transcriptions` endpoint, which is implemented by OpenAI, OpenRouter, and many self-hosted solutions. Alternatively, for advanced features like speaker diarization, Speakr can connect to ASR webservices that provide an `/asr` endpoint. **Note: Using the ASR endpoint option requires running an additional Docker container** (`onerahmet/openai-whisper-asr-webservice`) alongside Speakr - full setup instructions are provided in the [Running ASR Service for Speaker Diarization](#running-asr-service-for-speaker-diarization) section below. For text generation, Speakr uses the OpenAI Chat Completions API format with the `/chat/completions` endpoint, which is widely supported across different AI providers.
+Speakr использует специфические форматы API-эндпоинтов для этих интеграций. Для транскрибации он поддерживает стандартный формат API OpenAI Whisper, используя эндпоинт `/audio/transcriptions`, который реализован OpenAI, OpenRouter и многими самодостаточными решениями. Альтернативно, для продвинутых функций, таких как идентификация говорящих, Speakr может подключаться к ASR веб-сервисам, которые предоставляют эндпоинт `/asr`. **Примечание: Использование опции ASR эндпоинта требует запуска дополнительного Docker контейнера** (`onerahmet/openai-whisper-asr-webservice`) вместе с Speakr - полные инструкции по настройке предоставлены в разделе [Запуск ASR сервиса для идентификации говорящих](#running-asr-service-for-speaker-diarization) ниже. Для генерации текста Speakr использует формат API OpenAI Chat Completions с эндпоинтом `/chat/completions`, который широко поддерживается различными провайдерами ИИ.
 
-## Prerequisites
+## Предварительные требования
 
-For a production deployment, ensure your system meets these requirements. You'll need Docker Engine version 20.10 or later and Docker Compose version 2.0 or later. The system should have at least 4GB of RAM, with 8GB recommended for optimal performance, especially if you're processing longer recordings. Plan for at least 20GB of free disk space to accommodate recordings and transcriptions, though actual requirements will depend on your usage patterns. The server should have a stable internet connection for API calls to transcription and AI services, unless you're running everything locally.
+Для продакшен-развертывания убедитесь, что ваша система соответствует этим требованиям. Вам понадобится Docker Engine версии 20.10 или выше и Docker Compose версии 2.0 или выше. Система должна иметь минимум 4 ГБ RAM, с 8 ГБ рекомендуется для оптимальной производительности, особенно если вы обрабатываете более длинные записи. Планируйте минимум 20 ГБ свободного дискового пространства для размещения записей и транскрипций, хотя фактические требования будут зависеть от ваших паттернов использования. Сервер должен иметь стабильное интернет-подключение для API-вызовов к сервисам транскрибации и ИИ, если вы не запускаете все локально.
 
-## Choosing Your Deployment Method
+## Выбор метода развертывания
 
-You have two main options for deploying Speakr. The first and recommended approach is using the pre-built Docker image from Docker Hub, which requires no source code and gets you running quickly. The second option is building from source, which is useful if you need to modify the code or prefer to build your own images. Both methods use Docker Compose for orchestration and management.
+У вас есть два основных варианта для развертывания Speakr. Первый и рекомендуемый подход - использование предварительно собранного Docker образа из Docker Hub, который не требует исходного кода и быстро запускает вас. Второй вариант - сборка из исходников, что полезно, если вам нужно изменить код или вы предпочитаете собирать свои собственные образы. Оба метода используют Docker Compose для оркестрации и управления.
 
-## Standard Installation Using Pre-Built Image
+## Стандартная установка с использованием предварительно собранного образа
 
-### Step 1: Create Installation Directory
+### Шаг 1: Создание директории установки
 
-Choose an appropriate location for your Speakr installation. This directory will contain your configuration files and data volumes. For production deployments, using a dedicated directory like `/opt/speakr` or `/srv/speakr` is recommended as it provides a clear separation from user home directories and follows Linux filesystem hierarchy standards.
+Выберите подходящее местоположение для вашей установки Speakr. Эта директория будет содержать ваши файлы конфигурации и тома данных. Для продакшен-развертываний рекомендуется использовать выделенную директорию, такую как `/opt/speakr` или `/srv/speakr`, так как это обеспечивает четкое разделение от домашних директорий пользователей и следует стандартам иерархии файловой системы Linux.
 
 ```bash
 mkdir -p /opt/speakr
 cd /opt/speakr
 ```
 
-If you're just testing or running Speakr for personal use, you can create the directory in your home folder instead. The location isn't critical, but keeping everything organized in one place makes management easier.
+Если вы просто тестируете или запускаете Speakr для личного использования, вы можете создать директорию в вашей домашней папке вместо этого. Местоположение не критично, но хранение всего организованно в одном месте упрощает управление.
 
-### Step 2: Create Docker Compose Configuration
+### Шаг 2: Создание конфигурации Docker Compose
 
-Create a `docker-compose.yml` file with the following configuration:
+Создайте файл `docker-compose.yml` со следующей конфигурацией:
 
 ```yaml
 services:
@@ -48,27 +48,27 @@ services:
       - ./instance:/data/instance
 ```
 
-Or download the example configuration:
+Или загрузите пример конфигурации:
 
 ```bash
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/docker-compose.example.yml -O docker-compose.yml
 ```
 
-The restart policy `unless-stopped` ensures Speakr automatically starts after system reboots unless you've explicitly stopped it. The volumes mount local directories for persistent storage of uploads and database files.
+Политика перезапуска `unless-stopped` обеспечивает, что Speakr автоматически запускается после перезагрузки системы, если вы явно не остановили его. Тома монтируют локальные директории для постоянного хранения загрузок и файлов базы данных.
 
-### Step 3: Environment Configuration
+### Шаг 3: Конфигурация окружения
 
-The environment configuration is where you tell Speakr which AI services to use and how to connect to them. Download the appropriate environment template based on your transcription service choice. This template contains all the configuration variables with helpful comments explaining each setting.
+Конфигурация окружения - это место, где вы говорите Speakr, какие ИИ-сервисы использовать и как к ним подключаться. Загрузите соответствующий шаблон окружения на основе вашего выбора сервиса транскрибации. Этот шаблон содержит все переменные конфигурации с полезными комментариями, объясняющими каждую настройку.
 
-#### For OpenAI Whisper API
+#### Для OpenAI Whisper API
 
-If you're using OpenAI's Whisper API or any compatible service, download the Whisper environment template:
+Если вы используете API Whisper от OpenAI или любой совместимый сервис, загрузите шаблон окружения Whisper:
 
 ```bash
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.whisper.example -O .env
 ```
 
-Now edit the `.env` file to add your API keys and customize the settings. The configuration is organized into logical sections. First, configure the text generation model that powers summaries, titles, and chat features. OpenRouter is recommended here because it provides access to multiple AI models at competitive prices, but you can use any OpenAI-compatible service:
+Теперь отредактируйте файл `.env`, чтобы добавить ваши ключи API и настроить параметры. Конфигурация организована в логические разделы. Сначала настройте модель генерации текста, которая питает сводки, заголовки и функции чата. OpenRouter рекомендуется здесь, потому что он предоставляет доступ к нескольким моделям ИИ по конкурентным ценам, но вы можете использовать любой сервис, совместимый с OpenAI:
 
 ```bash
 TEXT_MODEL_BASE_URL=https://openrouter.ai/api/v1
@@ -76,9 +76,9 @@ TEXT_MODEL_API_KEY=sk-or-v1-your-key-here
 TEXT_MODEL_NAME=openai/gpt-4o-mini
 ```
 
-If you prefer to use OpenAI directly for text generation, simply change the base URL to `https://api.openai.com/v1` and use your OpenAI API key. You can also use local models through Ollama or LM Studio by pointing to `http://localhost:11434/v1` or similar.
+Если вы предпочитаете использовать OpenAI напрямую для генерации текста, просто измените базовый URL на `https://api.openai.com/v1` и используйте ваш ключ API OpenAI. Вы также можете использовать локальные модели через Ollama или LM Studio, указывая на `http://localhost:11434/v1` или подобное.
 
-Next, configure the transcription service. This is what converts your audio files into text:
+Далее настройте сервис транскрибации. Это то, что преобразует ваши аудиофайлы в текст:
 
 ```bash
 TRANSCRIPTION_BASE_URL=https://api.openai.com/v1
@@ -86,61 +86,61 @@ TRANSCRIPTION_API_KEY=sk-your-openai-key-here
 WHISPER_MODEL=whisper-1
 ```
 
-#### For Custom ASR Endpoint with Speaker Diarization
+#### Для пользовательского ASR эндпоинта с идентификацией говорящих
 
-If you want speaker diarization to identify who's speaking in your recordings, you'll need to use an ASR webservice endpoint. **This requires running an additional Docker container** alongside Speakr, but provides powerful features for meeting transcriptions and multi-speaker recordings.
+Если вы хотите идентификацию говорящих для определения того, кто говорит в ваших записях, вам нужно использовать ASR веб-сервис эндпоинт. **Это требует запуска дополнительного Docker контейнера** вместе с Speakr, но предоставляет мощные функции для транскрипций встреч и записей с несколькими говорящими.
 
-**ASR Service Options:**
+**Опции ASR сервиса:**
 
-1. **WhisperX ASR Service (Recommended for Voice Profiles)** - Required for AI-powered voice profile features using speaker embeddings
-   - Repository: [murtaza-nasir/whisperx-asr-service](https://github.com/murtaza-nasir/whisperx-asr-service)
-   - Uses `pyannote/speaker-diarization-community-1` model with exclusive diarization
-   - Supports 256-dimensional speaker embeddings for voice profile identification
-   - Better timestamp alignment between speakers and words
-   - **Required for:** Voice profiles, automatic speaker recognition, speaker embeddings
-   - **Environment file:** `config/env.whisperx.example`
+1. **WhisperX ASR Service (Рекомендуется для голосовых профилей)** - Требуется для функций голосовых профилей на основе ИИ, использующих эмбеддинги говорящих
+   - Репозиторий: [murtaza-nasir/whisperx-asr-service](https://github.com/murtaza-nasir/whisperx-asr-service)
+   - Использует модель `pyannote/speaker-diarization-community-1` с эксклюзивной идентификацией говорящих
+   - Поддерживает 256-мерные эмбеддинги говорящих для идентификации голосовых профилей
+   - Лучшее выравнивание временных меток между говорящими и словами
+   - **Требуется для:** Голосовых профилей, автоматического распознавания говорящих, эмбеддингов говорящих
+   - **Файл окружения:** `config/env.whisperx.example`
 
-2. **OpenAI Whisper ASR Webservice (Basic Diarization)** - For basic speaker diarization without voice profiles
-   - Repository: [ahmetoner/openai-whisper-asr-webservice](https://github.com/ahmetoner/openai-whisper-asr-webservice)
-   - Uses `pyannote/speaker-diarization-3.1` model
-   - Simpler setup, less resource intensive
-   - **Supports:** Basic speaker identification (Speaker 1, Speaker 2, etc.)
-   - **Does not support:** Voice profiles, speaker embeddings, automatic speaker recognition
-   - **Environment file:** `config/env.asr.example`
+2. **OpenAI Whisper ASR Webservice (Базовая идентификация говорящих)** - Для базовой идентификации говорящих без голосовых профилей
+   - Репозиторий: [ahmetoner/openai-whisper-asr-webservice](https://github.com/ahmetoner/openai-whisper-asr-webservice)
+   - Использует модель `pyannote/speaker-diarization-3.1`
+   - Более простая настройка, менее ресурсоемкая
+   - **Поддерживает:** Базовую идентификацию говорящих (Speaker 1, Speaker 2 и т.д.)
+   - **Не поддерживает:** Голосовые профили, эмбеддинги говорящих, автоматическое распознавание говорящих
+   - **Файл окружения:** `config/env.asr.example`
 
-> **Important:** Before proceeding with this configuration, you'll need to set up one of the ASR service containers. See [Running ASR Service for Speaker Diarization](#running-asr-service-for-speaker-diarization) for complete instructions on deploying both containers together or separately.
+> **Важно:** Перед продолжением с этой конфигурацией вам нужно настроить один из контейнеров ASR сервиса. См. [Запуск ASR сервиса для идентификации говорящих](#running-asr-service-for-speaker-diarization) для полных инструкций по развертыванию обоих контейнеров вместе или отдельно.
 
-Download the appropriate ASR configuration template:
+Загрузите соответствующий шаблон конфигурации ASR:
 
 ```bash
-# For WhisperX ASR Service (with voice profiles):
+# Для WhisperX ASR Service (с голосовыми профилями):
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.whisperx.example -O .env
 
-# OR for basic ASR (without voice profiles):
+# ИЛИ для базового ASR (без голосовых профилей):
 wget https://raw.githubusercontent.com/murtaza-nasir/speakr/master/config/env.asr.example -O .env
 ```
 
-The ASR configuration enables the custom endpoint and tells Speakr where to find it:
+Конфигурация ASR включает пользовательский эндпоинт и говорит Speakr, где его найти:
 
 ```bash
 USE_ASR_ENDPOINT=true
 
-# For WhisperX ASR Service:
+# Для WhisperX ASR Service:
 ASR_BASE_URL=http://whisperx-asr:9000
 
-# OR for basic ASR Webservice:
+# ИЛИ для базового ASR Webservice:
 ASR_BASE_URL=http://whisper-asr:9000
 ```
 
-The ASR_BASE_URL depends on your deployment architecture:
-- **Same Docker Compose stack:** Use the service name (e.g., `http://whisperx-asr:9000` or `http://whisper-asr:9000`) - Docker's internal networking
-- **Separate machine:** Use the full URL with IP address or domain name (e.g., `http://192.168.1.100:9000`)
+ASR_BASE_URL зависит от вашей архитектуры развертывания:
+- **Тот же Docker Compose стек:** Используйте имя сервиса (например, `http://whisperx-asr:9000` или `http://whisper-asr:9000`) - внутренняя сеть Docker
+- **Отдельная машина:** Используйте полный URL с IP-адресом или доменным именем (например, `http://192.168.1.100:9000`)
 
-Speaker diarization is automatically enabled when using ASR endpoints. The system will identify different speakers in your recordings and label them as Speaker 1, Speaker 2, and so on. You can optionally override the default speaker detection settings by uncommenting and adjusting ASR_MIN_SPEAKERS and ASR_MAX_SPEAKERS in your environment file.
+Идентификация говорящих автоматически включается при использовании ASR эндпоинтов. Система будет идентифицировать разных говорящих в ваших записях и помечать их как Speaker 1, Speaker 2 и так далее. Вы можете опционально переопределить настройки обнаружения говорящих по умолчанию, раскомментировав и настроив ASR_MIN_SPEAKERS и ASR_MAX_SPEAKERS в вашем файле окружения.
 
-### Step 4: Configure System Settings
+### Шаг 4: Настройка системных параметров
 
-One of Speakr's conveniences is automatic admin account creation. Instead of going through a registration process, you define the admin credentials in your environment file, and Speakr creates the account automatically on first startup. This ensures you can log in immediately without any additional setup steps:
+Одно из удобств Speakr - автоматическое создание административного аккаунта. Вместо прохождения процесса регистрации вы определяете учетные данные администратора в вашем файле окружения, и Speakr создает аккаунт автоматически при первом запуске. Это обеспечивает, что вы можете войти немедленно без каких-либо дополнительных шагов настройки:
 
 ```bash
 ADMIN_USERNAME=admin
@@ -148,9 +148,9 @@ ADMIN_EMAIL=admin@your-domain.com
 ADMIN_PASSWORD=your-secure-password-here
 ```
 
-Choose a strong password for this account as it has full system access, including the ability to manage users and view all recordings. The admin account is special and cannot be created through the regular registration process, only through these environment variables.
+Выберите надежный пароль для этого аккаунта, так как он имеет полный системный доступ, включая возможность управлять пользователями и просматривать все записи. Административный аккаунт особенный и не может быть создан через обычный процесс регистрации, только через эти переменные окружения.
 
-Next, configure how the application behaves. These settings control user access and system operation:
+Далее настройте, как приложение ведет себя. Эти настройки контролируют доступ пользователей и работу системы:
 
 ```bash
 ALLOW_REGISTRATION=false
@@ -158,13 +158,13 @@ TIMEZONE="America/New_York"
 LOG_LEVEL="INFO"
 ```
 
-Setting `ALLOW_REGISTRATION=false` means only the admin can create new user accounts, which is recommended for private installations where you want to control access. If you're running Speakr for a group or family, this prevents random people from creating accounts. The timezone setting affects how dates and times are displayed throughout the interface, so set it to your local timezone for convenience. The log level controls how much information Speakr writes to its logs. Use `INFO` during initial setup and testing to see what's happening, then switch to `ERROR` for production to reduce log volume and improve performance.
+Установка `ALLOW_REGISTRATION=false` означает, что только администратор может создавать новые пользовательские аккаунты, что рекомендуется для частных установок, где вы хотите контролировать доступ. Если вы запускаете Speakr для группы или семьи, это предотвращает создание аккаунтов случайными людьми. Настройка часового пояса влияет на то, как даты и времена отображаются по всему интерфейсу, поэтому установите его на ваш локальный часовой пояс для удобства. Уровень логирования контролирует, сколько информации Speakr записывает в свои логи. Используйте `INFO` во время первоначальной настройки и тестирования, чтобы видеть, что происходит, затем переключитесь на `ERROR` для продакшена, чтобы уменьшить объем логов и улучшить производительность.
 
-### Step 5: Configure Advanced Features
+### Шаг 5: Настройка продвинутых функций
 
-#### Large File Handling
+#### Обработка больших файлов
 
-One of Speakr's most useful features is automatic handling of large audio files. Many transcription APIs have file size limits, with OpenAI's 25MB limit being a common constraint. Rather than forcing you to manually split files, Speakr handles this automatically through intelligent chunking:
+Одна из самых полезных функций Speakr - автоматическая обработка больших аудиофайлов. Многие API транскрибации имеют ограничения размера файлов, с лимитом OpenAI в 25 МБ, являющимся распространенным ограничением. Вместо принуждения вас вручную разделять файлы, Speakr обрабатывает это автоматически через интеллектуальное разбиение:
 
 ```bash
 ENABLE_CHUNKING=true
@@ -172,23 +172,23 @@ CHUNK_LIMIT=20MB
 CHUNK_OVERLAP_SECONDS=3
 ```
 
-When chunking is enabled, Speakr automatically detects when a file exceeds the configured limit and splits it into smaller pieces. Each chunk is processed separately, and the transcriptions are seamlessly merged back together. The overlap setting ensures that no words are lost at chunk boundaries, which is especially important for continuous speech. The chunk limit can be specified as a file size like `20MB` or as a duration like `20m` for 20 minutes, depending on your API's limitations.
+Когда разбиение включено, Speakr автоматически обнаруживает, когда файл превышает настроенный лимит, и разделяет его на меньшие части. Каждый фрагмент обрабатывается отдельно, и транскрипции бесшовно объединяются обратно вместе. Настройка перекрытия обеспечивает, что никакие слова не теряются на границах фрагментов, что особенно важно для непрерывной речи. Лимит фрагмента может быть указан как размер файла, такой как `20MB`, или как длительность, такая как `20m` для 20 минут, в зависимости от ограничений вашего API.
 
-This feature only applies when using the standard Whisper API method. If you're using an ASR endpoint, chunking is not needed as these services typically handle large files natively.
+Эта функция применяется только при использовании стандартного метода API Whisper. Если вы используете ASR эндпоинт, разбиение не нужно, так как эти сервисы обычно обрабатывают большие файлы нативно.
 
-#### Inquire Mode for Semantic Search
+#### Режим Inquire для семантического поиска
 
-Inquire Mode transforms Speakr from a simple transcription tool into a knowledge base of all your recordings. When enabled, you can search across all your transcriptions using natural language questions:
+Режим Inquire преобразует Speakr из простого инструмента транскрибации в базу знаний всех ваших записей. Когда включено, вы можете искать по всем вашим транскрипциям, используя вопросы на естественном языке:
 
 ```bash
 ENABLE_INQUIRE_MODE=true
 ```
 
-With Inquire Mode active, Speakr creates embeddings of your transcriptions that enable semantic search. This means you can ask questions like "When did we discuss the marketing budget?" and find relevant recordings even if those exact words weren't used. The feature requires additional processing during transcription but provides powerful search capabilities that become more valuable as your recording library grows.
+С активным режимом Inquire Speakr создает эмбеддинги ваших транскрипций, которые обеспечивают семантический поиск. Это означает, что вы можете задавать вопросы, такие как "Когда мы обсуждали маркетинговый бюджет?" и находить релевантные записи, даже если эти точные слова не использовались. Функция требует дополнительной обработки во время транскрибации, но предоставляет мощные возможности поиска, которые становятся более ценными по мере роста вашей библиотеки записей.
 
-#### Automated File Processing
+#### Автоматическая обработка файлов
 
-The automated file processing feature, sometimes called the "black hole" directory, monitors a designated folder for new audio files and automatically processes them without manual intervention. This is perfect for integrating with recording devices, automated workflows, or batch processing scenarios:
+Функция автоматической обработки файлов, иногда называемая директорией "черной дыры", отслеживает назначенную папку на наличие новых аудиофайлов и автоматически обрабатывает их без ручного вмешательства. Это идеально для интеграции с записывающими устройствами, автоматизированными рабочими процессами или сценариями пакетной обработки:
 
 ```bash
 ENABLE_AUTO_PROCESSING=true
@@ -197,127 +197,127 @@ AUTO_PROCESS_WATCH_DIR=/data/auto-process
 AUTO_PROCESS_CHECK_INTERVAL=30
 ```
 
-When enabled, Speakr checks the watch directory every 30 seconds for new audio files. Any files found are automatically moved to the uploads directory and processed using your configured transcription settings. The `admin_only` mode assigns all processed files to the admin user, but you can also configure it for multi-user scenarios with separate directories for each user.
+Когда включено, Speakr проверяет директорию наблюдения каждые 30 секунд на наличие новых аудиофайлов. Любые найденные файлы автоматически перемещаются в директорию загрузок и обрабатываются с использованием ваших настроек транскрибации. Режим `admin_only` назначает все обработанные файлы администратору, но вы также можете настроить его для многопользовательских сценариев с отдельными директориями для каждого пользователя.
 
-To use this feature, you'll need to mount an additional volume in your Docker Compose configuration, which we'll cover in the next steps.
+Для использования этой функции вам нужно будет смонтировать дополнительный том в вашей конфигурации Docker Compose, что мы рассмотрим в следующих шагах.
 
-### Step 6: Set Up Data Directories
+### Шаг 6: Настройка директорий данных
 
-Speakr needs local directories to store your data persistently. These directories are mounted as Docker volumes, ensuring your recordings and database survive container updates and restarts:
+Speakr нужны локальные директории для постоянного хранения ваших данных. Эти директории монтируются как Docker тома, обеспечивая, что ваши записи и база данных переживают обновления контейнеров и перезапуски:
 
 ```bash
 mkdir -p uploads instance
 chmod 755 uploads instance
 ```
 
-The `uploads` directory stores all your audio files and their transcriptions, organized by user. The `instance` directory contains the SQLite database that tracks all your recordings, users, and settings. Setting the permissions to 755 ensures the Docker container can read and write to these directories while maintaining reasonable security.
+Директория `uploads` хранит все ваши аудиофайлы и их транскрипции, организованные по пользователям. Директория `instance` содержит базу данных SQLite, которая отслеживает все ваши записи, пользователей и настройки. Установка разрешений на 755 обеспечивает, что Docker контейнер может читать и записывать в эти директории, поддерживая разумную безопасность.
 
-If you're using the automated file processing feature, create that directory as well:
+Если вы используете функцию автоматической обработки файлов, создайте эту директорию также:
 
 ```bash
 mkdir -p auto-process
 chmod 755 auto-process
 ```
 
-### Step 7: Launch Speakr
+### Шаг 7: Запуск Speakr
 
-With everything configured, you're ready to start Speakr. The `-d` flag runs the container in detached mode, meaning it continues running in the background:
+Со всем настроенным, вы готовы запустить Speakr. Флаг `-d` запускает контейнер в отсоединенном режиме, что означает, что он продолжает работать в фоне:
 
 ```bash
 docker compose up -d
 ```
 
-The first time you run this command, Docker will download the Speakr image from Docker Hub. This image is approximately 3GB and contains all the dependencies needed to run Speakr, including FFmpeg for audio processing and various Python libraries. The download time depends on your internet connection speed.
+В первый раз, когда вы запускаете эту команду, Docker загрузит образ Speakr из Docker Hub. Этот образ составляет приблизительно 3 ГБ и содержит все зависимости, необходимые для запуска Speakr, включая FFmpeg для обработки аудио и различные библиотеки Python. Время загрузки зависит от скорости вашего интернет-подключения.
 
-Monitor the startup process to ensure everything is working correctly:
+Отслеживайте процесс запуска, чтобы убедиться, что все работает правильно:
 
 ```bash
 docker compose logs -f app
 ```
 
-Watch the logs for any error messages. You should see messages about database initialization, admin user creation, and finally a message indicating the Flask application is running on port 8899. Press Ctrl+C to stop following the logs (this won't stop the container, just the log viewing).
+Следите за логами на наличие сообщений об ошибках. Вы должны увидеть сообщения об инициализации базы данных, создании административного пользователя и, наконец, сообщение, указывающее, что приложение Flask работает на порту 8899. Нажмите Ctrl+C, чтобы прекратить следование логам (это не остановит контейнер, только просмотр логов).
 
-### Step 8: Verify Installation
+### Шаг 8: Проверка установки
 
-Open your web browser and navigate to `http://your-server:8899`, replacing `your-server` with your actual server address or `localhost` if you're running locally. You should see the Speakr login page with its distinctive gradient design.
+Откройте ваш веб-браузер и перейдите на `http://your-server:8899`, заменив `your-server` на ваш фактический адрес сервера или `localhost`, если вы запускаете локально. Вы должны увидеть страницу входа Speakr с его отличительным градиентным дизайном.
 
-Log in using the admin credentials you configured in the environment file. If login fails, check your Docker logs to ensure the admin user was created successfully. Sometimes typos in the environment file can cause issues.
+Войдите, используя учетные данные администратора, которые вы настроили в файле окружения. Если вход не удается, проверьте ваши Docker логи, чтобы убедиться, что административный пользователь был создан успешно. Иногда опечатки в файле окружения могут вызывать проблемы.
 
-Once logged in, test the installation by creating a test recording or uploading a sample audio file. The recording interface should show options for microphone, system audio, or both. Try uploading a small audio file first to verify that your API keys are working correctly. The transcription process should complete within a few moments for short files, and you should see the transcribed text appear along with an AI-generated summary.
+После входа протестируйте установку, создав тестовую запись или загрузив образец аудиофайла. Интерфейс записи должен показывать опции для микрофона, системного аудио или обоих. Попробуйте сначала загрузить небольшой аудиофайл, чтобы проверить, что ваши ключи API работают правильно. Процесс транскрибации должен завершиться в течение нескольких моментов для коротких файлов, и вы должны увидеть транскрибированный текст вместе с сгенерированной ИИ сводкой.
 
-If transcription fails, check the Docker logs for API authentication errors or connection issues. Common problems include incorrect API keys, insufficient API credits, or network connectivity issues.
+Если транскрибация терпит неудачу, проверьте Docker логи на ошибки аутентификации API или проблемы подключения. Распространенные проблемы включают неправильные ключи API, недостаточные кредиты API или проблемы сетевого подключения.
 
-## Advanced Deployment Scenarios
+## Продвинутые сценарии развертывания
 
-### Running ASR Service for Speaker Diarization
+### Запуск ASR сервиса для идентификации говорящих
 
-If you need speaker diarization to identify different speakers in your recordings, you'll need to run an ASR service alongside Speakr. There are two options depending on whether you need voice profile features:
+Если вам нужна идентификация говорящих для определения разных говорящих в ваших записях, вам нужно запустить ASR сервис вместе с Speakr. Есть два варианта в зависимости от того, нужны ли вам функции голосовых профилей:
 
-#### Option 1: WhisperX ASR Service (Recommended - Supports Voice Profiles)
+#### Вариант 1: WhisperX ASR Service (Рекомендуется - Поддерживает голосовые профили)
 
-**Use this if you want:**
-- AI-powered speaker voice profiles with automatic recognition
-- 256-dimensional speaker embeddings
-- Better speaker-to-word timestamp alignment
-- Exclusive diarization for cleaner speaker transitions
+**Используйте это, если вы хотите:**
+- Голосовые профили говорящих на основе ИИ с автоматическим распознаванием
+- 256-мерные эмбеддинги говорящих
+- Лучшее выравнивание временных меток между говорящими и словами
+- Эксклюзивную идентификацию говорящих для более чистых переходов между говорящими
 
-**Prerequisites:**
-1. **Hugging Face Account & Model Access** - Visit and accept terms for ALL models:
+**Предварительные требования:**
+1. **Аккаунт Hugging Face и доступ к моделям** - Посетите и примите условия для ВСЕХ моделей:
    - [pyannote/speaker-diarization-community-1](https://huggingface.co/pyannote/speaker-diarization-community-1)
    - [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1)
    - [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0)
 
-2. **Generate HF Token** - Create a read-access token at [Hugging Face Settings](https://huggingface.co/settings/tokens)
+2. **Генерация HF токена** - Создайте токен доступа только для чтения в [Hugging Face Settings](https://huggingface.co/settings/tokens)
 
-3. **GPU Requirements** - NVIDIA GPU with 14GB+ VRAM for large-v3 model (RTX 3090/4090 recommended)
+3. **Требования к GPU** - NVIDIA GPU с 14 ГБ+ VRAM для модели large-v3 (рекомендуется RTX 3090/4090)
 
-**Setup Instructions:**
+**Инструкции по настройке:**
 
-Clone the WhisperX ASR Service repository:
+Клонируйте репозиторий WhisperX ASR Service:
 ```bash
 git clone https://github.com/murtaza-nasir/whisperx-asr-service.git
 cd whisperx-asr-service
 
-# Copy environment file
+# Скопируйте файл окружения
 cp .env.example .env
 
-# Edit .env and add your Hugging Face token
-nano .env  # Set HF_TOKEN=hf_xxxxx...
+# Отредактируйте .env и добавьте ваш токен Hugging Face
+nano .env  # Установите HF_TOKEN=hf_xxxxx...
 
-# Build and start
+# Соберите и запустите
 docker compose up -d
 
-# Verify it's running
+# Проверьте, что он работает
 curl http://localhost:9000/health
 ```
 
-See the [WhisperX ASR Service README](https://github.com/murtaza-nasir/whisperx-asr-service#readme) for detailed configuration options, troubleshooting, and performance tuning.
+См. [README WhisperX ASR Service](https://github.com/murtaza-nasir/whisperx-asr-service#readme) для подробных опций конфигурации, решения проблем и настройки производительности.
 
-#### Option 2: OpenAI Whisper ASR Webservice (Basic Diarization Only)
+#### Вариант 2: OpenAI Whisper ASR Webservice (Только базовая идентификация говорящих)
 
-**Use this if you:**
-- Only need basic speaker identification (Speaker 1, Speaker 2, etc.)
-- Don't need voice profiles or speaker embeddings
-- Want simpler setup with lower resource requirements
+**Используйте это, если вы:**
+- Нуждаетесь только в базовой идентификации говорящих (Speaker 1, Speaker 2 и т.д.)
+- Не нуждаетесь в голосовых профилях или эмбеддингах говорящих
+- Хотите более простую настройку с меньшими требованиями к ресурсам
 
-**Prerequisites:**
-1. **Hugging Face Account & Model Access** - Visit and accept terms:
+**Предварительные требования:**
+1. **Аккаунт Hugging Face и доступ к моделям** - Посетите и примите условия:
    - [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1)
    - [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0)
 
-2. **Generate HF Token** - Create a read-access token at [Hugging Face Settings](https://huggingface.co/settings/tokens)
+2. **Генерация HF токена** - Создайте токен доступа только для чтения в [Hugging Face Settings](https://huggingface.co/settings/tokens)
 
-**Setup Instructions:**
+**Инструкции по настройке:**
 
-Visit the [ahmetoner/whisper-asr-webservice repository](https://github.com/ahmetoner/whisper-asr-webservice) for complete setup instructions.
+Посетите репозиторий [ahmetoner/whisper-asr-webservice](https://github.com/ahmetoner/whisper-asr-webservice) для полных инструкций по настройке.
 
-#### Deploying ASR Service with Speakr
+#### Развертывание ASR сервиса с Speakr
 
-Once you've chosen and set up your ASR service, you can deploy it alongside Speakr in several ways:
+После того, как вы выбрали и настроили ваш ASR сервис, вы можете развернуть его вместе с Speakr несколькими способами:
 
-**Same Machine - Combined Docker Compose (Recommended)**
+**Та же машина - Объединенный Docker Compose (Рекомендуется)**
 
-Example with WhisperX ASR Service (for voice profiles):
+Пример с WhisperX ASR Service (для голосовых профилей):
 
 ```yaml
 services:
@@ -371,31 +371,31 @@ volumes:
     driver: local
 ```
 
-In Speakr's `.env` file:
+В файле `.env` Speakr:
 ```bash
 USE_ASR_ENDPOINT=true
 ASR_BASE_URL=http://whisperx-asr:9000
 ```
 
-> **Note for Mac users:** GPU passthrough doesn't work on macOS due to Docker's architecture. Use CPU mode by setting `DEVICE=cpu` and `COMPUTE_TYPE=float32` in the environment variables. The ASR service will use CPU processing, which is slower but fully functional.
+> **Примечание для пользователей Mac:** Проброс GPU не работает на macOS из-за архитектуры Docker. Используйте режим CPU, установив `DEVICE=cpu` и `COMPUTE_TYPE=float32` в переменных окружения. ASR сервис будет использовать обработку CPU, что медленнее, но полностью функционально.
 
-**Important:** When running both services in the same Docker Compose file, use the service name (e.g., `whisperx-asr` or `whisper-asr`) in `ASR_BASE_URL`, not `localhost` or an IP address.
+**Важно:** При запуске обоих сервисов в том же файле Docker Compose используйте имя сервиса (например, `whisperx-asr` или `whisper-asr`) в `ASR_BASE_URL`, а не `localhost` или IP-адрес.
 
-#### Running Services in Separate Docker Compose Files
+#### Запуск сервисов в отдельных файлах Docker Compose
 
-If you prefer to manage the services independently or are adding the ASR service to an existing Speakr installation, you can run them in separate Docker Compose files. This approach gives you more flexibility and works whether the services are on the same machine or different machines.
+Если вы предпочитаете управлять сервисами независимо или добавляете ASR сервис к существующей установке Speakr, вы можете запустить их в отдельных файлах Docker Compose. Этот подход дает вам больше гибкости и работает независимо от того, находятся ли сервисы на той же машине или на разных машинах.
 
-##### Option 1: Same Machine with Shared Network
+##### Вариант 1: Та же машина с общей сетью
 
-If both services run on the same machine, you can use Docker's internal networking for communication:
+Если оба сервиса работают на той же машине, вы можете использовать внутреннюю сеть Docker для связи:
 
-First, create a shared Docker network:
+Сначала создайте общую сеть Docker:
 
 ```bash
 docker network create speakr-network
 ```
 
-Create `docker-compose.asr.yml` for the ASR service:
+Создайте `docker-compose.asr.yml` для ASR сервиса:
 
 ```yaml
 services:
@@ -425,7 +425,7 @@ networks:
     external: true
 ```
 
-Update your Speakr `docker-compose.yml` to use the shared network:
+Обновите ваш `docker-compose.yml` Speakr для использования общей сети:
 
 ```yaml
 services:
@@ -448,16 +448,16 @@ networks:
     external: true
 ```
 
-In your `.env` file, use the container name:
+В вашем файле `.env` используйте имя контейнера:
 ```bash
 ASR_BASE_URL=http://whisper-asr-webservice:9000
 ```
 
-##### Option 2: Separate Machines
+##### Вариант 2: Отдельные машины
 
-When running on different machines, you don't need the shared network. Each service runs independently and communicates over the network using IP addresses or hostnames.
+При запуске на разных машинах вам не нужна общая сеть. Каждый сервис работает независимо и общается по сети, используя IP-адреса или имена хостов.
 
-On the ASR server, create `docker-compose.asr.yml`:
+На ASR сервере создайте `docker-compose.asr.yml`:
 
 ```yaml
 services:
@@ -465,7 +465,7 @@ services:
     image: onerahmet/openai-whisper-asr-webservice:latest-gpu
     container_name: whisper-asr-webservice
     ports:
-      - "9000:9000"  # Exposed to the network
+      - "9000:9000"  # Открыт для сети
     environment:
       - ASR_MODEL=distil-large-v3
       - ASR_COMPUTE_TYPE=int8
@@ -481,7 +481,7 @@ services:
     restart: unless-stopped
 ```
 
-On the Speakr server, use the standard `docker-compose.yml`:
+На сервере Speakr используйте стандартный `docker-compose.yml`:
 
 ```yaml
 services:
@@ -498,34 +498,34 @@ services:
       - ./instance:/data/instance
 ```
 
-In your Speakr `.env` file, use the ASR server's IP address or hostname:
+В вашем файле `.env` Speakr используйте IP-адрес или имя хоста ASR сервера:
 ```bash
-# Using IP address
+# Используя IP-адрес
 ASR_BASE_URL=http://192.168.1.100:9000
 
-# Or using hostname
+# Или используя имя хоста
 ASR_BASE_URL=http://asr-server.local:9000
 ```
 
-Start both services on their respective machines:
+Запустите оба сервиса на их соответствующих машинах:
 
 ```bash
-# On ASR server
+# На ASR сервере
 docker compose -f docker-compose.asr.yml up -d
 
-# On Speakr server
+# На сервере Speakr
 docker compose up -d
 ```
 
-Make sure port 9000 is accessible between the machines (check firewall rules if needed).
+Убедитесь, что порт 9000 доступен между машинами (проверьте правила файрвола при необходимости).
 
-## Production Considerations
+## Соображения для продакшена
 
-### Using a Reverse Proxy for SSL
+### Использование обратного прокси для SSL
 
-For production deployments, running Speakr behind a reverse proxy is essential for security and enabling all features. The browser recording feature, particularly system audio capture, requires HTTPS to work due to browser security restrictions. A reverse proxy handles SSL termination, meaning it manages the HTTPS certificates while communicating with Speakr over HTTP internally.
+Для продакшен-развертываний запуск Speakr за обратным прокси необходим для безопасности и включения всех функций. Функция записи в браузере, особенно захват системного аудио, требует HTTPS для работы из-за ограничений безопасности браузера. Обратный прокси обрабатывает SSL-терминацию, что означает, что он управляет сертификатами HTTPS, общаясь с Speakr по HTTP внутренне.
 
-Here's a complete nginx configuration for Speakr:
+Вот полная конфигурация nginx для Speakr:
 
 ```nginx
 server {
@@ -566,13 +566,13 @@ server {
 }
 ```
 
-The WebSocket configuration is important for real-time features in Speakr. The timeout settings ensure large file uploads don't get interrupted. You can obtain free SSL certificates from Let's Encrypt using Certbot, making HTTPS accessible for everyone.
+Конфигурация WebSocket важна для функций реального времени в Speakr. Настройки таймаутов обеспечивают, что большие загрузки файлов не прерываются. Вы можете получить бесплатные SSL сертификаты от Let's Encrypt, используя Certbot, делая HTTPS доступным для всех.
 
-### Backup Strategy
+### Стратегия резервного копирования
 
-Regular backups are essential for production deployments. Your Speakr data consists of three critical components that need backing up: the SQLite database in the `instance` directory, the audio files and transcriptions in the `uploads` directory, and your configuration in the `.env` file.
+Регулярные резервные копии необходимы для продакшен-развертываний. Ваши данные Speakr состоят из трех критических компонентов, которые нужно резервировать: база данных SQLite в директории `instance`, аудиофайлы и транскрипции в директории `uploads`, и ваша конфигурация в файле `.env`.
 
-Create a backup script that captures all three components:
+Создайте скрипт резервного копирования, который захватывает все три компонента:
 
 ```bash
 #!/bin/bash
@@ -594,20 +594,20 @@ find "$BACKUP_DIR" -name "speakr_backup_*.tar.gz" -mtime +30 -delete
 echo "Backup completed: speakr_backup_$DATE.tar.gz"
 ```
 
-Make the script executable and schedule it with cron for automated daily backups:
+Сделайте скрипт исполняемым и запланируйте его с cron для автоматических ежедневных резервных копий:
 
 ```bash
 chmod +x /opt/speakr/backup.sh
 crontab -e
-# Add this line for daily backups at 2 AM:
+# Добавьте эту строку для ежедневных резервных копий в 2 AM:
 0 2 * * * /opt/speakr/backup.sh
 ```
 
-For critical deployments, consider copying backups to remote storage or cloud services for additional redundancy. The compressed backup size is typically much smaller than the original data, as audio files compress well.
+Для критических развертываний рассмотрите копирование резервных копий в удаленное хранилище или облачные сервисы для дополнительной избыточности. Сжатый размер резервной копии обычно намного меньше исходных данных, так как аудиофайлы хорошо сжимаются.
 
-### Monitoring and Maintenance
+### Мониторинг и обслуживание
 
-Proactive monitoring helps prevent issues before they impact users. Audio files can consume significant storage over time, especially if you're recording long meetings regularly. Set up disk space monitoring with alerts when usage exceeds 80%. A simple monitoring approach uses cron with df:
+Проактивный мониторинг помогает предотвращать проблемы до того, как они повлияют на пользователей. Аудиофайлы могут потреблять значительное хранилище со временем, особенно если вы регулярно записываете длинные встречи. Настройте мониторинг дискового пространства с предупреждениями, когда использование превышает 80%. Простой подход к мониторингу использует cron с df:
 
 ```bash
 #!/bin/bash
@@ -617,146 +617,146 @@ if [ $USAGE -gt 80 ]; then
 fi
 ```
 
-Monitor the Docker container health and logs regularly. You can use Docker's built-in health check feature or external monitoring tools. Check for patterns like repeated API failures, authentication errors, or processing timeouts. Also track your API usage and costs with your transcription service provider, as costs can add up with heavy usage.
+Регулярно отслеживайте здоровье Docker контейнера и логи. Вы можете использовать встроенную функцию проверки здоровья Docker или внешние инструменты мониторинга. Проверяйте паттерны, такие как повторяющиеся сбои API, ошибки аутентификации или таймауты обработки. Также отслеживайте использование API и затраты с вашим провайдером сервиса транскрибации, так как затраты могут накапливаться при интенсивном использовании.
 
-### Security Hardening
+### Усиление безопасности
 
-Production deployments require additional security measures beyond the default configuration. Start by ensuring strong passwords for all accounts, especially the admin account. Never use default or simple passwords in production.
+Продакшен-развертывания требуют дополнительных мер безопасности помимо конфигурации по умолчанию. Начните с обеспечения надежных паролей для всех аккаунтов, особенно административного аккаунта. Никогда не используйте пароли по умолчанию или простые пароли в продакшене.
 
-Restrict network access using firewall rules. If Speakr is only used internally, limit access to your organization's IP ranges:
+Ограничьте сетевой доступ, используя правила файрвола. Если Speakr используется только внутри, ограничьте доступ диапазонами IP вашей организации:
 
 ```bash
-# Example using ufw
+# Пример использования ufw
 ufw allow from 192.168.1.0/24 to any port 8899
 ufw deny 8899
 ```
 
-Implement rate limiting at the reverse proxy level to prevent abuse and API exhaustion. In nginx, you can add:
+Внедрите ограничение скорости на уровне обратного прокси, чтобы предотвратить злоупотребления и истощение API. В nginx вы можете добавить:
 
 ```nginx
 limit_req_zone $binary_remote_addr zone=speakr:10m rate=10r/s;
 limit_req zone=speakr burst=20;
 ```
 
-Keep the Docker image updated with the latest security patches. Check for updates regularly and plan maintenance windows for updates. Always backup before updating, and test updates in a staging environment first if possible.
+Держите Docker образ обновленным с последними патчами безопасности. Регулярно проверяйте обновления и планируйте окна обслуживания для обновлений. Всегда создавайте резервные копии перед обновлением и тестируйте обновления в промежуточной среде сначала, если возможно.
 
-## Updating Speakr
+## Обновление Speakr
 
-Keeping Speakr updated ensures you have the latest features and security patches. The update process is straightforward but should be done carefully to avoid data loss.
+Поддержание Speakr обновленным обеспечивает, что у вас есть последние функции и патчи безопасности. Процесс обновления прост, но должен выполняться осторожно, чтобы избежать потери данных.
 
-First, always create a backup before updating:
+Сначала всегда создавайте резервную копию перед обновлением:
 
 ```bash
-# Create a backup
+# Создайте резервную копию
 tar czf speakr_backup_before_update.tar.gz uploads/ instance/ .env
 
-# Pull the latest image
+# Получите последний образ
 docker compose pull
 
-# Stop the current container
+# Остановите текущий контейнер
 docker compose down
 
-# Start with the new image
+# Запустите с новым образом
 docker compose up -d
 
-# Check the logs to ensure successful startup
+# Проверьте логи, чтобы убедиться в успешном запуске
 docker compose logs -f app
 ```
 
-The update process preserves all your data since it's stored in mounted volumes outside the container. However, checking the release notes is important as some updates might require configuration changes or have breaking changes that need attention.
+Процесс обновления сохраняет все ваши данные, так как они хранятся в смонтированных томах вне контейнера. Однако проверка заметок о выпуске важна, так как некоторые обновления могут требовать изменений конфигурации или иметь критические изменения, которые требуют внимания.
 
-If an update causes issues, you can rollback by specifying the previous version in your docker-compose.yml file:
+Если обновление вызывает проблемы, вы можете откатиться, указав предыдущую версию в вашем файле docker-compose.yml:
 
 ```yaml
-image: learnedmachine/speakr:v1.2.3  # Replace with your previous version
+image: learnedmachine/speakr:v1.2.3  # Замените на вашу предыдущую версию
 ```
 
-## Troubleshooting Common Issues
+## Решение распространенных проблем
 
-### Container Won't Start
+### Контейнер не запускается
 
-When the container fails to start, the logs usually tell you exactly what's wrong. Check them first:
+Когда контейнер не может запуститься, логи обычно говорят вам точно, что не так. Проверьте их сначала:
 
 ```bash
 docker compose logs app
 ```
 
-Common startup issues include missing or malformed `.env` files. Ensure your `.env` file exists and has proper syntax. Each line should be `KEY=value` with no spaces around the equals sign. Comments start with `#`.
+Распространенные проблемы запуска включают отсутствующие или неправильно сформированные файлы `.env`. Убедитесь, что ваш файл `.env` существует и имеет правильный синтаксис. Каждая строка должна быть `KEY=value` без пробелов вокруг знака равенства. Комментарии начинаются с `#`.
 
-Port conflicts are another common issue. Check if port 8899 is already in use:
+Конфликты портов - еще одна распространенная проблема. Проверьте, используется ли порт 8899:
 
 ```bash
 netstat -tulpn | grep 8899
-# Or on macOS:
+# Или на macOS:
 lsof -i :8899
 ```
 
-If the port is in use, either stop the conflicting service or change Speakr's port in docker-compose.yml.
+Если порт используется, либо остановите конфликтующий сервис, либо измените порт Speakr в docker-compose.yml.
 
-### Transcription Failures
+### Сбои транскрибации
 
-Transcription failures usually stem from API configuration issues. Check the Docker logs for specific error messages:
+Сбои транскрибации обычно происходят из-за проблем конфигурации API. Проверьте Docker логи на конкретные сообщения об ошибках:
 
 ```bash
 docker compose logs app | grep -i error
 ```
 
-Common transcription issues include incorrect API keys, which show as authentication errors in the logs. Double-check your keys in the `.env` file and ensure they're for the correct service. Insufficient API credits will show as quota or payment errors. Check your account balance with your API provider. Network connectivity issues appear as connection timeouts or DNS resolution failures.
+Распространенные проблемы транскрибации включают неправильные ключи API, которые показываются как ошибки аутентификации в логах. Дважды проверьте ваши ключи в файле `.env` и убедитесь, что они для правильного сервиса. Недостаточные кредиты API будут показываться как ошибки квоты или оплаты. Проверьте баланс вашего аккаунта с вашим провайдером API. Проблемы сетевого подключения появляются как таймауты подключения или сбои разрешения DNS.
 
-For ASR endpoints, verify the service is running and accessible:
+Для ASR эндпоинтов проверьте, что сервис работает и доступен:
 
 ```bash
-# Test ASR endpoint connectivity
+# Протестируйте подключение ASR эндпоинта
 curl http://your-asr-service:9000/docs
 ```
 
-If using Docker networking with service names, remember that containers must be on the same network to communicate.
+Если используете Docker сеть с именами сервисов, помните, что контейнеры должны быть в той же сети для связи.
 
-### Performance Issues
+### Проблемы производительности
 
-Slow performance can have multiple causes. Start by checking system resources:
+Медленная производительность может иметь несколько причин. Начните с проверки системных ресурсов:
 
 ```bash
-# Check memory usage
+# Проверьте использование памяти
 free -h
 
-# Check disk I/O
+# Проверьте дисковый ввод-вывод
 iotop
 
-# Check Docker resource usage
+# Проверьте использование ресурсов Docker
 docker stats speakr
 ```
 
-If memory is constrained, consider adding swap space or upgrading your server. For disk I/O issues, ensure you're using SSD storage for the uploads and instance directories. Traditional hard drives can significantly slow down operations, especially with multiple concurrent users.
+Если память ограничена, рассмотрите добавление swap пространства или обновление вашего сервера. Для проблем дискового ввода-вывода убедитесь, что вы используете SSD хранилище для директорий uploads и instance. Традиционные жесткие диски могут значительно замедлить операции, особенно с несколькими одновременными пользователями.
 
-For large file processing, ensure chunking is properly configured. Without chunking, large files might timeout or fail completely. The chunk size should be slightly below your API's limit to account for encoding overhead.
+Для обработки больших файлов убедитесь, что разбиение правильно настроено. Без разбиения большие файлы могут таймаутиться или полностью терпеть неудачу. Размер фрагмента должен быть немного ниже лимита вашего API, чтобы учесть накладные расходы кодирования.
 
-If you're seeing slow transcription with many concurrent users, you might be hitting API rate limits. Check your API provider's documentation for rate limits and consider upgrading your plan if needed.
+Если вы видите медленную транскрибацию с многими одновременными пользователями, вы можете достигать лимитов скорости API. Проверьте документацию вашего провайдера API на лимиты скорости и рассмотрите обновление вашего плана при необходимости.
 
-### Browser Recording Issues
+### Проблемы записи в браузере
 
-If browser recording isn't working, especially system audio, the most common cause is using HTTP instead of HTTPS. Browsers require secure connections for audio capture due to privacy concerns. Either set up SSL with a reverse proxy or, for local development only, modify your browser's security settings to treat your local URL as secure.
+Если запись в браузере не работает, особенно системное аудио, наиболее распространенная причина - использование HTTP вместо HTTPS. Браузеры требуют безопасных подключений для захвата аудио из-за проблем конфиденциальности. Либо настройте SSL с обратным прокси, либо, только для локальной разработки, измените настройки безопасности вашего браузера, чтобы обрабатывать ваш локальный URL как безопасный.
 
-In Chrome, navigate to `chrome://flags`, search for "insecure origins", and add your URL to the list. Remember this reduces security and should only be used for development.
+В Chrome перейдите на `chrome://flags`, найдите "insecure origins" и добавьте ваш URL в список. Помните, что это снижает безопасность и должно использоваться только для разработки.
 
-## Building from Source
+## Сборка из исходников
 
-If you need to modify Speakr's code or prefer building your own images, you can build from source. This requires cloning the repository and using Docker's build capability.
+Если вам нужно изменить код Speakr или вы предпочитаете собирать свои собственные образы, вы можете собрать из исходников. Это требует клонирования репозитория и использования возможности сборки Docker.
 
-First, clone the repository and navigate to it:
+Сначала клонируйте репозиторий и перейдите в него:
 
 ```bash
 git clone https://github.com/murtaza-nasir/speakr.git
 cd speakr
 ```
 
-Modify the docker-compose.yml to build locally instead of using the pre-built image:
+Измените docker-compose.yml для сборки локально вместо использования предварительно собранного образа:
 
 ```yaml
 services:
   app:
-    build: .  # Build from current directory
-    image: speakr:custom  # Tag for your custom build
+    build: .  # Сборка из текущей директории
+    image: speakr:custom  # Тег для вашей пользовательской сборки
     container_name: speakr
     restart: unless-stopped
     ports:
@@ -768,19 +768,19 @@ services:
       - ./instance:/data/instance
 ```
 
-Build and start your custom version:
+Соберите и запустите вашу пользовательскую версию:
 
 ```bash
 docker compose up -d --build
 ```
 
-The `--build` flag forces Docker to rebuild the image even if one exists. This is useful when you've made code changes and want to test them.
+Флаг `--build` заставляет Docker пересобрать образ, даже если он существует. Это полезно, когда вы внесли изменения в код и хотите протестировать их.
 
-## Performance Optimization
+## Оптимизация производительности
 
-For high-volume deployments or when processing many large files, optimization becomes important. Start with model selection if using ASR. The distil-large-v3 model offers an excellent balance of speed and accuracy. For English-only content, use the `.en` variants which are faster and more accurate for English.
+Для развертываний с высоким объемом или при обработке многих больших файлов оптимизация становится важной. Начните с выбора модели, если используете ASR. Модель distil-large-v3 предлагает отличный баланс скорости и точности. Для контента только на английском используйте варианты `.en`, которые быстрее и точнее для английского.
 
-Optimize Docker resource allocation for your workload:
+Оптимизируйте выделение ресурсов Docker для вашей рабочей нагрузки:
 
 ```yaml
 services:
@@ -796,10 +796,10 @@ services:
           cpus: '2'
 ```
 
-This ensures Speakr has enough resources while preventing it from consuming everything on shared servers.
+Это обеспечивает, что Speakr имеет достаточно ресурсов, предотвращая при этом потребление всего на общих серверах.
 
-For storage performance, use SSD drives for the Docker volumes. The database benefits significantly from fast random I/O, and large audio file processing is much faster with SSDs. If using network storage, ensure low latency connections.
+Для производительности хранилища используйте SSD диски для Docker томов. База данных значительно выигрывает от быстрого случайного ввода-вывода, и обработка больших аудиофайлов намного быстрее с SSD. Если используете сетевое хранилище, убедитесь в низкой задержке подключений.
 
 ---
 
-Next: [User Guide](../user-guide/index.md) to learn how to use all of Speakr's features
+Далее: [Руководство пользователя](../user-guide/index.md) чтобы узнать, как использовать все функции Speakr

@@ -1,163 +1,163 @@
-# Default Prompts
+# Промпты по умолчанию
 
-The Default Prompts tab lets you shape how AI interprets and [summarizes recordings](../features.md#automatic-summarization) across your entire Speakr instance. This is where you establish the baseline intelligence that users experience when they haven't customized their own [personal prompts](../user-guide/settings.md#custom-prompts-tab).
+Вкладка Промпты по умолчанию позволяет вам формировать то, как ИИ интерпретирует и [суммирует записи](../features.md#automatic-summarization) по всему вашему экземпляру Speakr. Это место, где вы устанавливаете базовый интеллект, который пользователи испытывают, когда они не настроили свои собственные [личные промпты](../user-guide/settings.md#custom-prompts-tab).
 
-![Default Prompts](../assets/images/screenshots/Admin default prompts.png)
+![Промпты по умолчанию](../assets/images/screenshots/Admin default prompts.png)
 
-## Understanding Prompt Hierarchy
+## Понимание иерархии промптов
 
-Speakr uses a sophisticated hierarchy to determine which prompt to use for any given recording. This system provides flexibility while maintaining control, ensuring users get appropriate summaries while allowing customization where needed.
+Speakr использует сложную иерархию для определения, какой промпт использовать для любой данной записи. Эта система обеспечивает гибкость, поддерживая контроль, гарантируя, что пользователи получают соответствующие сводки, позволяя при этом настройку, где это необходимо.
 
-At the top of the hierarchy are tag-specific prompts. When a recording has [tags](../user-guide/settings.md#tag-management-tab) with associated prompts, these take absolute priority. Learn about [tag management](../features.md#tagging-system) in the features guide. Multiple tag prompts concatenate intelligently, allowing sophisticated prompt stacking for specialized content types.
+На вершине иерархии находятся промпты, специфичные для тегов. Когда запись имеет [теги](../user-guide/settings.md#tag-management-tab) с связанными промптами, они имеют абсолютный приоритет. Узнайте о [управлении тегами](../features.md#tagging-system) в руководстве по функциям. Несколько промптов тегов объединяются интеллектуально, позволяя сложное наложение промптов для специализированных типов контента.
 
-Next comes the user's personal custom prompt, set in their [account settings](../user-guide/settings.md#custom-prompts-tab). Users can also configure [language preferences](../user-guide/settings.md#language-preferences) for their summaries. This allows individuals to tailor summaries to their specific needs without affecting others. Many users never set this, making your admin default even more important.
+Далее идет личный пользовательский промпт, установленный в их [настройках аккаунта](../user-guide/settings.md#custom-prompts-tab). Пользователи также могут настроить [языковые предпочтения](../user-guide/settings.md#language-preferences) для своих сводок. Это позволяет отдельным лицам адаптировать сводки к их конкретным потребностям, не влияя на других. Многие пользователи никогда не устанавливают это, делая ваш административный промпт по умолчанию еще более важным.
 
-Your admin default prompt, configured on this page, serves as the foundation for most summaries. This is what new users experience and what long-term users rely on when they haven't customized their settings. It shapes the overall intelligence and utility of your Speakr instance.
+Ваш административный промпт по умолчанию, настроенный на этой странице, служит основой для большинства сводок. Это то, что испытывают новые пользователи, и на что полагаются долгосрочные пользователи, когда они не настроили свои настройки. Он формирует общий интеллект и полезность вашего экземпляра Speakr.
 
-Finally, if all else fails, a hardcoded system fallback ensures summaries are always generated. You'll rarely see this in practice, but it provides a safety net ensuring the system never fails to produce output.
+Наконец, если все остальное терпит неудачу, жестко закодированный системный резервный вариант обеспечивает, что сводки всегда генерируются. Вы редко увидите это на практике, но это обеспечивает страховочную сеть, гарантируя, что система никогда не терпит неудачу в производстве вывода.
 
-## Crafting Effective Default Prompts
+## Создание эффективных промптов по умолчанию
 
-Your default prompt is more than technical instruction - it's a template for understanding. The prompt shown in the interface demonstrates a balanced approach, requesting key issues, decisions, and action items. This structure works well for business meetings but might not suit all contexts.
+Ваш промпт по умолчанию — это больше, чем техническая инструкция — это шаблон для понимания. Промпт, показанный в интерфейсе, демонстрирует сбалансированный подход, запрашивая ключевые проблемы, решения и пункты действий. Эта структура хорошо работает для деловых встреч, но может не подходить для всех контекстов.
 
-Consider your user base when designing prompts. A research institution might emphasize methodologies and findings. A legal firm could focus on case details and precedents. For multi-language support, see [language configuration](../features.md#language-support) and [troubleshooting language issues](../troubleshooting.md#summary-language-doesnt-match-preference). A creative agency might highlight concepts and client feedback. The prompt should reflect what matters most to your users.
+Рассмотрите вашу пользовательскую базу при проектировании промптов. Исследовательское учреждение может подчеркивать методологии и находки. Юридическая фирма может фокусироваться на деталях дела и прецедентах. Для поддержки нескольких языков см. [конфигурацию языка](../features.md#language-support) и [решение языковых проблем](../troubleshooting.md#summary-language-doesnt-match-preference). Творческое агентство может выделять концепции и обратную связь клиентов. Промпт должен отражать то, что наиболее важно для ваших пользователей.
 
-The AI responds best to clear, structured requests. Use bullet points or numbered sections to organize the output. Specify the level of detail you want - "brief overview" versus "comprehensive analysis" produces very different results. Include examples if certain formats are crucial.
+ИИ лучше всего реагирует на четкие, структурированные запросы. Используйте маркированные списки или нумерованные разделы для организации вывода. Укажите уровень детализации, который вы хотите — "краткий обзор" против "всестороннего анализа" производит очень разные результаты. Включите примеры, если определенные форматы критичны.
 
-Remember that this prompt applies to everything from five-minute check-ins to two-hour workshops. Design for versatility. Avoid overly specific requirements that might not apply to all content. Focus on extracting universally valuable information while allowing the AI flexibility to adapt to different recording types.
+Помните, что этот промпт применяется ко всему, от пятиминутных проверок до двухчасовых семинаров. Проектируйте для универсальности. Избегайте чрезмерно специфических требований, которые могут не применяться ко всему контенту. Сосредоточьтесь на извлечении универсально ценной информации, позволяя при этом ИИ гибкость адаптироваться к разным типам записей.
 
-## The Default Prompt Editor
+## Редактор промпта по умолчанию
 
-The large text area displays your current default prompt, with full markdown support for formatting. You can use bold for emphasis, lists for structure, and even code blocks if you need to show example formats. The editor expands to accommodate longer prompts, though conciseness generally produces better results.
+Большая текстовая область отображает ваш текущий промпт по умолчанию, с полной поддержкой markdown для форматирования. Вы можете использовать жирный для акцента, списки для структуры и даже блоки кода, если вам нужно показать примеры форматов. Редактор расширяется для размещения более длинных промптов, хотя краткость обычно производит лучшие результаты.
 
-Changes save immediately when you click the Save Changes button. There's no draft or staging - modifications affect all new summaries instantly. Users can [regenerate summaries](../user-guide/transcripts.md) to apply updated prompts to existing recordings. The Reset to Default button provides a safety net, reverting to the original prompt if your customizations don't work as expected.
+Изменения сохраняются немедленно, когда вы нажимаете кнопку Save Changes. Нет черновика или промежуточной стадии — модификации влияют на все новые сводки мгновенно. Пользователи могут [регенерировать сводки](../user-guide/transcripts.md), чтобы применить обновленные промпты к существующим записям. Кнопка Reset to Default предоставляет страховочную сеть, возвращаясь к оригинальному промпту, если ваши настройки не работают, как ожидалось.
 
-The timestamp shows when the prompt was last modified, helpful for tracking changes over time. If multiple admins manage your instance, this helps coordinate who changed what and when.
+Временная метка показывает, когда промпт был последний раз изменен, полезно для отслеживания изменений со временем. Если несколько администраторов управляют вашим экземпляром, это помогает координировать, кто изменил что и когда.
 
-## Understanding the LLM Prompt Structure
+## Понимание структуры промпта LLM
 
-The expandable "View Full LLM Prompt Structure" section reveals how your prompt fits into the complete instruction sent to the AI. This technical view shows the system prompt, your custom prompt, and the transcript integration.
+Расширяемый раздел "View Full LLM Prompt Structure" раскрывает, как ваш промпт вписывается в полную инструкцию, отправленную в ИИ. Этот технический вид показывает системный промпт, ваш пользовательский промпт и интеграцию транскрипта.
 
-Understanding this structure helps you write better prompts. You'll see that certain instructions are already handled by the system prompt, so you don't need to repeat them. You'll understand how your prompt interacts with the transcript text and why certain phrasings work better than others.
+Понимание этой структуры помогает вам писать лучшие промпты. Вы увидите, что определенные инструкции уже обрабатываются системным промптом, поэтому вам не нужно их повторять. Вы поймете, как ваш промпт взаимодействует с текстом транскрипта и почему определенные формулировки работают лучше, чем другие.
 
-This transparency also helps with troubleshooting. If summaries aren't meeting expectations, reviewing the full prompt structure often reveals why. Perhaps your instructions conflict with system instructions, or maybe you're requesting information that isn't typically in transcripts.
+Эта прозрачность также помогает с решением проблем. Если сводки не соответствуют ожиданиям, просмотр полной структуры промпта часто раскрывает, почему. Возможно, ваши инструкции конфликтуют с системными инструкциями, или, возможно, вы запрашиваете информацию, которая обычно не в транскриптах.
 
-## Practical Prompt Strategies
+## Практические стратегии промптов
 
-Start with a proven structure and iterate based on results. The default prompt works well because it requests concrete, actionable information. Key issues provide context, decisions document outcomes, and action items drive follow-up.
+Начните с проверенной структуры и итерируйте на основе результатов. Промпт по умолчанию хорошо работает, потому что он запрашивает конкретную, действенную информацию. Ключевые проблемы предоставляют контекст, решения документируют результаты, а пункты действий стимулируют последующие действия.
 
-Test your prompts with various recording types before deploying widely. A prompt that works beautifully for formal presentations might fail for casual conversations. Upload test recordings with different characteristics and evaluate the summaries produced.
+Тестируйте ваши промпты с различными типами записей перед широким развертыванием. Промпт, который красиво работает для формальных презентаций, может терпеть неудачу для случайных бесед. Загрузите тестовые записи с разными характеристиками и оцените производимые сводки.
 
-Consider seasonal or project-based adjustments. During planning seasons, you might emphasize goals and strategies. During execution phases, focus on progress and blockers. You can update the default prompt as organizational needs evolve.
+Рассмотрите сезонные или проектные корректировки. Во время сезонов планирования вы можете подчеркивать цели и стратегии. Во время фаз выполнения сосредоточьтесь на прогрессе и блокерах. Вы можете обновить промпт по умолчанию по мере эволюции организационных потребностей.
 
-Monitor user feedback about summary quality. If users frequently edit summaries or complain about missing information, your prompt might need adjustment. The best prompt is one users rarely need to modify.
+Отслеживайте обратную связь пользователей о качестве сводок. Если пользователи часто редактируют сводки или жалуются на отсутствующую информацию, ваш промпт может нуждаться в корректировке. Лучший промпт — тот, который пользователи редко нуждаются в модификации.
 
-## Advanced Prompt Techniques
+## Продвинутые техники промптов
 
-Layer instructions for nuanced output. Instead of just requesting "action items," specify "action items with responsible parties and due dates if mentioned." This precision helps the AI extract more valuable information when it's available.
+Слоите инструкции для нюансного вывода. Вместо простого запроса "пунктов действий" укажите "пункты действий с ответственными сторонами и сроками, если упомянуты." Эта точность помогает ИИ извлекать более ценную информацию, когда она доступна.
 
-Use conditional language for flexibility. Phrases like "if applicable" or "when discussed" allow the AI to skip sections that don't apply to every recording. This prevents forced, irrelevant content in summaries.
+Используйте условный язык для гибкости. Фразы, такие как "если применимо" или "когда обсуждалось", позволяют ИИ пропускать разделы, которые не применяются к каждой записи. Это предотвращает принудительный, нерелевантный контент в сводках.
 
-Consider the AI model's strengths and limitations. Current models excel at identifying themes, extracting specific information, and organizing content. They struggle with complex reasoning, mathematical calculations, and information not explicitly stated. Design prompts that play to these strengths.
+Рассмотрите сильные стороны и ограничения модели ИИ. Текущие модели превосходны в идентификации тем, извлечении конкретной информации и организации контента. Они борются со сложными рассуждениями, математическими вычислениями и информацией, которая не явно указана. Проектируйте промпты, которые играют на эти сильные стороны.
 
-Balance detail with readability. Extremely detailed prompts might produce comprehensive summaries that users don't read. Sometimes a concise, focused summary serves users better than exhaustive documentation.
+Балансируйте детализацию с читаемостью. Чрезвычайно детальные промпты могут производить всесторонние сводки, которые пользователи не читают. Иногда краткая, сфокусированная сводка служит пользователям лучше, чем исчерпывающая документация.
 
-## Creative Tag Prompt Use Cases
+## Творческие случаи использования промптов тегов
 
-Tags with custom prompts unlock powerful transformation capabilities. Here are creative ways people use this feature:
+Теги с пользовательскими промптами разблокируют мощные возможности трансформации. Вот творческие способы, как люди используют эту функцию:
 
-### Recipe Recordings
+### Записи рецептов
 
-Create a "Recipe" tag with a prompt like: "Convert this free-form cooking narration into a properly formatted recipe with ingredients list, step-by-step instructions, cooking times, and servings. Organize ingredients by quantity and item. Number the steps clearly."
+Создайте тег "Recipe" с промптом типа: "Преобразуйте это свободное повествование о готовке в правильно отформатированный рецепт со списком ингредиентов, пошаговыми инструкциями, временами готовки и порциями. Организуйте ингредиенты по количеству и предмету. Нумеруйте шаги четко."
 
-When you record yourself cooking while talking through what you're doing - "okay I'm adding maybe two cups of flour, bit more actually, and then half a cup of sugar, no wait three quarters" - the AI transforms that messy stream-of-consciousness into a clean, usable recipe format with organized ingredients and numbered steps.
+Когда вы записываете себя, готовя, разговаривая через то, что вы делаете — "хорошо, я добавляю, может быть, две чашки муки, немного больше на самом деле, а затем полчашки сахара, нет, подождите, три четверти" — ИИ преобразует этот беспорядочный поток сознания в чистый, пригодный формат рецепта с организованными ингредиентами и нумерованными шагами.
 
-### Lecture Notes
+### Заметки лекций
 
-A "Lecture" tag could use: "Extract the main concepts, supporting examples, key terminology with definitions, and any practical applications mentioned. Organize in an outline format suitable for study notes."
+Тег "Lecture" может использовать: "Извлеките основные концепции, поддерживающие примеры, ключевую терминологию с определениями и любые практические применения, упомянутые. Организуйте в формате конспекта, подходящем для учебных заметок."
 
-Students record lectures as they happen. The messy 90-minute recording becomes organized study notes with concepts clearly labeled, examples pulled out, and terminology defined. Much more useful than trying to review the raw transcript.
+Студенты записывают лекции по мере их прохождения. Беспорядочная 90-минутная запись становится организованными учебными заметками с четко помеченными концепциями, извлеченными примерами и определенной терминологией. Намного полезнее, чем пытаться просмотреть сырой транскрипт.
 
-### Meeting Action Items
+### Пункты действий встреч
 
-Create a "Project Meeting" tag with: "Focus exclusively on action items, decisions made, and next steps. For each action item, identify who is responsible and any mentioned deadlines. Ignore general discussion."
+Создайте тег "Project Meeting" с: "Сосредоточьтесь исключительно на пунктах действий, принятых решениях и следующих шагах. Для каждого пункта действий идентифицируйте, кто несет ответственность и любые упомянутые сроки. Игнорируйте общее обсуждение."
 
-The group spends an hour talking about a project. The summary ignores all the background discussion and debate, giving you just the concrete outcomes - who's doing what and when.
+Группа проводит час, разговаривая о проекте. Сводка игнорирует все фоновое обсуждение и дебаты, давая вам только конкретные результаты — кто что делает и когда.
 
-### Brainstorming Sessions
+### Сессии мозгового штурма
 
-A "Ideas" tag with: "List every distinct idea mentioned, no matter how brief the discussion. For each idea, note any immediate reactions or concerns raised. Don't evaluate or synthesize - just capture everything."
+Тег "Ideas" с: "Перечислите каждую отдельную идею, упомянутую, независимо от того, насколько кратким было обсуждение. Для каждой идеи отметьте любые немедленные реакции или поднятые проблемы. Не оценивайте и не синтезируйте — просто захватите все."
 
-Free-flowing creative sessions produce transcripts full of half-formed thoughts and tangents. This prompt pulls out every idea fragment so nothing gets lost in the noise.
+Свободно текущие творческие сессии производят транскрипты, полные полуоформленных мыслей и отвлечений. Этот промпт извлекает каждый фрагмент идеи, чтобы ничего не потерялось в шуме.
 
-### Code Review Sessions
+### Сессии обзора кода
 
-"Code Review" tag: "For each piece of code or system discussed, list: 1) What was reviewed, 2) Issues identified, 3) Suggested changes, 4) Who will implement fixes. Use technical language, don't simplify."
+Тег "Code Review": "Для каждого фрагмента кода или системы, обсуждаемой, перечислите: 1) Что было рассмотрено, 2) Выявленные проблемы, 3) Предложенные изменения, 4) Кто будет реализовывать исправления. Используйте технический язык, не упрощайте."
 
-Technical discussions stay technical. The summary uses proper terminology and maintains the level of detail needed for developers to act on the feedback.
+Технические обсуждения остаются техническими. Сводка использует правильную терминологию и поддерживает уровень детализации, необходимый для разработчиков, чтобы действовать на основе обратной связи.
 
-## Tag Stacking and Order
+## Наложение тегов и порядок
 
-When a recording has multiple tags with prompts, they concatenate in the order tags were applied. This creates powerful combinations:
+Когда запись имеет несколько тегов с промптами, они объединяются в порядке, в котором теги были применены. Это создает мощные комбинации:
 
-### Example: Personal Lecture + Specific Course
+### Пример: Личная лекция + Конкретный курс
 
-You have a personal "My Lectures" tag with: "Organize as study notes with clear headers."
+У вас есть личный тег "My Lectures" с: "Организуйте как учебные заметки с четкими заголовками."
 
-You also tag with "Biology 301" which adds: "Pay special attention to biological processes, terminology, and diagrams mentioned."
+Вы также помечаете "Biology 301", который добавляет: "Обратите особое внимание на биологические процессы, терминологию и упомянутые диаграммы."
 
-The result combines both: study notes format focused on biological content. The order doesn't matter much here since they're complementary.
+Результат объединяет оба: формат учебных заметок, сфокусированный на биологическом контенте. Порядок здесь не имеет большого значения, поскольку они дополняют друг друга.
 
-### Example: Client Meeting + Legal Review
+### Пример: Встреча с клиентом + Юридический обзор
 
-"Client Meeting" tag: "Extract client requirements, concerns, and preferences."
+Тег "Client Meeting": "Извлеките требования клиента, проблемы и предпочтения."
 
-"Legal Review" tag: "Identify any legal considerations, compliance requirements, or risk factors mentioned."
+Тег "Legal Review": "Идентифицируйте любые юридические соображения, требования соответствия или упомянутые факторы риска."
 
-Together, you get client needs plus legal implications in one summary - useful when client calls touch on contractual matters. If you tagged "Legal Review" first and "Client Meeting" second, the legal aspects would be emphasized first, then client concerns.
+Вместе вы получаете потребности клиента плюс юридические последствия в одной сводке — полезно, когда звонки клиентов касаются договорных вопросов. Если вы пометили "Legal Review" первым и "Client Meeting" вторым, юридические аспекты были бы подчеркнуты первыми, затем проблемы клиента.
 
-### Example: Recipe + Dietary Restriction
+### Пример: Рецепт + Диетическое ограничение
 
-"Recipe" tag: "Convert to formatted recipe."
+Тег "Recipe": "Преобразуйте в отформатированный рецепт."
 
-"Gluten Free" tag: "Note which ingredients contain gluten and suggest substitutions."
+Тег "Gluten Free": "Отметьте, какие ингредиенты содержат глютен, и предложите замены."
 
-The recipe gets formatted properly, plus you get automatic gluten-free adaptation notes. Perfect when you're adapting traditional recipes for dietary needs.
+Рецепт получает правильное форматирование, плюс вы получаете автоматические заметки об адаптации без глютена. Идеально, когда вы адаптируете традиционные рецепты для диетических потребностей.
 
-### When Order Matters
+### Когда порядок имеет значение
 
-More specific prompts should generally come last, as they refine the output from general prompts. Start broad (format type) then add specifics (focus areas).
+Более специфические промпты должны, как правило, приходить последними, поскольку они уточняют вывод из общих промптов. Начните широко (тип формата), затем добавьте специфику (области фокуса).
 
-If you tag "Technical Details" + "Executive Summary", you're asking for detailed technical content presented as an executive summary - probably condensed but still technical.
+Если вы помечаете "Technical Details" + "Executive Summary", вы просите детальный технический контент, представленный как исполнительная сводка — вероятно, сжатый, но все еще технический.
 
-Reverse it to "Executive Summary" + "Technical Details" and you're requesting executive-level content with technical depth where applicable - probably less detailed overall.
+Обратите это на "Executive Summary" + "Technical Details", и вы запрашиваете контент на исполнительном уровне с технической глубиной, где применимо — вероятно, менее детальный в целом.
 
-Test your tag combinations with sample recordings to see which order produces the results you want.
+Тестируйте ваши комбинации тегов с образцовыми записями, чтобы увидеть, какой порядок производит результаты, которые вы хотите.
 
-## Coordinating with User Prompts
+## Координация с пользовательскими промптами
 
-Your default prompt should complement, not compete with, user customization. Design it as a solid foundation that works for most cases while encouraging power users to customize for their specific needs.
+Ваш промпт по умолчанию должен дополнять, а не конкурировать с пользовательской настройкой. Проектируйте его как прочную основу, которая работает для большинства случаев, поощряя при этом продвинутых пользователей настраивать для их конкретных потребностей.
 
-Communicate your prompt strategy to users. Let them know what the default prompt emphasizes so they can decide whether customization would benefit them. Share examples of effective user prompts that build on your default.
+Сообщайте вашу стратегию промптов пользователям. Дайте им знать, что подчеркивает промпт по умолчанию, чтобы они могли решить, будет ли настройка выгодна им. Поделитесь примерами эффективных пользовательских промптов, которые строятся на вашем по умолчанию.
 
-Consider documenting prompt best practices for your users. If certain departments need specialized summaries, provide recommended prompts they can use. This empowers users while maintaining consistency where it matters.
+Рассмотрите документирование лучших практик промптов для ваших пользователей. Если определенным отделам нужны специализированные сводки, предоставьте рекомендуемые промпты, которые они могут использовать. Это расширяет возможности пользователей, поддерживая при этом согласованность там, где это важно.
 
-## Measuring Prompt Effectiveness
+## Измерение эффективности промптов
 
-Track how often users modify AI-generated summaries. Frequent edits suggest your prompt isn't capturing what users need. Minimal edits indicate your prompt effectively extracts valuable information.
+Отслеживайте, как часто пользователи модифицируют сгенерированные ИИ сводки. Частые правки предполагают, что ваш промпт не захватывает то, что нужно пользователям. Минимальные правки указывают, что ваш промпт эффективно извлекает ценную информацию.
 
-Review a sample of summaries periodically. Do they consistently include the requested sections? Is the information accurate and relevant? Are users adding similar information that the prompt should request?
+Периодически просматривайте образец сводок. Включают ли они последовательно запрошенные разделы? Является ли информация точной и релевантной? Добавляют ли пользователи похожую информацию, которую промпт должен запрашивать?
 
-Gather feedback during user reviews or support interactions. Ask specifically about summary quality and whether the default format meets their needs. Users who don't customize their prompts rely entirely on your default, making their feedback crucial.
+Собирайте обратную связь во время пользовательских обзоров или взаимодействий поддержки. Спрашивайте конкретно о качестве сводок и соответствует ли формат по умолчанию их потребностям. Пользователи, которые не настраивают свои промпты, полагаются полностью на ваш по умолчанию, делая их обратную связь критичной.
 
-## Common Prompt Pitfalls
+## Распространенные ловушки промптов
 
-Avoid overly restrictive prompts that force structure onto incompatible content. Not every recording has "decisions" or "action items." Forcing the AI to find these when they don't exist produces meaningless filler.
+Избегайте чрезмерно ограничительных промптов, которые навязывают структуру несовместимому контенту. Не каждая запись имеет "решения" или "пункты действий." Принуждение ИИ находить их, когда они не существуют, производит бессмысленный заполнитель.
 
-Don't request information the AI can't provide. Asking for "unspoken concerns" or "what wasn't discussed" goes beyond transcript analysis. The AI can only work with what was actually said and recorded.
+Не запрашивайте информацию, которую ИИ не может предоставить. Запрос "невысказанных проблем" или "того, что не обсуждалось" выходит за рамки анализа транскрипта. ИИ может работать только с тем, что было фактически сказано и записано.
 
-Resist the temptation to make prompts too long. Each instruction adds complexity and potential confusion. Focus on what's most important rather than trying to capture every possible detail.
+Сопротивляйтесь искушению делать промпты слишком длинными. Каждая инструкция добавляет сложность и потенциальную путаницу. Сосредоточьтесь на том, что наиболее важно, а не пытайтесь захватить каждую возможную деталь.
 
 ---
 
-Next: [Vector Store](vector-store.md) →
+Далее: [Векторное хранилище](vector-store.md) →

@@ -1,105 +1,105 @@
-# System Settings
+# Системные настройки
 
-System Settings is where you configure the fundamental behaviors that affect every user and recording in your Speakr instance. These global parameters shape how the system operates, from technical limits to user-facing features.
+Системные настройки — это место, где вы настраиваете фундаментальное поведение, которое влияет на каждого пользователя и запись в вашем экземпляре Speakr. Эти глобальные параметры формируют то, как система работает, от технических лимитов до функций, обращенных к пользователям.
 
-![System Settings](../assets/images/screenshots/Admin system settings.png)
+![Системные настройки](../assets/images/screenshots/Admin system settings.png)
 
-## Transcript Length Limit
+## Лимит длины транскрипта
 
-The transcript length limit determines how much text gets sent to the AI when generating summaries or responding to chats. This seemingly simple number has a big effect on both quality and cost.
+Лимит длины транскрипта определяет, сколько текста отправляется в ИИ при генерации сводок или ответах в чатах. Это кажущееся простым число имеет большое влияние как на качество, так и на стоимость.
 
-When set to "No Limit," the entire transcript goes to the AI regardless of length. This ensures the AI has complete context but can become expensive for long recordings. A two-hour meeting might generate 20,000 words of transcript, consuming significant API tokens and potentially overwhelming the AI model's context window. This limit will also be applied to the speaker auto-detection feature in the speaker identification modal.
+Когда установлено "No Limit", весь транскрипт отправляется в ИИ независимо от длины. Это обеспечивает, что ИИ имеет полный контекст, но может стать дорогим для длинных записей. Двухчасовая встреча может сгенерировать 20 000 слов транскрипта, потребляя значительные токены API и потенциально перегружая контекстное окно модели ИИ. Этот лимит также будет применен к функции автоматического обнаружения говорящих в модальном окне идентификации говорящих.
 
-Setting a character limit (like 50,000 characters) creates a ceiling on API consumption. The system will truncate very long transcripts, sending only the beginning portion to the AI. This keeps costs predictable but might mean the AI misses important content from later in the recording.
+Установка лимита символов (например, 50 000 символов) создает потолок на потребление API. Система будет обрезать очень длинные транскрипты, отправляя только начальную часть в ИИ. Это сохраняет затраты предсказуемыми, но может означать, что ИИ пропустит важный контент из более поздней части записи.
 
-The sweet spot depends on your use case. For typical meetings under an hour, 50,000 characters usually captures everything. For longer sessions, you might increase this limit or train users to split recordings. Monitor your API costs and user feedback to find the right balance.
+Золотая середина зависит от вашего случая использования. Для типичных встреч менее часа 50 000 символов обычно захватывает все. Для более длинных сессий вы можете увеличить этот лимит или обучить пользователей разделять записи. Отслеживайте ваши затраты API и обратную связь пользователей, чтобы найти правильный баланс.
 
-## Maximum File Size
+## Максимальный размер файла
 
-The file size limit protects your system from being overwhelmed by massive uploads while ensuring users can work with reasonable recordings. The default 300MB accommodates several hours of compressed audio, which covers most use cases.
+Лимит размера файла защищает вашу систему от перегрузки массивными загрузками, обеспечивая при этом, что пользователи могут работать с разумными записями. По умолчанию 300 МБ вмещает несколько часов сжатого аудио, что покрывает большинство случаев использования.
 
-Raising this limit allows longer recordings but requires careful consideration. Larger files take longer to upload, consume more storage, and might timeout during processing. Your server needs enough memory to handle these files, and your storage must accommodate them. Network timeouts, browser limitations, and user patience all factor into what's practical.
+Повышение этого лимита позволяет более длинные записи, но требует тщательного рассмотрения. Более крупные файлы занимают больше времени для загрузки, потребляют больше хранилища и могут таймаутиться во время обработки. Ваш сервер нуждается в достаточной памяти для обработки этих файлов, и ваше хранилище должно их вмещать. Сетевые таймауты, ограничения браузера и терпение пользователей — все это факторы в том, что практично.
 
-If users frequently hit the limit, consider whether they really need single recordings that long. Often, splitting long sessions into logical segments produces better results - easier to review, faster to process, and more focused summaries.
+Если пользователи часто достигают лимита, рассмотрите, действительно ли им нужны одиночные записи такой длины. Часто разделение длинных сессий на логические сегменты дает лучшие результаты — легче просматривать, быстрее обрабатывать и более сфокусированные сводки.
 
-## ASR Timeout Settings
+## Настройки таймаута ASR
 
-The ASR timeout determines how long Speakr will wait for advanced transcription services to complete their work. The default 1,800 seconds (30 minutes) handles most recordings, but you might need to adjust based on your transcription service and typical file sizes.
+Таймаут ASR определяет, как долго Speakr будет ждать, пока продвинутые сервисы транскрибации завершат свою работу. По умолчанию 1 800 секунд (30 минут) обрабатывает большинство записей, но вам может потребоваться настроить на основе вашего сервиса транскрибации и типичных размеров файлов.
 
-Setting this too low causes longer recordings to fail even when the transcription service is working normally. The recording appears stuck in processing, then eventually fails, frustrating users who must retry or give up. Setting it too high ties up system resources waiting for services that might have actually failed.
+Установка этого слишком низко вызывает сбой более длинных записей даже когда сервис транскрибации работает нормально. Запись кажется застрявшей в обработке, затем в конечном итоге терпит неудачу, расстраивая пользователей, которые должны повторить попытку или сдаться. Установка слишком высоко связывает системные ресурсы, ожидая сервисы, которые могли фактически потерпеть неудачу.
 
-Your optimal timeout depends on your transcription service's performance and your users' recording lengths. Monitor processing times for successful transcriptions and set the timeout comfortably above your longest normal processing time. If you regularly process multi-hour recordings, you might need 3,600 seconds or more.
+Ваш оптимальный таймаут зависит от производительности вашего сервиса транскрибации и длин записей ваших пользователей. Отслеживайте времена обработки для успешных транскрибаций и установите таймаут комфортно выше вашего самого длинного нормального времени обработки. Если вы регулярно обрабатываете многочасовые записи, вам может потребоваться 3 600 секунд или больше.
 
-## Recording Disclaimer
+## Отказ от ответственности при записи
 
-The recording disclaimer appears before users start any recording session, making it perfect for legal notices, policy reminders, or usage guidelines. This markdown-formatted message ensures users understand their responsibilities before creating content.
+Отказ от ответственности при записи появляется перед тем, как пользователи начинают любую сессию записи, делая его идеальным для юридических уведомлений, напоминаний о политике или руководящих принципов использования. Это сообщение в формате markdown обеспечивает, что пользователи понимают свои обязанности перед созданием контента.
 
-Organizations often use this for compliance requirements - reminding users about consent requirements, data handling policies, or appropriate use guidelines. Educational institutions might note that recordings are for academic purposes only. Healthcare organizations could reference HIPAA compliance requirements.
+Организации часто используют это для требований соответствия — напоминая пользователям о требованиях согласия, политиках обработки данных или руководящих принципах соответствующего использования. Образовательные учреждения могут отметить, что записи только для академических целей. Организации здравоохранения могут ссылаться на требования соответствия HIPAA.
 
-Keep disclaimers concise and relevant. Users see this message frequently, so lengthy legal text becomes an ignored click-through. Focus on the most important points, and link to detailed policies if needed. The markdown support lets you format the message clearly with bold text for emphasis or links to additional resources.
+Держите отказы от ответственности краткими и релевантными. Пользователи видят это сообщение часто, поэтому длинный юридический текст становится игнорируемым проходом. Сосредоточьтесь на самых важных пунктах и ссылайтесь на подробные политики при необходимости. Поддержка markdown позволяет вам форматировать сообщение четко с жирным текстом для акцента или ссылками на дополнительные ресурсы.
 
-## System-Wide Impact
+## Системное влияние
 
-Every setting on this page affects all users immediately. Changes take effect as soon as you save them, without requiring system restarts or user logouts. This immediate application means you should test changes carefully and communicate significant modifications to your users.
+Каждая настройка на этой странице влияет на всех пользователей немедленно. Изменения вступают в силу, как только вы их сохраняете, без необходимости перезапуска системы или выхода пользователей. Это немедленное применение означает, что вы должны тщательно тестировать изменения и сообщать о значительных модификациях вашим пользователям.
 
-The refresh button reloads settings from the database, useful if multiple admins might be making changes or if you want to ensure you're seeing the latest values. The interface shows when each setting was last updated, helping you track changes over time.
+Кнопка обновления перезагружает настройки из базы данных, полезно, если несколько администраторов могут вносить изменения или если вы хотите убедиться, что видите последние значения. Интерфейс показывает, когда каждая настройка была последний раз обновлена, помогая вам отслеживать изменения со временем.
 
-## Troubleshooting Common Issues
+## Решение распространенных проблем
 
-When recordings fail consistently, check if they're hitting your configured limits. The error logs will indicate if files are too large or if processing is timing out. Users might not realize their recordings exceed limits, especially if they're uploading existing content rather than recording directly.
+Когда записи терпят неудачу последовательно, проверьте, достигают ли они ваших настроенных лимитов. Логи ошибок укажут, слишком ли большие файлы или таймаутится ли обработка. Пользователи могут не осознавать, что их записи превышают лимиты, особенно если они загружают существующий контент, а не записывают напрямую.
 
-If API costs spike unexpectedly, review your transcript length limit. A single user uploading many long recordings could dramatically increase consumption if no limit is set. The combination of user activity and system settings determines your actual costs.
+Если затраты API неожиданно всплескивают, просмотрите ваш лимит длины транскрипта. Один пользователь, загружающий много длинных записей, может драматически увеличить потребление, если лимит не установлен. Комбинация активности пользователей и системных настроек определяет ваши фактические затраты.
 
-Processing backlogs might indicate your timeout is too high. If the system waits 30 minutes for each failed transcription attempt, a series of problematic files could block the queue for hours. Balance patience for slow processing with the need to fail fast when services are actually down.
+Очереди обработки могут указывать, что ваш таймаут слишком высок. Если система ждет 30 минут для каждой неудачной попытки транскрибации, серия проблемных файлов может заблокировать очередь на часы. Балансируйте терпение для медленной обработки с необходимостью быстро терпеть неудачу, когда сервисы фактически не работают.
 
-## Environment Variable Configuration
+## Конфигурация переменных окружения
 
-Beyond the UI-configurable settings above, several environment variables in your `.env` file control fundamental system behaviors. These require instance restart to take effect.
+Помимо настроек, настраиваемых через UI выше, несколько переменных окружения в вашем файле `.env` контролируют фундаментальное системное поведение. Они требуют перезапуска экземпляра для вступления в силу.
 
-### Collaboration & Sharing
+### Сотрудничество и обмен
 
-**ENABLE_INTERNAL_SHARING**: Controls user-to-user sharing capabilities. Set to `true` to enable internal sharing features, allowing users to share recordings with specific colleagues. Required for group functionality. Default: `false`.
+**ENABLE_INTERNAL_SHARING**: Контролирует возможности обмена пользователь-пользователь. Установите в `true`, чтобы включить функции внутреннего обмена, позволяя пользователям делиться записями с конкретными коллегами. Требуется для групповой функциональности. По умолчанию: `false`.
 
-**SHOW_USERNAMES_IN_UI**: Controls username visibility in the interface. When `true`, usernames are displayed throughout the UI when sharing and collaborating. When `false`, usernames are hidden - users must know each other's usernames to share recordings (they type the username manually). Default: `false`.
+**SHOW_USERNAMES_IN_UI**: Контролирует видимость имен пользователей в интерфейсе. Когда `true`, имена пользователей отображаются по всему UI при обмене и сотрудничестве. Когда `false`, имена пользователей скрыты — пользователи должны знать имена пользователей друг друга для обмена записями (они вводят имя пользователя вручную). По умолчанию: `false`.
 
-**ENABLE_PUBLIC_SHARING**: Controls whether public share links can be created. When `true`, authorized users can generate secure links for external sharing. When `false`, only internal sharing is available. Default: `false`.
+**ENABLE_PUBLIC_SHARING**: Контролирует, могут ли быть созданы публичные ссылки для обмена. Когда `true`, авторизованные пользователи могут генерировать безопасные ссылки для внешнего обмена. Когда `false`, доступен только внутренний обмен. По умолчанию: `false`.
 
-### User Permissions
+### Разрешения пользователей
 
-**USERS_CAN_DELETE**: Determines whether regular users can delete their own recordings. When `true`, users see delete buttons for their recordings. When `false`, only administrators can delete recordings. This helps prevent accidental data loss and maintains content retention for compliance. Default: `true`.
+**USERS_CAN_DELETE**: Определяет, могут ли обычные пользователи удалять свои собственные записи. Когда `true`, пользователи видят кнопки удаления для своих записей. Когда `false`, только администраторы могут удалять записи. Это помогает предотвратить случайную потерю данных и поддерживает хранение контента для соответствия требованиям. По умолчанию: `true`.
 
-### Retention & Auto-Deletion
+### Хранение и автоматическое удаление
 
-**ENABLE_AUTO_DELETION**: Enables the automated retention system. When `true`, recordings older than the retention period are automatically processed for deletion. Default: `false`.
+**ENABLE_AUTO_DELETION**: Включает автоматизированную систему хранения. Когда `true`, записи старше периода хранения автоматически обрабатываются для удаления. По умолчанию: `false`.
 
-**DEFAULT_RETENTION_DAYS**: Global retention period in days for recordings without tag-specific retention. Set to `0` to disable auto-deletion. Tag-level retention policies can override this default. Default: `0` (disabled).
+**DEFAULT_RETENTION_DAYS**: Глобальный период хранения в днях для записей без специфичного для тега хранения. Установите в `0`, чтобы отключить автоматическое удаление. Политики хранения на уровне тегов могут переопределить это по умолчанию. По умолчанию: `0` (отключено).
 
-**DELETION_MODE**: Controls what gets deleted: `audio_only` removes audio files but preserves transcriptions and metadata, while `full_recording` removes everything. Audio-only mode maintains searchable records while saving storage space. Default: `audio_only`.
+**DELETION_MODE**: Контролирует, что удаляется: `audio_only` удаляет аудиофайлы, но сохраняет транскрипции и метаданные, в то время как `full_recording` удаляет все. Режим только аудио поддерживает доступные для поиска записи, экономя пространство хранилища. По умолчанию: `audio_only`.
 
-For detailed retention configuration, see the [Retention & Auto-Deletion](retention.md) guide.
+Для подробной конфигурации хранения см. руководство [Хранение и автоматическое удаление](retention.md).
 
-### Configuration Example
+### Пример конфигурации
 
 ```bash
-# Enable collaboration features
+# Включить функции сотрудничества
 ENABLE_INTERNAL_SHARING=true
 SHOW_USERNAMES_IN_UI=true
 ENABLE_PUBLIC_SHARING=false
 
-# User permissions
-USERS_CAN_DELETE=false  # Only admins can delete
+# Разрешения пользователей
+USERS_CAN_DELETE=false  # Только администраторы могут удалять
 
-# Retention policy
+# Политика хранения
 ENABLE_AUTO_DELETION=true
 DEFAULT_RETENTION_DAYS=90
 DELETION_MODE=audio_only
 ```
 
-After modifying environment variables, restart your Speakr instance for changes to take effect:
+После изменения переменных окружения перезапустите ваш экземпляр Speakr, чтобы изменения вступили в силу:
 ```bash
 docker compose restart
 ```
 
 ---
 
-Next: [Default Prompts](prompts.md) →
+Далее: [Промпты по умолчанию](prompts.md) →
